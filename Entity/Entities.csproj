@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Entity</RootNamespace>
-    <AssemblyName>Entity</AssemblyName>
+    <AssemblyName>Entities</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -102,9 +102,31 @@
     <Compile Include="Migrations\201902251440260_a1.Designer.cs">
       <DependentUpon>201902251440260_a1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902251900197_a2.cs" />
+    <Compile Include="Migrations\201902251900197_a2.Designer.cs">
+      <DependentUpon>201902251900197_a2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902251930355_a3.cs" />
+    <Compile Include="Migrations\201902251930355_a3.Designer.cs">
+      <DependentUpon>201902251930355_a3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902251931502_a4.cs" />
+    <Compile Include="Migrations\201902251931502_a4.Designer.cs">
+      <DependentUpon>201902251931502_a4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902252009303_a5.cs" />
+    <Compile Include="Migrations\201902252009303_a5.Designer.cs">
+      <DependentUpon>201902252009303_a5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902252048267_a6.cs" />
+    <Compile Include="Migrations\201902252048267_a6.Designer.cs">
+      <DependentUpon>201902252048267_a6.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\E1.cs" />
+    <Compile Include="Models\E2.cs" />
+    <Compile Include="Models\E3.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -116,6 +138,21 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201902251440260_a1.resx">
       <DependentUpon>201902251440260_a1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902251900197_a2.resx">
+      <DependentUpon>201902251900197_a2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902251930355_a3.resx">
+      <DependentUpon>201902251930355_a3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902251931502_a4.resx">
+      <DependentUpon>201902251931502_a4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902252009303_a5.resx">
+      <DependentUpon>201902252009303_a5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902252048267_a6.resx">
+      <DependentUpon>201902252048267_a6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Entity.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using SDHC.Common.Entity.Models;
 
 namespace WebSQL.Models
 {
@@ -19,13 +20,16 @@ namespace WebSQL.Models
     }
   }
 
-  public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+  public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IContentIndex
   {
     public ApplicationDbContext()
         : base("DefaultConnection", throwIfV1Schema: false)
     {
     }
-    public DbSet<E1> e1s { get; set; }
+    public DbSet<ContentIndex> contentIndexs { get; set; }
+    public DbSet<E1_2> e1s { get; set; }
+    public DbSet<E2> e2s { get; set; }
+    public DbSet<E3> e3s { get; set; }
 
     public static ApplicationDbContext Create()
     {

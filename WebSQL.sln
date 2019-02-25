@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSQL", "WebSQL\WebSQL.csproj", "{1EA6F42A-5800-476B-A185-67ECFA60B5C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entity", "Entity\Entity.csproj", "{F2C8F800-1B09-4F8C-8099-EDBF5088098D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entity\Entities.csproj", "{F2C8F800-1B09-4F8C-8099-EDBF5088098D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDHC.Common.Entity", "SDHC.Common.Entity\SDHC.Common.Entity.csproj", "{27B1CE81-9446-4E82-A23D-10D6F4269C16}"
 EndProject
