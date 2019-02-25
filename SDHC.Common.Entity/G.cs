@@ -7,6 +7,7 @@ namespace System
 {
   public static class G
   {
+    public static string FileUploadPath { get; set; } = "files";
     public static bool IsNullOrEmpty(this string input)
     {
       return String.IsNullOrEmpty(input);

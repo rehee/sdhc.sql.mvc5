@@ -152,6 +152,55 @@ namespace SDHC.Common.Entity.Extends
       //};
     }
 
+    public static void SetPropertyValue(this PropertyInfo p, IPassModel input, object result, bool deleteExistFile = true, List<string> oldFiles = null, List<string> newFiles = null)
+    {
+      var propertyPost = input.Properties.Find(b => b.Key == p.Name);
+      if (propertyPost == null)
+      {
+        return;
+      }
+      dynamic value = null;
+      var stringValue = !String.IsNullOrEmpty(propertyPost.Value) ? propertyPost.Value : "";
+      var keyType = p.PropertyType;
+      var inputAttribute = p.GetCustomAttribute<InputTypeAttribute>();
+      if (inputAttribute != null)
+      {
+        switch (inputAttribute.EditorType)
+        {
+          case EnumInputType.DropDwon:
+            //value = GetDropDownValue(inputAttribute, p, propertyPost);
+            break;
+          case EnumInputType.FileUpload:
+            var files = propertyPost;
+            if (files.File != null)
+            {
+              files.File.SaveFile(out var filePath, $"{p.DeclaringType.FullName}_{p.Name}");
+              if (deleteExistFile)
+              {
+                files.Value.DeleteFile(out var deleted);
+              }
+              value = filePath;
+            }
+            else
+            {
+              value = files.Value;
+            }
+            break;
+          default:
+            value = stringValue.MyTryConvert(keyType);
+            break;
+        }
+      }
+      else
+      {
+        //normal type switch and set
+        value = stringValue.MyTryConvert(keyType);
+
+      }
+      if (value != null)
+        p.SetValue(result, value);
+    }
+
     public static object ConvertBaseTypeToEnity(this ContentPostModel input, out string typeName, out Assembly assemblyName)
     {
       var type = Type.GetType(input.FullType);

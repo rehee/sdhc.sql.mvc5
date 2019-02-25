@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Attributes\BasePropertyAttribute.cs" />
     <Compile Include="Extends\Convert.cs" />
+    <Compile Include="Extends\Files.cs" />
     <Compile Include="Extends\MyConvertExtend.cs" />
     <Compile Include="G.cs" />
     <Compile Include="Models\ContentProperty.cs" />
