@@ -1,4 +1,5 @@
-﻿using Entity.Models;
+﻿using DelegateDecompiler;
+using Entity.Models;
 using SDHC.Common.Entity.Extends;
 using SDHC.Common.Entity.Models;
 using System;
@@ -15,10 +16,11 @@ namespace WebSQL.Controllers
   {
 
     public ApplicationDbContext db = new ApplicationDbContext();
-    
+
     public ActionResult Index()
     {
-      db.e3s.Where(b => b.ListValue.Contains(1)).ToList();
+
+      var list = Microsoft.Linq.Translations.ExpressiveExtensions.WithTranslations(db.e3s.Where(b => b.ListValue.Contains("1"))).ToList();
       return View();
     }
 
