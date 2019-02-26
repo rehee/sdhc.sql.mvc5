@@ -17,7 +17,7 @@ namespace SDHC.Common.Entity.Models
     public string Title { get; set; } = "";
     public EnumInputType EditorType { get; set; } = EnumInputType.Text;
     public bool MultiSelect { get; set; } = false;
-    //public IEnumerable<DropDownViewModel> SelectItems { get; set; } = new List<DropDownViewModel>();
+    public IEnumerable<DropDownViewModel> SelectItems { get; set; } = new List<DropDownViewModel>();
     public HttpPostedFileBase File { get; set; }
     public bool RemoveFile { get; set; } = false;
     public bool BaseProperty { get; set; } = false;
@@ -27,5 +27,11 @@ namespace SDHC.Common.Entity.Models
     public int RangeMin { get; set; } = 0;
     public int RangeMax { get; set; } = 100;
 
+  }
+  public class DropDownViewModel
+  {
+    public string Name { get; set; } = "";
+    public long Value { get; set; }
+    public bool Select { get; set; } = false;
   }
 }

@@ -36,6 +36,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Linq.PropertyTranslator.Core, Version=1.0.5.0, Culture=neutral, PublicKeyToken=3379bb52ef788d82, processorArchitecture=MSIL">
+      <HintPath>..\packages\Linq.PropertyTranslator.Core.1.0.5\lib\net46\Linq.PropertyTranslator.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -44,6 +47,9 @@
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Linq.Translations, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Linq.Translations.1.0.1\lib\net40\Microsoft.Linq.Translations.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
@@ -68,6 +74,15 @@
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="PropertyTranslator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=afc3392600bb3c0a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Linq.PropertyTranslator.1.0.0.0\lib\net40\PropertyTranslator.dll</HintPath>
+    </Reference>
+    <Reference Include="QueryInterceptor, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QueryInterceptor.0.2\lib\net40\QueryInterceptor.dll</HintPath>
+    </Reference>
+    <Reference Include="QueryInterceptor.Core, Version=1.0.7.0, Culture=neutral, PublicKeyToken=19f013043a0601f6, processorArchitecture=MSIL">
+      <HintPath>..\packages\QueryInterceptor.Core.1.0.7\lib\net40\QueryInterceptor.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -122,8 +137,25 @@
     <Compile Include="Migrations\201902252048267_a6.Designer.cs">
       <DependentUpon>201902252048267_a6.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902260853344_a7.cs" />
+    <Compile Include="Migrations\201902260853344_a7.Designer.cs">
+      <DependentUpon>201902260853344_a7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902261127474_a8.cs" />
+    <Compile Include="Migrations\201902261127474_a8.Designer.cs">
+      <DependentUpon>201902261127474_a8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902261316432_a10.cs" />
+    <Compile Include="Migrations\201902261316432_a10.Designer.cs">
+      <DependentUpon>201902261316432_a10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902261328029_a11.cs" />
+    <Compile Include="Migrations\201902261328029_a11.Designer.cs">
+      <DependentUpon>201902261328029_a11.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\b.cs" />
     <Compile Include="Models\E1.cs" />
     <Compile Include="Models\E2.cs" />
     <Compile Include="Models\E3.cs" />
@@ -153,6 +185,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902252048267_a6.resx">
       <DependentUpon>201902252048267_a6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902260853344_a7.resx">
+      <DependentUpon>201902260853344_a7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902261127474_a8.resx">
+      <DependentUpon>201902261127474_a8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902261316432_a10.resx">
+      <DependentUpon>201902261316432_a10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902261328029_a11.resx">
+      <DependentUpon>201902261328029_a11.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -36,6 +36,21 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Linq.PropertyTranslator.Core, Version=1.0.5.0, Culture=neutral, PublicKeyToken=3379bb52ef788d82, processorArchitecture=MSIL">
+      <HintPath>..\packages\Linq.PropertyTranslator.Core.1.0.5\lib\net46\Linq.PropertyTranslator.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Linq.Translations, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Linq.Translations.1.0.1\lib\net40\Microsoft.Linq.Translations.dll</HintPath>
+    </Reference>
+    <Reference Include="PropertyTranslator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=afc3392600bb3c0a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Linq.PropertyTranslator.1.0.0.0\lib\net40\PropertyTranslator.dll</HintPath>
+    </Reference>
+    <Reference Include="QueryInterceptor, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QueryInterceptor.0.2\lib\net40\QueryInterceptor.dll</HintPath>
+    </Reference>
+    <Reference Include="QueryInterceptor.Core, Version=1.0.7.0, Culture=neutral, PublicKeyToken=19f013043a0601f6, processorArchitecture=MSIL">
+      <HintPath>..\packages\QueryInterceptor.Core.1.0.7\lib\net40\QueryInterceptor.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />

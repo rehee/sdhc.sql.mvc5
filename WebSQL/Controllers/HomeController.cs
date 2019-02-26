@@ -18,31 +18,7 @@ namespace WebSQL.Controllers
     
     public ActionResult Index()
     {
-      //var e2 = new E2();
-      //e2.Title = "1";
-      ////var pass = e1.ConvertModelToPost();
-      ////db.e1s.Add(e1);
-      //var e3 = new E3();
-      //e3.FullType = typeof(E1_2).FullName;
-      //var type = db.GetType();
-
-      //foreach (var property in type.GetProperties())
-      //{
-      //  if (property.PropertyType.GenericTypeArguments.FirstOrDefault() == typeof(E2))
-      //  {
-      //    var addMethod = property.PropertyType.GetMethod("Add");
-      //    addMethod.Invoke(property.GetValue(db), new object[1] { e2 });
-      //    Expression<Func<IInt64Key, bool>> w = f => f.Id == 1;
-      //    var list = Queryable.Where<IInt64Key>((IQueryable<IInt64Key>)property.GetValue(db), w).ToList();
-      //    db.SaveChanges();
-      //  }
-      //};
-      //db.e3s.Add(e3);
-      var lastE2 = db.e2s.OrderByDescending(b => b.Id).FirstOrDefault();
-      var e2 = new E2();
-      //lastE2.CreateContentChildren(e2);
-      e2.CreateContent();
-      e2.Move(Guid.Parse("CE86F4C1-AFC4-44D2-B49D-2465A5D91751"));
+      db.e3s.Where(b => b.ListValue.Contains(1)).ToList();
       return View();
     }
 
