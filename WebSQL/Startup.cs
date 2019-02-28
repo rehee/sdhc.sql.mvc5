@@ -1,7 +1,10 @@
-﻿using Microsoft.Owin;
+﻿using Dapper;
+using Entity.Models;
+using Microsoft.Owin;
 using Owin;
 using SDHC.Common.Entity.Extends;
 using SDHC.Common.Entity.Models;
+using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using WebSQL.Models;
 
@@ -12,6 +15,7 @@ namespace WebSQL
   {
     public void Configuration(IAppBuilder app)
     {
+      SqlMapper.AddTypeHandler(typeof(List<long>), new EHandler());
       ConfigureAuth(app);
       var a = (IObjectContextAdapter)new ApplicationDbContext();
       var o = a.ObjectContext;

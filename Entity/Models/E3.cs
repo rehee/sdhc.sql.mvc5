@@ -1,11 +1,14 @@
-﻿using DelegateDecompiler;
+﻿using Dapper;
+using DelegateDecompiler;
 using Linq.PropertyTranslator.Core;
 using Microsoft.Linq.Translations;
+using Newtonsoft.Json;
 using SDHC.Common.Entity.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data;
 using System.Data.Entity.SqlServer;
 using System.Linq;
 using System.Linq.Expressions;
@@ -68,5 +71,21 @@ namespace Entity.Models
     }
     [Column]
     public string TList { get; set; } = "";
+  }
+
+  public class EHandler : SqlMapper.ITypeHandler
+  {
+    public object Parse(Type destinationType, object value)
+    {
+      return JsonConvert.DeserializeObject(value.ToString(), destinationType);
+    }
+
+    public void SetValue(IDbDataParameter parameter, object value)
+    {
+      parameter.Value = (value == null)
+      ? (object)DBNull.Value
+        : JsonConvert.SerializeObject(value);
+        parameter.DbType = DbType.String;
+    }
   }
 }

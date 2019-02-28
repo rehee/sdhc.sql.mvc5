@@ -19,7 +19,7 @@ namespace WebSQL.Controllers
 
     public ActionResult Index()
     {
-
+      
       var list = Microsoft.Linq.Translations.ExpressiveExtensions.WithTranslations(db.e3s.Where(b => b.ListValue.Contains("1"))).ToList();
       return View();
     }
