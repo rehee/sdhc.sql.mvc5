@@ -15,7 +15,7 @@ namespace WebSQL
   {
     public void Configuration(IAppBuilder app)
     {
-      SqlMapper.AddTypeHandler(typeof(List<long>), new EHandler());
+      //SqlMapper.AddTypeHandler(typeof(List<long>), new EHandler());
       ConfigureAuth(app);
       var a = (IObjectContextAdapter)new ApplicationDbContext();
       var o = a.ObjectContext;
