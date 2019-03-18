@@ -8,6 +8,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
+using WebSQL.Attribute;
 using WebSQL.Models;
 
 namespace WebSQL.Controllers
@@ -16,7 +17,7 @@ namespace WebSQL.Controllers
   {
 
     public ApplicationDbContext db = new ApplicationDbContext();
-
+    [ValidateDto]
     public ActionResult Index()
     {
       
