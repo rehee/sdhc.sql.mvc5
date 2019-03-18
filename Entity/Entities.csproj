@@ -99,6 +99,9 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Json, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Json.4.5.0\lib\netstandard2.0\System.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
@@ -165,6 +168,14 @@
     <Compile Include="Migrations\201902261328029_a11.Designer.cs">
       <DependentUpon>201902261328029_a11.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902282032200_a12.cs" />
+    <Compile Include="Migrations\201902282032200_a12.Designer.cs">
+      <DependentUpon>201902282032200_a12.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902282046596_a13.cs" />
+    <Compile Include="Migrations\201902282046596_a13.Designer.cs">
+      <DependentUpon>201902282046596_a13.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\b.cs" />
@@ -210,6 +221,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902261328029_a11.resx">
       <DependentUpon>201902261328029_a11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902282032200_a12.resx">
+      <DependentUpon>201902282032200_a12.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902282046596_a13.resx">
+      <DependentUpon>201902282046596_a13.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

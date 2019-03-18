@@ -1,9 +1,15 @@
-﻿using DelegateDecompiler;
+﻿using Dapper;
+using DelegateDecompiler;
 using Entity.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SDHC.Common.Entity.Extends;
 using SDHC.Common.Entity.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.SqlServer;
+using System.Data.SqlClient;
+using System.Json;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
@@ -20,8 +26,7 @@ namespace WebSQL.Controllers
     [ValidateDto]
     public ActionResult Index()
     {
-      
-      var list = Microsoft.Linq.Translations.ExpressiveExtensions.WithTranslations(db.e3s.Where(b => b.ListValue.Contains("1"))).ToList();
+
       return View();
     }
 
@@ -38,5 +43,6 @@ namespace WebSQL.Controllers
 
       return View();
     }
+    //var list = Microsoft.Linq.Translations.ExpressiveExtensions.WithTranslations(db.e3s.Where(b => b.ListValue.Contains("1"))).ToList();
   }
 }
