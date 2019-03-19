@@ -8,14 +8,21 @@ namespace Entity.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.E1",
+                "dbo.BaseContents",
                 c => new
                     {
-                        E1_Id = c.Long(nullable: false, identity: true),
+                        Id = c.Long(nullable: false, identity: true),
+                        Url = c.String(),
+                        DisplayOrder = c.Long(nullable: false),
+                        CreateTime = c.DateTime(),
+                        ParentId = c.Long(),
                         Title = c.String(),
-                        Name = c.String(),
+                        Title_Title = c.String(),
+                        Discriminator = c.String(nullable: false, maxLength: 128),
                     })
-                .PrimaryKey(t => t.E1_Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.BaseContents", t => t.ParentId)
+                .Index(t => t.ParentId);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -85,26 +92,42 @@ namespace Entity.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
+            CreateTable(
+                "dbo.S2",
+                c => new
+                    {
+                        Id = c.Long(nullable: false),
+                        Title2 = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.BaseContents", t => t.Id)
+                .Index(t => t.Id);
+            
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.S2", "Id", "dbo.BaseContents");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.BaseContents", "ParentId", "dbo.BaseContents");
+            DropIndex("dbo.S2", new[] { "Id" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.BaseContents", new[] { "ParentId" });
+            DropTable("dbo.S2");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
-            DropTable("dbo.E1");
+            DropTable("dbo.BaseContents");
         }
     }
 }

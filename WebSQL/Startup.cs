@@ -19,8 +19,8 @@ namespace WebSQL
       ConfigureAuth(app);
       var a = (IObjectContextAdapter)new ApplicationDbContext();
       var o = a.ObjectContext;
-      ContentIndex.repo = () => new ApplicationDbContext();
-      ContentCRUD.repo = () => new ApplicationDbContext();
+      //ContentIndex.repo = () => new ApplicationDbContext();
+      //ContentCRUD.repo = () => new ApplicationDbContext();
     }
   }
 }

@@ -25,48 +25,22 @@ namespace WebSQL.Models
     }
   }
 
-  public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IContentIndex
+  public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IContent
   {
     public ApplicationDbContext()
         : base("DefaultConnection", throwIfV1Schema: false)
     {
       context = ((IObjectContextAdapter)this).ObjectContext;
+      SCHCContent.GetRepo = () => new ApplicationDbContext();
     }
     ObjectContext context;
-    public DbSet<ContentIndex> contentIndexs { get; set; }
-    public DbSet<E1_2> e1s { get; set; }
-    public DbSet<E2> e2s { get; set; }
-    public DbSet<E3> e3s { get; set; }
-    public DbSet<E4> e4s { get; set; }
-    public DbSet<B1> b1 { get; set; }
-    public DbSet<B2> b2 { get; set; }
-    public DbSet<S1> s1 { get; set; }
-    public DbSet<S2> s2 { get; set; }
-    public DbSet<SCHCContent> sdc { get; set; }
-    public IQueryable<E3> E3Table
-    {
-      get
-      {
-        var objectSet = context.CreateObjectSet<E3>("e3s");
-        return objectSet.InterceptWith(new PropertyVisitor());
-      }
-    }
+    public DbSet<BaseContent> Contents { get; set; }
+    public DbSet<S1> S1s { get; set; }
+    public DbSet<S2> S2s { get; set; }
     public static ApplicationDbContext Create()
     {
       return new ApplicationDbContext();
     }
-  }
-  public class MyDataContext
-  {
-    ObjectContext context = ((IObjectContextAdapter)new ApplicationDbContext()).ObjectContext;
 
-    public IQueryable<E3> E3Table
-    {
-      get
-      {
-        var objectSet = context.CreateObjectSet<E3>("e3s");
-        return objectSet.InterceptWith(new PropertyVisitor());
-      }
-    }
   }
 }

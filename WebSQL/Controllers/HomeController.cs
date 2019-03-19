@@ -23,10 +23,8 @@ namespace WebSQL.Controllers
   {
 
     public ApplicationDbContext db = new ApplicationDbContext();
-    [ValidateDto]
     public ActionResult Index()
     {
-
       return View();
     }
 

@@ -9,11 +9,11 @@ namespace SDHC.Common.Entity.Extends
 {
   public static class ContentCRUD
   {
-    public static Func<IContentIndex> repo { get; set; }
+    //public static Func<IContent> repo { get; set; }
     public static void CreateContent(this IBasicContent model, Guid? parentId = null)
     {
-      model.Create(repo());
-      ContentIndex.Create(model, parentId, out ContentIndex index);
+      //model.Create(repo());
+      //ContentIndex.Create(model, parentId, out ContentIndex index);
     }
     public static void CreateContentChildren(this IBasicContent parent, IBasicContent model)
     {
@@ -28,14 +28,14 @@ namespace SDHC.Common.Entity.Extends
       Guid? parentGuid = null;
       if (!String.IsNullOrEmpty(fullType))
       {
-        var parent = ContentIndex.ReadByintId(parentId, fullType);
-        parentGuid = parent != null ? (Guid?)parent.Id : null;
+        //var parent = ContentIndex.ReadByintId(parentId, fullType);
+        //parentGuid = parent != null ? (Guid?)parent.Id : null;
       }
       CreateContent(model, parentGuid);
     }
     public static void Move(this IBasicContent model, Guid? parentId = null)
     {
-      ContentIndex.Move(model.Id, model.GetType().FullName, parentId);
+      //ContentIndex.Move(model.Id, model.GetType().FullName, parentId);
     }
     public static void Move(this Guid id, Guid? parentId = null)
     {

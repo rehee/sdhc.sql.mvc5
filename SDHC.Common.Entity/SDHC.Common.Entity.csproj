@@ -87,7 +87,7 @@
     <Compile Include="Extends\Files.cs" />
     <Compile Include="Extends\MyConvertExtend.cs" />
     <Compile Include="G.cs" />
-    <Compile Include="Models\ContentIndex.cs" />
+    <Compile Include="Models\IContent.cs" />
     <Compile Include="Models\ContentProperty.cs" />
     <Compile Include="Models\IPassModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
