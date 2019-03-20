@@ -142,7 +142,7 @@ namespace SDHC.Common.Entity.Extends
         }
         if (result.MultiSelect || stringValue.Split(',').Count() > 1)
         {
-          result.MultiValue = input.MyTryConvert<string>().Split(',').Select(b=>b.Trim()).ToList();
+          result.MultiValue = input.MyTryConvert<string>().Split(',').Select(b => b.Trim()).ToList();
           result.Value = "";
         }
         p.SetDropDownSelect(
@@ -213,7 +213,7 @@ namespace SDHC.Common.Entity.Extends
       dynamic value = null;
       var stringValue = !String.IsNullOrEmpty(propertyPost.Value) ? propertyPost.Value : "";
       propertyPost.MultiValue = propertyPost.MultiValue.Where(b => !string.IsNullOrEmpty(b));
-      
+
       var keyType = p.PropertyType;
       var inputAttribute = p.GetCustomAttribute<InputTypeAttribute>();
       if (inputAttribute != null)
@@ -287,7 +287,8 @@ namespace SDHC.Common.Entity.Extends
       }
       else
       {
-        return propertyPost.MultiValue.MyTryConvert(p.PropertyType);
+        var v = $",{String.Join(",", propertyPost.MultiValue)},";
+        return v;
       }
 
     }
