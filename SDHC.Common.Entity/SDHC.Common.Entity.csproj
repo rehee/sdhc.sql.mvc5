@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\BasePropertyAttribute.cs" />
+    <Compile Include="Cruds\ContentCruds.cs" />
     <Compile Include="Extends\BaseModelCRUD.cs" />
     <Compile Include="Extends\ContentCRUD.cs" />
     <Compile Include="Models\BasicContent.cs" />

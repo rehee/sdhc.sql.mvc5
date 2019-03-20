@@ -3,6 +3,7 @@ using DelegateDecompiler;
 using Entity.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SDHC.Common.Entity.Cruds;
 using SDHC.Common.Entity.Extends;
 using SDHC.Common.Entity.Models;
 using System;
@@ -21,26 +22,28 @@ namespace WebSQL.Controllers
 {
   public class HomeController : Controller
   {
-
-    public ApplicationDbContext db = new ApplicationDbContext();
+    ApplicationDbContext db = new ApplicationDbContext();
     public ActionResult Index()
     {
+      var s2 = new S2();
+      s2.Gender = $",1, 2,";
+      s2.Title = "1";
+      var model = s2.ConvertModelToPost();
+      var m = model.ConvertToBaseModel();
+      
       return View();
     }
 
     public ActionResult About()
     {
       ViewBag.Message = "Your application description page.";
-
       return View();
     }
 
     public ActionResult Contact()
     {
       ViewBag.Message = "Your contact page.";
-
       return View();
     }
-    //var list = Microsoft.Linq.Translations.ExpressiveExtensions.WithTranslations(db.e3s.Where(b => b.ListValue.Contains("1"))).ToList();
   }
 }

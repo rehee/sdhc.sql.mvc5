@@ -35,5 +35,4 @@ namespace SDHC.Common.Entity.Attributes
   public class CustomPropertyAttribute : Attribute
   {
   }
-
 }

@@ -13,6 +13,7 @@ namespace SDHC.Common.Entity.Models
   public interface IContent : ISave
   {
     DbSet<BaseContent> Contents { get; set; }
+    DbSet<BaseSelect> Selects { get; set; }
   }
   public interface ISave
   {

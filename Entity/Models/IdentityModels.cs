@@ -10,6 +10,7 @@ using PropertyTranslator;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using SDHC.Common.Entity.Cruds;
 
 namespace WebSQL.Models
 {
@@ -30,13 +31,16 @@ namespace WebSQL.Models
     public ApplicationDbContext()
         : base("DefaultConnection", throwIfV1Schema: false)
     {
-      context = ((IObjectContextAdapter)this).ObjectContext;
-      SCHCContent.GetRepo = () => new ApplicationDbContext();
+
     }
-    ObjectContext context;
     public DbSet<BaseContent> Contents { get; set; }
     public DbSet<S1> S1s { get; set; }
     public DbSet<S2> S2s { get; set; }
+
+    public DbSet<BaseSelect> Selects { get; set; }
+
+    public DbSet<GenderSelect> GenderSelects { get; set; }
+
     public static ApplicationDbContext Create()
     {
       return new ApplicationDbContext();

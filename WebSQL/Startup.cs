@@ -2,6 +2,7 @@
 using Entity.Models;
 using Microsoft.Owin;
 using Owin;
+using SDHC.Common.Entity.Cruds;
 using SDHC.Common.Entity.Extends;
 using SDHC.Common.Entity.Models;
 using System.Collections.Generic;
@@ -15,12 +16,9 @@ namespace WebSQL
   {
     public void Configuration(IAppBuilder app)
     {
-      //SqlMapper.AddTypeHandler(typeof(List<long>), new EHandler());
       ConfigureAuth(app);
-      var a = (IObjectContextAdapter)new ApplicationDbContext();
-      var o = a.ObjectContext;
-      //ContentIndex.repo = () => new ApplicationDbContext();
-      //ContentCRUD.repo = () => new ApplicationDbContext();
+      SCHCContent.GetRepo = () => new ApplicationDbContext();
+      ContentCruds.GetRepo = () => new ApplicationDbContext();
     }
   }
 }

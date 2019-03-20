@@ -17,17 +17,16 @@ namespace SDHC.Common.Entity.Models
 
   }
 
-  public abstract class BaseContent : IBasicSelect
+  public abstract class BaseSelect : IBasicSelect
   {
-    public BaseContent()
-    {
-      if (GetRepo != null)
-      {
-        this.repo = GetRepo();
-      }
-    }
-    [NotMapped]
-    private IContent repo { get; }
+    [Key]
+    public long Id { get; set; }
+    public string Title { get; set; }
+  }
+
+  public abstract class BaseContent : IInt64Key
+  {
+    
     [Key]
     public long Id { get; set; }
     public virtual string Url { get; set; }
@@ -74,15 +73,6 @@ namespace SDHC.Common.Entity.Models
 
     [NotMapped]
     public static Func<IContent> GetRepo { get; set; } = null;
-
-    public virtual void Save()
-    {
-      if (Id <= 0)
-      {
-        repo.Contents.Add(this);
-        repo.SaveChanges();
-      }
-    }
   }
 
   public class SCHCContent : BaseContent

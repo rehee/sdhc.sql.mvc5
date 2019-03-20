@@ -31,7 +31,7 @@ namespace SDHC.Common.Entity.Models
   public class DropDownViewModel
   {
     public string Name { get; set; } = "";
-    public long Value { get; set; }
+    public string Value { get; set; }
     public bool Select { get; set; } = false;
   }
 }
