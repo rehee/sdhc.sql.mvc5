@@ -225,6 +225,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Attribute\AA.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
@@ -250,6 +251,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Areas\Admin\Views\web.config" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -298,6 +300,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Views\Content\" />
   </ItemGroup>
   <ItemGroup>
@@ -315,6 +320,10 @@
     <ProjectReference Include="..\SDHC.Common.Entity\SDHC.Common.Entity.csproj">
       <Project>{27b1ce81-9446-4e82-a23d-10d6f4269c16}</Project>
       <Name>SDHC.Common.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TryController\TryController.csproj">
+      <Project>{187b5468-0eca-4308-9ba3-db4f682f2a6e}</Project>
+      <Name>TryController</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
