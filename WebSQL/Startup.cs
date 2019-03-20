@@ -1,12 +1,8 @@
-﻿using Dapper;
-using Entity.Models;
+﻿using Entity.Models;
 using Microsoft.Owin;
 using Owin;
-using SDHC.Common.Entity.Cruds;
-using SDHC.Common.Entity.Extends;
 using SDHC.Common.Entity.Models;
-using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
+using System;
 using WebSQL.Models;
 
 [assembly: OwinStartupAttribute(typeof(WebSQL.Startup))]
@@ -17,8 +13,9 @@ namespace WebSQL
     public void Configuration(IAppBuilder app)
     {
       ConfigureAuth(app);
-      SCHCContent.GetRepo = () => new ApplicationDbContext();
+      BaseContent.GetRepo = () => new ApplicationDbContext();
       ContentCruds.GetRepo = () => new ApplicationDbContext();
+      ContentManager.BasicContentType = typeof(SCHCContent);
     }
   }
 }

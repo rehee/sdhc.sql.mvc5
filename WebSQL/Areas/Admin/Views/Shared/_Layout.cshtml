@@ -1,0 +1,16 @@
+﻿@{
+    Layout = "_Root.cshtml";
+}
+<div class="row page-titles">
+    <div class="col-md-6 col-8 align-self-center">
+        @RenderSection("breadcrumb", false)
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        @RenderBody()
+    </div>
+</div>
+@section script{
+    @RenderSection("script", false)
+}

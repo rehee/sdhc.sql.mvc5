@@ -11,6 +11,19 @@ using System.Threading.Tasks;
 
 namespace Entity.Models
 {
+  [AllowChildren(
+    ChildrenType = new Type[] { typeof(S1), typeof(S2) }
+    //,
+    //CreateRoles = new string[] { "Admin" },
+    //EditRoles = new string[] { "Admin" }
+    )]
+  public class SCHCContent : BaseContent
+  {
+    public virtual string Title_Title { get; set; }
+  }
+  [AllowChildren(
+    Name = "ss 1"
+    )]
   public class S1 : SCHCContent
   {
     [Display(Name = "t1")]

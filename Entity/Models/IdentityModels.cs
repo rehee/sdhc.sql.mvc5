@@ -5,12 +5,6 @@ using Entity.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using SDHC.Common.Entity.Models;
-using QueryInterceptor;
-using PropertyTranslator;
-using System.Data.Entity.Core.Objects;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using SDHC.Common.Entity.Cruds;
 
 namespace WebSQL.Models
 {

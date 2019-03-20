@@ -1,13 +1,10 @@
 ﻿using SDHC.Common.Entity.Attributes;
-using SDHC.Common.Entity.Cruds;
 using SDHC.Common.Entity.Models;
 using SDHC.Common.Entity.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SDHC.Common.Entity.Extends
 {
@@ -131,18 +128,19 @@ namespace SDHC.Common.Entity.Extends
       var datetimeType = typeof(DateTime);
       if (result.EditorType == EnumInputType.DropDwon)
       {
-        var stringValue = input.MyTryConvert<string>().Trim();
-        if (stringValue[0] == ',')
+        var stringValue = input != null ? input.MyTryConvert<string>().Trim() : "";
+        stringValue = stringValue.Trim();
+        if (stringValue.Length >= 1 && stringValue[0] == ',')
         {
           stringValue = stringValue.Substring(1);
         }
-        if (stringValue[stringValue.Length - 1] == ',')
+        if (stringValue.Length >= 1 && stringValue[stringValue.Length - 1] == ',')
         {
           stringValue = stringValue.Substring(0, stringValue.Length - 2);
         }
         if (result.MultiSelect || stringValue.Split(',').Count() > 1)
         {
-          result.MultiValue = input.MyTryConvert<string>().Split(',').Select(b => b.Trim()).ToList();
+          result.MultiValue = stringValue.Split(',').Select(b => b.Trim()).ToList();
           result.Value = "";
         }
         p.SetDropDownSelect(

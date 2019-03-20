@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    @{ Html.RenderPartial("_head"); }
+    @{ Html.RenderPartial("_css"); }
+</head>
+
+<body class="fix-header card-no-border">
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+        </svg>
+    </div>
+    <div id="main-wrapper">
+        @{ Html.RenderPartial("_Header"); }
+        @{ Html.RenderPartial("_LeftSideBar"); }
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+            <footer class="footer"> copy right </footer>
+        </div>
+
+    </div>
+
+    @{ Html.RenderPartial("_js"); }
+    @RenderSection("script", false)
+</body>
+
+</html>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SDHC.Common.Entity.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -26,9 +27,9 @@ namespace SDHC.Common.Entity.Models
 
   public abstract class BaseContent : IInt64Key
   {
-    
     [Key]
     public long Id { get; set; }
+    public virtual string Title { get; set; }
     public virtual string Url { get; set; }
     public long DisplayOrder { get; set; }
 
@@ -73,12 +74,5 @@ namespace SDHC.Common.Entity.Models
 
     [NotMapped]
     public static Func<IContent> GetRepo { get; set; } = null;
-  }
-
-  public class SCHCContent : BaseContent
-  {
-    public virtual string Title { get; set; }
-
-    public virtual string Title_Title { get; set; }
   }
 }

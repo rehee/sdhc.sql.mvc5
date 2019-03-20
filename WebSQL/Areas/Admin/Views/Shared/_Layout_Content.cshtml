@@ -1,0 +1,13 @@
+﻿@{
+  Layout = "_Layout.cshtml";
+}
+@section breadcrumb{
+  @RenderSection("breadcrumb", false)
+}
+
+
+@RenderBody()
+
+@section script{
+  @RenderSection("script", false)
+}

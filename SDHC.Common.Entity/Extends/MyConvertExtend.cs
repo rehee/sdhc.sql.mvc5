@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SDHC.Common.Entity.Extends
+namespace System
 {
   public static class MyConvertExtend
   {

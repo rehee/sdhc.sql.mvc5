@@ -1,4 +1,5 @@
-﻿using SDHC.Common.Entity.Models;
+﻿using SDHC.Common.Entity.Extends;
+using SDHC.Common.Entity.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SDHC.Common.Entity.Cruds
+namespace System
 {
   public static class ContentCruds
   {
@@ -23,7 +24,7 @@ namespace SDHC.Common.Entity.Cruds
     }
     public static IQueryable<T> Read<T>(Expression<Func<T, bool>> where) where T : BaseContent
     {
-      
+
       var dbset = GetRepo().GetDbSet(typeof(T));
       if (dbset == null)
       {
@@ -106,6 +107,7 @@ namespace SDHC.Common.Entity.Cruds
 
   public static class ContentManager
   {
+    public static Type BasicContentType { get; set; } = typeof(BaseContent);
     public static void CreateContent(BaseContent input, long? parentId = null)
     {
       if (parentId != null)
@@ -134,8 +136,42 @@ namespace SDHC.Common.Entity.Cruds
       content.ParentId = parent != null ? (long?)parent.Id : null;
       ContentCruds.Update<BaseContent>(content);
     }
+    public static IEnumerable<BaseContent> GetAllChildContent(long? parentId)
+    {
+      return ContentCruds.Read<BaseContent>(
+        b => b.ParentId == parentId)
+        .AsQueryable();
+    }
+    public static BaseContent GetContent(long? id)
+    {
+      if (!id.HasValue)
+      {
+        return null;
+      }
+      return ContentCruds.Read<BaseContent>(id.Value);
+    }
+    public static ContentPostModel GetPreCreate(long? id, string fullType)
+    {
+      long? parentId = null;
+      if (id.HasValue)
+      {
+        var parent = ContentCruds.Read<BaseContent>(id.Value);
+        if (parent != null)
+        {
+          parentId = parent.Id;
+        }
+      }
+      var type = Type.GetType(fullType);
+      if (type == null)
+      {
+        return null;
+      }
+      var model = Activator.CreateInstance(type) as BaseContent;
+      model.ParentId = parentId;
+      return model.ConvertModelToPost();
+    }
   }
-  
+
   public static class SelectManager
   {
     public static IEnumerable<BaseSelect> GetAllSelect(Type selectType)
