@@ -1,4 +1,6 @@
-﻿using SDHC.Common.Entity.Models;
+﻿using SDHC.Common.Entity.Attributes;
+using SDHC.Common.Entity.Models;
+using SDHC.Common.Entity.Types;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -22,5 +24,18 @@ namespace Entity.Models
     public override string Title { get; set; }
 
     public string Title2 { get; set; }
+
+    [InputType(EditorType = EnumInputType.DropDwon, MultiSelect = true, RelatedType = typeof(GenderSelect))]
+    public string Gender { get; set; }
+  }
+
+  public class GenderSelect : BaseSelect
+  {
+    
+  }
+  public enum CC
+  {
+    C1 = 1,
+    C2 = 2
   }
 }

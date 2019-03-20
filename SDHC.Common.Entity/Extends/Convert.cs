@@ -1,4 +1,5 @@
 ﻿using SDHC.Common.Entity.Attributes;
+using SDHC.Common.Entity.Cruds;
 using SDHC.Common.Entity.Models;
 using SDHC.Common.Entity.Types;
 using System;
@@ -43,7 +44,7 @@ namespace SDHC.Common.Entity.Extends
       return model;
     }
 
-    public static object ConvertToBaseModel(this ContentPostModel input,bool deleteExistFile = true,List<string> oldFiles = null, List<string>newFiles = null)
+    public static object ConvertToBaseModel(this ContentPostModel input, bool deleteExistFile = true, List<string> oldFiles = null, List<string> newFiles = null)
     {
       var result = input.ConvertBaseTypeToEnity(out var typeName, out var assemblyName);
       var type = input.FullType;
@@ -130,13 +131,22 @@ namespace SDHC.Common.Entity.Extends
       var datetimeType = typeof(DateTime);
       if (result.EditorType == EnumInputType.DropDwon)
       {
-        if (result.MultiSelect)
+        var stringValue = input.MyTryConvert<string>().Trim();
+        if (stringValue[0] == ',')
         {
-          result.MultiValue = input.MyTryConvert<List<string>>();
+          stringValue = stringValue.Substring(1);
+        }
+        if (stringValue[stringValue.Length - 1] == ',')
+        {
+          stringValue = stringValue.Substring(0, stringValue.Length - 2);
+        }
+        if (result.MultiSelect || stringValue.Split(',').Count() > 1)
+        {
+          result.MultiValue = input.MyTryConvert<string>().Split(',').Select(b => b.Trim()).ToList();
           result.Value = "";
         }
-        //p.SetDropDownSelect(
-        //  (List<DropDownViewModel>)result.SelectItems, relatedType, result.Value, result.MultiValue);
+        p.SetDropDownSelect(
+          (List<DropDownViewModel>)result.SelectItems, relatedType, result.Value, result.MultiValue);
       }
       return result;
       //return new ContentProperty()
@@ -151,6 +161,47 @@ namespace SDHC.Common.Entity.Extends
       //  MultiValue = multiSelect ? postMultiValue : Enumerable.Empty<string>(),
       //};
     }
+    public static void SetDropDownSelect(
+      this PropertyInfo p, List<DropDownViewModel> selector, Type relatedType, string postValue, IEnumerable<string> postValues = null)
+    {
+      List<String> values;
+      if (postValues != null && postValues.Count() > 0)
+      {
+        values = postValues.ToList();
+      }
+      else
+      {
+        values = !String.IsNullOrEmpty(postValue) ? new List<string>() { postValue } : new List<string>();
+      }
+
+      if (relatedType.IsEnum)
+      {
+        Array enumValues = relatedType.GetEnumValues();
+        foreach (var item in enumValues)
+        {
+          var select = new DropDownViewModel();
+          select.Name = item.ToString();
+          select.Value = item.ToString();
+          select.Select = values.Contains(select.Value);
+          selector.Add(select);
+        }
+      }
+      else
+      {
+        //dropdown Classes
+        var allSelect = SelectManager.GetAllSelect(relatedType);
+        var selects = new List<DropDownViewModel>();
+        foreach (var item in allSelect)
+        {
+          var select = new DropDownViewModel();
+          select.Name = item.Title;
+          select.Value = item.Id.ToString();
+          select.Select = values.Contains(select.Value);
+          selector.Add(select);
+        }
+      }
+
+    }
 
     public static void SetPropertyValue(this PropertyInfo p, IPassModel input, object result, bool deleteExistFile = true, List<string> oldFiles = null, List<string> newFiles = null)
     {
@@ -161,6 +212,8 @@ namespace SDHC.Common.Entity.Extends
       }
       dynamic value = null;
       var stringValue = !String.IsNullOrEmpty(propertyPost.Value) ? propertyPost.Value : "";
+      propertyPost.MultiValue = propertyPost.MultiValue.Where(b => !string.IsNullOrEmpty(b));
+
       var keyType = p.PropertyType;
       var inputAttribute = p.GetCustomAttribute<InputTypeAttribute>();
       if (inputAttribute != null)
@@ -168,7 +221,11 @@ namespace SDHC.Common.Entity.Extends
         switch (inputAttribute.EditorType)
         {
           case EnumInputType.DropDwon:
-            //value = GetDropDownValue(inputAttribute, p, propertyPost);
+            if (String.IsNullOrEmpty(stringValue) && propertyPost.MultiSelect == false && propertyPost.MultiValue.Count() > 0)
+            {
+              propertyPost.Value = propertyPost.MultiValue.FirstOrDefault();
+            }
+            value = GetDropDownValue(inputAttribute, p, propertyPost);
             break;
           case EnumInputType.FileUpload:
             var files = propertyPost;
@@ -203,7 +260,7 @@ namespace SDHC.Common.Entity.Extends
 
     public static object ConvertBaseTypeToEnity(this ContentPostModel input, out string typeName, out Assembly assemblyName)
     {
-      var type = Type.GetType(input.FullType);
+      var type = Type.GetType($"{input.FullType},{input.ThisAssembly}");
       typeName = input.FullType;
       assemblyName = input.ThisAssembly;
       if (type == null)
@@ -220,6 +277,22 @@ namespace SDHC.Common.Entity.Extends
     {
       return property.GetCustomAttribute<IgnoreEditAttribute>() != null;
     }
+    public static object GetDropDownValue(InputTypeAttribute inputAttribute, PropertyInfo p, ContentProperty propertyPost)
+    {
+      if (inputAttribute == null || propertyPost == null)
+        return null;
+      if (!inputAttribute.MultiSelect)
+      {
+        return propertyPost.Value.MyTryConvert(p.PropertyType);
+      }
+      else
+      {
+        var v = $",{String.Join(",", propertyPost.MultiValue)},";
+        return v;
+      }
+
+    }
+
   }
 
 }
