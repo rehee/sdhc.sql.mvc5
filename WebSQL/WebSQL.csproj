@@ -978,6 +978,9 @@
     <Content Include="Areas\Admin\Views\Shared\_BreadCrumbContent.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\Contents\_ContentTable.cshtml" />
     <Content Include="Areas\Admin\Views\Content\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Content\_CreateOrEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\AdminInputs\_PropertiesEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

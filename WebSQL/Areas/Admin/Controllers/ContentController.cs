@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SDHC.Common.Entity.Extends;
+using SDHC.Common.Entity.Models;
+using System;
 using System.Web.Mvc;
 
 namespace WebSQL.Areas.Admin.Controllers
@@ -17,7 +19,13 @@ namespace WebSQL.Areas.Admin.Controllers
       var content = ContentManager.GetPreCreate(ContentId, FullType);
       return View("Create", content);
     }
-
+    [HttpPost]
+    public ActionResult Create(ContentPostModel model)
+    {
+      var content = model.ConvertToBaseModel() as BaseContent;
+      ContentManager.CreateContent(content, content.ParentId);
+      return RedirectToAction("Index");
+    }
     [HttpGet]
     public ActionResult Edit(long? id)
     {
@@ -37,7 +45,9 @@ namespace WebSQL.Areas.Admin.Controllers
     [HttpPost]
     public ActionResult Delete(long id)
     {
-      return View();
+      var content = ContentManager.GetContent(id);
+      ContentCruds.Delete(id);
+      return RedirectToAction("Index");
     }
   }
 }

@@ -1,0 +1,20 @@
+﻿@using SDHC.Common.Entity.Models
+@model ContentPostModel
+@{ 
+  var a = Model;
+  var v = Model.Id;
+}
+@Html.Hidden("Id", Model.Id)
+@Html.Hidden("ParentId", Model.ParentId)
+<input type="hidden" name="FullType" id="FullType" value="@Model.FullType" />
+@Html.Hidden("ThisAssembly", Model.ThisAssembly)
+@Html.Hidden("CreateTime", Model.CreateTime)
+@Html.Hidden("DisplayOrder", Model.DisplayOrder)
+
+<div class="form-group">
+    <label>Title</label>
+    <input type="text" class="form-control" name="Title" value="@Model.Title" required />
+</div>
+
+@{ Html.RenderPartial("AdminInputs/_PropertiesEdit", Model);}
+<button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>

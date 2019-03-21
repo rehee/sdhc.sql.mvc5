@@ -26,16 +26,11 @@ namespace Entity.Models
     )]
   public class S1 : SCHCContent
   {
-    [Display(Name = "t1")]
-    public override string Title { get; set; }
   }
 
   [Table("S2")]
   public class S2 : SCHCContent
   {
-    [Display(Name = "t2")]
-    public override string Title { get; set; }
-
     public string Title2 { get; set; }
 
     [InputType(EditorType = EnumInputType.DropDwon, MultiSelect = true, RelatedType = typeof(GenderSelect))]

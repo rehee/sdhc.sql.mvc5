@@ -22,18 +22,44 @@ namespace SDHC.Common.Entity.Models
   {
     [Key]
     public long Id { get; set; }
-    public string Title { get; set; }
+    public string Title
+    {
+      get; set;
+    }
   }
 
   public abstract class BaseContent : IInt64Key
   {
     [Key]
+    [BaseProperty]
     public long Id { get; set; }
-    public virtual string Title { get; set; }
-    public virtual string Url { get; set; }
+    [BaseProperty]
+    public string Title
+    {
+      get
+      {
+        return this._title;
+      }
+      set
+      {
+        var t = String.IsNullOrEmpty(value)|| String.IsNullOrWhiteSpace(value) ? Guid.NewGuid().ToString() : value.Trim();
+        this.Url = t.Replace('/', '_').Replace(" ", "_");
+        this._title = t;
+      }
+    }
+
+    private string _title { get; set; }
+    [IgnoreEdit]
+    public virtual string Url
+    {
+      get; set;
+    }
+    [BaseProperty]
     public long DisplayOrder { get; set; }
 
     private DateTime? _createTime { get; set; }
+
+    [BaseProperty]
     public DateTime? CreateTime
     {
       get
@@ -50,10 +76,13 @@ namespace SDHC.Common.Entity.Models
       }
     }
 
+    [BaseProperty]
     public long? ParentId { get; set; }
+    [IgnoreEdit]
     public BaseContent Parent { get; set; }
 
     [NotMapped]
+    [IgnoreEdit]
     public IEnumerable<BaseContent> Parents
     {
       get
@@ -73,6 +102,7 @@ namespace SDHC.Common.Entity.Models
     }
 
     [NotMapped]
+    [IgnoreEdit]
     public static Func<IContent> GetRepo { get; set; } = null;
   }
 }

@@ -95,7 +95,7 @@
             {
                 <form action="@Url.Action("PreCreate","Content",new { @area="Admin" })" method="post">
                     @Html.Hidden("ContentId", contentId)
-                    @Html.Hidden("FullType", child.FullName + "," + child.Assembly)
+                    @Html.Hidden("FullType", child.FullName + "," + child.Assembly.FullName)
                     <input type="submit" class="dropdown-item" name="name" value="@TypeExtends.GetClassDisplayName(child)" />
                 </form>
              }
@@ -105,7 +105,7 @@
     <a href="@Url.Action("Sort","Content",new { @area="Admin",@id=contentId })" class="btn btn-warning">Sort</a>
     <a href="#" onclick="deleteCurrent()" class="btn btn-danger">Delete</a>
     <form id="ContentDeleteForm" action="@Url.Action("Delete","Content",new { @area="Admin" })" method="post">
-        @Html.Hidden("ContentId", contentId)
+        @Html.Hidden("id", contentId)
     </form>
 </div>
 

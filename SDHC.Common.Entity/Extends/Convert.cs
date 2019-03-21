@@ -1,4 +1,5 @@
 ﻿using SDHC.Common.Entity.Attributes;
+using SDHC.Common.Entity.Extends;
 using SDHC.Common.Entity.Models;
 using SDHC.Common.Entity.Types;
 using System;
@@ -8,6 +9,10 @@ using System.Reflection;
 
 namespace SDHC.Common.Entity.Extends
 {
+}
+
+namespace System
+{
   public static class ConvertExtends
   {
     public static ContentPostModel ConvertModelToPost(this object input)
@@ -15,7 +20,7 @@ namespace SDHC.Common.Entity.Extends
       var model = new ContentPostModel();
       var type = input.GetType();
       model.FullType = type.FullName;
-      model.ThisAssembly = type.Assembly;
+      model.ThisAssembly = type.Assembly.FullName;
       var resultProperty = model.GetType().GetProperties().Where(b => b.BaseProperty()).ToList();
       var properties = input.GetType().GetProperties();
       foreach (var p in properties)
@@ -256,7 +261,7 @@ namespace SDHC.Common.Entity.Extends
         p.SetValue(result, value);
     }
 
-    public static object ConvertBaseTypeToEnity(this ContentPostModel input, out string typeName, out Assembly assemblyName)
+    public static object ConvertBaseTypeToEnity(this ContentPostModel input, out string typeName, out string assemblyName)
     {
       var type = Type.GetType($"{input.FullType},{input.ThisAssembly}");
       typeName = input.FullType;

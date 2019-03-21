@@ -22,7 +22,7 @@ namespace System
         type = input.GetType();
       }
       var allows = type.GetObjectCustomAttribute<AllowChildrenAttribute>();
-      if (allows == null)
+      if (allows == null || allows.ChildrenType == null)
       {
         return Enumerable.Empty<Type>();
       }
