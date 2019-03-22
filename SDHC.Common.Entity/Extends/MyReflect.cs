@@ -59,7 +59,7 @@ namespace System
           var info = p.PropertyType.GetType().GetField(p.Name);
           return info.GetCustomAttribute<T>();
         }
-        var t1 = p.GetCustomAttribute<T>();
+        var t1 = p.GetCustomAttribute<T>(false);
         return t1;
       }
       catch { return default(T); }

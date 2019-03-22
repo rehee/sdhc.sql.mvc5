@@ -13,9 +13,9 @@ namespace WebSQL
     public void Configuration(IAppBuilder app)
     {
       ConfigureAuth(app);
-      BaseContent.GetRepo = () => new ApplicationDbContext();
-      ContentCruds.GetRepo = () => new ApplicationDbContext();
+      BaseCruds.GetRepo = () => new ApplicationDbContext();
       ContentManager.BasicContentType = typeof(SCHCContent);
+      SelectManager.BasicSelectType = typeof(SDHCBascSelect);
     }
   }
 }

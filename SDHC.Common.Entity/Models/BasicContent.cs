@@ -100,9 +100,5 @@ namespace SDHC.Common.Entity.Models
         return list;
       }
     }
-
-    [NotMapped]
-    [IgnoreEdit]
-    public static Func<IContent> GetRepo { get; set; } = null;
   }
 }

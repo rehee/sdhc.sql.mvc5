@@ -49,6 +49,10 @@ namespace System
     public static object ConvertToBaseModel(this ContentPostModel input, bool deleteExistFile = true, List<string> oldFiles = null, List<string> newFiles = null)
     {
       var result = input.ConvertBaseTypeToEnity(out var typeName, out var assemblyName);
+      return input.ConvertToBaseModel(result, deleteExistFile, oldFiles, newFiles);
+    }
+    public static object ConvertToBaseModel(this ContentPostModel input, object result, bool deleteExistFile = true, List<string> oldFiles = null, List<string> newFiles = null)
+    {
       var type = input.FullType;
       var asm = input.ThisAssembly;
 
@@ -141,7 +145,7 @@ namespace System
         }
         if (stringValue.Length >= 1 && stringValue[stringValue.Length - 1] == ',')
         {
-          stringValue = stringValue.Substring(0, stringValue.Length - 2);
+          stringValue = stringValue.Substring(0, stringValue.Length - 1);
         }
         if (result.MultiSelect || stringValue.Split(',').Count() > 1)
         {

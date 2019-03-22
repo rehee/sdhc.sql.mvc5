@@ -29,12 +29,22 @@ namespace WebSQL.Areas.Admin.Controllers
     [HttpGet]
     public ActionResult Edit(long? id)
     {
-      return View();
+      if (!id.HasValue)
+      {
+        return RedirectToAction("index");
+      }
+      var content = ContentManager.GetContent(id);
+      if (content == null)
+      {
+        return RedirectToAction("index");
+      }
+      return View(content.ConvertModelToPost());
     }
-    [HttpPut]
-    public ActionResult Edit()
+    [HttpPost]
+    public ActionResult Edit(ContentPostModel model)
     {
-      return View();
+      ContentManager.UpdateContent(model);
+      return RedirectToAction("Index");
     }
 
     public ActionResult Sort(long? id)

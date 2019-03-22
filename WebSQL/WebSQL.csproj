@@ -981,6 +981,7 @@
     <Content Include="Areas\Admin\Views\Content\_CreateOrEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\AdminInputs\_PropertiesEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml" />
+    <Content Include="Areas\Admin\Views\Content\Edit.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

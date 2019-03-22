@@ -1,4 +1,5 @@
-﻿using SDHC.Common.Entity.Extends;
+﻿using SDHC.Common.Entity.Attributes;
+using SDHC.Common.Entity.Extends;
 using SDHC.Common.Entity.Models;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace System
 {
   public static class ContentCruds
   {
-    public static Func<IContent> GetRepo { get; set; }
+    public static Func<IContent> GetRepo { get; set; } = () => BaseCruds.GetRepo() as IContent;
     public static void Create(BaseContent input)
     {
       var db = GetRepo();
@@ -32,6 +33,16 @@ namespace System
       }
       var a = dbset as IQueryable<T>;
       return Queryable.Where<T>(a, where);
+    }
+    public static IQueryable<IInt64Key> Read(Type type, Expression<Func<IInt64Key, bool>> where)
+    {
+      var dbset = GetRepo().GetDbSet(type);
+      if (dbset == null)
+      {
+        return null;
+      }
+      var a = dbset as IQueryable<IInt64Key>;
+      return Queryable.Where<IInt64Key>(a, where);
     }
     public static void Update<T>(T input) where T : BaseContent
     {
@@ -71,7 +82,7 @@ namespace System
       db.SaveChanges();
     }
 
-    private static T GetByPK<T>(long id, out IContent db) where T : BaseContent
+    public static T GetByPK<T>(long id, out IContent db) where T : BaseContent
     {
       db = GetRepo();
       var result = db.Contents.Where(b => b.Id == id).FirstOrDefault();
@@ -80,28 +91,6 @@ namespace System
         return default(T);
       }
       return result as T;
-    }
-
-    public static object GetDbSet(this IContent repo, Type type)
-    {
-      var repoType = repo.GetType();
-      foreach (var p in repoType.GetProperties())
-      {
-        if (p.PropertyType.GenericTypeArguments == null)
-        {
-          continue;
-        }
-        var t = p.PropertyType.GenericTypeArguments.FirstOrDefault();
-        if (t == null)
-        {
-          continue;
-        }
-        if (t == type)
-        {
-          return p.GetValue(repo);
-        }
-      }
-      return null;
     }
   }
 
@@ -124,6 +113,16 @@ namespace System
     public static void UpdateContent(BaseContent input)
     {
       ContentCruds.Update<BaseContent>(input);
+    }
+    public static void UpdateContent(ContentPostModel input)
+    {
+      var content = ContentCruds.GetByPK<BaseContent>(input.Id,out IContent db);
+      if (content == null)
+      {
+        return;
+      }
+      input.ConvertToBaseModel(content);
+      db.SaveChanges();
     }
     public static void MoveContent(long contentId, long? parentId)
     {
@@ -174,11 +173,22 @@ namespace System
 
   public static class SelectManager
   {
+    public static Type BasicSelectType { get; set; } = typeof(BaseSelect);
     public static IEnumerable<BaseSelect> GetAllSelect(Type selectType)
     {
-      var dbset = ContentCruds.GetRepo().GetDbSet(selectType);
+      var dbset = BaseCruds.GetRepo().GetDbSet(selectType);
       return Queryable.Where<BaseSelect>(dbset as IQueryable<BaseSelect>, b => true).ToList();
     }
+    public static IEnumerable<Type> GetAllAvaliableType()
+    {
+      var avaliable = BasicSelectType.GetObjectCustomAttribute<AllowChildrenAttribute>(true);
+      if(avaliable==null || avaliable.ChildrenType == null)
+      {
+        return Enumerable.Empty<Type>();
+      }
+      return avaliable.ChildrenType;
+    }
+
   }
 
 }

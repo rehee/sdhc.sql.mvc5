@@ -37,7 +37,11 @@ namespace Entity.Models
     public string Gender { get; set; }
   }
 
-  public class GenderSelect : BaseSelect
+  public class SDHCBascSelect: BaseSelect
+  {
+
+  }
+  public class GenderSelect : SDHCBascSelect
   {
     
   }
