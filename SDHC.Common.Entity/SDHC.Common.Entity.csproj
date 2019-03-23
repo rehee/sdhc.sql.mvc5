@@ -72,6 +72,7 @@
     <Compile Include="Extends\MyConvertExtend.cs" />
     <Compile Include="G.cs" />
     <Compile Include="Models\ContentTableView.cs" />
+    <Compile Include="Models\DropdownModel.cs" />
     <Compile Include="Models\IContent.cs" />
     <Compile Include="Models\ContentProperty.cs" />
     <Compile Include="Models\IPassModel.cs" />

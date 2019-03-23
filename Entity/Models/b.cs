@@ -36,14 +36,15 @@ namespace Entity.Models
     [InputType(EditorType = EnumInputType.DropDwon, MultiSelect = true, RelatedType = typeof(GenderSelect))]
     public string Gender { get; set; }
   }
-
-  public class SDHCBascSelect: BaseSelect
+  [AllowChildren(ChildrenType = new Type[] { typeof(GenderSelect) })]
+  public class SDHCBascSelect : BaseSelect
   {
 
   }
+
   public class GenderSelect : SDHCBascSelect
   {
-    
+
   }
   public enum CC
   {

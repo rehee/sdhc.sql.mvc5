@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,12 +28,13 @@ namespace System
         }
         if (t == type)
         {
-          return p.GetValue(repo);
+          var tt = p.GetValue(repo);
+          return tt;
         }
       }
       return null;
     }
-    public static DbSet<T> GetDbSet<T>(this ISave repo) where T : class
+    public static IQueryable<T> GetDbSet<T>(this ISave repo) where T : class
     {
       var repoType = repo.GetType();
       foreach (var p in repoType.GetProperties())
@@ -52,6 +54,23 @@ namespace System
         }
       }
       return null;
+    }
+
+    public static IQueryable<T> Read<T>(Expression<Func<T, bool>> where, out ISave db) where T : class
+    {
+      db = GetRepo();
+      var dbset = db.GetDbSet<T>();
+      if (dbset == null)
+        return null;
+      return Queryable.Where<T>(dbset, where);
+    }
+    public static IQueryable<object> Read(Type type, Expression<Func<object, bool>> where, out ISave db)
+    {
+      db = GetRepo();
+      var dbset = db.GetDbSet(type) as IQueryable<object>;
+      if (dbset == null)
+        return null;
+      return Queryable.Where<object>(dbset, where);
     }
   }
 }
