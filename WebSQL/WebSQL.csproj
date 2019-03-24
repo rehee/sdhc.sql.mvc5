@@ -208,6 +208,7 @@
     <Compile Include="Areas\Admin\Controllers\ContentController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashBoardController.cs" />
     <Compile Include="Areas\Admin\Controllers\DropDownController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
     <Compile Include="Attribute\AA.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
@@ -5283,6 +5284,11 @@
     <Content Include="admin-lib\plugins\x-editable\LICENSE-MIT" />
     <Content Include="admin-lib\plugins\x-editable\README.md" />
     <Content Include="Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml" />
+    <Content Include="Areas\Admin\Views\Roles\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Roles\RoleList.cshtml" />
+    <Content Include="Areas\Admin\Views\Roles\CreateUser.cshtml" />
+    <Content Include="Areas\Admin\Views\Roles\_CreateOrEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\Roles\EditUser.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

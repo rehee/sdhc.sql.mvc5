@@ -147,7 +147,7 @@ namespace WebSQL.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel1 model)
         {
             if (ModelState.IsValid)
             {

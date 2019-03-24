@@ -1,4 +1,5 @@
-﻿using SDHC.Common.Entity.Attributes;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using SDHC.Common.Entity.Attributes;
 using SDHC.Common.Entity.Extends;
 using SDHC.Common.Entity.Models;
 using SDHC.Common.Entity.Types;
@@ -84,6 +85,56 @@ namespace System
       return result;
     }
 
+    public static UserPassModel ConvertUserToPost(this IdentityUser input)
+    {
+      var model = new UserPassModel();
+
+      var inputType = input.GetType();
+      var inputProperty = inputType.GetProperties();
+      var userType = typeof(IdentityUser);
+      var userProperty = userType.GetProperties();
+      foreach (var p in inputProperty)
+      {
+        if (userProperty.Where(b => b.Name == p.Name).FirstOrDefault() != null)
+        {
+          try
+          {
+            p.SetValue(model, p.GetValue(input));
+          }
+          catch { }
+          continue;
+        }
+        var prop = p.GetContentPropertyByPropertyInfo(input);
+        if (prop == null)
+          continue;
+        model.Properties.Add(prop);
+      }
+      return model;
+    }
+    public static IdentityUser ConvertPostToUser(this UserPassModel input, IdentityUser user, bool deleteExistFile = true, List<string> oldFiles = null, List<string> newFiles = null)
+    {
+      var inputType = user.GetType();
+      var inputProperty = inputType.GetProperties();
+
+      var userType = typeof(IdentityUser);
+      var userProperty = userType.GetProperties();
+
+      foreach (var p in inputProperty)
+      {
+        try
+        {
+          if (userProperty.Where(b => b.Name == p.Name).FirstOrDefault() != null)
+          {
+            continue;
+          }
+          p.SetPropertyValue(input, user, deleteExistFile, oldFiles, newFiles);
+        }
+        catch { }
+      }
+
+      return user;
+    }
+
 
     public static ContentProperty GetContentPropertyByPropertyInfo(this PropertyInfo p, object input)
     {
@@ -102,7 +153,7 @@ namespace System
       }
       result.Key = p.Name;
 
-      var cValue = input.MyTryConvert(typeof(string));
+      var cValue = p.GetValue(input).MyTryConvert(typeof(string));
       if (cValue != null)
         result.Value = (string)cValue;
 
