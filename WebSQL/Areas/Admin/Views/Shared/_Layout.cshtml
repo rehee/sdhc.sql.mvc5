@@ -1,16 +1,18 @@
 ﻿@{
     Layout = "_Root.cshtml";
 }
-<div class="row page-titles">
-    <div class="col-md-6 col-8 align-self-center">
-        @RenderSection("breadcrumb", false)
+<section>
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <div class="page-header">
+                <h2>@ViewBag.Title</h2>
+                @RenderSection("breadcrumb", false)
+            </div>
+            @RenderBody()
+        </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-12">
-        @RenderBody()
-    </div>
-</div>
+</section>
+
 @section script{
     @RenderSection("script", false)
 }

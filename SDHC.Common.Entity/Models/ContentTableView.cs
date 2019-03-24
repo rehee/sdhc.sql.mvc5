@@ -35,6 +35,27 @@ namespace System
       }
     }
   }
+  public class ContentTableHtmlView
+  {
+    public string FirstRowAction { get; set; }
+    public string FirstRowController { get; set; }
+    public string FirstRowArea { get; set; }
+    public Func<object,object> FirstRowObject { get; set; }
+    public string TableClass { get; set; }
+
+    public IEnumerable<string> TableHeaders { get; set; }
+    public IEnumerable<ContentTableRowItem> Rows { get; set; }
+  }
+  public class ContentTableRowItem
+  {
+    public ContentTableRowItem(long id, IEnumerable<string> values)
+    {
+      this.Id = id;
+      this.Values = values;
+    }
+    public long Id { get; set; }
+    public IEnumerable<string> Values { get; set; } = Enumerable.Empty<string>();
+  }
 
   public class ItemKeyAndName
   {

@@ -203,6 +203,24 @@ namespace System
       property.SetValue(result, convertResult);
     }
 
-
+    public static string GetPropertyByKey(this object input, string key)
+    {
+      if (input == null)
+      {
+        return "";
+      }
+      var type = input.GetType();
+      var p = type.GetProperties().Where(b => string.Equals(b.Name, key, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+      if (p == null)
+      {
+        return "";
+      }
+      var value = p.GetValue(input);
+      if (value == null)
+      {
+        return "";
+      }
+      return value.MyTryConvert<string>();
+    }
   }
 }

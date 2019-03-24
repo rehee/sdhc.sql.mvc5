@@ -142,6 +142,23 @@ namespace System
         b => b.ParentId == parentId)
         .AsQueryable();
     }
+    public static ContentTableHtmlView GetContentTableHtmlView(long? parentId)
+    {
+      var content = ContentManager.GetContent(parentId);
+      Type type = content != null ? content.GetType() : BasicContentType;
+      var allowChild = type.GetObjectCustomAttribute<AllowChildrenAttribute>();
+      IEnumerable<string> additionalList = allowChild != null && allowChild.TableList != null ? allowChild.TableList : new string[] { "Title" };
+      var children = GetAllChildContent(parentId).ToList().Select(b => b.ConvertModelToPost()).ToList();
+      var rowItems = children.Select(b =>
+      {
+        var values = additionalList.Select(a => b.GetPropertyByKey(a)).ToList();
+        return new ContentTableRowItem(b.Id, values);
+      }).ToList();
+      var result = new ContentTableHtmlView();
+      result.TableHeaders = additionalList;
+      result.Rows = rowItems;
+      return result;
+    }
     public static BaseContent GetContent(long? id)
     {
       if (!id.HasValue)

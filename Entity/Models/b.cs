@@ -31,9 +31,10 @@ namespace Entity.Models
   [Table("S2")]
   public class S2 : SCHCContent
   {
+    [InputType(EditorType = EnumInputType.Password)]
     public string Title2 { get; set; }
 
-    [InputType(EditorType = EnumInputType.DropDwon, MultiSelect = true, RelatedType = typeof(GenderSelect))]
+    [InputType(EditorType = EnumInputType.DropDwon, MultiSelect = false, RelatedType = typeof(GenderSelect))]
     public string Gender { get; set; }
   }
   [AllowChildren(ChildrenType = new Type[] { typeof(GenderSelect) })]

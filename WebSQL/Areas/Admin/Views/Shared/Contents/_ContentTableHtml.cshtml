@@ -1,0 +1,34 @@
+﻿@model ContentTableHtmlView
+
+<table class="table table-bordered table-striped table-hover basic-example dataTable">
+    <thead>
+        <tr>
+            <th>Id</th>
+            @foreach (var item in Model.TableHeaders)
+            {
+                <th>@item</th>
+            }
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>Id</th>
+            @foreach (var item in Model.TableHeaders)
+            {
+                <th>@item</th>
+            }
+        </tr>
+    </tfoot>
+    <tbody>
+        @foreach (var row in Model.Rows)
+        {
+            <tr>
+                <td> <a href="@Url.Action(Model.FirstRowAction,Model.FirstRowController,Model.FirstRowObject(row))">@row.Id</a> </td>
+                @foreach (var item in row.Values)
+                {
+                    <td>@item</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

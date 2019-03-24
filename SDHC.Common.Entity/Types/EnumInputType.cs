@@ -9,6 +9,7 @@ namespace SDHC.Common.Entity.Types
   public enum EnumInputType
   {
     Text,
+    Password,
     TextArea,
     Hidden,
     Number,
