@@ -20,20 +20,23 @@ namespace WebSQL.Models
     }
   }
 
-  public class MyUser:IdentityUser
+  public class MyUser: SDHCUser
   {
     public string AAA { get; set; }
   }
-  public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IContent
+
+  public class ApplicationDbContext : IdentityDbContext<SDHCUser>, IContent
   {
     public ApplicationDbContext()
         : base("DefaultConnection", throwIfV1Schema: false)
     {
 
     }
+    public DbSet<MyUser> MyUsers { get; set; }
     public DbSet<BaseContent> Contents { get; set; }
     public DbSet<S1> S1s { get; set; }
     public DbSet<S2> S2s { get; set; }
+
 
     public DbSet<BaseSelect> Selects { get; set; }
 

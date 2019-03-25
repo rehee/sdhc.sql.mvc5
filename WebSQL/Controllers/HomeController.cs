@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using SDHC.Common.Entity.Extends;
 using SDHC.Common.Entity.Models;
+using Start;
 using System;
 using System.Linq;
 using System.Linq.Expressions;

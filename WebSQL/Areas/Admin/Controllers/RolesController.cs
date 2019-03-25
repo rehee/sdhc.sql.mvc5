@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using SDHC.Common.Entity.Models;
+using Start;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace WebSQL.Areas.Admin.Controllers
       var roles = getRoleAndUsers();
       tabNameAndUser.AddRange(roles);
       tabNameAndUser.Add(new RoleNameAndUser() { RoleName = "_other", RoleDisplayName = "Registered", Users = otherUsers.Count });
-      IEnumerable<ApplicationUser> users = Enumerable.Empty<ApplicationUser>();
+      IEnumerable<SDHCUser> users = Enumerable.Empty<SDHCUser>();
 
       if (string.IsNullOrEmpty(id))
       {
@@ -181,7 +182,7 @@ namespace WebSQL.Areas.Admin.Controllers
   public class RolesIndexView
   {
     public IEnumerable<RoleNameAndUser> RoleAndUsers { get; set; }
-    public IEnumerable<ApplicationUser> Users { get; set; }
+    public IEnumerable<SDHCUser> Users { get; set; }
 
   }
   public class RoleNameAndUser
