@@ -152,7 +152,7 @@ namespace System
       var rowItems = children.Select(b =>
       {
         var values = additionalList.Select(a => b.GetPropertyByKey(a)).ToList();
-        return new ContentTableRowItem(b.Id, values);
+        return new ContentTableRowItem(b.Id, values, b.GetType());
       }).ToList();
       var result = new ContentTableHtmlView();
       result.TableHeaders = additionalList;

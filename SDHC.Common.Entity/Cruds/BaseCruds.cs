@@ -56,6 +56,16 @@ namespace System
       return null;
     }
 
+    public static IQueryable<T> GetDbSet<T>(out ISave repo) where T : class
+    {
+      repo = GetRepo();
+      return GetDbSet<T>(repo);
+    }
+    public static IQueryable<object> GetDbSet(Type type, out ISave repo)
+    {
+      repo = GetRepo();
+      return repo.GetDbSet(type) as IQueryable<object>;
+    }
     public static IQueryable<T> Read<T>(Expression<Func<T, bool>> where, out ISave db) where T : class
     {
       db = GetRepo();
@@ -72,5 +82,6 @@ namespace System
         return null;
       return Queryable.Where<object>(dbset, where);
     }
+
   }
 }

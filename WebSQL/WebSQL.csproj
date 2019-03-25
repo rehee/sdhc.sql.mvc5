@@ -208,6 +208,7 @@
     <Compile Include="Areas\Admin\Controllers\ContentController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashBoardController.cs" />
     <Compile Include="Areas\Admin\Controllers\DropDownController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ModelManagementController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
     <Compile Include="Attribute\AA.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -5289,6 +5290,10 @@
     <Content Include="Areas\Admin\Views\Roles\CreateUser.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\_CreateOrEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\EditUser.cshtml" />
+    <Content Include="Areas\Admin\Views\ModelManagement\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ModelManagement\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ModelManagement\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ModelManagement\_CreateOrEdit.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

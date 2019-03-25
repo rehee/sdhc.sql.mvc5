@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SDHC.Common.Entity.Extends
+namespace System
 {
   public static class BaseModelCRUD
   {
@@ -27,10 +27,7 @@ namespace SDHC.Common.Entity.Extends
 
         }
       }
-
     }
-    
-
     public static MethodInfo GetMethod(this ISave repo, Type property, string methodName, out object propertyObj)
     {
       var repoType = repo.GetType();

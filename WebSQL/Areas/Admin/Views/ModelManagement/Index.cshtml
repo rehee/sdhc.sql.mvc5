@@ -1,0 +1,37 @@
+﻿@model ContentTableHtmlView
+@{
+  ViewBag.Title = "Model Management";
+  Model.FirstRowAction = "Edit";
+  Model.FirstRowController = "ModelManagement";
+  Model.FirstRowArea = "Area";
+  Model.FirstRowObject = b => new { @area = "Admin", @id = (b as ContentTableRowItem).Id, @type = ModelManager.GetMapperKey((b as ContentTableRowItem).ThisType.FullName) };
+}
+<div class="row clearfix">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="button-box">
+
+          <button type="button" class="btn btn-info btn-group" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Create
+          </button>
+        </div>
+
+      </div>
+
+      <div class="body">
+        @{ Html.RenderPartial("Contents/_ContentTableHtml", Model); }
+
+      </div>
+    </div>
+  </div>
+</div>
+@section script{
+  <script>
+            $(function () {
+                $('.basic-example').DataTable();
+            });
+  </script>
+  @*<script src="/admin-lib/assets/js/pages/tables/jquery-datatable.js"></script>*@
+}
+

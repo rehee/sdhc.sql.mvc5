@@ -19,6 +19,18 @@ namespace System
     public static ContentPostModel ConvertModelToPost(this object input)
     {
       var model = new ContentPostModel();
+      ConvertToIPost(input, model);
+      return model;
+    }
+    public static ModelPostModel ConvertModelToModelPostModel(this object input)
+    {
+      var model = new ModelPostModel();
+      ConvertToIPost(input, model);
+      return model;
+    }
+
+    public static void ConvertToIPost(object input, IPostModel model)
+    {
       var type = input.GetType();
       model.FullType = type.FullName;
       model.ThisAssembly = type.Assembly.FullName;
@@ -28,31 +40,30 @@ namespace System
       {
         if (p.SkippedProperty())
           continue;
-        var inputValue = p.GetValue(input);
         if (p.BaseProperty())
         {
           var baseP = resultProperty.Where(b => b.Name == p.Name).FirstOrDefault();
           if (baseP == null)
             continue;
+          var inputValue = p.GetValue(input);
           if (inputValue == null)
             continue;
           baseP.SetValue(model, inputValue);
           continue;
         }
-        var prop = p.GetContentPropertyByPropertyInfo(inputValue);
+        var prop = p.GetContentPropertyByPropertyInfo(input);
         if (prop == null)
           continue;
         model.Properties.Add(prop);
       }
-      return model;
     }
 
-    public static object ConvertToBaseModel(this ContentPostModel input, bool deleteExistFile = true, List<string> oldFiles = null, List<string> newFiles = null)
+    public static object ConvertToBaseModel(this IPostModel input, bool deleteExistFile = true, List<string> oldFiles = null, List<string> newFiles = null)
     {
       var result = input.ConvertBaseTypeToEnity(out var typeName, out var assemblyName);
       return input.ConvertToBaseModel(result, deleteExistFile, oldFiles, newFiles);
     }
-    public static object ConvertToBaseModel(this ContentPostModel input, object result, bool deleteExistFile = true, List<string> oldFiles = null, List<string> newFiles = null)
+    public static object ConvertToBaseModel(this IPostModel input, object result, bool deleteExistFile = true, List<string> oldFiles = null, List<string> newFiles = null)
     {
       var type = input.FullType;
       var asm = input.ThisAssembly;
@@ -316,7 +327,7 @@ namespace System
         p.SetValue(result, value);
     }
 
-    public static object ConvertBaseTypeToEnity(this ContentPostModel input, out string typeName, out string assemblyName)
+    public static object ConvertBaseTypeToEnity(this IPostModel input, out string typeName, out string assemblyName)
     {
       var type = Type.GetType($"{input.FullType},{input.ThisAssembly}");
       typeName = input.FullType;

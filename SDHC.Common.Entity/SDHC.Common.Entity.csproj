@@ -90,11 +90,12 @@
     <Compile Include="Attributes\BasePropertyAttribute.cs" />
     <Compile Include="Cruds\BaseCruds.cs" />
     <Compile Include="Cruds\ContentCruds.cs" />
-    <Compile Include="Extends\BaseModelCRUD.cs" />
+    <Compile Include="Cruds\BaseModelCRUD.cs" />
     <Compile Include="Extends\ContentCRUD.cs" />
     <Compile Include="Extends\ContentExtends.cs" />
     <Compile Include="Extends\MyReflect.cs" />
     <Compile Include="Extends\TypeExtends.cs" />
+    <Compile Include="Managers\ModelManager.cs" />
     <Compile Include="Models\BasicContent.cs" />
     <Compile Include="Models\BasicModel.cs" />
     <Compile Include="Extends\Convert.cs" />

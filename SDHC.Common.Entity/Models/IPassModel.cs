@@ -12,7 +12,7 @@ namespace SDHC.Common.Entity.Models
   {
     List<ContentProperty> Properties { get; set; }
   }
-  public class ContentPostModel : IPassModel
+  public class ContentPostModel : IPostModel
   {
     [BaseProperty]
     public long Id { get; set; }
@@ -32,6 +32,23 @@ namespace SDHC.Common.Entity.Models
     public List<ContentProperty> Properties { get; set; } = new List<ContentProperty>();
   }
 
+  public class ModelPostModel: IPostModel
+  {
+    [BaseProperty]
+    public long Id { get; set; }
+    [BaseProperty]
+    public string FullType { get; set; }
+    [BaseProperty]
+    public string ThisAssembly { get; set; }
+
+    public List<ContentProperty> Properties { get; set; } = new List<ContentProperty>();
+  }
+
+  public interface IPostModel: IPassModel, IInt64Key
+  {
+    string FullType { get; set; }
+    string ThisAssembly { get; set; }
+  }
   public class ContentPropertyIndex
   {
     public ContentProperty Property { get; set; }
@@ -42,4 +59,5 @@ namespace SDHC.Common.Entity.Models
       Index = index;
     }
   }
+
 }

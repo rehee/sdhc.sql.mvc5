@@ -101,4 +101,13 @@ namespace SDHC.Common.Entity.Models
       }
     }
   }
+
+
+  public abstract class BaseModel : IInt64Key
+  {
+    [Key]
+    [BaseProperty]
+    public long Id { get; set; }
+  }
+
 }

@@ -48,13 +48,16 @@ namespace System
   }
   public class ContentTableRowItem
   {
-    public ContentTableRowItem(long id, IEnumerable<string> values)
+    public ContentTableRowItem(long id, IEnumerable<string> values, Type type)
     {
       this.Id = id;
       this.Values = values;
+      this.ThisType = type;
     }
     public long Id { get; set; }
     public IEnumerable<string> Values { get; set; } = Enumerable.Empty<string>();
+
+    public Type ThisType { get; set; }
   }
 
   public class ItemKeyAndName
