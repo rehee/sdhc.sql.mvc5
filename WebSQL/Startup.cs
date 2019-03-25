@@ -2,6 +2,7 @@
 using Microsoft.Owin;
 using Owin;
 using SDHC.Common.Entity.Models;
+using Start;
 using System;
 using WebSQL.Models;
 
@@ -12,7 +13,7 @@ namespace WebSQL
   {
     public void Configuration(IAppBuilder app)
     {
-      ConfigureAuth(app);
+      SDHCStartup.ConfigureAuth<ApplicationDbContext>(app, () => ApplicationDbContext.Create());
       BaseCruds.GetRepo = () => new ApplicationDbContext();
       ContentManager.BasicContentType = typeof(SCHCContent);
       SelectManager.BasicSelectType = typeof(SDHCBascSelect);
