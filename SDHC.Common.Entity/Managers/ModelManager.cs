@@ -78,38 +78,37 @@ namespace System
     {
       return BaseCruds.GetDbSet<T>(out repo).Where(where);
     }
-    public static IQueryable<object> Read(Type type, Expression<Func<object, bool>> where, out ISave repo)
+    public static IQueryable<T> Read<T>(Type type, Expression<Func<T, bool>> where, out ISave repo)
     {
       var set = BaseCruds.GetDbSet(type, out repo);
-      var q = Queryable.Where<object>(set, where);
+      var q = Queryable.Where<T>((IQueryable<T>)set, where);
       return q;
     }
 
-    public static IQueryable<object> Read(string typeString, Expression<Func<object, bool>> where, out ISave repo)
+    public static IQueryable<T> Read<T>(string typeString, Expression<Func<T, bool>> where, out ISave repo)
     {
       var type = GetModelType(typeString);
-      var dbset = BaseCruds.GetDbSet(type, out repo);
-      return dbset.Where(where);
+      return Read<T>(type, where, out repo);
     }
     public static object Find(string typeString, long id, out ISave repo)
     {
       var type = GetModelType(typeString);
       var set = BaseCruds.GetDbSet(type, out repo);
-      var q = Queryable.Where<IInt64Key>((IQueryable<IInt64Key>)set, b=>b.Id==id);
+      var q = Queryable.Where<IInt64Key>((IQueryable<IInt64Key>)set, b=> b.Id==id);
       return q.FirstOrDefault();
     }
 
     public static void Update(ModelPostModel model)
     {
       var type = Type.GetType($"{model.FullType},{model.ThisAssembly}");
-      var target = Read(type, b => (b as BaseModel).Id == model.Id, out ISave repo).FirstOrDefault();
+      var target = Read<IInt64Key>(type, b => b.Id == model.Id, out ISave repo).FirstOrDefault();
       model.ConvertToBaseModel(target);
       repo.SaveChanges();
     }
 
     public static ContentTableHtmlView GetContentTableHtmlView(Type type)
     {
-      var children = Read(type, b => true, out ISave repo).ToList().Select(b => b as IInt64Key).ToList();
+      var children = Read<IInt64Key>(type, b => true, out ISave repo).ToList();
       var allowChild = type.GetObjectCustomAttribute<AllowChildrenAttribute>();
 
       IEnumerable<string> additionalList = allowChild != null && allowChild.TableList != null ? allowChild.TableList : new string[] { };
