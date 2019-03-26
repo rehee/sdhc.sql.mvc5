@@ -117,6 +117,8 @@
     <Compile Include="Extends\ContentExtends.cs" />
     <Compile Include="Extends\MyReflect.cs" />
     <Compile Include="Extends\TypeExtends.cs" />
+    <Compile Include="Managers\ConfigManager.cs" />
+    <Compile Include="Managers\EmailManager.cs" />
     <Compile Include="Managers\FileManager.cs" />
     <Compile Include="Managers\LanguageManager.cs" />
     <Compile Include="Managers\ModelManager.cs" />
