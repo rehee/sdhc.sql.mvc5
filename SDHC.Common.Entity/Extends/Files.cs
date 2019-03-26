@@ -17,6 +17,7 @@ namespace SDHC.Common.Entity.Extends
         return;
       try
       {
+        
         var name = file.FileName.Split('.').LastOrDefault();
         if (String.IsNullOrEmpty(name))
           name = "";
@@ -25,31 +26,34 @@ namespace SDHC.Common.Entity.Extends
         var fileName = $"{Guid.NewGuid().ToString()}{name}";
         string uploadPath;
         uploadPath = Path.Combine(G.FileUploadPath, extraPath, fileName);
-        var path = Path.Combine(Directory.GetCurrentDirectory(), uploadPath);
-        var exist = Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(),
+        var path = Path.Combine(FileManager.BasePath, uploadPath);
+        var exist = Directory.Exists(Path.Combine(FileManager.BasePath,
                                  G.FileUploadPath, extraPath));
         if (!exist)
         {
-          Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(),
+          Directory.CreateDirectory(Path.Combine(FileManager.BasePath,
                                  G.FileUploadPath, extraPath));
         }
         file.SaveAs(path);
         filePath = uploadPath;
       }
-      catch { }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.Message);
+      }
     }
 
     public static void DeleteFile(this string filePath, out bool success)
     {
+      var path = Path.Combine(FileManager.BasePath, filePath);
       success = false;
-      if (!File.Exists(filePath))
+      if (!File.Exists(path))
       {
         success = true;
         return;
       }
       try
       {
-        var path = Path.Combine(Directory.GetCurrentDirectory(), filePath);
         File.Delete(path);
         success = true;
       }

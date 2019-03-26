@@ -64,7 +64,8 @@ namespace System
     public static IQueryable<object> GetDbSet(Type type, out ISave repo)
     {
       repo = GetRepo();
-      return repo.GetDbSet(type) as IQueryable<object>;
+      var set = repo.GetDbSet(type);
+      return (IQueryable<object>)set;
     }
     public static IQueryable<T> Read<T>(Expression<Func<T, bool>> where, out ISave db) where T : class
     {
