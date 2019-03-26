@@ -1,15 +1,4 @@
-﻿using System;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin;
-using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.Google;
-using Owin;
-using SDHC.Common.Entity.Models;
-using Start;
-using WebSQL.Models;
-
-namespace WebSQL
+﻿namespace WebSQL
 {
   //public partial class Startup
   //{
