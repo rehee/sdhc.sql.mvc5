@@ -301,7 +301,7 @@ namespace System
             if (files.File != null)
             {
               files.File.SaveFile(out var filePath, $"{p.DeclaringType.FullName}_{p.Name}");
-              if (deleteExistFile)
+              if (deleteExistFile && !string.IsNullOrEmpty(files.Value))
               {
                 files.Value.DeleteFile(out var deleted);
               }

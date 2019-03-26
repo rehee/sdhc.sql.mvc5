@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SDHC.Common.Entity.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SDHC.Common.Entity.Models
+namespace System
 {
   public interface IContent : ISave
   {

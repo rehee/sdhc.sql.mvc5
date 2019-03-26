@@ -95,6 +95,7 @@
     <Compile Include="Extends\ContentExtends.cs" />
     <Compile Include="Extends\MyReflect.cs" />
     <Compile Include="Extends\TypeExtends.cs" />
+    <Compile Include="GeneralFunction.cs" />
     <Compile Include="Managers\FileManager.cs" />
     <Compile Include="Managers\LanguageManager.cs" />
     <Compile Include="Managers\ModelManager.cs" />

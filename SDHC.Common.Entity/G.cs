@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace System
 {
-  public static class G
+  public static partial class G
   {
     public static string FileUploadPath { get; set; } = "files";
     public static bool IsNullOrEmpty(this string input)
