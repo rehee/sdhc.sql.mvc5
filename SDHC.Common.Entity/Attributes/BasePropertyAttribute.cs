@@ -52,8 +52,10 @@ namespace SDHC.Common.Entity.Attributes
     public string[] SortRoles { get; set; }
     public string[] DeleteRoles { get; set; }
     public string[] TableList { get; set; }
+    public bool SingleRecord { get; set; } = false;
     public AllowChildrenAttribute()
     {
+
     }
   }
 }

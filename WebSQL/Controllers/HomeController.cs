@@ -25,8 +25,18 @@ namespace WebSQL.Controllers
     {
       
     }
-    public ActionResult Index()
+    //public ActionResult Index()
+    public async Task<ActionResult> Index()
     {
+      var user = new MyUser();
+      user.UserName = "tu1";
+      user.Email = "tu1@1.com";
+      //await _userManager.CreateAsync(user, "1");
+      var s = await _userManager.FindByNameAsync(user.UserName);
+      var v = await _userManager.CheckPasswordAsync(s, "1");
+      var token = await _userManager.GeneratePasswordResetTokenAsync(s.Id);
+      await _userManager.ResetPasswordAsync(s.Id, token, "2");
+      
       return View();
     }
 
