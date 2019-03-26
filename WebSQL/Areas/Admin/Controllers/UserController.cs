@@ -6,11 +6,14 @@ using System.Web.Mvc;
 
 namespace WebSQL.Areas.Admin.Controllers
 {
-  [Admin(Roles = "Admin")]
-  public class DashBoardController : Controller
+  public class UserController : Controller
   {
-    // GET: Admin/Home
+    // GET: Admin/User
     public ActionResult Index()
+    {
+      return RedirectToAction("Index", "DashBoard", new { @area = "Admin" });
+    }
+    public ActionResult Login()
     {
       return View();
     }
