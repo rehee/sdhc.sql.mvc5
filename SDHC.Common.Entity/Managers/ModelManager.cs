@@ -122,5 +122,16 @@ namespace System
       result.Rows = rowItems;
       return result;
     }
+
+    public static void Delete<T>(ISave repo,T model) where T:class
+    {
+      if (repo == null)
+      {
+        repo = BaseCruds.GetRepo();
+      }
+      var set = BaseCruds.GetDbSet<T>(repo) as DbSet<T>;
+      set.Remove(model);
+      repo.SaveChanges();
+    }
   }
 }
