@@ -102,7 +102,6 @@ namespace SDHC.Common.Entity.Models
     }
   }
 
-
   public abstract class BaseModel : IInt64Key
   {
     [Key]
@@ -127,7 +126,8 @@ namespace SDHC.Common.Entity.Models
     public virtual void SetViewModel(IInt64Key model = null)
     {
       if (model != null)
-      { var type = model.GetType();
+      {
+        var type = model.GetType();
         FullType = type.FullName;
         ThisAssembly = type.Assembly.FullName;
         model.SetObjectByObject(this);
@@ -158,5 +158,4 @@ namespace SDHC.Common.Entity.Models
 
 
   }
-
 }
