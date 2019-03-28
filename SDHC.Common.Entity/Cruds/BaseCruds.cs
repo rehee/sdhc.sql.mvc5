@@ -50,12 +50,11 @@ namespace System
         }
         if (t == typeof(T))
         {
-          return p.GetValue(repo) as DbSet<T>;
+          return (IQueryable<T>) p.GetValue(repo);
         }
       }
       return null;
     }
-
     public static IQueryable<T> GetDbSet<T>(out ISave repo) where T : class
     {
       repo = GetRepo();
@@ -75,13 +74,13 @@ namespace System
         return null;
       return Queryable.Where<T>(dbset, where);
     }
-    public static IQueryable<object> Read(Type type, Expression<Func<object, bool>> where, out ISave db)
+    public static IQueryable<T> Read<T>(Type type, Expression<Func<T, bool>> where, out ISave db)
     {
       db = GetRepo();
-      var dbset = db.GetDbSet(type) as IQueryable<object>;
+      var dbset = db.GetDbSet(type) as IQueryable<T>;
       if (dbset == null)
         return null;
-      return Queryable.Where<object>(dbset, where);
+      return Queryable.Where<T>(dbset, where);
     }
 
   }

@@ -23,20 +23,15 @@ namespace WebSQL.Controllers
 
     public HomeController()
     {
-      
+
     }
     //public ActionResult Index()
-    public async Task<ActionResult> Index()
+    public ActionResult Index()
     {
-      var user = new MyUser();
-      user.UserName = "tu1";
-      user.Email = "tu1@1.com";
-      //await _userManager.CreateAsync(user, "1");
-      var s = await _userManager.FindByNameAsync(user.UserName);
-      var v = await _userManager.CheckPasswordAsync(s, "1");
-      var token = await _userManager.GeneratePasswordResetTokenAsync(s.Id);
-      await _userManager.ResetPasswordAsync(s.Id, token, "2");
-      
+      var e1 = new S1();
+      ModelManager.Create(e1);
+      var e = ModelManager.Read<S1>(b => true).ToList();
+      e.ForEach(b => ModelManager.Delete(b));
       return View();
     }
 

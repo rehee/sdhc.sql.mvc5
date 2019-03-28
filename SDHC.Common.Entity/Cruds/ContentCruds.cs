@@ -214,7 +214,7 @@ namespace System
         return Enumerable.Empty<DropDownSummary>();
       return list.Select(b =>
       {
-        var count = BaseCruds.Read(b, c => true, out ISave db).ToList().Count;
+        var count = BaseCruds.Read<IInt64Key>(b, c => true, out ISave db).ToList().Count;
         var allowChild = b.GetObjectCustomAttribute<AllowChildrenAttribute>();
         var dropDownName = allowChild != null && String.IsNullOrEmpty(allowChild.Name) ? allowChild.Name : b.Name;
         return new DropDownSummary()
