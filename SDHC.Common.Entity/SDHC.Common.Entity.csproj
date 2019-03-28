@@ -123,6 +123,7 @@
     <Compile Include="Managers\FileManager.cs" />
     <Compile Include="Managers\LanguageManager.cs" />
     <Compile Include="Managers\ModelManager.cs" />
+    <Compile Include="Managers\ViewModelManager.cs" />
     <Compile Include="Models\BasicContent.cs" />
     <Compile Include="Models\BasicModel.cs" />
     <Compile Include="Extends\Convert.cs" />

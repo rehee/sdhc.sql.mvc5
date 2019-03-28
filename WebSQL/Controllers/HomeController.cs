@@ -30,8 +30,13 @@ namespace WebSQL.Controllers
     {
       var e1 = new S1();
       ModelManager.Create(e1);
-      var e = ModelManager.Read<S1>(b => true).ToList();
-      e.ForEach(b => ModelManager.Delete(b));
+
+      var e1View = e1.ConvertModelToViewModel<S1View>();
+
+      e1View.Title = "999";
+      e1View.Update();
+
+      var newE1 = ModelManager.Find<S1>(e1View.Id);
       return View();
     }
 

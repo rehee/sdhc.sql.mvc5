@@ -362,6 +362,33 @@ namespace System
 
     }
 
+
+    public static void SetObjectByObject(this object thisObject, object targetObject)
+    {
+      if (thisObject == null || targetObject == null)
+        return;
+      var thisType = thisObject.GetType();
+      var thisProperty = thisType.GetProperties();
+      var targetType = targetObject.GetType();
+      var targetProperty = targetType.GetProperties();
+      foreach (var p in targetProperty)
+      {
+        var thisP = thisProperty.Where(b => b.Name == p.Name).FirstOrDefault();
+        if (thisP == null)
+          continue;
+        try
+        {
+          p.SetValue(targetObject, thisP.GetValue(thisObject));
+        }
+        catch { }
+      }
+    }
+    public static T ConvertModelToViewModel<T>(this IInt64Key input) where T : BaseViewModel, new()
+    {
+      var result = new T();
+      result.SetViewModel(input);
+      return result;
+    }
   }
 
 }

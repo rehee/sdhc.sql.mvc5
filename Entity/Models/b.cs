@@ -26,6 +26,12 @@ namespace Entity.Models
     )]
   public class S1 : SCHCContent
   {
+
+  }
+
+  public class S1View : BaseViewModel
+  {
+    public string Title { get; set; }
   }
 
   [Table("S2")]
