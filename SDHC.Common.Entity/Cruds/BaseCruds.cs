@@ -74,6 +74,10 @@ namespace System
         return null;
       return Queryable.Where<T>(dbset, where);
     }
+    public static IQueryable<T> Read<T>(Expression<Func<T, bool>> where) where T : class
+    {
+      return Read<T>(where, out var repo);
+    }
     public static IQueryable<T> Read<T>(Type type, Expression<Func<T, bool>> where, out ISave db)
     {
       db = GetRepo();
@@ -81,6 +85,10 @@ namespace System
       if (dbset == null)
         return null;
       return Queryable.Where<T>(dbset, where);
+    }
+    public static IQueryable<T> Read<T>(Type type, Expression<Func<T, bool>> where)
+    {
+      return Read<T>(type, where, out var repo);
     }
 
   }
