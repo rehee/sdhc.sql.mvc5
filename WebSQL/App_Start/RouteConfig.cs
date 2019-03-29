@@ -13,11 +13,14 @@ namespace WebSQL
     {
       routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+      routes.MapRoute("content", "page/{*names}",
+            defaults: new { controller = "Content2", action = "Index" });
       routes.MapRoute(
           name: "Default",
           url: "{controller}/{action}/{id}",
           defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
       );
+      
     }
   }
 }

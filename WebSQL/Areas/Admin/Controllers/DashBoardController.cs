@@ -6,7 +6,6 @@ using System.Web.Mvc;
 
 namespace WebSQL.Areas.Admin.Controllers
 {
-  [Admin(Roles = "Admin")]
   public class DashBoardController : Controller
   {
     // GET: Admin/Home

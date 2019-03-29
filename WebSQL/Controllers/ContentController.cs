@@ -6,12 +6,12 @@ using System.Web.Mvc;
 
 namespace WebSQL.Controllers
 {
-  public class ContentController : Controller
+  public class Content2Controller : Controller
   {
-    public ActionResult Index()
+    public ActionResult Index(string names)
     {
-      
-      return View();
+
+      return Content(names);
     }
     public ActionResult Create()
     {
