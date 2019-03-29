@@ -190,20 +190,23 @@ namespace System
         }
       }
     }
-
     public static void Delete(string key, long id)
     {
-      var type = GetModelType(key);
-      if (type == null)
+      try
       {
-        return;
+        var type = GetModelType(key);
+        if (type == null)
+        {
+          return;
+        }
+        var model = Find(type, id, out var repo);
+        if (model == null)
+        {
+          return;
+        }
+        Delete(model, repo);
       }
-      var model = Find(type, id, out var repo);
-      if (model == null)
-      {
-        return;
-      }
-      Delete(model, repo);
+      catch { }
     }
 
     public static ContentTableHtmlView GetContentTableHtmlView(Type type)
