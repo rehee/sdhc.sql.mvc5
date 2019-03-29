@@ -30,6 +30,10 @@ namespace WebSQL.Controllers
     {
       return View();
     }
+    public ActionResult Page(string name)
+    {
+      return Content("");
+    }
 
     public ActionResult About()
     {
