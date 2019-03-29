@@ -36,7 +36,7 @@ namespace System
       {
         if (p.PropertyType.GenericTypeArguments.FirstOrDefault() == property)
         {
-          var addMethod = p.PropertyType.GetMethod("Add");
+          var addMethod = p.PropertyType.GetMethod(methodName);
           if (addMethod != null)
           {
             propertyObj = p.GetValue(repo);

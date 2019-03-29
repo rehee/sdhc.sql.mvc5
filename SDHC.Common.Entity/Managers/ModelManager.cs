@@ -150,7 +150,7 @@ namespace System
     {
       var tType = typeof(T);
       var modelType = model.GetType();
-      if(tType!= modelType)
+      if (tType != modelType)
       {
         Delete(model as object, repo);
         return;
@@ -174,7 +174,7 @@ namespace System
       if (repo == null)
       {
         var id = ((IInt64Key)model).Id;
-        model = Find(type, id,out repo);
+        model = Find(type, id, out repo);
       }
       var method = repo.GetMethod(type, "Remove", out object p);
       if (method != null)
@@ -190,8 +190,21 @@ namespace System
         }
       }
     }
-    
 
+    public static void Delete(string key, long id)
+    {
+      var type = GetModelType(key);
+      if (type == null)
+      {
+        return;
+      }
+      var model = Find(type, id, out var repo);
+      if (model == null)
+      {
+        return;
+      }
+      Delete(model, repo);
+    }
 
     public static ContentTableHtmlView GetContentTableHtmlView(Type type)
     {
