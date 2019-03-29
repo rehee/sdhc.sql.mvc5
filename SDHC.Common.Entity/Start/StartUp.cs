@@ -19,11 +19,6 @@ namespace Start
     // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
     public static void ConfigureAuth<T>(IAppBuilder app,Func<T> create) where T:DbContext
     {
-      G.GetSetting = key =>
-      {
-        var setting = WebConfigurationManager.AppSettings[key];
-        return setting.Text();
-      };
       // Configure the db context, user manager and signin manager to use a single instance per request
       app.CreatePerOwinContext(create);
       app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create<T>);
