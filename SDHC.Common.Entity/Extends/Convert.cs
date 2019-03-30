@@ -169,6 +169,9 @@ namespace System
       if (inputType != null)
       {
         result.SortOrder = inputType.SortOrder;
+        result.Required = inputType.Required;
+        result.Readonly = inputType.Readonly;
+        result.ReadonlyEdit = inputType.ReadonlyEdit;
       }
       var cValue = p.GetValue(input).MyTryConvert(typeof(string));
       if (cValue != null)

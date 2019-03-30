@@ -68,6 +68,10 @@ namespace System
         return new ContentTableRowItem(b.Id, values, b.GetType());
       }).ToList();
       var result = new ContentTableHtmlView();
+      if(allowChild!=null && allowChild.DisableDelete)
+      {
+        result.DisableDelete = true;
+      }
       result.TableHeaders = additionalList.Select(b => type.GetPropertyLabelByKey(b)).ToList();
       result.Rows = rowItems;
       return result;

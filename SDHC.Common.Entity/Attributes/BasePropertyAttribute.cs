@@ -16,6 +16,9 @@ namespace SDHC.Common.Entity.Attributes
     public int RangeMax { get; set; } = 100;
     public bool RangeMaxSelf { get; set; } = false;
     public int SortOrder { get; set; } = 0;
+    public bool Required { get; set; }
+    public bool Readonly { get; set; }
+    public bool ReadonlyEdit { get; set; }
     public InputTypeAttribute()
     {
 
@@ -54,6 +57,7 @@ namespace SDHC.Common.Entity.Attributes
     public string[] TableList { get; set; }
     public bool SingleRecord { get; set; } = false;
     public int DisplayOrder { get; set; } = 0;
+    public bool DisableDelete { get; set; }
     public AllowChildrenAttribute()
     {
 

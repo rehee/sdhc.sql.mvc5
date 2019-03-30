@@ -26,7 +26,9 @@ namespace SDHC.Common.Entity.Models
     public int SortOrder { get; set; } = 0;
     public int RangeMin { get; set; } = 0;
     public int RangeMax { get; set; } = 100;
-
+    public bool Required { get; set; }
+    public bool Readonly { get; set; }
+    public bool ReadonlyEdit { get; set; }
   }
   public class DropDownViewModel
   {

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +10,32 @@ namespace Start
 {
   public static class BeforeStart
   {
-    public static void Init(Func<string, string> getConfig, Type E, Func<string, object> getSession, Action<string, object> setSession)
+    public static void Init(
+      Func<string, string> getConfig,
+      Type E,
+      Func<string, object> getSession,
+      Action<string, object> setSession,
+      Func<IOwinContext> getContext)
     {
       G.GetSetting = getConfig;
       var eProperty = E.GetProperties();
       foreach (var p in eProperty)
       {
+        switch (p.Name)
+        {
+          case "UserManager":
+            Func<ApplicationUserManager> UserManager = () => OwinContextExtensions.Get<ApplicationUserManager>(getContext());
+            p.SetValue(null, UserManager);
+            continue;
+          case "SignManager":
+            Func<ApplicationSignInManager> SignManager = () => OwinContextExtensions.Get<ApplicationSignInManager>(getContext());
+            p.SetValue(null, SignManager);
+            continue;
+          case "RoleManager":
+            Func<ApplicationRoleManager> RoleManager = () => OwinContextExtensions.Get<ApplicationRoleManager>(getContext());
+            p.SetValue(null, RoleManager);
+            continue;
+        }
         var config = p.GetObjectCustomAttribute<ConfigAttribute>();
         if (config == null)
         {
@@ -32,7 +54,7 @@ namespace Start
         }
         catch { }
       }
-      
+
       LanguageManager.GetLang = () =>
       {
         var obj = getSession((string)LanguageManager.LanguageKey);
@@ -50,10 +72,10 @@ namespace Start
       };
       LanguageManager.SetLang = (lang) =>
       {
-        setSession((string)LanguageManager.LanguageKey,lang);
+        setSession((string)LanguageManager.LanguageKey, lang);
       };
 
-      
+
     }
   }
 }

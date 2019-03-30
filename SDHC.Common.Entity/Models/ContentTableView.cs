@@ -45,6 +45,7 @@ namespace System
 
     public IEnumerable<string> TableHeaders { get; set; }
     public IEnumerable<ContentTableRowItem> Rows { get; set; }
+    public bool DisableDelete { get; set; }
   }
   public class ContentTableRowItem
   {
