@@ -222,9 +222,10 @@ namespace System
         return new ContentTableRowItem(b.Id, values, b.GetType());
       }).ToList();
       var result = new ContentTableHtmlView();
-      result.TableHeaders = additionalList;
+      result.TableHeaders = additionalList.Select(b => type.GetPropertyLabelByKey(b)).ToList();
       result.Rows = rowItems;
       return result;
     }
+
   }
 }
