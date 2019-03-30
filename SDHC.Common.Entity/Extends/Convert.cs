@@ -205,7 +205,7 @@ namespace System
       var datetimeType = typeof(DateTime);
       if (result.EditorType == EnumInputType.DropDwon)
       {
-        var stringValue = input.Text();
+        var stringValue = input != null ? p.GetValue(input).MyTryConvert<string>() : "";
         var stringValueList = stringValue.StringValueToList();
         if (result.MultiSelect || stringValueList.Count() > 1)
         {
@@ -285,7 +285,7 @@ namespace System
             selector.Add(select);
           }
         }
-        
+
       }
 
     }
