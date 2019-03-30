@@ -57,7 +57,7 @@ namespace System
               return v;
           }
         }
-        return Convert.ChangeType(value, type);
+        return value.ChangeTypeNull(type);
       }
       catch (Exception ex)
       {
@@ -82,7 +82,7 @@ namespace System
       }
       try
       {
-        return Convert.ChangeType(value, type);
+        return value.ChangeTypeNull(type);
       }
       catch
       {
@@ -160,6 +160,22 @@ namespace System
           return array;
         }
         return instance;
+      }
+      return null;
+    }
+    public static object ChangeTypeNull(this object value, Type type)
+    {
+      try
+      {
+        if (type.Name.Contains("Nullable"))
+        {
+          return Convert.ChangeType(value, type.GenericTypeArguments.FirstOrDefault());
+        }
+        return Convert.ChangeType(value, type);
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.Message);
       }
       return null;
     }

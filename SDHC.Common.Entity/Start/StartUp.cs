@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
@@ -16,8 +17,21 @@ namespace Start
 {
   public static class SDHCStartup
   {
+    public static void Init<TRepo, TBaseContent, TBaseSelect,TBaseUser>(IAppBuilder app, Func<TRepo> create, string path)
+      where TRepo : DbContext, IContent, new() 
+      where TBaseContent : BaseContent 
+      where TBaseSelect : BaseSelect
+      where TBaseUser: SDHCUser
+    {
+      ConfigureAuth<TRepo>(app, create);
+      BaseCruds.GetRepo = () => new TRepo();
+      ContentManager.BasicContentType = typeof(TBaseContent);
+      SelectManager.BasicSelectType = typeof(TBaseSelect);
+      FileManager.BasePath = path;
+      SDHCUserManager.BaseUser = typeof(TBaseUser);
+    }
     // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
-    public static void ConfigureAuth<T>(IAppBuilder app,Func<T> create) where T:DbContext
+    public static void ConfigureAuth<T>(IAppBuilder app, Func<T> create) where T : DbContext
     {
       // Configure the db context, user manager and signin manager to use a single instance per request
       app.CreatePerOwinContext(create);

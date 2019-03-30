@@ -85,6 +85,8 @@ namespace System
     }
     public static IQueryable<T> Read<T>(Type type, Expression<Func<T, bool>> where, out ISave repo)
     {
+      var tType = typeof(T);
+      
       var set = BaseCruds.GetDbSet(type, out repo);
       var q = Queryable.Where<T>((IQueryable<T>)set, where);
       return q;

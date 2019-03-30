@@ -256,16 +256,36 @@ namespace System
       else
       {
         //dropdown Classes
-        var allSelect = ModelManager.Read<IBasicContent>(relatedType, b => true).ToList();
-        var selects = new List<DropDownViewModel>();
-        foreach (var item in allSelect)
+        var isContent = relatedType.GetInterfaces().Any(b => b == typeof(IInt64Key));
+        if (isContent)
         {
-          var select = new DropDownViewModel();
-          select.Name = item.DisplayName();
-          select.Value = item.Id.ToString();
-          select.Select = values.Contains(select.Value);
-          selector.Add(select);
+          var allSelect = ModelManager.Read<IBasicContent>(relatedType, b => true).ToList();
+
+          var selects = new List<DropDownViewModel>();
+          foreach (var item in allSelect)
+          {
+            var select = new DropDownViewModel();
+            select.Name = item.DisplayName();
+            select.Value = item.Id.ToString();
+            select.Select = values.Contains(select.Value);
+            selector.Add(select);
+          }
         }
+        else
+        {
+          var allSelect = ModelManager.Read<SDHCUser>(relatedType, b => true).ToList();
+
+          var selects = new List<DropDownViewModel>();
+          foreach (var item in allSelect)
+          {
+            var select = new DropDownViewModel();
+            select.Name = item.DisplayName();
+            select.Value = item.Id;
+            select.Select = values.Contains(select.Value);
+            selector.Add(select);
+          }
+        }
+        
       }
 
     }

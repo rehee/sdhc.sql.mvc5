@@ -1,0 +1,6 @@
+﻿ToDo
+1. MyTryConvert 方法目前无法转换带?的类型 比如long?
+
+目前问题
+1. 初次启动的速度还是很慢
+2. 路由wildcard matching和控制器仍无法同时存在
