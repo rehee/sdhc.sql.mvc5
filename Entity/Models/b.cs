@@ -12,10 +12,12 @@ using System.Threading.Tasks;
 namespace Entity.Models
 {
   [AllowChildren(
-    ChildrenType = new Type[] { typeof(S1), typeof(S2) }
+    ChildrenType = new Type[] { typeof(S1), typeof(S2) },
+    TableList = new string[] {"Id","Title", "E2Select" }
     //,
     //CreateRoles = new string[] { "Admin" },
     //EditRoles = new string[] { "Admin" }
+    
     )]
   public class SCHCContent : BaseContent
   {
@@ -42,6 +44,9 @@ namespace Entity.Models
 
     [InputType(EditorType = EnumInputType.DropDwon, MultiSelect = false, RelatedType = typeof(GenderSelect))]
     public string Gender { get; set; }
+
+    [InputType(EditorType = EnumInputType.DropDwon, RelatedType = typeof(E2))]
+    public long E2Select { get; set; }
   }
   [AllowChildren(ChildrenType = new Type[] { typeof(GenderSelect) })]
   public class SDHCBascSelect : BaseSelect

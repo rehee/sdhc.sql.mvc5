@@ -284,6 +284,19 @@ namespace System
       return chars;
     }
 
+    public static IEnumerable<string> StringValueToList(this string input, char mark = ',')
+    {
+      var stringValue = input.Text();
+      if (stringValue.Length >= 1 && stringValue[0] == ',')
+      {
+        stringValue = stringValue.Substring(1);
+      }
+      if (stringValue.Length >= 1 && stringValue[stringValue.Length - 1] == ',')
+      {
+        stringValue = stringValue.Substring(0, stringValue.Length - 1);
+      }
+      return stringValue.Split(mark);
+    }
   }
 
   public enum IntCompareType

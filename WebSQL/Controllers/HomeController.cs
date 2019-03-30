@@ -28,6 +28,14 @@ namespace WebSQL.Controllers
     //public ActionResult Index()
     public ActionResult Index()
     {
+      //for(var i = 0; i < 10; i++)
+      //{
+      //  var e2 = new E2()
+      //  {
+      //    Title = $"ttt{i}"
+      //  };
+      //  ModelManager.Create(e2);
+      //}
       return View();
     }
     public ActionResult Page(string name)

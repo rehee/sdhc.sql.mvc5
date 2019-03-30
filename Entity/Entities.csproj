@@ -107,29 +107,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201903192113468_a1.cs" />
-    <Compile Include="Migrations\201903192113468_a1.Designer.cs">
-      <DependentUpon>201903192113468_a1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903201342121_a2.cs" />
-    <Compile Include="Migrations\201903201342121_a2.Designer.cs">
-      <DependentUpon>201903201342121_a2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903222350005_a3.cs" />
-    <Compile Include="Migrations\201903222350005_a3.Designer.cs">
-      <DependentUpon>201903222350005_a3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903240036027_a4.cs" />
-    <Compile Include="Migrations\201903240036027_a4.Designer.cs">
-      <DependentUpon>201903240036027_a4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903250034094_a5.cs" />
-    <Compile Include="Migrations\201903250034094_a5.Designer.cs">
-      <DependentUpon>201903250034094_a5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903250042428_a6.cs" />
-    <Compile Include="Migrations\201903250042428_a6.Designer.cs">
-      <DependentUpon>201903250042428_a6.cs</DependentUpon>
+    <Compile Include="Migrations\201903292318233_init.cs" />
+    <Compile Include="Migrations\201903292318233_init.Designer.cs">
+      <DependentUpon>201903292318233_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -153,23 +133,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903192113468_a1.resx">
-      <DependentUpon>201903192113468_a1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903201342121_a2.resx">
-      <DependentUpon>201903201342121_a2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903222350005_a3.resx">
-      <DependentUpon>201903222350005_a3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903240036027_a4.resx">
-      <DependentUpon>201903240036027_a4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903250034094_a5.resx">
-      <DependentUpon>201903250034094_a5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903250042428_a6.resx">
-      <DependentUpon>201903250042428_a6.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903292318233_init.resx">
+      <DependentUpon>201903292318233_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

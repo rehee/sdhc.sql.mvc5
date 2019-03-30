@@ -37,7 +37,7 @@ namespace WebSQL.Models
     public DbSet<BaseContent> Contents { get; set; }
     public DbSet<S1> S1s { get; set; }
     public DbSet<S2> S2s { get; set; }
-
+    public DbSet<E2> E2s { get; set; }
 
     public DbSet<BaseSelect> Selects { get; set; }
 

@@ -3,7 +3,7 @@ namespace Entity.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class a1 : DbMigration
+    public partial class init : DbMigration
     {
         public override void Up()
         {
@@ -12,11 +12,11 @@ namespace Entity.Migrations
                 c => new
                     {
                         Id = c.Long(nullable: false, identity: true),
+                        Title = c.String(),
                         Url = c.String(),
                         DisplayOrder = c.Long(nullable: false),
                         CreateTime = c.DateTime(),
                         ParentId = c.Long(),
-                        Title = c.String(),
                         Title_Title = c.String(),
                         Discriminator = c.String(nullable: false, maxLength: 128),
                     })
@@ -25,27 +25,23 @@ namespace Entity.Migrations
                 .Index(t => t.ParentId);
             
             CreateTable(
-                "dbo.AspNetRoles",
+                "dbo.E2",
                 c => new
                     {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Name = c.String(nullable: false, maxLength: 256),
+                        Id = c.Long(nullable: false, identity: true),
+                        Title = c.String(),
                     })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.AspNetUserRoles",
+                "dbo.BaseSelects",
                 c => new
                     {
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        RoleId = c.String(nullable: false, maxLength: 128),
+                        Id = c.Long(nullable: false, identity: true),
+                        Title = c.String(),
+                        Discriminator = c.String(nullable: false, maxLength: 128),
                     })
-                .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId)
-                .Index(t => t.RoleId);
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -63,6 +59,8 @@ namespace Entity.Migrations
                         LockoutEnabled = c.Boolean(nullable: false),
                         AccessFailedCount = c.Int(nullable: false),
                         UserName = c.String(nullable: false, maxLength: 256),
+                        AAA = c.String(),
+                        Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
@@ -93,11 +91,36 @@ namespace Entity.Migrations
                 .Index(t => t.UserId);
             
             CreateTable(
+                "dbo.AspNetUserRoles",
+                c => new
+                    {
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        RoleId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.UserId, t.RoleId })
+                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId)
+                .Index(t => t.RoleId);
+            
+            CreateTable(
+                "dbo.AspNetRoles",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Name = c.String(nullable: false, maxLength: 256),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
+            
+            CreateTable(
                 "dbo.S2",
                 c => new
                     {
                         Id = c.Long(nullable: false),
                         Title2 = c.String(),
+                        Gender = c.String(),
+                        E2Select = c.Long(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.BaseContents", t => t.Id)
@@ -114,19 +137,21 @@ namespace Entity.Migrations
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.BaseContents", "ParentId", "dbo.BaseContents");
             DropIndex("dbo.S2", new[] { "Id" });
+            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
+            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
-            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.BaseContents", new[] { "ParentId" });
             DropTable("dbo.S2");
+            DropTable("dbo.AspNetRoles");
+            DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.AspNetUserRoles");
-            DropTable("dbo.AspNetRoles");
+            DropTable("dbo.BaseSelects");
+            DropTable("dbo.E2");
             DropTable("dbo.BaseContents");
         }
     }

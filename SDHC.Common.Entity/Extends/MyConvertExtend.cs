@@ -59,7 +59,11 @@ namespace System
         }
         return Convert.ChangeType(value, type);
       }
-      catch { return null; }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.Message);
+        return null;
+      }
     }
     public static object MyTryConvert(this object value, Type type)
     {

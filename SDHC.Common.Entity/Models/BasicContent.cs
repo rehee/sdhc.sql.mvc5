@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace SDHC.Common.Entity.Models
 {
-  public interface IBasicContent : IInt64Key
+  public interface IBasicContent : IInt64Key, IDisplayName
   {
 
   }
-  public interface IBasicSelect : IInt64Key
+  public interface IBasicSelect : IBasicContent
   {
 
   }
@@ -22,13 +22,18 @@ namespace SDHC.Common.Entity.Models
   {
     [Key]
     public long Id { get; set; }
-    public string Title
+    [InputType(EditorType = Types.EnumInputType.Text, SortOrder = -1)]
+    public virtual string Title
     {
       get; set;
     }
+    public virtual string DisplayName()
+    {
+      return String.IsNullOrEmpty(this.Title) ? this.Id.ToString() : this.Title;
+    }
   }
 
-  public abstract class BaseContent : IInt64Key
+  public abstract class BaseContent : IBasicContent
   {
     [Key]
     [BaseProperty]
@@ -100,13 +105,23 @@ namespace SDHC.Common.Entity.Models
         return list;
       }
     }
+    public virtual string DisplayName()
+    {
+      return String.IsNullOrEmpty(this.Title) ? this.Id.ToString() : this.Title;
+    }
   }
 
-  public abstract class BaseModel : IInt64Key
+  public abstract class BaseModel : IBasicContent
   {
     [Key]
     [BaseProperty]
     public long Id { get; set; }
+    [InputType(EditorType = Types.EnumInputType.Text, SortOrder = -1)]
+    public virtual string Title { get; set; }
+    public virtual string DisplayName()
+    {
+      return String.IsNullOrEmpty(this.Title) ? this.Id.ToString() : this.Title;
+    }
   }
 
   public abstract class BaseViewModel : IInt64Key

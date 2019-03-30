@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SDHC.Common.Entity.Attributes;
+using SDHC.Common.Entity.Models;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -215,12 +217,54 @@ namespace System
       {
         return "";
       }
+      var inputType = p.GetObjectCustomAttribute<InputTypeAttribute>();
       var value = p.GetValue(input);
+      //TODO 需要把外联到其他表的内容给转换过来
+      if (inputType != null && inputType.RelatedType != null && !inputType.RelatedType.IsEnum)
+      {
+        var longKey = inputType.RelatedType.GetInterfaces().Any(b => b == typeof(IInt64Key));
+        var values = value.Text().StringValueToList();
+        if (inputType.MultiSelect)
+        {
+          if (longKey)
+          {
+            var longValues = values.Select(b => b.MyTryConvert<long>()).ToList();
+            value = String.Join(",", ModelManager.Read<IBasicContent>(inputType.RelatedType, b => longValues.Contains(b.Id)).ToList().Select(b => b.DisplayName()));
+          }
+          else
+          {
+            value = String.Join(",", ModelManager.Read<SDHCUser>(inputType.RelatedType, b => values.Contains(b.Id)).ToList().Select(b => b.DisplayName()));
+          }
+        }
+        else
+        {
+          var firstValue = values.FirstOrDefault();
+          if (longKey)
+          {
+            var longValue = firstValue.MyTryConvert<long>();
+            value = ModelManager.Read<IBasicContent>(inputType.RelatedType, b => b.Id == longValue).ToList().Select(b => b.DisplayName()).FirstOrDefault();
+          }
+          else
+          {
+            value = ModelManager.Read<SDHCUser>(inputType.RelatedType, b => values.Contains(b.Id)).ToList().Select(b => b.DisplayName()).FirstOrDefault();
+          }
+        }
+      }
       if (value == null)
       {
         return "";
       }
       return value.MyTryConvert<string>();
+    }
+    public static string GetPropertyLabelByKey(this Type input,string key)
+    {
+      var p = input.GetProperties().Where(b => b.Name == key).FirstOrDefault();
+      if (p == null)
+        return key;
+      var display = p.GetObjectCustomAttribute<DisplayAttribute>();
+      if (display == null)
+        return key.SpacesFromCamel();
+      return display.Name.SpacesFromCamel();
     }
   }
 }

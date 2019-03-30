@@ -11,4 +11,9 @@ namespace SDHC.Common.Entity.Models
   {
     Int64 Id { get; set; }
   }
+
+  public interface IDisplayName
+  {
+    string DisplayName();
+  }
 }

@@ -56,6 +56,7 @@ namespace System
           continue;
         model.Properties.Add(prop);
       }
+      model.Properties = model.Properties.OrderBy(b => b.SortOrder).ToList();
     }
 
     public static object ConvertToBaseModel(this IPostModel input, bool deleteExistFile = true, List<string> oldFiles = null, List<string> newFiles = null)
@@ -120,6 +121,7 @@ namespace System
           continue;
         model.Properties.Add(prop);
       }
+      model.Properties = model.Properties.OrderBy(b => b.SortOrder).ToList();
       return model;
     }
     public static IdentityUser ConvertPostToUser(this UserPassModel input, IdentityUser user, bool deleteExistFile = true, List<string> oldFiles = null, List<string> newFiles = null)
@@ -163,7 +165,11 @@ namespace System
         result.CustomProperty = true;
       }
       result.Key = p.Name;
-
+      var inputType = p.GetObjectCustomAttribute<InputTypeAttribute>();
+      if (inputType != null)
+      {
+        result.SortOrder = inputType.SortOrder;
+      }
       var cValue = p.GetValue(input).MyTryConvert(typeof(string));
       if (cValue != null)
         result.Value = (string)cValue;
@@ -199,19 +205,11 @@ namespace System
       var datetimeType = typeof(DateTime);
       if (result.EditorType == EnumInputType.DropDwon)
       {
-        var stringValue = input != null ? input.MyTryConvert<string>().Trim() : "";
-        stringValue = stringValue.Trim();
-        if (stringValue.Length >= 1 && stringValue[0] == ',')
+        var stringValue = input.Text();
+        var stringValueList = stringValue.StringValueToList();
+        if (result.MultiSelect || stringValueList.Count() > 1)
         {
-          stringValue = stringValue.Substring(1);
-        }
-        if (stringValue.Length >= 1 && stringValue[stringValue.Length - 1] == ',')
-        {
-          stringValue = stringValue.Substring(0, stringValue.Length - 1);
-        }
-        if (result.MultiSelect || stringValue.Split(',').Count() > 1)
-        {
-          result.MultiValue = stringValue.Split(',').Select(b => b.Trim()).ToList();
+          result.MultiValue = stringValueList;
           result.Value = "";
         }
         p.SetDropDownSelect(
@@ -258,12 +256,12 @@ namespace System
       else
       {
         //dropdown Classes
-        var allSelect = SelectManager.GetAllSelect(relatedType);
+        var allSelect = ModelManager.Read<IBasicContent>(relatedType, b => true).ToList();
         var selects = new List<DropDownViewModel>();
         foreach (var item in allSelect)
         {
           var select = new DropDownViewModel();
-          select.Name = item.Title;
+          select.Name = item.DisplayName();
           select.Value = item.Id.ToString();
           select.Select = values.Contains(select.Value);
           selector.Add(select);

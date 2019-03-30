@@ -8,11 +8,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Models
 {
-  public class E2 : IBasicContent
+  public class E2 : BaseModel
   {
-    [Key]
-    public Int64 Id { get; set; }
-    public string Title { get; set; }
-
   }
 }

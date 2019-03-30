@@ -43,6 +43,7 @@ namespace System
 
     public static void Create<T>(T input) where T : class
     {
+      var type = typeof(T);
       var set = BaseCruds.GetDbSet<T>(out ISave repo) as DbSet<T>;
       set.Add(input);
       repo.SaveChanges();
