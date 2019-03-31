@@ -156,7 +156,7 @@ namespace System
       {
         result.BaseProperty = true;
       }
-      if (p.GetCustomAttribute<IgnoreEditAttribute>() != null)
+      if (p.GetCustomAttribute<IgnoreEditAttribute>() != null|| p.GetCustomAttribute<HideEditAttribute>() != null)
       {
         result.IgnoreProperty = true;
       }

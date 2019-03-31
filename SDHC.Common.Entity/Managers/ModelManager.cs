@@ -86,7 +86,7 @@ namespace System
     public static IQueryable<T> Read<T>(Type type, Expression<Func<T, bool>> where, out ISave repo)
     {
       var tType = typeof(T);
-      
+
       var set = BaseCruds.GetDbSet(type, out repo);
       var q = Queryable.Where<T>((IQueryable<T>)set, where);
       return q;
@@ -215,6 +215,26 @@ namespace System
     public static ContentTableHtmlView GetContentTableHtmlView(Type type)
     {
       var children = Read<IInt64Key>(type, b => true, out ISave repo).ToList();
+      var allowChild = type.GetObjectCustomAttribute<AllowChildrenAttribute>();
+
+      IEnumerable<string> additionalList = allowChild != null && allowChild.TableList != null ? allowChild.TableList : new string[] { };
+      var rowItems = children.Select(b =>
+      {
+        var values = additionalList.Select(a => b.GetPropertyByKey(a)).ToList();
+        return new ContentTableRowItem(b.Id, values, b.GetType());
+      }).ToList();
+      var result = new ContentTableHtmlView();
+      if (allowChild != null && allowChild.DisableDelete)
+      {
+        result.DisableDelete = true;
+      }
+      result.TableHeaders = additionalList.Select(b => type.GetPropertyLabelByKey(b)).ToList();
+      result.Rows = rowItems;
+      return result;
+    }
+    public static ContentTableHtmlView GetContentTableHtmlView<T>(Type type, Expression<Func<T, bool>> where) where T : IInt64Key
+    {
+      var children = Read<T>(type, where, out ISave repo).ToList();
       var allowChild = type.GetObjectCustomAttribute<AllowChildrenAttribute>();
 
       IEnumerable<string> additionalList = allowChild != null && allowChild.TableList != null ? allowChild.TableList : new string[] { };
