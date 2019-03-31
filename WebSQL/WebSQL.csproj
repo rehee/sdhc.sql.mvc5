@@ -205,7 +205,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\ContentController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashBoardController.cs" />
     <Compile Include="Areas\Admin\Controllers\DropDownController.cs" />
     <Compile Include="Areas\Admin\Controllers\ModelManagementController.cs" />
@@ -213,9 +212,13 @@
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Attribute\AA.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="E\EConfit.cs" />
+    <Compile Include="E\EExtends.cs" />
+    <Compile Include="E\EInitConfig.cs" />
+    <Compile Include="E\ELanguage.cs" />
+    <Compile Include="E\EUser.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -4642,10 +4645,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Areas\Admin\Views\web.config" />
-    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Admin\Views\DashBoard\Index.cshtml" />
     <Content Include="lib\admin\assets\plugins\footable\css\fonts\footable.eot" />
     <Content Include="lib\admin\assets\plugins\footable\css\fonts\footable.ttf" />
     <Content Include="lib\admin\assets\plugins\footable\css\fonts\footable.woff" />
@@ -4850,22 +4849,6 @@
     <Content Include="lib\admin\scss\style.scss" />
     <Content Include="lib\admin\scss\variable.scss" />
     <Content Include="lib\admin\scss\widgets.scss" />
-    <Content Include="Areas\Admin\Views\Shared\_Root.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_head.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_css.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Header.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_LeftSideBar.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_js.cshtml" />
-    <Content Include="Areas\Admin\Views\Content\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Layout_Content.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_BreadCrumbContent.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\Contents\_ContentTable.cshtml" />
-    <Content Include="Areas\Admin\Views\Content\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Content\_CreateOrEdit.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\AdminInputs\_PropertiesEdit.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml" />
-    <Content Include="Areas\Admin\Views\Content\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\DropDown\Index.cshtml" />
     <Content Include="admin-lib\assets\js\pages\ui\jstree-demo\root.json" />
     <Content Include="admin-lib\plugins\7-stroke\fonts\Pe-icon-7-stroke.eot" />
     <Content Include="admin-lib\plugins\7-stroke\fonts\Pe-icon-7-stroke.ttf" />
@@ -5285,17 +5268,7 @@
     <Content Include="admin-lib\plugins\weather-icons-master\_docs\less\variables.less" />
     <Content Include="admin-lib\plugins\x-editable\LICENSE-MIT" />
     <Content Include="admin-lib\plugins\x-editable\README.md" />
-    <Content Include="Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml" />
-    <Content Include="Areas\Admin\Views\Roles\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Roles\RoleList.cshtml" />
-    <Content Include="Areas\Admin\Views\Roles\CreateUser.cshtml" />
-    <Content Include="Areas\Admin\Views\Roles\_CreateOrEdit.cshtml" />
-    <Content Include="Areas\Admin\Views\Roles\EditUser.cshtml" />
-    <Content Include="Areas\Admin\Views\ModelManagement\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\ModelManagement\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\ModelManagement\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\ModelManagement\_CreateOrEdit.cshtml" />
-    <Content Include="Areas\Admin\Views\User\Login.cshtml" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -5341,6 +5314,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\S2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

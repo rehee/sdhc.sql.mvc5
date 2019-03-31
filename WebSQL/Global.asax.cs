@@ -12,7 +12,8 @@ namespace WebSQL
     {
         protected void Application_Start()
         {
-            AreaRegistration.RegisterAllAreas();
+      E.Init();
+      AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);

@@ -12,6 +12,29 @@ namespace SDHC.Common.Entity.Models
   {
     List<ContentProperty> Properties { get; set; }
   }
+
+  public class ContentPostViewModel
+  {
+    public ContentPostViewModel(ContentPostModel model = null)
+    {
+      if (model != null)
+        Model = model;
+    }
+    public ContentPostModel Model { get; set; }
+    public string ViewPath
+    {
+      get
+      {
+        if (Model == null)
+          return "";
+        var t = Type.GetType($"{Model.FullType},{Model.ThisAssembly}");
+        var path = String.IsNullOrEmpty(ContentManager.ContentViewPath) ? "" : $"/{ContentManager.ContentViewPath}";
+        return $"~/Views{path}/{t.Name}.cshtml";
+      }
+    }
+  }
+
+
   public class ContentPostModel : IPostModel
   {
     [BaseProperty]
@@ -32,7 +55,7 @@ namespace SDHC.Common.Entity.Models
     public List<ContentProperty> Properties { get; set; } = new List<ContentProperty>();
   }
 
-  public class ModelPostModel: IPostModel
+  public class ModelPostModel : IPostModel
   {
     [BaseProperty]
     public long Id { get; set; }
@@ -44,7 +67,7 @@ namespace SDHC.Common.Entity.Models
     public List<ContentProperty> Properties { get; set; } = new List<ContentProperty>();
   }
 
-  public interface IPostModel: IPassModel, IInt64Key
+  public interface IPostModel : IPassModel, IInt64Key
   {
     string FullType { get; set; }
     string ThisAssembly { get; set; }

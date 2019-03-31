@@ -44,6 +44,16 @@ namespace Start
         try
         {
           var value = G.GetSetting(p.Name);
+          switch (p.Name)
+          {
+            case "ContentViewPath":
+              ContentManager.ContentViewPath = value == null ? "" : value.MyTryConvert<string>();
+              break;
+            case "ContentPageUrl":
+              ContentManager.ContentPageUrl = value == null ? "" : value.MyTryConvert<string>();
+              break;
+
+          }
           var ptype = p.PropertyType;
           if (ptype == typeof(string))
           {

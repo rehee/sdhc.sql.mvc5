@@ -5,6 +5,9 @@ using SDHC.Common.Entity.Models;
 using Start;
 using System;
 using System.Collections.Generic;
+using System.Web.Hosting;
+using System.Web.Mvc;
+using System.Web.Routing;
 using WebSQL.Models;
 
 [assembly: OwinStartupAttribute(typeof(WebSQL.Startup))]
@@ -14,10 +17,8 @@ namespace WebSQL
   {
     public void Configuration(IAppBuilder app)
     {
-      SDHCStartup.ConfigureAuth<ApplicationDbContext>(app, () => ApplicationDbContext.Create());
-      BaseCruds.GetRepo = () => new ApplicationDbContext();
-      ContentManager.BasicContentType = typeof(SCHCContent);
-      SelectManager.BasicSelectType = typeof(SDHCBascSelect);
+      SDHCStartup.Init<ApplicationDbContext, BaseContent, SDHCBascSelect, MyUser>(
+        app, () => ApplicationDbContext.Create(), HostingEnvironment.MapPath("/"));
       ModelManager.ModelMapper = new Dictionary<string, Type>()
       {
         ["S1"] = typeof(S1),
@@ -27,6 +28,8 @@ namespace WebSQL
       {
         "S1","S2"
       };
+
+      
     }
   }
 }

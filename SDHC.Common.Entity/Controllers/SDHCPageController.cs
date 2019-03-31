@@ -4,14 +4,16 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace WebSQL.Controllers
+namespace SDHC.Controllers
 {
-  public class Content2Controller : Controller
+  public class SDHCPageController : Controller
   {
     public ActionResult Index(string names)
     {
-
-      return Content(names);
+      var m = ContentManager.GetContentPostViewModel(names);
+      if(string.IsNullOrEmpty(m.ViewPath))
+        return Content("NoContent");
+      return View(m.ViewPath, m.Model);
     }
     public ActionResult Create()
     {

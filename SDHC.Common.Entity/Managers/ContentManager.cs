@@ -5,12 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace System
 {
   public static class ContentManager
   {
     public static Type BasicContentType { get; set; } = typeof(BaseContent);
+    public static string ContentViewPath { get; set; } = "";
+    public static string ContentPageUrl { get; set; } = "";
     public static void CreateContent(BaseContent input, long? parentId = null)
     {
       if (parentId != null)
@@ -68,7 +71,7 @@ namespace System
         return new ContentTableRowItem(b.Id, values, b.GetType());
       }).ToList();
       var result = new ContentTableHtmlView();
-      if(allowChild!=null && allowChild.DisableDelete)
+      if (allowChild != null && allowChild.DisableDelete)
       {
         result.DisableDelete = true;
       }
@@ -104,6 +107,20 @@ namespace System
       model.ParentId = parentId;
       return model.ConvertModelToPost();
     }
+
+    public static ContentPostViewModel GetContentPostViewModel(string url)
+    {
+      if (String.IsNullOrEmpty(url))
+      {
+        var model = ModelManager.Read<BaseContent>(BasicContentType, b => b.Parent == null).FirstOrDefault();
+        if(model==null)
+          return new ContentPostViewModel(null);
+        return new ContentPostViewModel(model.ConvertModelToPost());
+      }
+      return new ContentPostViewModel(null);
+    }
+
+
   }
 
 }

@@ -108,9 +108,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\Admin\Controllers\ContentController.cs" />
     <Compile Include="Attributes\AdminAttribute.cs" />
     <Compile Include="Attributes\BasePropertyAttribute.cs" />
     <Compile Include="Attributes\ConfigAttribute.cs" />
+    <Compile Include="Controllers\SDHCPageController.cs" />
     <Compile Include="Cruds\BaseCruds.cs" />
     <Compile Include="Cruds\ContentCruds.cs" />
     <Compile Include="Cruds\BaseModelCRUD.cs" />
@@ -148,10 +150,44 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Content\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Content\Create.cshtml" />
+    <Content Include="Views\Content\Edit.cshtml" />
+    <Content Include="Views\Content\Index.cshtml" />
+    <Content Include="Views\DashBoard\Index.cshtml" />
+    <Content Include="Views\DropDown\Index.cshtml" />
+    <Content Include="Views\ModelManagement\_CreateOrEdit.cshtml" />
+    <Content Include="Views\ModelManagement\Create.cshtml" />
+    <Content Include="Views\ModelManagement\Edit.cshtml" />
+    <Content Include="Views\ModelManagement\Index.cshtml" />
+    <Content Include="Views\Roles\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Roles\CreateUser.cshtml" />
+    <Content Include="Views\Roles\EditUser.cshtml" />
+    <Content Include="Views\Roles\Index.cshtml" />
+    <Content Include="Views\Roles\RoleList.cshtml" />
+    <Content Include="Views\Shared\_BreadCrumbContent.cshtml" />
+    <Content Include="Views\Shared\_css.cshtml" />
+    <Content Include="Views\Shared\_head.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Shared\_js.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_Layout_Content.cshtml" />
+    <Content Include="Views\Shared\_LeftSideBar.cshtml" />
+    <Content Include="Views\Shared\_Root.cshtml" />
+    <Content Include="Views\Shared\AdminInputs\_AdminInput.cshtml" />
+    <Content Include="Views\Shared\AdminInputs\_PropertiesEdit.cshtml" />
+    <Content Include="Views\Shared\Contents\_ContentTable.cshtml" />
+    <Content Include="Views\Shared\Contents\_ContentTableHtml.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\web.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ToDoList.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

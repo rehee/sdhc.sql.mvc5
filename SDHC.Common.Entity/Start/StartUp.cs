@@ -12,23 +12,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Configuration;
+using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace Start
 {
   public static class SDHCStartup
   {
-    public static void Init<TRepo, TBaseContent, TBaseSelect,TBaseUser>(IAppBuilder app, Func<TRepo> create, string path)
-      where TRepo : DbContext, IContent, new() 
-      where TBaseContent : BaseContent 
+    public static void Init<TRepo, TBaseContent, TBaseSelect, TBaseUser>(
+      IAppBuilder app, Func<TRepo> repoCreate, string webBasePath)
+      where TRepo : DbContext, IContent, new()
+      where TBaseContent : BaseContent
       where TBaseSelect : BaseSelect
-      where TBaseUser: SDHCUser
+      where TBaseUser : SDHCUser
     {
-      ConfigureAuth<TRepo>(app, create);
+      ConfigureAuth<TRepo>(app, repoCreate);
       BaseCruds.GetRepo = () => new TRepo();
       ContentManager.BasicContentType = typeof(TBaseContent);
       SelectManager.BasicSelectType = typeof(TBaseSelect);
-      FileManager.BasePath = path;
+      FileManager.BasePath = webBasePath;
       SDHCUserManager.BaseUser = typeof(TBaseUser);
+
+      RouteTable.Routes.MapRoute("content2", "Admin/Content/{action}/{id}",
+            defaults: new {
+              controller = "Content",
+              action = "Index",
+              id = UrlParameter.Optional,
+              namespaces = new string[] { "SDHC.Common.Entity" },
+            });
+      RouteTable.Routes.MapRoute("content", $"{(String.IsNullOrEmpty(ContentManager.ContentPageUrl) ? "" : ContentManager.ContentPageUrl + "/")}{{*names}}",
+            defaults: new { controller = "SDHCPage", action = "Index" });
     }
     // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
     public static void ConfigureAuth<T>(IAppBuilder app, Func<T> create) where T : DbContext
