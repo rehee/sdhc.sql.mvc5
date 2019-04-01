@@ -41,11 +41,11 @@ namespace ASP
             
             #line 2 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
   
-  ViewBag.Title = E.GetModelTitle(G.Text(ViewBag.id)) + " Management";
+  ViewBag.Title = G.GetModelTitle(G.Text(ViewBag.id)) + " Management";
   Model.FirstRowAction = "Edit";
   Model.FirstRowController = "ModelManagement";
   Model.FirstRowArea = "Area";
-  Model.FirstRowObject = b => new { @area = E.AdminPath, @id = (b as ContentTableRowItem).Id, @type = ModelManager.GetMapperKey((b as ContentTableRowItem).ThisType.FullName) };
+  Model.FirstRowObject = b => new { @area = G.AdminPath, @id = (b as ContentTableRowItem).Id, @type = ModelManager.GetMapperKey((b as ContentTableRowItem).ThisType.FullName) };
   ViewBag.delete = true;
   ViewBag.deleteFunction = "deleteRole";
 
@@ -59,7 +59,7 @@ WriteLiteral(" id=\"modelDeleteForm\"");
 WriteAttribute("action", Tuple.Create(" action=\"", 495), Tuple.Create("\"", 563)
             
             #line 11 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 504), Tuple.Create<System.Object, System.Int32>(Url.Action("Delete","ModelManagement","@area=E.AdminPath")
+, Tuple.Create(Tuple.Create("", 504), Tuple.Create<System.Object, System.Int32>(Url.Action("Delete","ModelManagement","@area=G.AdminPath")
             
             #line default
             #line hidden
@@ -119,7 +119,7 @@ WriteLiteral(">\r\n\r\n          <a");
 WriteAttribute("href", Tuple.Create(" href=\"", 905), Tuple.Create("\"", 992)
             
             #line 21 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 912), Tuple.Create<System.Object, System.Int32>(Url.Action("Create","ModelManagement",new { @area=E.AdminPath,@id=ViewBag.id })
+, Tuple.Create(Tuple.Create("", 912), Tuple.Create<System.Object, System.Int32>(Url.Action("Create","ModelManagement",new { @area=G.AdminPath,@id=ViewBag.id })
             
             #line default
             #line hidden

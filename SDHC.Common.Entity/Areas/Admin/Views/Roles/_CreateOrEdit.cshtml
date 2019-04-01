@@ -1,7 +1,7 @@
 ﻿@model WebSQL.Areas.Admin.Controllers.UserCreateView
 @Html.Hidden("Id", Model.Id)
 
-@if (E.UserNameIsNotEmail)
+@if (G.UserNameIsNotEmail)
 {
     <div class="form-group">
         <label>UserName</label>

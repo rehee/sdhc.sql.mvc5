@@ -12,7 +12,7 @@
     <h2>Default Basic Forms</h2>
   </div>
   <div class="body">
-    <form action="@Url.Action("Create","Content",new { @area=E.AdminPath })" class="" method="post" enctype="multipart/form-data">
+    <form action="@Url.Action("Create","Content",new { @area=G.AdminPath })" class="" method="post" enctype="multipart/form-data">
       @{ Html.RenderPartial("_CreateOrEdit", Model);}
     </form>
   </div>

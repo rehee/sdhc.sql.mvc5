@@ -81,7 +81,7 @@ WriteLiteral(">\r\n        <a");
 WriteAttribute("href", Tuple.Create(" href=\"", 422), Tuple.Create("\"", 490)
             
             #line 15 "..\..\Areas\Admin\Views\Shared\_BreadCrumbContent.cshtml"
-, Tuple.Create(Tuple.Create("", 429), Tuple.Create<System.Object, System.Int32>(Url.Action("Index","Content",new { area=E.AdminPath,id="" })
+, Tuple.Create(Tuple.Create("", 429), Tuple.Create<System.Object, System.Int32>(Url.Action("Index","Content",new { area=G.AdminPath,id="" })
             
             #line default
             #line hidden
@@ -122,7 +122,7 @@ WriteLiteral(">\r\n            <a");
 WriteAttribute("href", Tuple.Create(" href=\"", 671), Tuple.Create("\"", 747)
             
             #line 20 "..\..\Areas\Admin\Views\Shared\_BreadCrumbContent.cshtml"
-, Tuple.Create(Tuple.Create("", 678), Tuple.Create<System.Object, System.Int32>(Url.Action("Index","Content",new { area=E.AdminPath,@id = item.Id })
+, Tuple.Create(Tuple.Create("", 678), Tuple.Create<System.Object, System.Int32>(Url.Action("Index","Content",new { area=G.AdminPath,@id = item.Id })
             
             #line default
             #line hidden

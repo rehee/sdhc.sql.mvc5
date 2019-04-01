@@ -1,14 +1,14 @@
 ﻿@model ContentTableHtmlView
 @{
-  ViewBag.Title = E.GetModelTitle(G.Text(ViewBag.id)) + " Management";
+  ViewBag.Title = G.GetModelTitle(G.Text(ViewBag.id)) + " Management";
   Model.FirstRowAction = "Edit";
   Model.FirstRowController = "ModelManagement";
   Model.FirstRowArea = "Area";
-  Model.FirstRowObject = b => new { @area = E.AdminPath, @id = (b as ContentTableRowItem).Id, @type = ModelManager.GetMapperKey((b as ContentTableRowItem).ThisType.FullName) };
+  Model.FirstRowObject = b => new { @area = G.AdminPath, @id = (b as ContentTableRowItem).Id, @type = ModelManager.GetMapperKey((b as ContentTableRowItem).ThisType.FullName) };
   ViewBag.delete = true;
   ViewBag.deleteFunction = "deleteRole";
 }
-<form id="modelDeleteForm" action="@Url.Action("Delete","ModelManagement","@area=E.AdminPath")" method="post">
+<form id="modelDeleteForm" action="@Url.Action("Delete","ModelManagement","@area=G.AdminPath")" method="post">
   <input type="hidden" name="type" value="@ViewBag.id" />
   <input id="deleteId" type="hidden" name="deleteId" value="" />
 </form>
@@ -18,7 +18,7 @@
       <div class="card-header">
         <div class="button-box">
 
-          <a href="@Url.Action("Create","ModelManagement",new { @area=E.AdminPath,@id=ViewBag.id })" class="btn btn-info btn-group">Create</a>
+          <a href="@Url.Action("Create","ModelManagement",new { @area=G.AdminPath,@id=ViewBag.id })" class="btn btn-info btn-group">Create</a>
         </div>
 
       </div>

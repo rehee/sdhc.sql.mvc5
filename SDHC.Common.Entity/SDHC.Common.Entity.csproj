@@ -131,6 +131,7 @@
     <Compile Include="Areas\Admin\Controllers\DropDownController.cs" />
     <Compile Include="Areas\Admin\Controllers\ModelManagementController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
+    <Compile Include="Areas\Admin\G.cs" />
     <Compile Include="Areas\Admin\Views\Content\Create.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

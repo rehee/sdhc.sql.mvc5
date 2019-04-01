@@ -6,9 +6,9 @@
     var contentId = Model != null ? (long?)Model.Id : null;
     var contents = ContentManager.GetContentTableHtmlView(contentId);
     contents.FirstRowAction = "Index";
-    contents.FirstRowArea = E.AdminPath;
+    contents.FirstRowArea = G.AdminPath;
     contents.FirstRowController = "Content";
-    contents.FirstRowObject = b => new { @id = (b as ContentTableRowItem).Id, @area = E.AdminPath };
+    contents.FirstRowObject = b => new { @id = (b as ContentTableRowItem).Id, @area = G.AdminPath };
     IEnumerable<string> CreateRole;
     IEnumerable<string> ReadRole;
     IEnumerable<string> UpdateRole;
@@ -67,7 +67,7 @@
                                 var idguid = Guid.NewGuid().ToString();
                                 <li>
                                     <a href="#" onclick="subbform('@idguid')">@TypeExtends.GetClassDisplayName(child)</a>
-                                    <form id="@idguid" action="@Url.Action("PreCreate", "Content", new { @area = E.AdminPath })" method="post">
+                                    <form id="@idguid" action="@Url.Action("PreCreate", "Content", new { @area = G.AdminPath })" method="post">
                                         @Html.Hidden("ContentId", contentId)
                                         @Html.Hidden("FullType", child.FullName + "," + child.Assembly.FullName)
                                     </form>
@@ -82,10 +82,10 @@
                             return;
                         }
                     </script>
-                    <a href="@Url.Action("Edit", "Content", new { @area = E.AdminPath, @id = contentId })" class="btn btn-success">Edit</a>
-                    <a href="@Url.Action("Sort", "Content", new { @area = E.AdminPath, @id = contentId })" class="btn btn-warning">Sort</a>
+                    <a href="@Url.Action("Edit", "Content", new { @area = G.AdminPath, @id = contentId })" class="btn btn-success">Edit</a>
+                    <a href="@Url.Action("Sort", "Content", new { @area = G.AdminPath, @id = contentId })" class="btn btn-warning">Sort</a>
                     <a href="#" onclick="deleteCurrent()" class="btn btn-danger">Delete</a>
-                    <form id="ContentDeleteForm" action="@Url.Action("Delete", "Content", new { @area = E.AdminPath })" method="post">
+                    <form id="ContentDeleteForm" action="@Url.Action("Delete", "Content", new { @area = G.AdminPath })" method="post">
                         @Html.Hidden("id", contentId)
                     </form>
                 </div>

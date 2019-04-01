@@ -11,8 +11,6 @@ namespace System
   {
     public static Func<string,string> GetSetting { get; set; }
 
-    public static string AdminPath { get; set; } = "Admin";
-
     public static bool UserNameIsNotEmail { get; set; } = true;
     public static Func<ApplicationUserManager> UserManager { get; set; }
     public static Func<ApplicationSignInManager> SignManager { get; set; }

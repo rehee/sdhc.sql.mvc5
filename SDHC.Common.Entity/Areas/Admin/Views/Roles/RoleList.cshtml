@@ -6,7 +6,7 @@
 <div class="modal fade" id="create-role-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="@Url.Action("CreateRole","Roles",new { @area=E.AdminPath })" method="post">
+            <form action="@Url.Action("CreateRole","Roles",new { @area=G.AdminPath })" method="post">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
                     <h4 class="modal-title" id="myModalLabel">Create Role</h4>
@@ -55,7 +55,7 @@
                                 <td>@item.RoleDisplayName</td>
                                 <td>@item.Users</td>
                                 <td>
-                                    <form action="@Url.Action("DeleteRole","Roles",new { @area=E.AdminPath })" method="post">
+                                    <form action="@Url.Action("DeleteRole","Roles",new { @area=G.AdminPath })" method="post">
                                         <input type="hidden" name="id" value="@item.Id" />
                                         <button type="submit" class="btn btn-danger btn-group" aria-haspopup="true" aria-expanded="false">
                                             Delete Role

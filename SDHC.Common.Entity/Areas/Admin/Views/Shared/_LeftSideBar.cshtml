@@ -11,7 +11,7 @@
                 @foreach (var item in ModelManager.ModelManagerMapper)
                 {
                     <li>
-                        <a href="@Url.Action("Index","ModelManagement",new { @area=E.AdminPath,@id=item })" title="@item">
+                        <a href="@Url.Action("Index","ModelManagement",new { @area=G.AdminPath,@id=item })" title="@item">
                             <em class="material-icons">description</em>
                             <span>@item.GetModelTitle()</span>
                         </a>
@@ -24,7 +24,7 @@
                     <h4>Roles And Users</h4>
                 </li>
                 <li>
-                    <a href="@Url.Action("Index","Roles",new { @area=E.AdminPath })" title="Management User">
+                    <a href="@Url.Action("Index","Roles",new { @area=G.AdminPath })" title="Management User">
                         <em class="material-icons">account_box</em>
                         <span>Manage Role And User</span>
                     </a>

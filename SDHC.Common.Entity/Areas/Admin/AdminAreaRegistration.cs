@@ -17,7 +17,7 @@ namespace WebSQL.Areas.Admin
     {
       context.MapRoute(
           "Admin_default",
-          $"{G.AdminPath}/{{controller}}/{{action}}/{{id}}",
+          $"{(String.IsNullOrEmpty(G.AdminPath) ? "Admin" : G.AdminPath)}/{{controller}}/{{action}}/{{id}}",
           new { controller = "DashBoard", action = "Index", id = UrlParameter.Optional }
       );
     }

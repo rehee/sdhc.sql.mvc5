@@ -126,7 +126,7 @@ WriteLiteral(">\r\n          <a");
 WriteAttribute("href", Tuple.Create(" href=\"", 849), Tuple.Create("\"", 916)
             
             #line 28 "..\..\Areas\Admin\Views\Shared\_Root.cshtml"
-, Tuple.Create(Tuple.Create("", 856), Tuple.Create<System.Object, System.Int32>(Url.Action("Index","Dashboard",new { @area = E.AdminPath })
+, Tuple.Create(Tuple.Create("", 856), Tuple.Create<System.Object, System.Int32>(Url.Action("Index","Dashboard",new { @area = G.AdminPath })
             
             #line default
             #line hidden
@@ -209,7 +209,7 @@ WriteLiteral("\r\n    <footer>\r\n      <span>");
 
             
             #line 65 "..\..\Areas\Admin\Views\Shared\_Root.cshtml"
-       Write(Html.Raw(E.AdminCopyright.Text("&copy; spxus admin")));
+       Write(Html.Raw(G.AdminCopyright.Text("&copy; spxus admin")));
 
             
             #line default

@@ -81,7 +81,7 @@ WriteLiteral("                    <li>\r\n                        <a");
 WriteAttribute("href", Tuple.Create(" href=\"", 533), Tuple.Create("\"", 613)
             
             #line 14 "..\..\Areas\Admin\Views\Shared\_LeftSideBar.cshtml"
-, Tuple.Create(Tuple.Create("", 540), Tuple.Create<System.Object, System.Int32>(Url.Action("Index","ModelManagement",new { @area=E.AdminPath,@id=item })
+, Tuple.Create(Tuple.Create("", 540), Tuple.Create<System.Object, System.Int32>(Url.Action("Index","ModelManagement",new { @area=G.AdminPath,@id=item })
             
             #line default
             #line hidden
@@ -131,7 +131,7 @@ WriteLiteral(">\r\n                    <h4>Roles And Users</h4>\r\n             
 WriteAttribute("href", Tuple.Create(" href=\"", 1073), Tuple.Create("\"", 1134)
             
             #line 27 "..\..\Areas\Admin\Views\Shared\_LeftSideBar.cshtml"
-, Tuple.Create(Tuple.Create("", 1080), Tuple.Create<System.Object, System.Int32>(Url.Action("Index","Roles",new { @area=E.AdminPath })
+, Tuple.Create(Tuple.Create("", 1080), Tuple.Create<System.Object, System.Int32>(Url.Action("Index","Roles",new { @area=G.AdminPath })
             
             #line default
             #line hidden

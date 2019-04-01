@@ -73,7 +73,7 @@ WriteLiteral(">\r\n            <form");
 WriteAttribute("action", Tuple.Create(" action=\"", 323), Tuple.Create("\"", 391)
             
             #line 9 "..\..\Areas\Admin\Views\Roles\RoleList.cshtml"
-, Tuple.Create(Tuple.Create("", 332), Tuple.Create<System.Object, System.Int32>(Url.Action("CreateRole","Roles",new { @area=E.AdminPath })
+, Tuple.Create(Tuple.Create("", 332), Tuple.Create<System.Object, System.Int32>(Url.Action("CreateRole","Roles",new { @area=G.AdminPath })
             
             #line default
             #line hidden
@@ -231,7 +231,7 @@ WriteLiteral("</td>\r\n                                <td>\r\n                 
 WriteAttribute("action", Tuple.Create(" action=\"", 2540), Tuple.Create("\"", 2608)
             
             #line 58 "..\..\Areas\Admin\Views\Roles\RoleList.cshtml"
-, Tuple.Create(Tuple.Create("", 2549), Tuple.Create<System.Object, System.Int32>(Url.Action("DeleteRole","Roles",new { @area=E.AdminPath })
+, Tuple.Create(Tuple.Create("", 2549), Tuple.Create<System.Object, System.Int32>(Url.Action("DeleteRole","Roles",new { @area=G.AdminPath })
             
             #line default
             #line hidden

@@ -49,7 +49,7 @@ WriteLiteral("\r\n\r\n");
 
             
             #line 4 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
- if (E.UserNameIsNotEmail)
+ if (G.UserNameIsNotEmail)
 {
 
             

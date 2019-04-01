@@ -61,7 +61,7 @@ WriteLiteral("  ");
 
             
             #line 5 "..\..\Areas\Admin\Views\Shared\_head.cshtml"
-Write(E.AdminTitle.Text("Spxus Admin System"));
+Write(G.AdminTitle.Text("Spxus Admin System"));
 
             
             #line default

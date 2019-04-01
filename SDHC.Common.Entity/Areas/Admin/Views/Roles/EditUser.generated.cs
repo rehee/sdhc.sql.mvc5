@@ -70,7 +70,7 @@ WriteLiteral(" autocomplete=\"off\"");
 WriteAttribute("action", Tuple.Create(" action=\"", 310), Tuple.Create("\"", 376)
             
             #line 10 "..\..\Areas\Admin\Views\Roles\EditUser.cshtml"
-, Tuple.Create(Tuple.Create("", 319), Tuple.Create<System.Object, System.Int32>(Url.Action("EditUser","Roles",new { @area=E.AdminPath })
+, Tuple.Create(Tuple.Create("", 319), Tuple.Create<System.Object, System.Int32>(Url.Action("EditUser","Roles",new { @area=G.AdminPath })
             
             #line default
             #line hidden

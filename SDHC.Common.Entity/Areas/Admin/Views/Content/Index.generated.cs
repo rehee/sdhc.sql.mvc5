@@ -52,9 +52,9 @@ namespace ASP
     var contentId = Model != null ? (long?)Model.Id : null;
     var contents = ContentManager.GetContentTableHtmlView(contentId);
     contents.FirstRowAction = "Index";
-    contents.FirstRowArea = E.AdminPath;
+    contents.FirstRowArea = G.AdminPath;
     contents.FirstRowController = "Content";
-    contents.FirstRowObject = b => new { @id = (b as ContentTableRowItem).Id, @area = E.AdminPath };
+    contents.FirstRowObject = b => new { @id = (b as ContentTableRowItem).Id, @area = G.AdminPath };
     IEnumerable<string> CreateRole;
     IEnumerable<string> ReadRole;
     IEnumerable<string> UpdateRole;
@@ -229,7 +229,7 @@ WriteAttribute("id", Tuple.Create(" id=\"", 3285), Tuple.Create("\"", 3297)
 WriteAttribute("action", Tuple.Create(" action=\"", 3298), Tuple.Create("\"", 3371)
             
             #line 70 "..\..\Areas\Admin\Views\Content\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 3307), Tuple.Create<System.Object, System.Int32>(Url.Action("PreCreate", "Content", new { @area = E.AdminPath })
+, Tuple.Create(Tuple.Create("", 3307), Tuple.Create<System.Object, System.Int32>(Url.Action("PreCreate", "Content", new { @area = G.AdminPath })
             
             #line default
             #line hidden
@@ -284,7 +284,7 @@ WriteLiteral(@"                        </ul>
 WriteAttribute("href", Tuple.Create(" href=\"", 4064), Tuple.Create("\"", 4147)
             
             #line 85 "..\..\Areas\Admin\Views\Content\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 4071), Tuple.Create<System.Object, System.Int32>(Url.Action("Edit", "Content", new { @area = E.AdminPath, @id = contentId })
+, Tuple.Create(Tuple.Create("", 4071), Tuple.Create<System.Object, System.Int32>(Url.Action("Edit", "Content", new { @area = G.AdminPath, @id = contentId })
             
             #line default
             #line hidden
@@ -298,7 +298,7 @@ WriteLiteral(">Edit</a>\r\n                    <a");
 WriteAttribute("href", Tuple.Create(" href=\"", 4205), Tuple.Create("\"", 4288)
             
             #line 86 "..\..\Areas\Admin\Views\Content\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 4212), Tuple.Create<System.Object, System.Int32>(Url.Action("Sort", "Content", new { @area = E.AdminPath, @id = contentId })
+, Tuple.Create(Tuple.Create("", 4212), Tuple.Create<System.Object, System.Int32>(Url.Action("Sort", "Content", new { @area = G.AdminPath, @id = contentId })
             
             #line default
             #line hidden
@@ -322,7 +322,7 @@ WriteLiteral(" id=\"ContentDeleteForm\"");
 WriteAttribute("action", Tuple.Create(" action=\"", 4465), Tuple.Create("\"", 4535)
             
             #line 88 "..\..\Areas\Admin\Views\Content\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 4474), Tuple.Create<System.Object, System.Int32>(Url.Action("Delete", "Content", new { @area = E.AdminPath })
+, Tuple.Create(Tuple.Create("", 4474), Tuple.Create<System.Object, System.Int32>(Url.Action("Delete", "Content", new { @area = G.AdminPath })
             
             #line default
             #line hidden

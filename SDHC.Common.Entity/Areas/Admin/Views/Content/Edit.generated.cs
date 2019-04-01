@@ -92,7 +92,7 @@ WriteLiteral(">\r\n        <form");
 WriteAttribute("action", Tuple.Create(" action=\"", 408), Tuple.Create("\"", 472)
             
             #line 15 "..\..\Areas\Admin\Views\Content\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 417), Tuple.Create<System.Object, System.Int32>(Url.Action("Edit","Content",new { @area=E.AdminPath })
+, Tuple.Create(Tuple.Create("", 417), Tuple.Create<System.Object, System.Int32>(Url.Action("Edit","Content",new { @area=G.AdminPath })
             
             #line default
             #line hidden

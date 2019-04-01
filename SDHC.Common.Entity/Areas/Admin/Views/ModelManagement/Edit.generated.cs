@@ -41,7 +41,7 @@ namespace ASP
             
             #line 2 "..\..\Areas\Admin\Views\ModelManagement\Edit.cshtml"
   
-    ViewBag.Title = E.GetModelTitleFullType(Model.FullType, Model.ThisAssembly) + " Edit";
+    ViewBag.Title = G.GetModelTitleFullType(Model.FullType, Model.ThisAssembly) + " Edit";
     Layout = "~/Areas/Admin/Views/Shared/_Layout_Content.cshtml";
 
             
@@ -60,7 +60,7 @@ WriteLiteral(">\r\n        <form");
 WriteAttribute("action", Tuple.Create(" action=\"", 274), Tuple.Create("\"", 346)
             
             #line 9 "..\..\Areas\Admin\Views\ModelManagement\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 283), Tuple.Create<System.Object, System.Int32>(Url.Action("Edit","ModelManagement",new { @area=E.AdminPath })
+, Tuple.Create(Tuple.Create("", 283), Tuple.Create<System.Object, System.Int32>(Url.Action("Edit","ModelManagement",new { @area=G.AdminPath })
             
             #line default
             #line hidden
