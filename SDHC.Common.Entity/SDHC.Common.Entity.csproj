@@ -267,11 +267,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_Layout_Content.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Admin\Views\Shared\_LeftSideBar.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>_LeftSideBar.cshtml</DependentUpon>
-    </Compile>
     <Compile Include="Areas\Admin\Views\Shared\_Root.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -430,10 +425,6 @@
     <None Include="Areas\Admin\Views\Shared\_Layout_Content.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_Layout_Content.generated.cs</LastGenOutput>
-    </None>
-    <None Include="Areas\Admin\Views\Shared\_LeftSideBar.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>_LeftSideBar.generated.cs</LastGenOutput>
     </None>
     <None Include="Areas\Admin\Views\Shared\_Root.cshtml">
       <Generator>RazorGenerator</Generator>
