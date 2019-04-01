@@ -27,7 +27,6 @@ namespace ASP
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    using SDHC.Common.Entity;
     
     #line 1 "..\..\Areas\Admin\Views\Shared\AdminInputs\_PropertiesEdit.cshtml"
     using SDHC.Common.Entity.Models;
@@ -59,7 +58,17 @@ WriteLiteral("\r\n");
             #line 6 "..\..\Areas\Admin\Views\Shared\AdminInputs\_PropertiesEdit.cshtml"
  foreach (var property in Model.Properties)
 {
-    Html.RenderPartial("AdminInputs/_AdminInput", new ContentPropertyIndex(property, index));
+    if (property.IgnoreProperty)
+    {
+        Html.RenderPartial("AdminInputs/_AdminInput_Ignore", new ContentPropertyIndex(property, index));
+
+    }
+    else
+    {
+        Html.RenderPartial("AdminInputs/_AdminInput", new ContentPropertyIndex(property, index));
+
+    }
+
     index++;
 }
 

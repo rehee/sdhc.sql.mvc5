@@ -27,7 +27,6 @@ namespace ASP
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    using SDHC.Common.Entity;
     using WebSQL;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
@@ -59,62 +58,14 @@ WriteLiteral(" class=\"navbar-brand\"");
 
 WriteLiteral(" href=\"index.html\"");
 
-WriteLiteral(">\r\n                <!-- Logo icon --><b>\r\n                    <!--You can put her" +
-"e icon as well // <i class=\"wi wi-sunset\"></i> //-->\r\n                    <!-- D" +
-"ark Logo icon -->\r\n                    <img");
+WriteLiteral(">\r\n                <!-- Logo icon --><b>\r\n                    ");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 575), Tuple.Create("\"", 620)
-, Tuple.Create(Tuple.Create("", 581), Tuple.Create<System.Object, System.Int32>(Href("~/lib/admin/assets/images/logo-icon.png")
-, 581), false)
-);
+WriteLiteral("\r\n                </b>\r\n                <!--End Logo icon -->\r\n                <!" +
+"-- Logo text -->\r\n                ");
 
-WriteLiteral(" alt=\"homepage\"");
-
-WriteLiteral(" class=\"dark-logo\"");
-
-WriteLiteral(" />\r\n                    <!-- Light Logo icon -->\r\n                    <img");
-
-WriteAttribute("src", Tuple.Create(" src=\"", 729), Tuple.Create("\"", 780)
-, Tuple.Create(Tuple.Create("", 735), Tuple.Create<System.Object, System.Int32>(Href("~/lib/admin/assets/images/logo-light-icon.png")
-, 735), false)
-);
-
-WriteLiteral(" alt=\"homepage\"");
-
-WriteLiteral(" class=\"light-logo\"");
-
-WriteLiteral(" />\r\n                </b>\r\n                <!--End Logo icon -->\r\n               " +
-" <!-- Logo text --><span>\r\n                    <!-- dark Logo text -->\r\n        " +
-"            <img");
-
-WriteAttribute("src", Tuple.Create(" src=\"", 992), Tuple.Create("\"", 1037)
-, Tuple.Create(Tuple.Create("", 998), Tuple.Create<System.Object, System.Int32>(Href("~/lib/admin/assets/images/logo-text.png")
-, 998), false)
-);
-
-WriteLiteral(" alt=\"homepage\"");
-
-WriteLiteral(" class=\"dark-logo\"");
-
-WriteLiteral(" />\r\n                    <!-- Light Logo text -->\r\n                    <img");
-
-WriteAttribute("src", Tuple.Create(" src=\"", 1146), Tuple.Create("\"", 1197)
-, Tuple.Create(Tuple.Create("", 1152), Tuple.Create<System.Object, System.Int32>(Href("~/lib/admin/assets/images/logo-light-text.png")
-, 1152), false)
-);
-
-WriteLiteral(" class=\"light-logo\"");
-
-WriteLiteral(" alt=\"homepage\"");
-
-WriteLiteral(@" />
-                </span>
-            </a>
-        </div>
-        <!-- ============================================================== -->
-        <!-- End Logo -->
-        <!-- ============================================================== -->
-        <div");
+WriteLiteral("\r\n            </a>\r\n        </div>\r\n        <!-- ================================" +
+"============================== -->\r\n        <!-- End Logo -->\r\n        <!-- ====" +
+"========================================================== -->\r\n        <div");
 
 WriteLiteral(" class=\"navbar-collapse\"");
 
@@ -390,9 +341,9 @@ WriteLiteral(" class=\"user-img\"");
 
 WriteLiteral("> <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 7134), Tuple.Create("\"", 7177)
-, Tuple.Create(Tuple.Create("", 7140), Tuple.Create<System.Object, System.Int32>(Href("~/lib/admin/assets/images/users/1.jpg")
-, 7140), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 7160), Tuple.Create("\"", 7203)
+, Tuple.Create(Tuple.Create("", 7166), Tuple.Create<System.Object, System.Int32>(Href("~/lib/admin/assets/images/users/1.jpg")
+, 7166), false)
 );
 
 WriteLiteral(" alt=\"user\"");
@@ -427,9 +378,9 @@ WriteLiteral(" class=\"user-img\"");
 
 WriteLiteral("> <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 7756), Tuple.Create("\"", 7799)
-, Tuple.Create(Tuple.Create("", 7762), Tuple.Create<System.Object, System.Int32>(Href("~/lib/admin/assets/images/users/2.jpg")
-, 7762), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 7782), Tuple.Create("\"", 7825)
+, Tuple.Create(Tuple.Create("", 7788), Tuple.Create<System.Object, System.Int32>(Href("~/lib/admin/assets/images/users/2.jpg")
+, 7788), false)
 );
 
 WriteLiteral(" alt=\"user\"");
@@ -464,9 +415,9 @@ WriteLiteral(" class=\"user-img\"");
 
 WriteLiteral("> <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 8381), Tuple.Create("\"", 8424)
-, Tuple.Create(Tuple.Create("", 8387), Tuple.Create<System.Object, System.Int32>(Href("~/lib/admin/assets/images/users/3.jpg")
-, 8387), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 8407), Tuple.Create("\"", 8450)
+, Tuple.Create(Tuple.Create("", 8413), Tuple.Create<System.Object, System.Int32>(Href("~/lib/admin/assets/images/users/3.jpg")
+, 8413), false)
 );
 
 WriteLiteral(" alt=\"user\"");
@@ -501,9 +452,9 @@ WriteLiteral(" class=\"user-img\"");
 
 WriteLiteral("> <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 8993), Tuple.Create("\"", 9036)
-, Tuple.Create(Tuple.Create("", 8999), Tuple.Create<System.Object, System.Int32>(Href("~/lib/admin/assets/images/users/4.jpg")
-, 8999), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 9019), Tuple.Create("\"", 9062)
+, Tuple.Create(Tuple.Create("", 9025), Tuple.Create<System.Object, System.Int32>(Href("~/lib/admin/assets/images/users/4.jpg")
+, 9025), false)
 );
 
 WriteLiteral(" alt=\"user\"");
@@ -613,9 +564,9 @@ WriteLiteral("> <img");
 
 WriteLiteral(" class=\"d-block img-fluid\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 11216), Tuple.Create("\"", 11260)
-, Tuple.Create(Tuple.Create("", 11222), Tuple.Create<System.Object, System.Int32>(Href("~/lib/admin/assets/images/big/img1.jpg")
-, 11222), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 11242), Tuple.Create("\"", 11286)
+, Tuple.Create(Tuple.Create("", 11248), Tuple.Create<System.Object, System.Int32>(Href("~/lib/admin/assets/images/big/img1.jpg")
+, 11248), false)
 );
 
 WriteLiteral(" alt=\"First slide\"");
@@ -633,9 +584,9 @@ WriteLiteral("><img");
 
 WriteLiteral(" class=\"d-block img-fluid\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 11502), Tuple.Create("\"", 11546)
-, Tuple.Create(Tuple.Create("", 11508), Tuple.Create<System.Object, System.Int32>(Href("~/lib/admin/assets/images/big/img2.jpg")
-, 11508), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 11528), Tuple.Create("\"", 11572)
+, Tuple.Create(Tuple.Create("", 11534), Tuple.Create<System.Object, System.Int32>(Href("~/lib/admin/assets/images/big/img2.jpg")
+, 11534), false)
 );
 
 WriteLiteral(" alt=\"Second slide\"");
@@ -653,9 +604,9 @@ WriteLiteral("><img");
 
 WriteLiteral(" class=\"d-block img-fluid\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 11789), Tuple.Create("\"", 11833)
-, Tuple.Create(Tuple.Create("", 11795), Tuple.Create<System.Object, System.Int32>(Href("~/lib/admin/assets/images/big/img3.jpg")
-, 11795), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 11815), Tuple.Create("\"", 11859)
+, Tuple.Create(Tuple.Create("", 11821), Tuple.Create<System.Object, System.Int32>(Href("~/lib/admin/assets/images/big/img3.jpg")
+, 11821), false)
 );
 
 WriteLiteral(" alt=\"Third slide\"");
@@ -1050,9 +1001,9 @@ WriteLiteral(" aria-expanded=\"false\"");
 
 WriteLiteral(">\r\n                        <img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 19197), Tuple.Create("\"", 19240)
-, Tuple.Create(Tuple.Create("", 19203), Tuple.Create<System.Object, System.Int32>(Href("~/lib/admin/assets/images/users/1.jpg")
-, 19203), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 19223), Tuple.Create("\"", 19266)
+, Tuple.Create(Tuple.Create("", 19229), Tuple.Create<System.Object, System.Int32>(Href("~/lib/admin/assets/images/users/1.jpg")
+, 19229), false)
 );
 
 WriteLiteral(" alt=\"user\"");
@@ -1077,9 +1028,9 @@ WriteLiteral(" class=\"u-img\"");
 
 WriteLiteral("><img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 19593), Tuple.Create("\"", 19636)
-, Tuple.Create(Tuple.Create("", 19599), Tuple.Create<System.Object, System.Int32>(Href("~/lib/admin/assets/images/users/1.jpg")
-, 19599), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 19619), Tuple.Create("\"", 19662)
+, Tuple.Create(Tuple.Create("", 19625), Tuple.Create<System.Object, System.Int32>(Href("~/lib/admin/assets/images/users/1.jpg")
+, 19625), false)
 );
 
 WriteLiteral(" alt=\"user\"");

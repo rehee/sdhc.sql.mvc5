@@ -27,7 +27,6 @@ namespace ASP
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    using SDHC.Common.Entity;
     using WebSQL;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
@@ -41,17 +40,6 @@ namespace ASP
         {
             
             #line 2 "..\..\Areas\Admin\Views\ModelManagement\_CreateOrEdit.cshtml"
-  
-  var a = Model;
-  var v = Model.Id;
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-            
-            #line 6 "..\..\Areas\Admin\Views\ModelManagement\_CreateOrEdit.cshtml"
 Write(Html.Hidden("Id", Model.Id));
 
             
@@ -60,7 +48,7 @@ Write(Html.Hidden("Id", Model.Id));
 WriteLiteral("\r\n");
 
             
-            #line 7 "..\..\Areas\Admin\Views\ModelManagement\_CreateOrEdit.cshtml"
+            #line 3 "..\..\Areas\Admin\Views\ModelManagement\_CreateOrEdit.cshtml"
 Write(Html.Hidden("FullType", Model.FullType));
 
             
@@ -69,7 +57,7 @@ Write(Html.Hidden("FullType", Model.FullType));
 WriteLiteral("\r\n");
 
             
-            #line 8 "..\..\Areas\Admin\Views\ModelManagement\_CreateOrEdit.cshtml"
+            #line 4 "..\..\Areas\Admin\Views\ModelManagement\_CreateOrEdit.cshtml"
 Write(Html.Hidden("ThisAssembly", Model.ThisAssembly));
 
             
@@ -78,7 +66,7 @@ Write(Html.Hidden("ThisAssembly", Model.ThisAssembly));
 WriteLiteral("\r\n");
 
             
-            #line 9 "..\..\Areas\Admin\Views\ModelManagement\_CreateOrEdit.cshtml"
+            #line 5 "..\..\Areas\Admin\Views\ModelManagement\_CreateOrEdit.cshtml"
    Html.RenderPartial("AdminInputs/_PropertiesEdit", Model);
             
             #line default

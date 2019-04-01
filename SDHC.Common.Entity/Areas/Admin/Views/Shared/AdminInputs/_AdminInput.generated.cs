@@ -27,7 +27,6 @@ namespace ASP
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    using SDHC.Common.Entity;
     
     #line 1 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
     using SDHC.Common.Entity.Models;
@@ -46,6 +45,77 @@ namespace ASP
     [System.Web.WebPages.PageVirtualPathAttribute("~/Areas/Admin/Views/Shared/AdminInputs/_AdminInput.cshtml")]
     public partial class _Areas_Admin_Views_Shared_AdminInputs__AdminInput_cshtml : System.Web.Mvc.WebViewPage<ContentPropertyIndex>
     {
+
+#line 20 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+public System.Web.WebPages.HelperResult requiredMark(bool required)
+{
+#line default
+#line hidden
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+
+#line 21 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+ 
+    if (required)
+    {
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "        ");
+
+WriteLiteralTo(__razor_helper_writer, "*");
+
+WriteLiteralTo(__razor_helper_writer, "\r\n");
+
+
+#line 25 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+    }
+
+
+#line default
+#line hidden
+});
+
+#line 26 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+}
+#line default
+#line hidden
+
+#line 27 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+public System.Web.WebPages.HelperResult requiredAttr(bool required)
+{
+#line default
+#line hidden
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+
+#line 28 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+ 
+    if (required)
+    {
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "        ");
+
+WriteLiteralTo(__razor_helper_writer, "required");
+
+WriteLiteralTo(__razor_helper_writer, "\r\n");
+
+
+#line 32 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+    }
+
+
+#line default
+#line hidden
+});
+
+#line 33 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+}
+#line default
+#line hidden
+
         public _Areas_Admin_Views_Shared_AdminInputs__AdminInput_cshtml()
         {
         }
@@ -103,15 +173,26 @@ WriteLiteral("\r\n");
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n\r\n<div");
+WriteLiteral("\r\n\r\n");
+
+WriteLiteral("\r\n<div");
 
 WriteLiteral(" class=\"form-group\"");
 
 WriteLiteral(">\r\n    <label>");
 
             
-            #line 22 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+            #line 36 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
       Write(Model.Property.Title);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" ");
+
+            
+            #line 36 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+                            Write(requiredMark(Model.Property.Required));
 
             
             #line default
@@ -119,13 +200,13 @@ WriteLiteral(">\r\n    <label>");
 WriteLiteral("</label>\r\n");
 
             
-            #line 23 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+            #line 37 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 23 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+            #line 37 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
      if (Model.Property.EditorType == EnumInputType.Text)
     {
 
@@ -136,32 +217,37 @@ WriteLiteral("        <input");
 
 WriteLiteral(" type=\"text\"");
 
-WriteLiteral(" class=\"form-control\"");
+WriteLiteral(" ");
 
-WriteAttribute("name", Tuple.Create(" name=\"", 940), Tuple.Create("\"", 957)
             
-            #line 25 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
-, Tuple.Create(Tuple.Create("", 947), Tuple.Create<System.Object, System.Int32>(inputName
+            #line 39 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+                      Write(requiredAttr(Model.Property.Required));
+
             
             #line default
             #line hidden
-, 947), false)
-);
+WriteLiteral(" class=\"form-control\" name=\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 958), Tuple.Create("\"", 987)
             
-            #line 25 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
-, Tuple.Create(Tuple.Create("", 966), Tuple.Create<System.Object, System.Int32>(Model.Property.Value
+            #line 39 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+                                                                                        Write(inputName);
+
             
             #line default
             #line hidden
-, 966), false)
-);
-
-WriteLiteral(" />\r\n");
+WriteLiteral("\" value=\"");
 
             
-            #line 26 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+            #line 39 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+                                                                                                           Write(Model.Property.Value);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\" />\r\n");
+
+            
+            #line 40 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
     }
 
             
@@ -170,7 +256,7 @@ WriteLiteral(" />\r\n");
 WriteLiteral("    ");
 
             
-            #line 27 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+            #line 41 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
      if (Model.Property.EditorType == EnumInputType.Password)
     {
 
@@ -181,32 +267,37 @@ WriteLiteral("        <input");
 
 WriteLiteral(" type=\"password\"");
 
-WriteLiteral(" class=\"form-control\"");
+WriteLiteral(" ");
 
-WriteAttribute("name", Tuple.Create(" name=\"", 1121), Tuple.Create("\"", 1138)
             
-            #line 29 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
-, Tuple.Create(Tuple.Create("", 1128), Tuple.Create<System.Object, System.Int32>(inputName
+            #line 43 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+                          Write(requiredAttr(Model.Property.Required));
+
             
             #line default
             #line hidden
-, 1128), false)
-);
+WriteLiteral(" class=\"form-control\" name=\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 1139), Tuple.Create("\"", 1168)
             
-            #line 29 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
-, Tuple.Create(Tuple.Create("", 1147), Tuple.Create<System.Object, System.Int32>(Model.Property.Value
+            #line 43 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+                                                                                            Write(inputName);
+
             
             #line default
             #line hidden
-, 1147), false)
-);
-
-WriteLiteral(" />\r\n");
+WriteLiteral("\" value=\"");
 
             
-            #line 30 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+            #line 43 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+                                                                                                               Write(Model.Property.Value);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\" />\r\n");
+
+            
+            #line 44 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
     }
 
             
@@ -215,7 +306,7 @@ WriteLiteral(" />\r\n");
 WriteLiteral("    ");
 
             
-            #line 31 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+            #line 45 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
      if (Model.Property.EditorType == EnumInputType.TextArea)
     {
 
@@ -226,23 +317,29 @@ WriteLiteral("        <textarea");
 
 WriteLiteral(" class=\"form-control\"");
 
-WriteLiteral(" rows=\"5\"");
+WriteLiteral(" ");
 
-WriteAttribute("name", Tuple.Create(" name=\"", 1298), Tuple.Create("\"", 1315)
             
-            #line 33 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
-, Tuple.Create(Tuple.Create("", 1305), Tuple.Create<System.Object, System.Int32>(inputName
+            #line 47 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+                                  Write(requiredAttr(Model.Property.Required));
+
             
             #line default
             #line hidden
-, 1305), false)
-);
-
-WriteLiteral(">");
+WriteLiteral(" rows=\"5\" name=\"");
 
             
-            #line 33 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
-                                                             Write(Model.Property.Value);
+            #line 47 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+                                                                                        Write(inputName);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\">");
+
+            
+            #line 47 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+                                                                                                    Write(Model.Property.Value);
 
             
             #line default
@@ -250,7 +347,7 @@ WriteLiteral(">");
 WriteLiteral("</textarea>\r\n");
 
             
-            #line 34 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+            #line 48 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
     }
 
             
@@ -259,59 +356,67 @@ WriteLiteral("</textarea>\r\n");
 WriteLiteral("    ");
 
             
-            #line 35 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+            #line 49 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
      if (Model.Property.EditorType == EnumInputType.DateTime)
     {
+        
+            
+            #line default
+            #line hidden
+            
+            #line 56 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+                    
 
             
             #line default
             #line hidden
 WriteLiteral("        <div");
 
-WriteLiteral(" class=\'input-group date datetimepicker\'");
+WriteLiteral(" class=\"input-group date form_datetime \"");
 
-WriteLiteral(" id=\"mydatepicker\"");
+WriteLiteral(">\r\n            <span");
 
-WriteLiteral(">\r\n            <input");
+WriteLiteral(" class=\"input-group-addon bg\"");
 
-WriteLiteral(" type=\'text\'");
+WriteLiteral("><i");
 
-WriteLiteral(" class=\"form-control\"");
+WriteLiteral(" class=\"fa fa-calendar\"");
 
-WriteAttribute("name", Tuple.Create(" name=\"", 1552), Tuple.Create("\"", 1569)
+WriteLiteral("></i></span>\r\n            <input");
+
+WriteLiteral(" type=\"text\"");
+
+WriteLiteral(" ");
+
             
-            #line 38 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
-, Tuple.Create(Tuple.Create("", 1559), Tuple.Create<System.Object, System.Int32>(inputName
-            
-            #line default
-            #line hidden
-, 1559), false)
-);
+            #line 59 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+                          Write(requiredAttr(Model.Property.Required));
 
-WriteAttribute("value", Tuple.Create(" value=\"", 1570), Tuple.Create("\"", 1627)
-            
-            #line 38 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
-, Tuple.Create(Tuple.Create("", 1578), Tuple.Create<System.Object, System.Int32>(Model.Property.Value.Split(' ').FirstOrDefault()
             
             #line default
             #line hidden
-, 1578), false)
-);
-
-WriteLiteral(" placeholder=\"yyyy-mm-dd\"");
-
-WriteLiteral(" />\r\n            <span");
-
-WriteLiteral(" class=\"input-group-addon\"");
-
-WriteLiteral(">\r\n                <span");
-
-WriteLiteral(" class=\"glyphicon glyphicon-calendar\"");
-
-WriteLiteral("></span>\r\n            </span>\r\n        </div>\r\n");
+WriteLiteral(" name=\"");
 
             
-            #line 43 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+            #line 59 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+                                                                       Write(inputName);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\" value=\"");
+
+            
+            #line 59 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+                                                                                           Write(!String.IsNullOrEmpty(Model.Property.Value)?Model.Property.Value.Contains("T")? Model.Property.Value.Split('T').FirstOrDefault() : Model.Property.Value.Split(' ').FirstOrDefault() :"" );
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\" placeholder=\"yyyy-mm-dd\" readonly class=\"form-control\">\r\n\r\n        </div>\r\n");
+
+            
+            #line 62 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
     }
 
             
@@ -320,7 +425,7 @@ WriteLiteral("></span>\r\n            </span>\r\n        </div>\r\n");
 WriteLiteral("    ");
 
             
-            #line 44 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+            #line 63 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
      if (Model.Property.EditorType == EnumInputType.DropDwon)
     {
 
@@ -329,23 +434,39 @@ WriteLiteral("    ");
             #line hidden
 WriteLiteral("        <select");
 
-WriteAttribute("name", Tuple.Create(" name=\"", 1901), Tuple.Create("\"", 1918)
+WriteAttribute("name", Tuple.Create(" name=\"", 2788), Tuple.Create("\"", 2805)
             
-            #line 46 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
-, Tuple.Create(Tuple.Create("", 1908), Tuple.Create<System.Object, System.Int32>(inputName
+            #line 65 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+, Tuple.Create(Tuple.Create("", 2795), Tuple.Create<System.Object, System.Int32>(inputName
             
             #line default
             #line hidden
-, 1908), false)
+, 2795), false)
 );
-
-WriteLiteral(" class=\"form-control\"");
 
 WriteLiteral(" ");
 
             
-            #line 46 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
-                                                   Write(Model.Property.MultiSelect ? "multiple" : "");
+            #line 65 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+                             Write(requiredAttr(Model.Property.Required));
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" ");
+
+            
+            #line 65 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+                                                                     Write(Model.Property.Readonly ? "disabled" : "");
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" class=\"form-control\" ");
+
+            
+            #line 65 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+                                                                                                                                       Write(Model.Property.MultiSelect ? "multiple" : "");
 
             
             #line default
@@ -353,13 +474,13 @@ WriteLiteral(" ");
 WriteLiteral(">\r\n");
 
             
-            #line 47 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+            #line 66 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 47 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+            #line 66 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
              foreach (var item in Model.Property.SelectItems)
             {
                 if (item.Select)
@@ -370,20 +491,20 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                    <option selected");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 2158), Tuple.Create("\"", 2179)
+WriteAttribute("value", Tuple.Create(" value=\"", 3129), Tuple.Create("\"", 3150)
             
-            #line 51 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
-, Tuple.Create(Tuple.Create("", 2166), Tuple.Create<System.Object, System.Int32>(item.Value
+            #line 70 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+, Tuple.Create(Tuple.Create("", 3137), Tuple.Create<System.Object, System.Int32>(item.Value
             
             #line default
             #line hidden
-, 2166), false)
+, 3137), false)
 );
 
 WriteLiteral(">");
 
             
-            #line 51 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+            #line 70 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
                                                        Write(item.Name);
 
             
@@ -392,7 +513,7 @@ WriteLiteral(">");
 WriteLiteral("</option>\r\n");
 
             
-            #line 52 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+            #line 71 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
                 }
                 else
                 {
@@ -402,20 +523,20 @@ WriteLiteral("</option>\r\n");
             #line hidden
 WriteLiteral("                    <option");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 2291), Tuple.Create("\"", 2312)
+WriteAttribute("value", Tuple.Create(" value=\"", 3262), Tuple.Create("\"", 3283)
             
-            #line 55 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
-, Tuple.Create(Tuple.Create("", 2299), Tuple.Create<System.Object, System.Int32>(item.Value
+            #line 74 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+, Tuple.Create(Tuple.Create("", 3270), Tuple.Create<System.Object, System.Int32>(item.Value
             
             #line default
             #line hidden
-, 2299), false)
+, 3270), false)
 );
 
 WriteLiteral(">");
 
             
-            #line 55 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+            #line 74 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
                                               Write(item.Name);
 
             
@@ -424,7 +545,7 @@ WriteLiteral(">");
 WriteLiteral("</option>\r\n");
 
             
-            #line 56 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+            #line 75 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
                 }
 
             }
@@ -435,7 +556,7 @@ WriteLiteral("</option>\r\n");
 WriteLiteral("        </select>\r\n");
 
             
-            #line 60 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+            #line 79 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
     }
 
             
@@ -444,57 +565,96 @@ WriteLiteral("        </select>\r\n");
 WriteLiteral("    ");
 
             
-            #line 61 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+            #line 80 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
      if (Model.Property.EditorType == EnumInputType.FileUpload)
     {
+        if (!string.IsNullOrEmpty(Model.Property.Value))
+        {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            <p>\r\n                <img");
+
+WriteLiteral(" style=\"display:block; max-width: 120px;max-height: 120px; margin-bottom: 10px;\"");
+
+WriteAttribute("src", Tuple.Create(" src=\"", 3628), Tuple.Create("\"", 3668)
+, Tuple.Create(Tuple.Create("", 3634), Tuple.Create("/", 3634), true)
+            
+            #line 85 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+                           , Tuple.Create(Tuple.Create("", 3635), Tuple.Create<System.Object, System.Int32>(Model.Property.Value.ImagePath()
+            
+            #line default
+            #line hidden
+, 3635), false)
+);
+
+WriteLiteral(" />\r\n            </p>\r\n");
+
+            
+            #line 87 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+
+        }
 
             
             #line default
             #line hidden
 WriteLiteral("        <input");
 
+WriteLiteral(" style=\"display:block\"");
+
 WriteLiteral(" type=\"file\"");
 
-WriteAttribute("name", Tuple.Create(" name=\"", 2497), Tuple.Create("\"", 2513)
+WriteLiteral(" ");
+
             
-            #line 63 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
-, Tuple.Create(Tuple.Create("", 2504), Tuple.Create<System.Object, System.Int32>(FileName
+            #line 89 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+                                            Write(requiredAttr(Model.Property.Required));
+
             
             #line default
             #line hidden
-, 2504), false)
-);
+WriteLiteral(" class=\"form-control\" name=\"");
 
-WriteLiteral(" />\r\n");
+            
+            #line 89 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+                                                                                                              Write(FileName);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\" /> ");
+
+WriteLiteral("<br />\r\n");
 
 WriteLiteral("        <input");
 
 WriteLiteral(" type=\"hidden\"");
 
-WriteAttribute("name", Tuple.Create(" name=\"", 2547), Tuple.Create("\"", 2564)
+WriteAttribute("name", Tuple.Create(" name=\"", 3870), Tuple.Create("\"", 3887)
             
-            #line 64 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
-, Tuple.Create(Tuple.Create("", 2554), Tuple.Create<System.Object, System.Int32>(inputName
+            #line 90 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+, Tuple.Create(Tuple.Create("", 3877), Tuple.Create<System.Object, System.Int32>(inputName
             
             #line default
             #line hidden
-, 2554), false)
+, 3877), false)
 );
 
-WriteAttribute("value", Tuple.Create(" value=\"", 2565), Tuple.Create("\"", 2594)
+WriteAttribute("value", Tuple.Create(" value=\"", 3888), Tuple.Create("\"", 3917)
             
-            #line 64 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
-, Tuple.Create(Tuple.Create("", 2573), Tuple.Create<System.Object, System.Int32>(Model.Property.Value
+            #line 90 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+, Tuple.Create(Tuple.Create("", 3896), Tuple.Create<System.Object, System.Int32>(Model.Property.Value
             
             #line default
             #line hidden
-, 2573), false)
+, 3896), false)
 );
 
 WriteLiteral(" />\r\n");
 
             
-            #line 65 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
+            #line 91 "..\..\Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml"
     }
 
             

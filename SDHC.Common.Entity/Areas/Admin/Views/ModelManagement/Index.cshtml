@@ -1,20 +1,24 @@
 ﻿@model ContentTableHtmlView
 @{
-  ViewBag.Title = "Model Management";
+  ViewBag.Title = E.GetModelTitle(G.Text(ViewBag.id)) + " Management";
   Model.FirstRowAction = "Edit";
   Model.FirstRowController = "ModelManagement";
   Model.FirstRowArea = "Area";
-  Model.FirstRowObject = b => new { @area = "Admin", @id = (b as ContentTableRowItem).Id, @type = ModelManager.GetMapperKey((b as ContentTableRowItem).ThisType.FullName) };
+  Model.FirstRowObject = b => new { @area = E.AdminPath, @id = (b as ContentTableRowItem).Id, @type = ModelManager.GetMapperKey((b as ContentTableRowItem).ThisType.FullName) };
+  ViewBag.delete = true;
+  ViewBag.deleteFunction = "deleteRole";
 }
+<form id="modelDeleteForm" action="@Url.Action("Delete","ModelManagement","@area=E.AdminPath")" method="post">
+  <input type="hidden" name="type" value="@ViewBag.id" />
+  <input id="deleteId" type="hidden" name="deleteId" value="" />
+</form>
 <div class="row clearfix">
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="card">
       <div class="card-header">
         <div class="button-box">
 
-          <button type="button" class="btn btn-info btn-group" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Create
-          </button>
+          <a href="@Url.Action("Create","ModelManagement",new { @area=E.AdminPath,@id=ViewBag.id })" class="btn btn-info btn-group">Create</a>
         </div>
 
       </div>
@@ -26,12 +30,60 @@
     </div>
   </div>
 </div>
+
 @section script{
   <script>
-            $(function () {
-                $('.basic-example').DataTable();
-            });
+    $(function () {
+      $('.basic-example').DataTable();
+    });
   </script>
   @*<script src="/admin-lib/assets/js/pages/tables/jquery-datatable.js"></script>*@
+  <script>
+    $(function () {
+      $('.sweetalert_delete.delete_button').on('click', function () {
+        var id = $(this).data('id');
+        showCancelMessage(function(){
+          $('#deleteId').val(id);
+          if(id){
+            document.getElementById('modelDeleteForm').submit()
+          }
+        })
+      });
+    });
+
+   function deleteRole(id){
+     showCancelMessage(function(){
+          $('#deleteId').val(id);
+          if(id){
+            document.getElementById('modelDeleteForm').submit()
+          }
+        })
+   }
+
+    function showCancelMessage(callback) {
+      swal({
+        title: "Are you sure?",
+        text: "You will not be able to recover!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel plx!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      }, function (isConfirm) {
+        if (isConfirm) {
+          swal("Deleted!", "Your record has been deleted.", "success");
+          if(callback){
+            callback();
+          }
+        } else {
+          swal("Cancelled", "Your record is safe :)", "error");
+        }
+      });
+    }
+
+    
+  </script>
 }
 

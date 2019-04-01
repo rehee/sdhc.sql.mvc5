@@ -27,7 +27,6 @@ namespace ASP
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    using SDHC.Common.Entity;
     
     #line 1 "..\..\Areas\Admin\Views\Content\_CreateOrEdit.cshtml"
     using SDHC.Common.Entity.Models;

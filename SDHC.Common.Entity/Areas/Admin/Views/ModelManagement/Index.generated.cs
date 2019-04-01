@@ -27,7 +27,6 @@ namespace ASP
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    using SDHC.Common.Entity;
     using WebSQL;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
@@ -42,16 +41,60 @@ namespace ASP
             
             #line 2 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
   
-  ViewBag.Title = "Model Management";
+  ViewBag.Title = E.GetModelTitle(G.Text(ViewBag.id)) + " Management";
   Model.FirstRowAction = "Edit";
   Model.FirstRowController = "ModelManagement";
   Model.FirstRowArea = "Area";
-  Model.FirstRowObject = b => new { @area = "Admin", @id = (b as ContentTableRowItem).Id, @type = ModelManager.GetMapperKey((b as ContentTableRowItem).ThisType.FullName) };
+  Model.FirstRowObject = b => new { @area = E.AdminPath, @id = (b as ContentTableRowItem).Id, @type = ModelManager.GetMapperKey((b as ContentTableRowItem).ThisType.FullName) };
+  ViewBag.delete = true;
+  ViewBag.deleteFunction = "deleteRole";
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n<div");
+WriteLiteral("\r\n<form");
+
+WriteLiteral(" id=\"modelDeleteForm\"");
+
+WriteAttribute("action", Tuple.Create(" action=\"", 495), Tuple.Create("\"", 563)
+            
+            #line 11 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 504), Tuple.Create<System.Object, System.Int32>(Url.Action("Delete","ModelManagement","@area=E.AdminPath")
+            
+            #line default
+            #line hidden
+, 504), false)
+);
+
+WriteLiteral(" method=\"post\"");
+
+WriteLiteral(">\r\n  <input");
+
+WriteLiteral(" type=\"hidden\"");
+
+WriteLiteral(" name=\"type\"");
+
+WriteAttribute("value", Tuple.Create(" value=\"", 615), Tuple.Create("\"", 634)
+            
+            #line 12 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 623), Tuple.Create<System.Object, System.Int32>(ViewBag.id
+            
+            #line default
+            #line hidden
+, 623), false)
+);
+
+WriteLiteral(" />\r\n  <input");
+
+WriteLiteral(" id=\"deleteId\"");
+
+WriteLiteral(" type=\"hidden\"");
+
+WriteLiteral(" name=\"deleteId\"");
+
+WriteLiteral(" value=\"\"");
+
+WriteLiteral(" />\r\n</form>\r\n<div");
 
 WriteLiteral(" class=\"row clearfix\"");
 
@@ -71,45 +114,94 @@ WriteLiteral(">\r\n        <div");
 
 WriteLiteral(" class=\"button-box\"");
 
-WriteLiteral(">\r\n\r\n          <button");
+WriteLiteral(">\r\n\r\n          <a");
 
-WriteLiteral(" type=\"button\"");
+WriteAttribute("href", Tuple.Create(" href=\"", 905), Tuple.Create("\"", 992)
+            
+            #line 21 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 912), Tuple.Create<System.Object, System.Int32>(Url.Action("Create","ModelManagement",new { @area=E.AdminPath,@id=ViewBag.id })
+            
+            #line default
+            #line hidden
+, 912), false)
+);
 
 WriteLiteral(" class=\"btn btn-info btn-group\"");
 
-WriteLiteral(" data-toggle=\"dropdown\"");
-
-WriteLiteral(" aria-haspopup=\"true\"");
-
-WriteLiteral(" aria-expanded=\"false\"");
-
-WriteLiteral(">\r\n            Create\r\n          </button>\r\n        </div>\r\n\r\n      </div>\r\n\r\n   " +
-"   <div");
+WriteLiteral(">Create</a>\r\n        </div>\r\n\r\n      </div>\r\n\r\n      <div");
 
 WriteLiteral(" class=\"body\"");
 
 WriteLiteral(">\r\n");
 
             
-            #line 23 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
+            #line 27 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 23 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
+            #line 27 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
            Html.RenderPartial("Contents/_ContentTableHtml", Model); 
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n");
+WriteLiteral("\r\n\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n");
 
 DefineSection("script", () => {
 
-WriteLiteral("\r\n  <script>\r\n            $(function () {\r\n                $(\'.basic-example\').Da" +
-"taTable();\r\n            });\r\n  </script>\r\n  ");
+WriteLiteral("\r\n  <script>\r\n    $(function () {\r\n      $(\'.basic-example\').DataTable();\r\n    })" +
+";\r\n  </script>\r\n  ");
 
-WriteLiteral("\r\n");
+WriteLiteral(@"
+  <script>
+    $(function () {
+      $('.sweetalert_delete.delete_button').on('click', function () {
+        var id = $(this).data('id');
+        showCancelMessage(function(){
+          $('#deleteId').val(id);
+          if(id){
+            document.getElementById('modelDeleteForm').submit()
+          }
+        })
+      });
+    });
+
+   function deleteRole(id){
+     showCancelMessage(function(){
+          $('#deleteId').val(id);
+          if(id){
+            document.getElementById('modelDeleteForm').submit()
+          }
+        })
+   }
+
+    function showCancelMessage(callback) {
+      swal({
+        title: ""Are you sure?"",
+        text: ""You will not be able to recover!"",
+        type: ""warning"",
+        showCancelButton: true,
+        confirmButtonColor: ""#DD6B55"",
+        confirmButtonText: ""Yes, delete it!"",
+        cancelButtonText: ""No, cancel plx!"",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      }, function (isConfirm) {
+        if (isConfirm) {
+          swal(""Deleted!"", ""Your record has been deleted."", ""success"");
+          if(callback){
+            callback();
+          }
+        } else {
+          swal(""Cancelled"", ""Your record is safe :)"", ""error"");
+        }
+      });
+    }
+
+    
+  </script>
+");
 
 });
 

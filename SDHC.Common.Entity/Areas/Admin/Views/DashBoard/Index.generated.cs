@@ -30,68 +30,23 @@ namespace ASP
     using WebSQL;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
-    [System.Web.WebPages.PageVirtualPathAttribute("~/Areas/Admin/Views/Shared/_Layout_Content.cshtml")]
-    public partial class _Areas_Admin_Views_Shared__Layout_Content_cshtml : System.Web.Mvc.WebViewPage<dynamic>
+    [System.Web.WebPages.PageVirtualPathAttribute("~/Areas/Admin/Views/DashBoard/Index.cshtml")]
+    public partial class _Areas_Admin_Views_DashBoard_Index_cshtml : System.Web.Mvc.WebViewPage<dynamic>
     {
-        public _Areas_Admin_Views_Shared__Layout_Content_cshtml()
+        public _Areas_Admin_Views_DashBoard_Index_cshtml()
         {
         }
         public override void Execute()
         {
             
-            #line 1 "..\..\Areas\Admin\Views\Shared\_Layout_Content.cshtml"
+            #line 1 "..\..\Areas\Admin\Views\DashBoard\Index.cshtml"
   
-  Layout = "_Layout.cshtml";
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-DefineSection("breadcrumb", () => {
-
-WriteLiteral("\r\n");
-
-WriteLiteral("  ");
-
-            
-            #line 5 "..\..\Areas\Admin\Views\Shared\_Layout_Content.cshtml"
-Write(RenderSection("breadcrumb", false));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-});
-
-WriteLiteral("\r\n\r\n");
-
-            
-            #line 9 "..\..\Areas\Admin\Views\Shared\_Layout_Content.cshtml"
-Write(RenderBody());
+    ViewBag.Title = "Dash board";
 
             
             #line default
             #line hidden
 WriteLiteral("\r\n\r\n");
-
-DefineSection("script", () => {
-
-WriteLiteral("\r\n");
-
-WriteLiteral("  ");
-
-            
-            #line 12 "..\..\Areas\Admin\Views\Shared\_Layout_Content.cshtml"
-Write(RenderSection("script", false));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-});
 
         }
     }

@@ -27,7 +27,6 @@ namespace ASP
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    using SDHC.Common.Entity;
     
     #line 1 "..\..\Areas\Admin\Views\Content\Edit.cshtml"
     using SDHC.Common.Entity.Models;
@@ -90,10 +89,10 @@ WriteLiteral(" class=\"body\"");
 
 WriteLiteral(">\r\n        <form");
 
-WriteAttribute("action", Tuple.Create(" action=\"", 408), Tuple.Create("\"", 468)
+WriteAttribute("action", Tuple.Create(" action=\"", 408), Tuple.Create("\"", 472)
             
             #line 15 "..\..\Areas\Admin\Views\Content\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 417), Tuple.Create<System.Object, System.Int32>(Url.Action("Edit","Content",new { @area="Admin" })
+, Tuple.Create(Tuple.Create("", 417), Tuple.Create<System.Object, System.Int32>(Url.Action("Edit","Content",new { @area=E.AdminPath })
             
             #line default
             #line hidden

@@ -30,18 +30,19 @@ namespace ASP
     using WebSQL;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
-    [System.Web.WebPages.PageVirtualPathAttribute("~/Areas/Admin/Views/Roles/CreateUser.cshtml")]
-    public partial class _Areas_Admin_Views_Roles_CreateUser_cshtml : System.Web.Mvc.WebViewPage<WebSQL.Areas.Admin.Controllers.UserCreateView>
+    [System.Web.WebPages.PageVirtualPathAttribute("~/Areas/Admin/Views/Roles/EditUser.cshtml")]
+    public partial class _Areas_Admin_Views_Roles_EditUser_cshtml : System.Web.Mvc.WebViewPage<WebSQL.Areas.Admin.Controllers.UserCreateView>
     {
-        public _Areas_Admin_Views_Roles_CreateUser_cshtml()
+        public _Areas_Admin_Views_Roles_EditUser_cshtml()
         {
         }
         public override void Execute()
         {
             
-            #line 2 "..\..\Areas\Admin\Views\Roles\CreateUser.cshtml"
+            #line 2 "..\..\Areas\Admin\Views\Roles\EditUser.cshtml"
   
-    ViewBag.Title = "Create User";
+    ViewBag.Title = "Edit User";
+    ViewBag.inEdit = true;
 
             
             #line default
@@ -64,14 +65,16 @@ WriteLiteral(" class=\"body\"");
 
 WriteLiteral(">\r\n                <form");
 
-WriteAttribute("action", Tuple.Create(" action=\"", 265), Tuple.Create("\"", 333)
+WriteLiteral(" autocomplete=\"off\"");
+
+WriteAttribute("action", Tuple.Create(" action=\"", 310), Tuple.Create("\"", 376)
             
-            #line 9 "..\..\Areas\Admin\Views\Roles\CreateUser.cshtml"
-, Tuple.Create(Tuple.Create("", 274), Tuple.Create<System.Object, System.Int32>(Url.Action("CreateUser","Roles",new { @area=E.AdminPath })
+            #line 10 "..\..\Areas\Admin\Views\Roles\EditUser.cshtml"
+, Tuple.Create(Tuple.Create("", 319), Tuple.Create<System.Object, System.Int32>(Url.Action("EditUser","Roles",new { @area=E.AdminPath })
             
             #line default
             #line hidden
-, 274), false)
+, 319), false)
 );
 
 WriteLiteral(" method=\"post\"");
@@ -81,13 +84,13 @@ WriteLiteral(" enctype=\"multipart/form-data\"");
 WriteLiteral(">\r\n");
 
             
-            #line 10 "..\..\Areas\Admin\Views\Roles\CreateUser.cshtml"
+            #line 11 "..\..\Areas\Admin\Views\Roles\EditUser.cshtml"
                     
             
             #line default
             #line hidden
             
-            #line 10 "..\..\Areas\Admin\Views\Roles\CreateUser.cshtml"
+            #line 11 "..\..\Areas\Admin\Views\Roles\EditUser.cshtml"
                        Html.RenderPartial("_CreateOrEdit", Model);
             
             #line default

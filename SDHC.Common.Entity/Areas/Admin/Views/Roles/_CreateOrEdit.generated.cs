@@ -27,7 +27,6 @@ namespace ASP
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    using SDHC.Common.Entity;
     using WebSQL;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
@@ -46,29 +45,52 @@ Write(Html.Hidden("Id", Model.Id));
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n<div");
+WriteLiteral("\r\n\r\n");
 
-WriteLiteral(" class=\"form-group\"");
-
-WriteLiteral(">\r\n    <label>UserName</label>\r\n    <input");
-
-WriteLiteral(" type=\"text\"");
-
-WriteLiteral(" class=\"form-control\"");
-
-WriteLiteral(" name=\"UserName\"");
-
-WriteAttribute("value", Tuple.Create(" value=\"", 200), Tuple.Create("\"", 223)
             
-            #line 6 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 208), Tuple.Create<System.Object, System.Int32>(Model.UserName
+            #line 4 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
+ if (E.UserNameIsNotEmail)
+{
+
             
             #line default
             #line hidden
-, 208), false)
-);
+WriteLiteral("    <div");
 
-WriteLiteral(" required />\r\n</div>\r\n<div");
+WriteLiteral(" class=\"form-group\"");
+
+WriteLiteral(">\r\n        <label>UserName</label>\r\n        <input");
+
+WriteLiteral(" type=\"text\"");
+
+WriteLiteral(" ");
+
+            
+            #line 8 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
+                       Write(ViewBag.inEdit != null ? "readonly disabled" : "required");
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" class=\"form-control\" name=\"UserName\" value=\"");
+
+            
+            #line 8 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
+                                                                                                                               Write(Model.UserName);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\" />\r\n    </div>\r\n");
+
+            
+            #line 10 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
+}
+
+            
+            #line default
+            #line hidden
+WriteLiteral("<div");
 
 WriteLiteral(" class=\"form-group\"");
 
@@ -76,67 +98,86 @@ WriteLiteral(">\r\n    <label>UserEmail</label>\r\n    <input");
 
 WriteLiteral(" type=\"email\"");
 
-WriteLiteral(" class=\"form-control\"");
+WriteLiteral(" ");
 
-WriteLiteral(" name=\"Email\"");
-
-WriteAttribute("value", Tuple.Create(" value=\"", 359), Tuple.Create("\"", 379)
             
-            #line 10 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 367), Tuple.Create<System.Object, System.Int32>(Model.Email
+            #line 13 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
+                    Write(ViewBag.inEdit != null ? "readonly disabled" : "required");
+
             
             #line default
             #line hidden
-, 367), false)
-);
+WriteLiteral(" class=\"form-control\" name=\"Email\" value=\"");
 
-WriteLiteral(" required />\r\n</div>\r\n<div");
+            
+            #line 13 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
+                                                                                                                         Write(Model.Email);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\" />\r\n</div>\r\n");
+
+            
+            #line 15 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
+ if (ViewBag.inEdit == null)
+{
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    <div");
 
 WriteLiteral(" class=\"form-group\"");
 
-WriteLiteral(">\r\n    <label>Password</label>\r\n    <input");
+WriteLiteral(">\r\n        <label>Password</label>\r\n        <input");
 
 WriteLiteral(" type=\"password\"");
 
-WriteLiteral(" class=\"form-control\"");
+WriteLiteral(" ");
 
-WriteLiteral(" name=\"Password\"");
-
-WriteAttribute("value", Tuple.Create(" value=\"", 520), Tuple.Create("\"", 543)
             
-            #line 14 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 528), Tuple.Create<System.Object, System.Int32>(Model.Password
+            #line 19 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
+                           Write(ViewBag.inEdit != null ? "" : "required");
+
             
             #line default
             #line hidden
-, 528), false)
-);
+WriteLiteral(" autocomplete=\"off\" class=\"form-control\" name=\"Password\" value=\"\" />\r\n    </div>\r" +
+"\n");
 
-WriteLiteral(" />\r\n</div>\r\n<div");
+WriteLiteral("    <div");
 
 WriteLiteral(" class=\"form-group\"");
 
-WriteLiteral(">\r\n    <label>Confirm Password</label>\r\n    <input");
+WriteLiteral(">\r\n        <label>Confirm Password</label>\r\n        <input");
 
 WriteLiteral(" type=\"password\"");
 
-WriteLiteral(" class=\"form-control\"");
+WriteLiteral(" ");
 
-WriteLiteral(" name=\"ConfirmPassword\"");
-
-WriteAttribute("value", Tuple.Create(" value=\"", 690), Tuple.Create("\"", 720)
             
-            #line 18 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 698), Tuple.Create<System.Object, System.Int32>(Model.ConfirmPassword
+            #line 23 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
+                           Write(ViewBag.inEdit != null ? "" : "required");
+
             
             #line default
             #line hidden
-, 698), false)
-);
+WriteLiteral(" autocomplete=\"off\" class=\"form-control\" name=\"ConfirmPassword\" value=\"\" />\r\n    " +
+"</div>\r\n");
 
-WriteLiteral(" />\r\n</div>\r\n<div");
+            
+            #line 25 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
+}
+
+            
+            #line default
+            #line hidden
+WriteLiteral("<div");
 
 WriteLiteral(" class=\"form-group\"");
+
+WriteLiteral(" style=\"display:none\"");
 
 WriteLiteral(">\r\n    <label>Roles</label>\r\n    <select");
 
@@ -155,13 +196,13 @@ WriteLiteral(" value=\"\"");
 WriteLiteral(">--</option>\r\n");
 
             
-            #line 24 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
+            #line 30 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 24 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
+            #line 30 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
          foreach (var item in Model.Roles)
         {
 
@@ -170,20 +211,20 @@ WriteLiteral(">--</option>\r\n");
             #line hidden
 WriteLiteral("            <option");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 975), Tuple.Create("\"", 991)
+WriteAttribute("value", Tuple.Create(" value=\"", 1307), Tuple.Create("\"", 1323)
             
-            #line 26 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 983), Tuple.Create<System.Object, System.Int32>(item.Id
+            #line 32 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
+, Tuple.Create(Tuple.Create("", 1315), Tuple.Create<System.Object, System.Int32>(item.Id
             
             #line default
             #line hidden
-, 983), false)
+, 1315), false)
 );
 
 WriteLiteral(" ");
 
             
-            #line 26 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
+            #line 32 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
                                  Write(Model.SelectedRoles.Contains(item.Id) ? "selected" : "");
 
             
@@ -192,7 +233,7 @@ WriteLiteral(" ");
 WriteLiteral(">");
 
             
-            #line 26 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
+            #line 32 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
                                                                                            Write(item.RoleDisplayName);
 
             
@@ -201,7 +242,7 @@ WriteLiteral(">");
 WriteLiteral("</option>\r\n");
 
             
-            #line 27 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
+            #line 33 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
         }
 
             
@@ -210,7 +251,7 @@ WriteLiteral("</option>\r\n");
 WriteLiteral("    </select>\r\n</div>\r\n\r\n");
 
             
-            #line 31 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
+            #line 37 "..\..\Areas\Admin\Views\Roles\_CreateOrEdit.cshtml"
    Html.RenderPartial("AdminInputs/_PropertiesEdit", Model);
             
             #line default

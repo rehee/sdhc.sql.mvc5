@@ -1,19 +1,19 @@
 ﻿@using SDHC.Common.Entity.Models
 @model ContentPostModel
 @{
-    ViewBag.Title = "Create Content";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout_Content.cshtml";
+  ViewBag.Title = "Create Content";
+  Layout = "~/Areas/Admin/Views/Shared/_Layout_Content.cshtml";
 }
 @section breadcrumb{
-    @{ Html.RenderPartial("_BreadCrumbContent", Model.ConvertToBaseModel());}
+  @{ Html.RenderPartial("_BreadCrumbContent", Model.ConvertToBaseModel());}
 }
 <div class="card">
-    <div class="card-header">
-        <h2>Default Basic Forms</h2>
-    </div>
-    <div class="body">
-        <form action="@Url.Action("Create","Content",new { @area="Admin" })" class="" method="post" enctype="multipart/form-data">
-            @{ Html.RenderPartial("_CreateOrEdit", Model);}
-        </form>
-    </div>
+  <div class="card-header">
+    <h2>Default Basic Forms</h2>
+  </div>
+  <div class="body">
+    <form action="@Url.Action("Create","Content",new { @area=E.AdminPath })" class="" method="post" enctype="multipart/form-data">
+      @{ Html.RenderPartial("_CreateOrEdit", Model);}
+    </form>
+  </div>
 </div>

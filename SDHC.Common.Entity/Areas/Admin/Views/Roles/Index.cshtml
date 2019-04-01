@@ -1,6 +1,9 @@
 ﻿@model WebSQL.Areas.Admin.Controllers.RolesIndexView
 @{
     ViewBag.Title = "User and Roles";
+    var tableList = E.GetTableList(SDHCUserManager.BaseUser, new string[] { "FullName", "Email", "Phone" }).ToList();
+    var adminRole = E.RoleManager().Roles.Where(b => b.Name == "Admin").Select(b => b.Id).FirstOrDefault();
+    var records = ModelManager.Read<MemberShipRecord>(b => true).ToList();
 }
 
 <div class="row clearfix">
@@ -8,71 +11,107 @@
         <div class="card">
             <div class="card-header">
                 <div class="button-box">
-                    <a href="@Url.Action("RoleList","Roles",new { @area="Admin" })" class="btn btn-info btn-group" aria-haspopup="true" aria-expanded="false">
-                        Management Roles
-                    </a>
-                    <button type="button" class="btn btn-info btn-group" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @*<a href="@Url.Action("RoleList","Roles",new { @area=E.AdminPath })" class="btn btn-info btn-group" aria-haspopup="true" aria-expanded="false">
+                            Management Roles
+                        </a>*@
+                    <a href="@Url.Action("CreateUser","Roles",new { @area=E.AdminPath })" type="button" class="btn btn-info btn-group">
                         Create User
-                    </button>
+                    </a>
                 </div>
                 <br />
-                <h2>
-                    @foreach (var item in Model.RoleAndUsers)
-                    {
-                        <a href="@Url.Action("Index","Roles",new { @area="Admin",@id=item.RoleName } )">@item.RoleDisplayName (@item.Users)</a>
-                    }
+                @*<h2>
+                        @foreach (var item in Model.RoleAndUsers)
+                        {
+                            <a href="@Url.Action("Index","Roles",new { @area=E.AdminPath,@id=item.RoleName } )">@item.RoleDisplayName (@item.Users)</a>
+                        }
 
-                </h2>
+                    </h2>*@
             </div>
             <div class="body">
-                <table id="demo-foo-filtering" class="table table-bordered table-hover toggle-circle" data-page-size="7">
+                <table class="table table-bordered table-striped table-hover basic-example dataTable">
                     <thead>
                         <tr>
-                            <th data-toggle="true">User Name</th>
-                            <th>Email</th>
-                            <th data-hide="phone, tablet">Phone Number</th>
+                            @foreach (var t in tableList)
+                            {
+                                <th>@t.SpacesFromCamel()</th>
+                            }
+                            <th>
+                                Membership Status
+                            </th>
+                            <th>Option</th>
                         </tr>
                     </thead>
-                    @*<div class="form-inline">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <label class="control-label">Status</label>
-                                    <select id="demo-foo-filter-status" class="form-control">
-                                        <option value="">Show all</option>
-                                        <option value="active">Active</option>
-                                        <option value="disabled">Disabled</option>
-                                        <option value="suspended">Suspended</option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-6">
-                                    <input id="demo-foo-search" type="text" placeholder="Search" class="form-control pull-right" autocomplete="off">
-                                </div>
-                            </div>
-                        </div>*@
+                    <tfoot>
+                        <tr>
+                            @foreach (var t in tableList)
+                            {
+                                <th>@t.SpacesFromCamel()</th>
+                            }
+                            <th>
+                                Membership Status
+                            </th>
+                            <th>Option</th>
+                        </tr>
+                    </tfoot>
                     <tbody>
-                        @foreach (var item in Model.Users)
+                        @foreach (ClubUser item in Model.Users)
                         {
                             <tr>
-                                <td><a href="@Url.Action("EditUser","Roles",new { @area="Admin",@id=item.Id })">@item.UserName</a></td>
-                                <td>@item.Email</td>
+                                @foreach (var t in tableList)
+                                {
+                                    <td>
+                                        @if (tableList.IndexOf(t) == 0)
+                                        {
+                                            <a href="@Url.Action("EditUser","Roles",new { @area=E.AdminPath,@id=item.Id })">
+                                                @(String.IsNullOrEmpty(item.GetValueByKey(t)) ? item.Id : item.GetValueByKey(t))
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <span>@item.GetValueByKey(t)</span>
+                                        }
+
+                                    </td>
+                                }
                                 <td>
-                                    @*label label-table label-success*@
-                                    <span class="">
-                                        @item.PhoneNumber
-                                    </span>
+                                    @if (!item.Roles.Any(b => b.RoleId == adminRole))
+                                    {
+                                        if (records.Any(b => b.UserId == item.Id && b.StartDate <= DateTime.Now && b.EndDate >= DateTime.Now && b.Active))
+                                        {
+                                            <span>True</span>
+                                        }
+                                        else
+                                        {
+                                            <span>False</span>
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        <span>Admin</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("EditUser","Roles",new { @area=E.AdminPath,@id=item.Id })" class="btn btn-primary">
+                                        Info
+                                    </a>
+                                    @if (!item.Roles.Any(b => b.RoleId == adminRole) && !(records.Any(b => b.UserId == item.Id && b.StartDate <= DateTime.Now && b.EndDate >= DateTime.Now && b.Active)))
+                                    {
+                                        <a href="@Url.Action("Create","GolfMembership",new { @area=E.AdminPath,@id=item.Id })" class="btn btn-success" target="_blank">
+                                            Create Membership
+                                        </a>
+                                    }
+                                    @if (!item.Roles.Any(b => b.RoleId == adminRole) && records.Any(b => b.UserId == item.Id))
+                                    {
+                                        <a href="@Url.Action("Index","GolfMembership",new { @area=E.AdminPath,@id=item.Id })" class="btn btn-warning" target="_blank">
+                                            Membership History
+                                        </a>
+                                    }
+
                                 </td>
                             </tr>
                         }
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="5">
-                                <div class="text-right">
-                                    <ul class="pagination"></ul>
-                                </div>
-                            </td>
-                        </tr>
-                    </tfoot>
                 </table>
             </div>
         </div>
@@ -82,6 +121,11 @@
 @section script{
     <script src="/admin-lib/plugins/footable/js/footable.all.min.js"></script>
     <script src="/admin-lib/plugins/footable/js/footable.min.js"></script>
+    <script>
+        $(function () {
+            $('.basic-example').DataTable();
+        });
+    </script>
 }
 
 

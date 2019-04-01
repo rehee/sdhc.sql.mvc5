@@ -27,7 +27,6 @@ namespace ASP
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    using SDHC.Common.Entity;
     using WebSQL;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
@@ -262,25 +261,75 @@ WriteAttribute("src", Tuple.Create(" src=\"", 2738), Tuple.Create("\"", 2786)
 , 2744), false)
 );
 
-WriteLiteral("></script>\r\n<!-- #End# Chat js-->\r\n\r\n<script");
+WriteLiteral("></script>\r\n<!-- #End# Chat js-->\r\n<script");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 2831), Tuple.Create("\"", 2873)
-, Tuple.Create(Tuple.Create("", 2837), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/assets/js/pages/index.js")
-, 2837), false)
-);
-
-WriteLiteral("></script>\r\n\r\n<!-- LAYOUT JS -->\r\n<script");
-
-WriteAttribute("src", Tuple.Create(" src=\"", 2915), Tuple.Create("\"", 2950)
-, Tuple.Create(Tuple.Create("", 2921), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/assets/js/demo.js")
-, 2921), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 2829), Tuple.Create("\"", 2883)
+, Tuple.Create(Tuple.Create("", 2835), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/sweetalert/sweetalert.min.js")
+, 2835), false)
 );
 
 WriteLiteral("></script>\r\n<script");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 2970), Tuple.Create("\"", 3007)
-, Tuple.Create(Tuple.Create("", 2976), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/assets/js/layout.js")
-, 2976), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 2903), Tuple.Create("\"", 2945)
+, Tuple.Create(Tuple.Create("", 2909), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/assets/js/pages/index.js")
+, 2909), false)
+);
+
+WriteLiteral("></script>\r\n\r\n<script");
+
+WriteAttribute("src", Tuple.Create(" src=\"", 2967), Tuple.Create("\"", 3011)
+, Tuple.Create(Tuple.Create("", 2973), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/momentjs/moment.js")
+, 2973), false)
+);
+
+WriteLiteral("></script>\r\n<script");
+
+WriteAttribute("src", Tuple.Create(" src=\"", 3031), Tuple.Create("\"", 3130)
+, Tuple.Create(Tuple.Create("", 3037), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datet" +
+"imepicker.js")
+, 3037), false)
+);
+
+WriteLiteral("></script>\r\n<script");
+
+WriteAttribute("src", Tuple.Create(" src=\"", 3150), Tuple.Create("\"", 3225)
+, Tuple.Create(Tuple.Create("", 3156), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/boootstrap-datepicker/bootstrap-datepicker.min.js")
+, 3156), false)
+);
+
+WriteLiteral("></script>\r\n<script");
+
+WriteAttribute("src", Tuple.Create(" src=\"", 3245), Tuple.Create("\"", 3327)
+, Tuple.Create(Tuple.Create("", 3251), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/bootstrap-datetime-picker/js/bootstrap-datetimepicker.js")
+, 3251), false)
+);
+
+WriteLiteral("></script>\r\n<script");
+
+WriteAttribute("src", Tuple.Create(" src=\"", 3347), Tuple.Create("\"", 3420)
+, Tuple.Create(Tuple.Create("", 3353), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/bootstrap-timepicker/js/bootstrap-timepicker.js")
+, 3353), false)
+);
+
+WriteLiteral("></script>\r\n<script");
+
+WriteAttribute("src", Tuple.Create(" src=\"", 3440), Tuple.Create("\"", 3504)
+, Tuple.Create(Tuple.Create("", 3446), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/bootstrap-daterange/daterangepicker.js")
+, 3446), false)
+);
+
+WriteLiteral("></script>\r\n\r\n\r\n<!-- LAYOUT JS -->\r\n<script");
+
+WriteAttribute("src", Tuple.Create(" src=\"", 3548), Tuple.Create("\"", 3583)
+, Tuple.Create(Tuple.Create("", 3554), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/assets/js/demo.js")
+, 3554), false)
+);
+
+WriteLiteral("></script>\r\n<script");
+
+WriteAttribute("src", Tuple.Create(" src=\"", 3603), Tuple.Create("\"", 3640)
+, Tuple.Create(Tuple.Create("", 3609), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/assets/js/layout.js")
+, 3609), false)
 );
 
 WriteLiteral("></script>\r\n\r\n");

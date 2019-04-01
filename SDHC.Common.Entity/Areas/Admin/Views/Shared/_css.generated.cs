@@ -27,7 +27,6 @@ namespace ASP
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    using SDHC.Common.Entity;
     using WebSQL;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
@@ -84,104 +83,159 @@ WriteAttribute("href", Tuple.Create(" href=\"", 356), Tuple.Create("\"", 402)
 
 WriteLiteral(" rel=\"stylesheet\"");
 
-WriteLiteral(">\r\n\r\n\r\n<link");
+WriteLiteral(">\r\n\r\n<link");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 432), Tuple.Create("\"", 519)
-, Tuple.Create(Tuple.Create("", 439), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css")
-, 439), false)
+WriteAttribute("href", Tuple.Create(" href=\"", 430), Tuple.Create("\"", 532)
+, Tuple.Create(Tuple.Create("", 437), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-date" +
+"timepicker.css")
+, 437), false)
+);
+
+WriteLiteral(" rel=\"stylesheet\"");
+
+WriteLiteral(" />\r\n<link");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 560), Tuple.Create("\"", 645)
+, Tuple.Create(Tuple.Create("", 567), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/bootstrap-datetime-picker/css/bootstrap-datetimepicker.css")
+, 567), false)
+);
+
+WriteLiteral(" rel=\"stylesheet\"");
+
+WriteLiteral(" />\r\n<link");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 673), Tuple.Create("\"", 751)
+, Tuple.Create(Tuple.Create("", 680), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/boootstrap-datepicker/bootstrap-datepicker3.min.css")
+, 680), false)
+);
+
+WriteLiteral(" rel=\"stylesheet\"");
+
+WriteLiteral(" />\r\n<link");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 779), Tuple.Create("\"", 855)
+, Tuple.Create(Tuple.Create("", 786), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/bootstrap-timepicker/css/bootstrap-timepicker.css")
+, 786), false)
+);
+
+WriteLiteral(" rel=\"stylesheet\"");
+
+WriteLiteral(" />\r\n<link");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 883), Tuple.Create("\"", 949)
+, Tuple.Create(Tuple.Create("", 890), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/bootstrap-daterange/daterangepicker.css")
+, 890), false)
+);
+
+WriteLiteral(" rel=\"stylesheet\"");
+
+WriteLiteral(" />\r\n\r\n\r\n<link");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 981), Tuple.Create("\"", 1068)
+, Tuple.Create(Tuple.Create("", 988), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css")
+, 988), false)
 );
 
 WriteLiteral(" rel=\"stylesheet\"");
 
 WriteLiteral(">\r\n<link");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 545), Tuple.Create("\"", 636)
-, Tuple.Create(Tuple.Create("", 552), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/jquery-datatable/skin/bootstrap/css/responsive.bootstrap.min." +
+WriteAttribute("href", Tuple.Create(" href=\"", 1094), Tuple.Create("\"", 1185)
+, Tuple.Create(Tuple.Create("", 1101), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/jquery-datatable/skin/bootstrap/css/responsive.bootstrap.min." +
 "css")
-, 552), false)
+, 1101), false)
 );
 
 WriteLiteral(" rel=\"stylesheet\"");
 
 WriteLiteral(">\r\n<link");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 662), Tuple.Create("\"", 751)
-, Tuple.Create(Tuple.Create("", 669), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/jquery-datatable/skin/bootstrap/css/scroller.bootstrap.min.cs" +
+WriteAttribute("href", Tuple.Create(" href=\"", 1211), Tuple.Create("\"", 1300)
+, Tuple.Create(Tuple.Create("", 1218), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/jquery-datatable/skin/bootstrap/css/scroller.bootstrap.min.cs" +
 "s")
-, 669), false)
+, 1218), false)
 );
 
 WriteLiteral(" rel=\"stylesheet\"");
 
 WriteLiteral(">\r\n<link");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 777), Tuple.Create("\"", 869)
-, Tuple.Create(Tuple.Create("", 784), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/jquery-datatable/skin/bootstrap/css/fixedHeader.bootstrap.min" +
+WriteAttribute("href", Tuple.Create(" href=\"", 1326), Tuple.Create("\"", 1418)
+, Tuple.Create(Tuple.Create("", 1333), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/jquery-datatable/skin/bootstrap/css/fixedHeader.bootstrap.min" +
 ".css")
-, 784), false)
+, 1333), false)
 );
 
 WriteLiteral(" rel=\"stylesheet\"");
 
 WriteLiteral(">\r\n<link");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 895), Tuple.Create("\"", 952)
-, Tuple.Create(Tuple.Create("", 902), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/footable/css/footable.core.css")
-, 902), false)
+WriteAttribute("href", Tuple.Create(" href=\"", 1444), Tuple.Create("\"", 1501)
+, Tuple.Create(Tuple.Create("", 1451), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/footable/css/footable.core.css")
+, 1451), false)
 );
 
 WriteLiteral(" rel=\"stylesheet\"");
 
 WriteLiteral(">\r\n<!--REQUIRED THEME CSS -->\r\n\r\n<link");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1008), Tuple.Create("\"", 1047)
-, Tuple.Create(Tuple.Create("", 1015), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/assets/css/style.css")
-, 1015), false)
+WriteAttribute("href", Tuple.Create(" href=\"", 1557), Tuple.Create("\"", 1596)
+, Tuple.Create(Tuple.Create("", 1564), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/assets/css/style.css")
+, 1564), false)
 );
 
 WriteLiteral(" rel=\"stylesheet\"");
 
 WriteLiteral(">\r\n<link");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1073), Tuple.Create("\"", 1113)
-, Tuple.Create(Tuple.Create("", 1080), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/assets/css/layout.css")
-, 1080), false)
+WriteAttribute("href", Tuple.Create(" href=\"", 1622), Tuple.Create("\"", 1662)
+, Tuple.Create(Tuple.Create("", 1629), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/assets/css/layout.css")
+, 1629), false)
 );
 
 WriteLiteral(" rel=\"stylesheet\"");
 
 WriteLiteral(">\r\n<link");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1139), Tuple.Create("\"", 1190)
-, Tuple.Create(Tuple.Create("", 1146), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/assets/css/themes/main_theme.css")
-, 1146), false)
+WriteAttribute("href", Tuple.Create(" href=\"", 1688), Tuple.Create("\"", 1739)
+, Tuple.Create(Tuple.Create("", 1695), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/assets/css/themes/main_theme.css")
+, 1695), false)
 );
 
 WriteLiteral(" rel=\"stylesheet\"");
 
-WriteLiteral(" />\r\n\r\n<!--THIS PAGE LEVEL CSS-->\r\n<link");
+WriteLiteral(" />\r\n<link");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1248), Tuple.Create("\"", 1294)
-, Tuple.Create(Tuple.Create("", 1255), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/morrisjs/morris.css")
-, 1255), false)
+WriteAttribute("href", Tuple.Create(" href=\"", 1767), Tuple.Create("\"", 1819)
+, Tuple.Create(Tuple.Create("", 1774), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/sweetalert/sweetalert.css")
+, 1774), false)
+);
+
+WriteLiteral(" rel=\"stylesheet\"");
+
+WriteLiteral(" />\r\n<!--THIS PAGE LEVEL CSS-->\r\n<link");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 1875), Tuple.Create("\"", 1921)
+, Tuple.Create(Tuple.Create("", 1882), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/morrisjs/morris.css")
+, 1882), false)
 );
 
 WriteLiteral(" rel=\"stylesheet\"");
 
 WriteLiteral(" />\r\n<!--Chat Css-->\r\n<link");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1339), Tuple.Create("\"", 1398)
-, Tuple.Create(Tuple.Create("", 1346), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/wchat/assets/css/style-light.css")
-, 1346), false)
+WriteAttribute("href", Tuple.Create(" href=\"", 1966), Tuple.Create("\"", 2025)
+, Tuple.Create(Tuple.Create("", 1973), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/wchat/assets/css/style-light.css")
+, 1973), false)
 );
 
 WriteLiteral(" rel=\"stylesheet\"");
 
 WriteLiteral(">\r\n<link");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1424), Tuple.Create("\"", 1478)
-, Tuple.Create(Tuple.Create("", 1431), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/wchat/assets/css/mobile.css")
-, 1431), false)
+WriteAttribute("href", Tuple.Create(" href=\"", 2051), Tuple.Create("\"", 2105)
+, Tuple.Create(Tuple.Create("", 2058), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/wchat/assets/css/mobile.css")
+, 2058), false)
 );
 
 WriteLiteral(" rel=\"stylesheet\"");
@@ -192,16 +246,16 @@ WriteLiteral(">\r\n\r\n<!-- EMOJI ONE JS -->\r\n<link");
 
 WriteLiteral(" rel=\"stylesheet\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1557), Tuple.Create("\"", 1632)
-, Tuple.Create(Tuple.Create("", 1564), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/wchat/smiley/assets/sprites/emojione.sprites.css")
-, 1564), false)
+WriteAttribute("href", Tuple.Create(" href=\"", 2184), Tuple.Create("\"", 2259)
+, Tuple.Create(Tuple.Create("", 2191), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/wchat/smiley/assets/sprites/emojione.sprites.css")
+, 2191), false)
 );
 
 WriteLiteral(" />\r\n<script");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 1645), Tuple.Create("\"", 1702)
-, Tuple.Create(Tuple.Create("", 1651), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/wchat/smiley/js/emojione.min.js")
-, 1651), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 2272), Tuple.Create("\"", 2329)
+, Tuple.Create(Tuple.Create("", 2278), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/wchat/smiley/js/emojione.min.js")
+, 2278), false)
 );
 
 WriteLiteral("></script>\r\n\r\n<script");

@@ -5,6 +5,16 @@
 }
 @foreach (var property in Model.Properties)
 {
-    Html.RenderPartial("AdminInputs/_AdminInput", new ContentPropertyIndex(property, index));
+    if (property.IgnoreProperty)
+    {
+        Html.RenderPartial("AdminInputs/_AdminInput_Ignore", new ContentPropertyIndex(property, index));
+
+    }
+    else
+    {
+        Html.RenderPartial("AdminInputs/_AdminInput", new ContentPropertyIndex(property, index));
+
+    }
+
     index++;
 }

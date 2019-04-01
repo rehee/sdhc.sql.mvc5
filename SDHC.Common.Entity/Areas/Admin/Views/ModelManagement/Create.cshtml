@@ -1,16 +1,13 @@
 ﻿@model SDHC.Common.Entity.Models.ModelPostModel
 @{
-  ViewBag.Title = "Create Model";
-  Layout = "~/Areas/Admin/Views/Shared/_Layout_Content.cshtml";
+    ViewBag.Title = E.GetModelTitleFullType(Model.FullType, Model.ThisAssembly) + " Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Content.cshtml";
 }
 
 <div class="card">
-  <div class="card-header">
-    <h2>Default Basic Forms</h2>
-  </div>
-  <div class="body">
-    <form action="@Url.Action("Create","ModelManagement",new { @area="Admin" })" class="" method="post" enctype="multipart/form-data">
-      @{ Html.RenderPartial("_CreateOrEdit", Model);}
-    </form>
-  </div>
+    <div class="body">
+        <form action="@Url.Action("Create","ModelManagement",new { @area=E.AdminPath })" class="" method="post" enctype="multipart/form-data">
+            @{ Html.RenderPartial("_CreateOrEdit", Model);}
+        </form>
+    </div>
 </div>

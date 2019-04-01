@@ -26,14 +26,17 @@ namespace Start
           case "UserManager":
             Func<ApplicationUserManager> UserManager = () => OwinContextExtensions.Get<ApplicationUserManager>(getContext());
             p.SetValue(null, UserManager);
+            G.UserManager = UserManager;
             continue;
           case "SignManager":
             Func<ApplicationSignInManager> SignManager = () => OwinContextExtensions.Get<ApplicationSignInManager>(getContext());
             p.SetValue(null, SignManager);
+            G.SignManager = SignManager;
             continue;
           case "RoleManager":
             Func<ApplicationRoleManager> RoleManager = () => OwinContextExtensions.Get<ApplicationRoleManager>(getContext());
             p.SetValue(null, RoleManager);
+            G.RoleManager = RoleManager;
             continue;
         }
         var config = p.GetObjectCustomAttribute<ConfigAttribute>();
@@ -51,6 +54,13 @@ namespace Start
               break;
             case "ContentPageUrl":
               ContentManager.ContentPageUrl = value == null ? "" : value.MyTryConvert<string>();
+              break;
+            case "AdminPath":
+              var v = value.MyTryConvert<string>();
+              G.AdminPath = String.IsNullOrEmpty(v) ? "Admin" : v;
+              break;
+            case "UserNameIsNotEmail":
+              G.UserNameIsNotEmail = value == null ? false : value.MyTryConvert<bool>();
               break;
 
           }

@@ -30,44 +30,22 @@ namespace ASP
     using WebSQL;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
-    [System.Web.WebPages.PageVirtualPathAttribute("~/Areas/Admin/Views/Shared/_head.cshtml")]
-    public partial class _Areas_Admin_Views_Shared__head_cshtml : System.Web.Mvc.WebViewPage<dynamic>
+    [System.Web.WebPages.PageVirtualPathAttribute("~/Areas/Admin/Views/_ViewStart.cshtml")]
+    public partial class _Areas_Admin_Views__ViewStart_cshtml : System.Web.Mvc.ViewStartPage
     {
-        public _Areas_Admin_Views_Shared__head_cshtml()
+        public _Areas_Admin_Views__ViewStart_cshtml()
         {
         }
         public override void Execute()
         {
-WriteLiteral("<meta");
-
-WriteLiteral(" charset=\"UTF-8\"");
-
-WriteLiteral(">\r\n<meta");
-
-WriteLiteral(" http-equiv=\"X-UA-Compatible\"");
-
-WriteLiteral(" content=\"IE=Edge\"");
-
-WriteLiteral(">\r\n<meta");
-
-WriteLiteral(" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no\"" +
-"");
-
-WriteLiteral(" name=\"viewport\"");
-
-WriteLiteral(">\r\n<title>\r\n");
-
-WriteLiteral("  ");
-
             
-            #line 5 "..\..\Areas\Admin\Views\Shared\_head.cshtml"
-Write(E.AdminTitle.Text("Spxus Admin System"));
+            #line 1 "..\..\Areas\Admin\Views\_ViewStart.cshtml"
+  
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n</title>\r\n\r\n");
-
         }
     }
 }

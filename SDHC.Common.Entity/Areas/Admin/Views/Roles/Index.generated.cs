@@ -27,7 +27,6 @@ namespace ASP
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    using SDHC.Common.Entity;
     using WebSQL;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
@@ -43,6 +42,9 @@ namespace ASP
             #line 2 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
   
     ViewBag.Title = "User and Roles";
+    var tableList = E.GetTableList(SDHCUserManager.BaseUser, new string[] { "FullName", "Email", "Phone" }).ToList();
+    var adminRole = E.RoleManager().Roles.Where(b => b.Name == "Admin").Select(b => b.Id).FirstOrDefault();
+    var records = ModelManager.Read<MemberShipRecord>(b => true).ToList();
 
             
             #line default
@@ -67,208 +69,379 @@ WriteLiteral(">\r\n                <div");
 
 WriteLiteral(" class=\"button-box\"");
 
-WriteLiteral(">\r\n                    <a");
+WriteLiteral(">\r\n                    ");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 320), Tuple.Create("\"", 380)
+WriteLiteral("\r\n                    <a");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 868), Tuple.Create("\"", 934)
             
-            #line 11 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 327), Tuple.Create<System.Object, System.Int32>(Url.Action("RoleList","Roles",new { @area="Admin" })
+            #line 17 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 875), Tuple.Create<System.Object, System.Int32>(Url.Action("CreateUser","Roles",new { @area=E.AdminPath })
             
             #line default
             #line hidden
-, 327), false)
+, 875), false)
 );
-
-WriteLiteral(" class=\"btn btn-info btn-group\"");
-
-WriteLiteral(" aria-haspopup=\"true\"");
-
-WriteLiteral(" aria-expanded=\"false\"");
-
-WriteLiteral(">\r\n                        Management Roles\r\n                    </a>\r\n          " +
-"          <button");
 
 WriteLiteral(" type=\"button\"");
 
 WriteLiteral(" class=\"btn btn-info btn-group\"");
 
-WriteLiteral(" data-toggle=\"dropdown\"");
+WriteLiteral(">\r\n                        Create User\r\n                    </a>\r\n               " +
+" </div>\r\n                <br />\r\n                ");
 
-WriteLiteral(" aria-haspopup=\"true\"");
-
-WriteLiteral(" aria-expanded=\"false\"");
-
-WriteLiteral(">\r\n                        Create User\r\n                    </button>\r\n          " +
-"      </div>\r\n                <br />\r\n                <h2>\r\n");
-
-            
-            #line 20 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
-                    
-            
-            #line default
-            #line hidden
-            
-            #line 20 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
-                     foreach (var item in Model.RoleAndUsers)
-                    {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                        <a");
-
-WriteAttribute("href", Tuple.Create(" href=\"", 917), Tuple.Create("\"", 993)
-            
-            #line 22 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 924), Tuple.Create<System.Object, System.Int32>(Url.Action("Index","Roles",new { @area="Admin",@id=item.RoleName } )
-            
-            #line default
-            #line hidden
-, 924), false)
-);
-
-WriteLiteral(">");
-
-            
-            #line 22 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
-                                                                                                   Write(item.RoleDisplayName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" (");
-
-            
-            #line 22 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
-                                                                                                                          Write(item.Users);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(")</a>\r\n");
-
-            
-            #line 23 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
-                    }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                </h2>\r\n            </div>\r\n            <div");
+WriteLiteral("\r\n            </div>\r\n            <div");
 
 WriteLiteral(" class=\"body\"");
 
 WriteLiteral(">\r\n                <table");
 
-WriteLiteral(" id=\"demo-foo-filtering\"");
+WriteLiteral(" class=\"table table-bordered table-striped table-hover basic-example dataTable\"");
 
-WriteLiteral(" class=\"table table-bordered table-hover toggle-circle\"");
-
-WriteLiteral(" data-page-size=\"7\"");
-
-WriteLiteral(">\r\n                    <thead>\r\n                        <tr>\r\n                   " +
-"         <th");
-
-WriteLiteral(" data-toggle=\"true\"");
-
-WriteLiteral(">User Name</th>\r\n                            <th>Email</th>\r\n                    " +
-"        <th");
-
-WriteLiteral(" data-hide=\"phone, tablet\"");
-
-WriteLiteral(">Phone Number</th>\r\n                        </tr>\r\n                    </thead>\r\n" +
-"                    ");
-
-WriteLiteral("\r\n                    <tbody>\r\n");
+WriteLiteral(">\r\n                    <thead>\r\n                        <tr>\r\n");
 
             
-            #line 53 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+            #line 34 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+                            
+            
+            #line default
+            #line hidden
+            
+            #line 34 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+                             foreach (var t in tableList)
+                            {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                <th>");
+
+            
+            #line 36 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+                               Write(t.SpacesFromCamel());
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</th>\r\n");
+
+            
+            #line 37 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+                            }
+
+            
+            #line default
+            #line hidden
+WriteLiteral(@"                            <th>
+                                Membership Status
+                            </th>
+                            <th>Option</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+");
+
+            
+            #line 46 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+                            
+            
+            #line default
+            #line hidden
+            
+            #line 46 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+                             foreach (var t in tableList)
+                            {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                <th>");
+
+            
+            #line 48 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+                               Write(t.SpacesFromCamel());
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</th>\r\n");
+
+            
+            #line 49 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+                            }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                            <th>\r\n                                Membership Stat" +
+"us\r\n                            </th>\r\n                            <th>Option</t" +
+"h>\r\n                        </tr>\r\n                    </tfoot>\r\n               " +
+"     <tbody>\r\n");
+
+            
+            #line 57 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 53 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
-                         foreach (var item in Model.Users)
+            #line 57 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+                         foreach (ClubUser item in Model.Users)
                         {
 
             
             #line default
             #line hidden
-WriteLiteral("                            <tr>\r\n                                <td><a");
+WriteLiteral("                            <tr>\r\n");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2812), Tuple.Create("\"", 2884)
             
-            #line 56 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 2819), Tuple.Create<System.Object, System.Int32>(Url.Action("EditUser","Roles",new { @area="Admin",@id=item.Id })
+            #line 60 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+                                
             
             #line default
             #line hidden
-, 2819), false)
+            
+            #line 60 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+                                 foreach (var t in tableList)
+                                {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                    <td>\r\n");
+
+            
+            #line 63 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+                                        
+            
+            #line default
+            #line hidden
+            
+            #line 63 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+                                         if (tableList.IndexOf(t) == 0)
+                                        {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                            <a");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 2974), Tuple.Create("\"", 3050)
+            
+            #line 65 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 2981), Tuple.Create<System.Object, System.Int32>(Url.Action("EditUser","Roles",new { @area=E.AdminPath,@id=item.Id })
+            
+            #line default
+            #line hidden
+, 2981), false)
 );
-
-WriteLiteral(">");
-
-            
-            #line 56 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
-                                                                                                           Write(item.UserName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</a></td>\r\n                                <td>");
-
-            
-            #line 57 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
-                               Write(item.Email);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n                                <td>\r\n                                    " +
-"");
-
-WriteLiteral("\r\n                                    <span");
-
-WriteLiteral(" class=\"\"");
 
 WriteLiteral(">\r\n");
 
-WriteLiteral("                                        ");
+WriteLiteral("                                                ");
 
             
-            #line 61 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
-                                   Write(item.PhoneNumber);
+            #line 66 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+                                            Write(String.IsNullOrEmpty(item.GetValueByKey(t)) ? item.Id : item.GetValueByKey(t));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                                    </span>\r\n                                </" +
-"td>\r\n                            </tr>\r\n");
+WriteLiteral("\r\n                                            </a>\r\n");
 
             
-            #line 65 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+            #line 68 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+                                        }
+                                        else
+                                        {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                            <span>");
+
+            
+            #line 71 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+                                             Write(item.GetValueByKey(t));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span>\r\n");
+
+            
+            #line 72 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+                                        }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                    </td>\r\n");
+
+            
+            #line 75 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+                                }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                <td>\r\n");
+
+            
+            #line 77 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+                                    
+            
+            #line default
+            #line hidden
+            
+            #line 77 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+                                     if (!item.Roles.Any(b => b.RoleId == adminRole))
+                                    {
+                                        if (records.Any(b => b.UserId == item.Id && b.StartDate <= DateTime.Now && b.EndDate >= DateTime.Now && b.Active))
+                                        {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                            <span>True</span>\r\n");
+
+            
+            #line 82 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+                                        }
+                                        else
+                                        {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                            <span>False</span>\r\n");
+
+            
+            #line 86 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+                                        }
+
+                                    }
+                                    else
+                                    {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                        <span>Admin</span>\r\n");
+
+            
+            #line 92 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+                                    }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                </td>\r\n                                <td>\r\n    " +
+"                                <a");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 4571), Tuple.Create("\"", 4647)
+            
+            #line 95 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 4578), Tuple.Create<System.Object, System.Int32>(Url.Action("EditUser","Roles",new { @area=E.AdminPath,@id=item.Id })
+            
+            #line default
+            #line hidden
+, 4578), false)
+);
+
+WriteLiteral(" class=\"btn btn-primary\"");
+
+WriteLiteral(">\r\n                                        Info\r\n                                " +
+"    </a>\r\n");
+
+            
+            #line 98 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+                                    
+            
+            #line default
+            #line hidden
+            
+            #line 98 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+                                     if (!item.Roles.Any(b => b.RoleId == adminRole) && !(records.Any(b => b.UserId == item.Id && b.StartDate <= DateTime.Now && b.EndDate >= DateTime.Now && b.Active)))
+                                    {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                        <a");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 5047), Tuple.Create("\"", 5130)
+            
+            #line 100 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 5054), Tuple.Create<System.Object, System.Int32>(Url.Action("Create","GolfMembership",new { @area=E.AdminPath,@id=item.Id })
+            
+            #line default
+            #line hidden
+, 5054), false)
+);
+
+WriteLiteral(" class=\"btn btn-success\"");
+
+WriteLiteral(" target=\"_blank\"");
+
+WriteLiteral(">\r\n                                            Create Membership\r\n               " +
+"                         </a>\r\n");
+
+            
+            #line 103 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+                                    }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                    ");
+
+            
+            #line 104 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+                                     if (!item.Roles.Any(b => b.RoleId == adminRole) && records.Any(b => b.UserId == item.Id))
+                                    {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                        <a");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 5531), Tuple.Create("\"", 5613)
+            
+            #line 106 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 5538), Tuple.Create<System.Object, System.Int32>(Url.Action("Index","GolfMembership",new { @area=E.AdminPath,@id=item.Id })
+            
+            #line default
+            #line hidden
+, 5538), false)
+);
+
+WriteLiteral(" class=\"btn btn-warning\"");
+
+WriteLiteral(" target=\"_blank\"");
+
+WriteLiteral(">\r\n                                            Membership History\r\n              " +
+"                          </a>\r\n");
+
+            
+            #line 109 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
+                                    }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                </td>\r\n                            </tr>\r\n");
+
+            
+            #line 113 "..\..\Areas\Admin\Views\Roles\Index.cshtml"
                         }
 
             
             #line default
             #line hidden
-WriteLiteral("                    </tbody>\r\n                    <tfoot>\r\n                      " +
-"  <tr>\r\n                            <td");
-
-WriteLiteral(" colspan=\"5\"");
-
-WriteLiteral(">\r\n                                <div");
-
-WriteLiteral(" class=\"text-right\"");
-
-WriteLiteral(">\r\n                                    <ul");
-
-WriteLiteral(" class=\"pagination\"");
-
-WriteLiteral("></ul>\r\n                                </div>\r\n                            </td>" +
-"\r\n                        </tr>\r\n                    </tfoot>\r\n                <" +
-"/table>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n");
+WriteLiteral("                    </tbody>\r\n                </table>\r\n            </div>\r\n     " +
+"   </div>\r\n    </div>\r\n</div>\r\n\r\n");
 
 DefineSection("script", () => {
 
@@ -280,7 +453,8 @@ WriteLiteral("></script>\r\n    <script");
 
 WriteLiteral(" src=\"/admin-lib/plugins/footable/js/footable.min.js\"");
 
-WriteLiteral("></script>\r\n");
+WriteLiteral("></script>\r\n    <script>\r\n        $(function () {\r\n            $(\'.basic-example\'" +
+").DataTable();\r\n        });\r\n    </script>\r\n");
 
 });
 

@@ -27,7 +27,6 @@ namespace ASP
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    using SDHC.Common.Entity;
     using WebSQL;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
@@ -43,13 +42,13 @@ WriteLiteral("<!DOCTYPE html>\r\n<html>\r\n\r\n<head>\r\n");
 
             
             #line 5 "..\..\Areas\Admin\Views\Shared\_Root.cshtml"
-    
+  
             
             #line default
             #line hidden
             
             #line 5 "..\..\Areas\Admin\Views\Shared\_Root.cshtml"
-       Html.RenderPartial("_head"); 
+     Html.RenderPartial("_head"); 
             
             #line default
             #line hidden
@@ -57,13 +56,13 @@ WriteLiteral("\r\n");
 
             
             #line 6 "..\..\Areas\Admin\Views\Shared\_Root.cshtml"
-    
+  
             
             #line default
             #line hidden
             
             #line 6 "..\..\Areas\Admin\Views\Shared\_Root.cshtml"
-       Html.RenderPartial("_css"); 
+     Html.RenderPartial("_css"); 
             
             #line default
             #line hidden
@@ -71,98 +70,83 @@ WriteLiteral("\r\n</head>\r\n\r\n<body");
 
 WriteLiteral(" class=\"theme-indigo light layout-fixed\"");
 
-WriteLiteral(">\r\n    <div");
+WriteLiteral(">\r\n  <div");
 
 WriteLiteral(" class=\"wrapper\"");
 
-WriteLiteral(">\r\n        <div");
+WriteLiteral(">\r\n    <div");
 
 WriteLiteral(" class=\"page-loader-wrapper\"");
 
-WriteLiteral(">\r\n            <div");
+WriteLiteral(">\r\n      <div");
 
 WriteLiteral(" class=\"loader\"");
 
-WriteLiteral(">\r\n                <div");
+WriteLiteral(">\r\n        <div");
 
 WriteLiteral(" class=\"sk-wave\"");
 
-WriteLiteral(">\r\n                    <div");
+WriteLiteral(">\r\n          <div");
 
 WriteLiteral(" class=\"sk-rect sk-rect1 bg-cyan\"");
 
-WriteLiteral("></div>\r\n                    <div");
+WriteLiteral("></div>\r\n          <div");
 
 WriteLiteral(" class=\"sk-rect sk-rect2 bg-cyan\"");
 
-WriteLiteral("></div>\r\n                    <div");
+WriteLiteral("></div>\r\n          <div");
 
 WriteLiteral(" class=\"sk-rect sk-rect3 bg-cyan\"");
 
-WriteLiteral("></div>\r\n                    <div");
+WriteLiteral("></div>\r\n          <div");
 
 WriteLiteral(" class=\"sk-rect sk-rect4 bg-cyan\"");
 
-WriteLiteral("></div>\r\n                    <div");
+WriteLiteral("></div>\r\n          <div");
 
 WriteLiteral(" class=\"sk-rect sk-rect5 bg-cyan\"");
 
-WriteLiteral("></div>\r\n                </div>\r\n                <p>Please wait...</p>\r\n         " +
-"   </div>\r\n        </div>\r\n        <!-- top navbar-->\r\n        <header");
+WriteLiteral("></div>\r\n        </div>\r\n        <p>Please wait...</p>\r\n      </div>\r\n    </div>\r" +
+"\n    <!-- top navbar-->\r\n    <header");
 
 WriteLiteral(" class=\"topnavbar-wrapper\"");
 
-WriteLiteral(">\r\n            <nav");
+WriteLiteral(">\r\n      <nav");
 
 WriteLiteral(" role=\"navigation\"");
 
 WriteLiteral(" class=\"navbar topnavbar\"");
 
-WriteLiteral(">\r\n                <!-- START navbar header-->\r\n                <div");
+WriteLiteral(">\r\n        <!-- START navbar header-->\r\n        <div");
 
 WriteLiteral(" class=\"navbar-header\"");
 
-WriteLiteral(">\r\n                    <a");
+WriteLiteral(">\r\n          <a");
 
-WriteLiteral(" href=\"index.html\"");
+WriteAttribute("href", Tuple.Create(" href=\"", 849), Tuple.Create("\"", 916)
+            
+            #line 28 "..\..\Areas\Admin\Views\Shared\_Root.cshtml"
+, Tuple.Create(Tuple.Create("", 856), Tuple.Create<System.Object, System.Int32>(Url.Action("Index","Dashboard",new { @area = E.AdminPath })
+            
+            #line default
+            #line hidden
+, 856), false)
+);
 
 WriteLiteral(" class=\"navbar-brand\"");
 
-WriteLiteral(">\r\n                        <div");
+WriteLiteral(">\r\n              <br/>\r\n              Admin\r\n            ");
 
-WriteLiteral(" class=\"brand-logo\"");
-
-WriteLiteral(">\r\n                            <img");
-
-WriteLiteral(" src=\"/admin-lib/assets/images/logo.png\"");
-
-WriteLiteral(" alt=\"Admin Logo\"");
-
-WriteLiteral(" class=\"img-responsive\"");
-
-WriteLiteral(">\r\n                        </div>\r\n                        <div");
-
-WriteLiteral(" class=\"brand-logo-collapsed\"");
-
-WriteLiteral(">\r\n                            <img");
-
-WriteLiteral(" src=\"/admin-lib/assets/images/logo-single.png\"");
-
-WriteLiteral(" alt=\"Admin Logo\"");
-
-WriteLiteral(" class=\"img-responsive\"");
-
-WriteLiteral(">\r\n                        </div>\r\n                    </a>\r\n                </di" +
-"v>\r\n                <!-- END navbar header-->\r\n                <!-- START Nav wr" +
-"apper-->\r\n                <div");
+WriteLiteral("\r\n          </a>\r\n        </div>\r\n        <!-- END navbar header-->\r\n        <!--" +
+" START Nav wrapper-->\r\n        <div");
 
 WriteLiteral(" class=\"nav-wrapper\"");
 
-WriteLiteral(">\r\n                    <!-- START Left navbar-->\r\n                    <ul");
+WriteLiteral(">\r\n          <!-- START Left navbar-->\r\n          <ul");
 
 WriteLiteral(" class=\"nav navbar-nav\"");
 
-WriteLiteral(">\r\n                        <li>\r\n                            <a");
+WriteLiteral(">\r\n            <li>\r\n              <a");
 
 WriteLiteral(" href=\"#\"");
 
@@ -172,11 +156,11 @@ WriteLiteral(" data-toggle-state=\"aside-collapsed\"");
 
 WriteLiteral(" class=\"hidden-xs\"");
 
-WriteLiteral(">\r\n                                <em");
+WriteLiteral(">\r\n                <em");
 
 WriteLiteral(" class=\"material-icons\"");
 
-WriteLiteral(">menu</em>\r\n                            </a>\r\n                            <a");
+WriteLiteral(">menu</em>\r\n              </a>\r\n              <a");
 
 WriteLiteral(" href=\"#\"");
 
@@ -186,55 +170,27 @@ WriteLiteral(" data-no-persist=\"true\"");
 
 WriteLiteral(" class=\"visible-xs sidebar-toggle\"");
 
-WriteLiteral(">\r\n                                <em");
+WriteLiteral(">\r\n                <em");
 
 WriteLiteral(" class=\"material-icons\"");
 
-WriteLiteral(">menu</em>\r\n                            </a>\r\n                        </li>\r\n    " +
-"                </ul>\r\n                    <!-- END Left navbar-->\r\n            " +
-"        <!-- START Right Navbar-->\r\n                    <ul");
+WriteLiteral(">menu</em>\r\n              </a>\r\n            </li>\r\n          </ul>\r\n          <!-" +
+"- END Left navbar-->\r\n          <!-- START Right Navbar-->\r\n          <ul");
 
 WriteLiteral(" class=\"nav navbar-nav navbar-right\"");
 
-WriteLiteral("></ul>\r\n                    <!-- #END# Right Navbar-->\r\n                </div>\r\n " +
-"           </nav>\r\n            <!-- END Top Navbar-->\r\n        </header>\r\n      " +
-"  <!-- sidebar-->\r\n");
+WriteLiteral("></ul>\r\n          <!-- #END# Right Navbar-->\r\n        </div>\r\n      </nav>\r\n     " +
+" <!-- END Top Navbar-->\r\n    </header>\r\n    <!-- sidebar-->\r\n");
 
             
-            #line 60 "..\..\Areas\Admin\Views\Shared\_Root.cshtml"
-        
-            
-            #line default
-            #line hidden
-            
-            #line 60 "..\..\Areas\Admin\Views\Shared\_Root.cshtml"
-           Html.RenderPartial("_LeftSideBar");
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("        ");
-
-            
-            #line 61 "..\..\Areas\Admin\Views\Shared\_Root.cshtml"
-   Write(RenderBody());
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n        <footer>\r\n            <span>&copy; spxus admin</span>\r\n        </footer" +
-">\r\n    </div>\r\n\r\n");
-
-            
-            #line 67 "..\..\Areas\Admin\Views\Shared\_Root.cshtml"
+            #line 62 "..\..\Areas\Admin\Views\Shared\_Root.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 67 "..\..\Areas\Admin\Views\Shared\_Root.cshtml"
-       Html.RenderPartial("_js"); 
+            #line 62 "..\..\Areas\Admin\Views\Shared\_Root.cshtml"
+       Html.RenderPartial("_LeftSideBar");
             
             #line default
             #line hidden
@@ -243,13 +199,49 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 68 "..\..\Areas\Admin\Views\Shared\_Root.cshtml"
+            #line 63 "..\..\Areas\Admin\Views\Shared\_Root.cshtml"
+Write(RenderBody());
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n    <footer>\r\n      <span>");
+
+            
+            #line 65 "..\..\Areas\Admin\Views\Shared\_Root.cshtml"
+       Write(Html.Raw(E.AdminCopyright.Text("&copy; spxus admin")));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span>\r\n    </footer>\r\n  </div>\r\n\r\n");
+
+            
+            #line 69 "..\..\Areas\Admin\Views\Shared\_Root.cshtml"
+  
+            
+            #line default
+            #line hidden
+            
+            #line 69 "..\..\Areas\Admin\Views\Shared\_Root.cshtml"
+     Html.RenderPartial("_js"); 
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n  <script>\r\n      $(\".form_datetime\").datepicker({\r\n          format: \'yyyy-mm-" +
+"dd\',\r\n          fontAwesome: !0,\r\n          autoclose: true,\r\n          pickerPo" +
+"sition: \"top-right\"\r\n\r\n      });\r\n  </script>\r\n");
+
+WriteLiteral("  ");
+
+            
+            #line 79 "..\..\Areas\Admin\Views\Shared\_Root.cshtml"
 Write(RenderSection("script", false));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n</body>\r\n");
+WriteLiteral("\r\n\r\n</body>\r\n</html>");
 
         }
     }

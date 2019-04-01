@@ -2,68 +2,81 @@
 <html>
 
 <head>
-    @{ Html.RenderPartial("_head"); }
-    @{ Html.RenderPartial("_css"); }
+  @{ Html.RenderPartial("_head"); }
+  @{ Html.RenderPartial("_css"); }
 </head>
 
 <body class="theme-indigo light layout-fixed">
-    <div class="wrapper">
-        <div class="page-loader-wrapper">
-            <div class="loader">
-                <div class="sk-wave">
-                    <div class="sk-rect sk-rect1 bg-cyan"></div>
-                    <div class="sk-rect sk-rect2 bg-cyan"></div>
-                    <div class="sk-rect sk-rect3 bg-cyan"></div>
-                    <div class="sk-rect sk-rect4 bg-cyan"></div>
-                    <div class="sk-rect sk-rect5 bg-cyan"></div>
-                </div>
-                <p>Please wait...</p>
-            </div>
+  <div class="wrapper">
+    <div class="page-loader-wrapper">
+      <div class="loader">
+        <div class="sk-wave">
+          <div class="sk-rect sk-rect1 bg-cyan"></div>
+          <div class="sk-rect sk-rect2 bg-cyan"></div>
+          <div class="sk-rect sk-rect3 bg-cyan"></div>
+          <div class="sk-rect sk-rect4 bg-cyan"></div>
+          <div class="sk-rect sk-rect5 bg-cyan"></div>
         </div>
-        <!-- top navbar-->
-        <header class="topnavbar-wrapper">
-            <nav role="navigation" class="navbar topnavbar">
-                <!-- START navbar header-->
-                <div class="navbar-header">
-                    <a href="index.html" class="navbar-brand">
-                        <div class="brand-logo">
-                            <img src="/admin-lib/assets/images/logo.png" alt="Admin Logo" class="img-responsive">
-                        </div>
-                        <div class="brand-logo-collapsed">
-                            <img src="/admin-lib/assets/images/logo-single.png" alt="Admin Logo" class="img-responsive">
-                        </div>
-                    </a>
-                </div>
-                <!-- END navbar header-->
-                <!-- START Nav wrapper-->
-                <div class="nav-wrapper">
-                    <!-- START Left navbar-->
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a href="#" data-trigger-resize="" data-toggle-state="aside-collapsed" class="hidden-xs">
-                                <em class="material-icons">menu</em>
-                            </a>
-                            <a href="#" data-toggle-state="aside-toggled" data-no-persist="true" class="visible-xs sidebar-toggle">
-                                <em class="material-icons">menu</em>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- END Left navbar-->
-                    <!-- START Right Navbar-->
-                    <ul class="nav navbar-nav navbar-right"></ul>
-                    <!-- #END# Right Navbar-->
-                </div>
-            </nav>
-            <!-- END Top Navbar-->
-        </header>
-        <!-- sidebar-->
-        @{ Html.RenderPartial("_LeftSideBar");}
-        @RenderBody()
-        <footer>
-            <span>&copy; spxus admin</span>
-        </footer>
+        <p>Please wait...</p>
+      </div>
     </div>
+    <!-- top navbar-->
+    <header class="topnavbar-wrapper">
+      <nav role="navigation" class="navbar topnavbar">
+        <!-- START navbar header-->
+        <div class="navbar-header">
+          <a href="@Url.Action("Index","Dashboard",new { @area = E.AdminPath })" class="navbar-brand">
+              <br/>
+              Admin
+            @*<div class="brand-logo">
+                <img src="/admin-lib/assets/images/logo.png" alt="Admin Logo" class="img-responsive">
+              </div>
+              <div class="brand-logo-collapsed">
+                <img src="/admin-lib/assets/images/logo-single.png" alt="Admin Logo" class="img-responsive">
+              </div>*@
+          </a>
+        </div>
+        <!-- END navbar header-->
+        <!-- START Nav wrapper-->
+        <div class="nav-wrapper">
+          <!-- START Left navbar-->
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="#" data-trigger-resize="" data-toggle-state="aside-collapsed" class="hidden-xs">
+                <em class="material-icons">menu</em>
+              </a>
+              <a href="#" data-toggle-state="aside-toggled" data-no-persist="true" class="visible-xs sidebar-toggle">
+                <em class="material-icons">menu</em>
+              </a>
+            </li>
+          </ul>
+          <!-- END Left navbar-->
+          <!-- START Right Navbar-->
+          <ul class="nav navbar-nav navbar-right"></ul>
+          <!-- #END# Right Navbar-->
+        </div>
+      </nav>
+      <!-- END Top Navbar-->
+    </header>
+    <!-- sidebar-->
+    @{ Html.RenderPartial("_LeftSideBar");}
+    @RenderBody()
+    <footer>
+      <span>@Html.Raw(E.AdminCopyright.Text("&copy; spxus admin"))</span>
+    </footer>
+  </div>
 
-    @{ Html.RenderPartial("_js"); }
-    @RenderSection("script", false)
+  @{ Html.RenderPartial("_js"); }
+  <script>
+      $(".form_datetime").datepicker({
+          format: 'yyyy-mm-dd',
+          fontAwesome: !0,
+          autoclose: true,
+          pickerPosition: "top-right"
+
+      });
+  </script>
+  @RenderSection("script", false)
+
 </body>
+</html>
