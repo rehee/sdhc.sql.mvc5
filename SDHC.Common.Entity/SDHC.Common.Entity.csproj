@@ -11,6 +11,7 @@
     <AssemblyName>SDHC.Common.Entity</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -75,6 +79,9 @@
     <Reference Include="QueryInterceptor.Core, Version=1.0.7.0, Culture=neutral, PublicKeyToken=19f013043a0601f6, processorArchitecture=MSIL">
       <HintPath>..\packages\QueryInterceptor.Core.1.0.7\lib\net40\QueryInterceptor.Core.dll</HintPath>
     </Reference>
+    <Reference Include="RazorGenerator.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorGenerator.Mvc.2.4.9\lib\net40\RazorGenerator.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -87,6 +94,9 @@
     </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.4\lib\net45\System.Web.Razor.dll</HintPath>
@@ -106,9 +116,146 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0.3\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
     <Compile Include="Areas\Admin\Controllers\ContentController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DashBoardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DropDownController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ModelManagementController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Areas\Admin\Views\Content\Create.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Create.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\Content\Edit.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Edit.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\Content\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\Content\_CreateOrEdit.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_CreateOrEdit.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\DropDown\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\ModelManagement\Create.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Create.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\ModelManagement\Edit.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Edit.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\ModelManagement\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\ModelManagement\_CreateOrEdit.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_CreateOrEdit.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\Roles\CreateUser.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreateUser.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\Roles\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\Roles\_CreateOrEdit.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_CreateOrEdit.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\Shared\AdminInputs\_AdminInput.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_AdminInput.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\Shared\AdminInputs\_PropertiesEdit.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_PropertiesEdit.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\Shared\Contents\_ContentTable.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_ContentTable.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\Shared\Contents\_ContentTableHtml.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_ContentTableHtml.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\Shared\_BreadCrumbContent.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_BreadCrumbContent.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\Shared\_css.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_css.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\Shared\_head.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_head.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\Shared\_Header.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_Header.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\Shared\_js.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_js.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\Shared\_Layout.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_Layout.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\Shared\_Layout_Content.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_Layout_Content.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\Shared\_LeftSideBar.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_LeftSideBar.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\Shared\_Root.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_Root.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Attributes\AdminAttribute.cs" />
     <Compile Include="Attributes\BasePropertyAttribute.cs" />
     <Compile Include="Attributes\ConfigAttribute.cs" />
@@ -150,37 +297,112 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Content\_CreateOrEdit.cshtml" />
-    <Content Include="Views\Content\Create.cshtml" />
-    <Content Include="Views\Content\Edit.cshtml" />
-    <Content Include="Views\Content\Index.cshtml" />
-    <Content Include="Views\DashBoard\Index.cshtml" />
-    <Content Include="Views\DropDown\Index.cshtml" />
-    <Content Include="Views\ModelManagement\_CreateOrEdit.cshtml" />
-    <Content Include="Views\ModelManagement\Create.cshtml" />
-    <Content Include="Views\ModelManagement\Edit.cshtml" />
-    <Content Include="Views\ModelManagement\Index.cshtml" />
-    <Content Include="Views\Roles\_CreateOrEdit.cshtml" />
-    <Content Include="Views\Roles\CreateUser.cshtml" />
-    <Content Include="Views\Roles\EditUser.cshtml" />
-    <Content Include="Views\Roles\Index.cshtml" />
-    <Content Include="Views\Roles\RoleList.cshtml" />
-    <Content Include="Views\Shared\_BreadCrumbContent.cshtml" />
-    <Content Include="Views\Shared\_css.cshtml" />
-    <Content Include="Views\Shared\_head.cshtml" />
-    <Content Include="Views\Shared\_Header.cshtml" />
-    <Content Include="Views\Shared\_js.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\_Layout_Content.cshtml" />
-    <Content Include="Views\Shared\_LeftSideBar.cshtml" />
-    <Content Include="Views\Shared\_Root.cshtml" />
-    <Content Include="Views\Shared\AdminInputs\_AdminInput.cshtml" />
-    <Content Include="Views\Shared\AdminInputs\_PropertiesEdit.cshtml" />
-    <Content Include="Views\Shared\Contents\_ContentTable.cshtml" />
-    <Content Include="Views\Shared\Contents\_ContentTableHtml.cshtml" />
-    <Content Include="Views\User\Login.cshtml" />
-    <Content Include="Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Content\_CreateOrEdit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_CreateOrEdit.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Views\Content\Create.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Create.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Views\Content\Edit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Edit.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Views\Content\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Views\DashBoard\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\DropDown\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Views\ModelManagement\_CreateOrEdit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_CreateOrEdit.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Views\ModelManagement\Create.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Create.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Views\ModelManagement\Edit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Edit.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Views\ModelManagement\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Views\Roles\_CreateOrEdit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_CreateOrEdit.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Views\Roles\CreateUser.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CreateUser.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Views\Roles\EditUser.cshtml" />
+    <Content Include="Areas\Admin\Views\Roles\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Views\Roles\RoleList.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_BreadCrumbContent.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_BreadCrumbContent.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Views\Shared\_css.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_css.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Views\Shared\_head.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_head.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Views\Shared\_Header.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_Header.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Views\Shared\_js.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_js.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_Layout.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Views\Shared\_Layout_Content.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_Layout_Content.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Views\Shared\_LeftSideBar.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_LeftSideBar.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Views\Shared\_Root.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_Root.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_AdminInput.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Views\Shared\AdminInputs\_PropertiesEdit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_PropertiesEdit.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Views\Shared\Contents\_ContentTable.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_ContentTable.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_ContentTableHtml.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Views\User\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\web.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

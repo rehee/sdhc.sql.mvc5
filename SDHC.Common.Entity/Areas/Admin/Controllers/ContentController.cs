@@ -11,6 +11,7 @@ namespace WebSQL.Areas.Admin.Controllers
     public ActionResult Index(long? id)
     {
       var content = ContentManager.GetContent(id);
+
       return View(content);
     }
     [HttpPost]

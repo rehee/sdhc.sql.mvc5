@@ -8,7 +8,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using WebSQL.Models;
 
 namespace WebSQL.Areas.Admin.Controllers
 {
@@ -91,7 +90,7 @@ namespace WebSQL.Areas.Admin.Controllers
 
     public ActionResult CreateUser()
     {
-      var user = new ApplicationUser();
+      var user = new SDHCUser();
       var model = new UserCreateView();
 
       model.Properties = user.ConvertUserToPost().Properties;
@@ -105,7 +104,7 @@ namespace WebSQL.Areas.Admin.Controllers
       {
         return View(model);
       }
-      var user = new ApplicationUser();
+      var user = new SDHCUser();
       var m = user.ConvertUserToPost();
       m.Properties = model.Properties;
       var mu = m.ConvertPostToUser(user);

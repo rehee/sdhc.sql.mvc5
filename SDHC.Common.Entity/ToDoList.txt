@@ -4,3 +4,6 @@
 目前问题
 1. 初次启动的速度还是很慢
 2. 路由wildcard matching和控制器仍无法同时存在
+
+
+https://stackoverflow.com/questions/24341336/is-it-possible-to-access-mvc-views-located-in-another-project

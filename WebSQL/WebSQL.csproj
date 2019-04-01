@@ -205,11 +205,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\DashBoardController.cs" />
-    <Compile Include="Areas\Admin\Controllers\DropDownController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ModelManagementController.cs" />
-    <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
-    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Attribute\AA.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -5318,6 +5313,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Views\Content\" />
   </ItemGroup>
