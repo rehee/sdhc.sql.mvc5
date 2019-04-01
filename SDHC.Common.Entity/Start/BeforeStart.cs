@@ -3,6 +3,7 @@ using Microsoft.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,74 +20,48 @@ namespace Start
     {
       G.GetSetting = getConfig;
       var eProperty = E.GetProperties();
-      foreach (var p in eProperty)
+      G.UserManager = () => OwinContextExtensions.Get<ApplicationUserManager>(getContext());
+      G.SignManager = () => OwinContextExtensions.Get<ApplicationSignInManager>(getContext());
+      G.RoleManager = () => OwinContextExtensions.Get<ApplicationRoleManager>(getContext());
+      Action<PropertyInfo> setValue = p =>
       {
-        switch (p.Name)
+        var value = G.GetSetting(p.Name);
+        if (value == null)
+          return;
+        if (value.Text() == "")
+          return;
+        p.SetValue(null, value.MyTryConvert(p.GetType()));
+      };
+      typeof(G).GetProperties().Where(b => b.GetObjectCustomAttribute<ConfigAttribute>() != null)
+        .ToList()
+        .ForEach(b =>
         {
-          case "UserManager":
-            Func<ApplicationUserManager> UserManager = () => OwinContextExtensions.Get<ApplicationUserManager>(getContext());
-            p.SetValue(null, UserManager);
-            G.UserManager = UserManager;
-            continue;
-          case "SignManager":
-            Func<ApplicationSignInManager> SignManager = () => OwinContextExtensions.Get<ApplicationSignInManager>(getContext());
-            p.SetValue(null, SignManager);
-            G.SignManager = SignManager;
-            continue;
-          case "RoleManager":
-            Func<ApplicationRoleManager> RoleManager = () => OwinContextExtensions.Get<ApplicationRoleManager>(getContext());
-            p.SetValue(null, RoleManager);
-            G.RoleManager = RoleManager;
-            continue;
-        }
-        var config = p.GetObjectCustomAttribute<ConfigAttribute>();
-        if (config == null)
-        {
-          continue;
-        }
-        try
-        {
-          var value = G.GetSetting(p.Name);
-          switch (p.Name)
+          try
           {
-            case "ContentViewPath":
-              ContentManager.ContentViewPath = value == null ? "" : value.MyTryConvert<string>();
-              break;
-            case "ContentPageUrl":
-              ContentManager.ContentPageUrl = value == null ? "" : value.MyTryConvert<string>();
-              break;
-            case "AdminPath":
-              var v = value.MyTryConvert<string>();
-              G.AdminPath = String.IsNullOrEmpty(v) ? "Admin" : v;
-              break;
-            case "UserNameIsNotEmail":
-              G.UserNameIsNotEmail = value == null ? false : value.MyTryConvert<bool>();
-              break;
+            setValue(b);
+          }
+          catch { }
+        });
+      E.GetProperties().Where(b => b.GetObjectCustomAttribute<ConfigAttribute>() != null)
+        .ToList()
+        .ForEach(b =>
+        {
+          try
+          {
+            setValue(b);
+          }
+          catch { }
+        });
 
-          }
-          var ptype = p.PropertyType;
-          if (ptype == typeof(string))
-          {
-            p.SetValue(null, value);
-            continue;
-          }
-          p.SetValue(null, value.MyTryConvert(ptype));
-        }
-        catch { }
-      }
+
 
       LanguageManager.GetLang = () =>
       {
         var obj = getSession((string)LanguageManager.LanguageKey);
         if (obj == null)
         {
-          var defaultLangulage = eProperty.Where(b => b.Name == "DefaultLanguage").FirstOrDefault();
-          if (defaultLangulage == null)
-            return 0;
-          var value = defaultLangulage.GetValue(null);
-          if (value == null)
-            return 0;
-          return value.MyTryConvert<int>();
+          return G.DefaultLanguage;
+
         }
         return obj.MyTryConvert<int>();
       };

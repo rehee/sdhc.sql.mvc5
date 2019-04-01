@@ -28,14 +28,8 @@ namespace WebSQL.Controllers
     //public ActionResult Index()
     public ActionResult Index()
     {
-      //for(var i = 0; i < 10; i++)
-      //{
-      //  var e2 = new E2()
-      //  {
-      //    Title = $"ttt{i}"
-      //  };
-      //  ModelManager.Create(e2);
-      //}
+      var user = G.UserManager().FindByEmailAsync("t@t.com").GetAsyncValue<SDHCUser>();
+      var type = TypeExtends.GetAdminAuthorize(user.Id, EnumAdminAuthorize.Create, typeof(E1_2));
       return View();
     }
     public ActionResult Page(string name)

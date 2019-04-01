@@ -6,6 +6,15 @@
             <ul class="nav menu">
                 <!-- Iterates over all sidebar items-->
                 <li class="nav-heading ">
+                    <h4>WEB PAGES</h4>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index","Content",new { @area=G.AdminPath })" title="Pages">
+                        <em class="material-icons">description</em>
+                        <span>Page</span>
+                    </a>
+                </li>
+                <li class="nav-heading ">
                     <h4>WEB CONTENTS</h4>
                 </li>
                 @foreach (var item in ModelManager.ModelManagerMapper)

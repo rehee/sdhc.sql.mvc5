@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace WebSQL.Areas.Admin.Controllers
+namespace Admin.Areas.Admin.Controllers
 {
   public class ModelManagementController : Controller
     {

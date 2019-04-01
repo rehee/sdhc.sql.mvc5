@@ -50,9 +50,10 @@ namespace SDHC.Common.Entity.Attributes
   {
     public string Name { get; set; }
     public Type[] ChildrenType { get; set; }
-    public string[] CreateRoles { get; set; }
-    public string[] EditRoles { get; set; }
-    public string[] SortRoles { get; set; }
+    public string[] CreateRoles { get; set; } 
+    public string[] ReadRoles { get; set; } 
+    public string[] EditRoles { get; set; } 
+    public string[] SortRoles { get; set; } 
     public string[] DeleteRoles { get; set; }
     public string[] TableList { get; set; }
     public bool SingleRecord { get; set; } = false;

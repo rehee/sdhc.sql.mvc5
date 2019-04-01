@@ -12,8 +12,6 @@ namespace System
   public static class ContentManager
   {
     public static Type BasicContentType { get; set; } = typeof(BaseContent);
-    public static string ContentViewPath { get; set; } = "";
-    public static string ContentPageUrl { get; set; } = "";
     public static void CreateContent(BaseContent input, long? parentId = null)
     {
       if (parentId != null)

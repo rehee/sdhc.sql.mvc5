@@ -40,7 +40,7 @@ namespace Start
               id = UrlParameter.Optional,
               namespaces = new string[] { "SDHC.Common.Entity" },
             });
-      RouteTable.Routes.MapRoute("content", $"{(String.IsNullOrEmpty(ContentManager.ContentPageUrl) ? "" : ContentManager.ContentPageUrl + "/")}{{*names}}",
+      RouteTable.Routes.MapRoute("content", $"{(String.IsNullOrEmpty(G.ContentPageUrl) ? "" : G.ContentPageUrl + "/")}{{*names}}",
             defaults: new { controller = "SDHCPage", action = "Index" });
     }
     // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864

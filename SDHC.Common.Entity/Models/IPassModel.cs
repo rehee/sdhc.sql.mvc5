@@ -28,7 +28,7 @@ namespace SDHC.Common.Entity.Models
         if (Model == null)
           return "";
         var t = Type.GetType($"{Model.FullType},{Model.ThisAssembly}");
-        var path = String.IsNullOrEmpty(ContentManager.ContentViewPath) ? "" : $"/{ContentManager.ContentViewPath}";
+        var path = String.IsNullOrEmpty(G.ContentViewPath) ? "" : $"/{G.ContentViewPath}";
         return $"~/Views{path}/{t.Name}.cshtml";
       }
     }

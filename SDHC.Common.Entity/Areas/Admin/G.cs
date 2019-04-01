@@ -15,6 +15,13 @@ namespace System
     [Config]
     public static string AdminPath { get; set; } = "Admin";
 
+    public static bool AdminRequestLogin { get; set; } = true;
+
+    [Config]
+    public static string SuperUserRole { get; set; } = "Admin";
+    [Config]
+    public static string AdminRole { get; set; } = "Admin";
+
     public static int DeleteMinTime { get; set; } = 1000;
 
     public static string GetModelTitle(this string key)

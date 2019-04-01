@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 
-namespace WebSQL.Areas.Admin
+namespace Admin.Areas.Admin
 {
   public class AdminAreaRegistration : AreaRegistration
   {

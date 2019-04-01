@@ -35,12 +35,13 @@ namespace WebSQL.Models
     }
     public DbSet<MyUser> MyUsers { get; set; }
     public DbSet<BaseContent> Contents { get; set; }
+    public DbSet<SCHCContent> SCHCContents { get; set; }
+
     public DbSet<S1> S1s { get; set; }
     public DbSet<S2> S2s { get; set; }
     public DbSet<E2> E2s { get; set; }
 
     public DbSet<BaseSelect> Selects { get; set; }
-
     public DbSet<GenderSelect> GenderSelects { get; set; }
 
     public static ApplicationDbContext Create()

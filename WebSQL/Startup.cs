@@ -17,7 +17,7 @@ namespace WebSQL
   {
     public void Configuration(IAppBuilder app)
     {
-      SDHCStartup.Init<ApplicationDbContext, BaseContent, SDHCBascSelect, MyUser>(
+      SDHCStartup.Init<ApplicationDbContext, SCHCContent, SDHCBascSelect, MyUser>(
         app, () => ApplicationDbContext.Create(), HostingEnvironment.MapPath("/"));
       ModelManager.ModelMapper = new Dictionary<string, Type>()
       {
