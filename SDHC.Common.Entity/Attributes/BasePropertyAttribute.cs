@@ -19,6 +19,10 @@ namespace SDHC.Common.Entity.Attributes
     public bool Required { get; set; }
     public bool Readonly { get; set; }
     public bool ReadonlyEdit { get; set; }
+    public int InputWidth { get; set; }
+    public bool NewLine { get; set; }
+    public bool NewLineAfter { get; set; }
+
     public InputTypeAttribute()
     {
 

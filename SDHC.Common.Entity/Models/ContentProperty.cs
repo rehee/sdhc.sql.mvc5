@@ -29,6 +29,9 @@ namespace SDHC.Common.Entity.Models
     public bool Required { get; set; }
     public bool Readonly { get; set; }
     public bool ReadonlyEdit { get; set; }
+    public int InputWidth { get; set; }
+    public bool NewLine { get; set; }
+    public bool NewLineAfter { get; set; }
   }
   public class DropDownViewModel
   {

@@ -56,7 +56,7 @@ namespace System
           continue;
         model.Properties.Add(prop);
       }
-      model.Properties = model.Properties.OrderBy(b => b.SortOrder).ToList();
+      model.Properties = model.Properties.OrderByDescending(b => b.SortOrder).ToList();
     }
 
     public static object ConvertToBaseModel(this IPostModel input, bool deleteExistFile = true, List<string> oldFiles = null, List<string> newFiles = null)
@@ -172,6 +172,9 @@ namespace System
         result.Required = inputType.Required;
         result.Readonly = inputType.Readonly;
         result.ReadonlyEdit = inputType.ReadonlyEdit;
+        result.NewLine = inputType.NewLine;
+        result.NewLineAfter = inputType.NewLineAfter;
+        result.InputWidth = inputType.InputWidth;
       }
       var cValue = p.GetValue(input).MyTryConvert(typeof(string));
       if (cValue != null)

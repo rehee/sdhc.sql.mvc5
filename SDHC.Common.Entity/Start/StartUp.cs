@@ -32,16 +32,12 @@ namespace Start
       SelectManager.BasicSelectType = typeof(TBaseSelect);
       FileManager.BasePath = webBasePath;
       SDHCUserManager.BaseUser = typeof(TBaseUser);
+      if (G.UseContentRouter)
+      {
+        RouteTable.Routes.MapRoute("content", $"{(String.IsNullOrEmpty(G.ContentPageUrl) ? "" : G.ContentPageUrl + "/")}{{*names}}",
+              defaults: new { controller = "SDHCPage", action = "Index" });
+      }
 
-      RouteTable.Routes.MapRoute("content2", "Admin/Content/{action}/{id}",
-            defaults: new {
-              controller = "Content",
-              action = "Index",
-              id = UrlParameter.Optional,
-              namespaces = new string[] { "SDHC.Common.Entity" },
-            });
-      RouteTable.Routes.MapRoute("content", $"{(String.IsNullOrEmpty(G.ContentPageUrl) ? "" : G.ContentPageUrl + "/")}{{*names}}",
-            defaults: new { controller = "SDHCPage", action = "Index" });
     }
     // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
     public static void ConfigureAuth<T>(IAppBuilder app, Func<T> create) where T : DbContext

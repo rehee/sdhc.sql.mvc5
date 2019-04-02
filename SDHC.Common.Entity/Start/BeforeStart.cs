@@ -30,7 +30,7 @@ namespace Start
           return;
         if (value.Text() == "")
           return;
-        p.SetValue(null, value.MyTryConvert(p.GetType()));
+        p.SetValue(null, value.MyTryConvert(p.PropertyType));
       };
       typeof(G).GetProperties().Where(b => b.GetObjectCustomAttribute<ConfigAttribute>() != null)
         .ToList()

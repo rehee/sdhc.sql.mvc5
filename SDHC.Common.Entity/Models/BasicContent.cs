@@ -22,7 +22,7 @@ namespace SDHC.Common.Entity.Models
   {
     [Key]
     public long Id { get; set; }
-    [InputType(EditorType = Types.EnumInputType.Text, SortOrder = -1)]
+    [InputType(EditorType = Types.EnumInputType.Text, SortOrder = 9999)]
     public virtual string Title
     {
       get; set;
@@ -116,7 +116,7 @@ namespace SDHC.Common.Entity.Models
     [Key]
     [BaseProperty]
     public long Id { get; set; }
-    [InputType(EditorType = Types.EnumInputType.Text, SortOrder = -1)]
+    [InputType(EditorType = Types.EnumInputType.Text, SortOrder = 9999)]
     public virtual string Title { get; set; }
     public virtual string DisplayName()
     {

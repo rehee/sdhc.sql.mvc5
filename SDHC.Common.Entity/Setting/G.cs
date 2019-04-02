@@ -9,6 +9,9 @@ namespace System
   public static partial class G
   {
     [Config]
+    public static bool UseContentRouter { get; set; } = false;
+
+    [Config]
     public static string AdminTitle { get; set; } = "";
     [Config]
     public static string AdminCopyright { get; set; } = "";
