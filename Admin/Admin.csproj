@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{27B1CE81-9446-4E82-A23D-10D6F4269C16}</ProjectGuid>
+    <ProjectGuid>{429CB85D-6359-4365-B5D4-8E97722A730D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SDHC.Common.Entity</RootNamespace>
-    <AssemblyName>SDHC.Common.Entity</AssemblyName>
+    <RootNamespace>Admin</RootNamespace>
+    <AssemblyName>Admin</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -70,8 +71,8 @@
     <Reference Include="Mono.Reflection, Version=1.1.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\Mono.Reflection.Core.1.1.1\lib\net45\Mono.Reflection.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -125,53 +126,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
-    <Compile Include="Attributes\AdminAttribute.cs" />
-    <Compile Include="Attributes\BasePropertyAttribute.cs" />
-    <Compile Include="Attributes\ConfigAttribute.cs" />
-    <Compile Include="Controllers\SDHCPageController.cs" />
-    <Compile Include="Cruds\BaseCruds.cs" />
-    <Compile Include="Cruds\ContentCruds.cs" />
-    <Compile Include="Cruds\BaseModelCRUD.cs" />
-    <Compile Include="Extends\ContentCRUD.cs" />
-    <Compile Include="Extends\ContentExtends.cs" />
-    <Compile Include="Extends\MyReflect.cs" />
-    <Compile Include="Extends\TypeExtends.cs" />
-    <Compile Include="Managers\ConfigManager.cs" />
-    <Compile Include="Managers\ContentManager.cs" />
-    <Compile Include="Managers\EmailManager.cs" />
-    <Compile Include="GeneralFunction.cs" />
-    <Compile Include="Managers\FileManager.cs" />
-    <Compile Include="Managers\LanguageManager.cs" />
-    <Compile Include="Managers\ModelManager.cs" />
-    <Compile Include="Managers\SDHCUserManager.cs" />
-    <Compile Include="Managers\SelectManager.cs" />
-    <Compile Include="Managers\ViewModelManager.cs" />
-    <Compile Include="Models\BasicContent.cs" />
-    <Compile Include="Models\BasicModel.cs" />
-    <Compile Include="Extends\Convert.cs" />
-    <Compile Include="Extends\Files.cs" />
-    <Compile Include="Extends\MyConvertExtend.cs" />
-    <Compile Include="G.cs" />
-    <Compile Include="Models\ContentTableView.cs" />
-    <Compile Include="Models\DropdownModel.cs" />
-    <Compile Include="Models\IContent.cs" />
-    <Compile Include="Models\ContentProperty.cs" />
-    <Compile Include="Models\IPassModel.cs" />
-    <Compile Include="Models\UserPassModel.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\ContentController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DashBoardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DropDownController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ModelManagementController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Setting\G.cs" />
-    <Compile Include="Start\BeforeStart.cs" />
-    <Compile Include="Start\IdentityConfig.cs" />
-    <Compile Include="Start\StartUp.cs" />
-    <Compile Include="Types\EnumInputType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SDHC.Common.Entity\SDHC.Common.Entity.csproj">
+      <Project>{27b1ce81-9446-4e82-a23d-10d6f4269c16}</Project>
+      <Name>SDHC.Common.Entity</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ToDoList.txt" />
+    <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,13 +1,8 @@
-﻿using Admin.Areas.Admin.Controllers;
-using SDHC.Common.Entity.Attributes;
+﻿using SDHC.Common.Entity.Attributes;
 using SDHC.Common.Entity.Models;
-using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Routing;
 
 namespace System
@@ -128,72 +123,72 @@ namespace System
       if (String.IsNullOrEmpty(action))
         action = "Index";
       #region ContentController
-      if (String.Equals(controller, nameof(ContentController), StringComparison.CurrentCultureIgnoreCase))
-      {
-        if (String.Equals(action, nameof(ContentController.Index), StringComparison.CurrentCultureIgnoreCase))
-        {
-          if (String.IsNullOrEmpty(id))
-          {
-            return GetAdminAuthorizeRoles(EnumAdminAuthorize.Read, ContentManager.BasicContentType);
-          }
-          var model = ModelManager.Find<BaseContent>(id.MyTryConvert<long>());
-          if (model != null)
-          {
-            return GetAdminAuthorizeRoles(EnumAdminAuthorize.Read, model.GetType());
-          }
-          return adminList;
-        }
-        if (String.Equals(action, nameof(ContentController.PreCreate), StringComparison.CurrentCultureIgnoreCase))
-        {
-          var fullType = GetKey("FullType");
-          var type = Type.GetType(fullType);
-          if (type != null)
-            return GetAdminAuthorizeRoles(EnumAdminAuthorize.Create, type);
-          return adminList;
-        }
-        if (String.Equals(action, nameof(ContentController.Create), StringComparison.CurrentCultureIgnoreCase))
-        {
+      //if (String.Equals(controller, nameof(ContentController), StringComparison.CurrentCultureIgnoreCase))
+      //{
+      //  if (String.Equals(action, nameof(ContentController.Index), StringComparison.CurrentCultureIgnoreCase))
+      //  {
+      //    if (String.IsNullOrEmpty(id))
+      //    {
+      //      return GetAdminAuthorizeRoles(EnumAdminAuthorize.Read, ContentManager.BasicContentType);
+      //    }
+      //    var model = ModelManager.Find<BaseContent>(id.MyTryConvert<long>());
+      //    if (model != null)
+      //    {
+      //      return GetAdminAuthorizeRoles(EnumAdminAuthorize.Read, model.GetType());
+      //    }
+      //    return adminList;
+      //  }
+      //  if (String.Equals(action, nameof(ContentController.PreCreate), StringComparison.CurrentCultureIgnoreCase))
+      //  {
+      //    var fullType = GetKey("FullType");
+      //    var type = Type.GetType(fullType);
+      //    if (type != null)
+      //      return GetAdminAuthorizeRoles(EnumAdminAuthorize.Create, type);
+      //    return adminList;
+      //  }
+      //  if (String.Equals(action, nameof(ContentController.Create), StringComparison.CurrentCultureIgnoreCase))
+      //  {
 
-          var fullType = $"{GetFormKey("FullType")},{GetFormKey("ThisAssembly")}";
-          var type = Type.GetType(fullType);
-          if (type != null)
-            return GetAdminAuthorizeRoles(EnumAdminAuthorize.Create, type);
-          return adminList;
-        }
-        if (String.Equals(action, nameof(ContentController.Edit), StringComparison.CurrentCultureIgnoreCase))
-        {
-          if (!String.IsNullOrEmpty(id))
-          {
-            var model = ModelManager.Find<BaseContent>(id.MyTryConvert<long>());
-            if (model != null)
-            {
-              return GetAdminAuthorizeRoles(EnumAdminAuthorize.Read, model.GetType());
-            }
-          }
-          else
-          {
-            var fullType = $"{GetFormKey("FullType")},{GetFormKey("ThisAssembly")}";
-            var type = Type.GetType(fullType);
-            if (type != null)
-              return GetAdminAuthorizeRoles(EnumAdminAuthorize.Create, type);
-          }
-          return adminList;
-        }
-        if (String.Equals(action, nameof(ContentController.Delete), StringComparison.CurrentCultureIgnoreCase))
-        {
-          if (!String.IsNullOrEmpty(id))
-          {
-            var model = ModelManager.Find<BaseContent>(id.MyTryConvert<long>());
-            if (model != null)
-            {
-              return GetAdminAuthorizeRoles(EnumAdminAuthorize.Delete, model.GetType());
-            }
-          }
+      //    var fullType = $"{GetFormKey("FullType")},{GetFormKey("ThisAssembly")}";
+      //    var type = Type.GetType(fullType);
+      //    if (type != null)
+      //      return GetAdminAuthorizeRoles(EnumAdminAuthorize.Create, type);
+      //    return adminList;
+      //  }
+      //  if (String.Equals(action, nameof(ContentController.Edit), StringComparison.CurrentCultureIgnoreCase))
+      //  {
+      //    if (!String.IsNullOrEmpty(id))
+      //    {
+      //      var model = ModelManager.Find<BaseContent>(id.MyTryConvert<long>());
+      //      if (model != null)
+      //      {
+      //        return GetAdminAuthorizeRoles(EnumAdminAuthorize.Read, model.GetType());
+      //      }
+      //    }
+      //    else
+      //    {
+      //      var fullType = $"{GetFormKey("FullType")},{GetFormKey("ThisAssembly")}";
+      //      var type = Type.GetType(fullType);
+      //      if (type != null)
+      //        return GetAdminAuthorizeRoles(EnumAdminAuthorize.Create, type);
+      //    }
+      //    return adminList;
+      //  }
+      //  if (String.Equals(action, nameof(ContentController.Delete), StringComparison.CurrentCultureIgnoreCase))
+      //  {
+      //    if (!String.IsNullOrEmpty(id))
+      //    {
+      //      var model = ModelManager.Find<BaseContent>(id.MyTryConvert<long>());
+      //      if (model != null)
+      //      {
+      //        return GetAdminAuthorizeRoles(EnumAdminAuthorize.Delete, model.GetType());
+      //      }
+      //    }
 
-        }
+      //  }
 
 
-      }
+      //}
 
       #endregion
 
