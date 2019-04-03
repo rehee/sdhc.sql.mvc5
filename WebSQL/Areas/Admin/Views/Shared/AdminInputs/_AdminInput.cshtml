@@ -31,8 +31,11 @@
         <text>required</text>
     }
 }
-
-<div class="form-group">
+@if (Model.Property.NewLine)
+{
+    <br />
+}
+<div class="form-group" style="@(Model.Property.InputWidth>0?"width:"+Model.Property.InputWidth+"%;display:inline-block;":"")">
     <label>@Model.Property.Title @requiredMark(Model.Property.Required)</label>
     @if (Model.Property.EditorType == EnumInputType.Text)
     {
@@ -90,3 +93,7 @@
         <input type="hidden" name="@inputName" value="@Model.Property.Value" />
     }
 </div>
+@if (Model.Property.NewLineAfter)
+{
+    <br />
+}

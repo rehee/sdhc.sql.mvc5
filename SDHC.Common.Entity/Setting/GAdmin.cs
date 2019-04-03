@@ -10,7 +10,9 @@ namespace System
   {
     [Config]
     public static bool UseContentRouter { get; set; } = false;
-
+    [Config]
+    public static bool AdminFree { get; set; } = false;
+    
     [Config]
     public static string AdminTitle { get; set; } = "";
     [Config]

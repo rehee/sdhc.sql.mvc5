@@ -1,5 +1,6 @@
 ﻿using SDHC.Common.Entity.Attributes;
 using SDHC.Common.Entity.Models;
+using SDHC.Common.Entity.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -118,7 +119,44 @@ namespace System
       return new ContentPostViewModel(null);
     }
 
+    public static ContentListView GetContentListView(long? id)
+    {
+      if (id.HasValue)
+      {
+        var model = GetContent(id);
+        if (model == null)
+        {
+          return null;
+        }
+        return GetContentListView(model, null);
+      }
+      else
+      {
+        var roots = ModelManager.Read<BaseContent>(b => b.ParentId == null).ToList();
+        var result = new ContentListView();
+        roots.ForEach(b => GetContentListView(b, result));
+        return result;
+      }
+    }
 
+    public static ContentListView GetContentListView(BaseContent model, ContentListView parent)
+    {
+      
+      var result = new ContentListView();
+      result.Id = model.Id;
+      result.Title = model.Title;
+      result.ParentId = model.ParentId;
+      if (parent != null)
+      {
+        parent.Children.Add(result);
+      }
+      var children = model.Children;
+      foreach(var item in children)
+      {
+        GetContentListView(item, result);
+      }
+      return result;
+    }
   }
 
 }

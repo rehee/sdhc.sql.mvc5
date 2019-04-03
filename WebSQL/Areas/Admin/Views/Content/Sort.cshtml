@@ -1,0 +1,89 @@
+﻿@using SDHC.Common.Entity.Models.ViewModels
+@model ContentListView
+@{
+    ViewBag.Title = "Sort Content";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Content.cshtml";
+}
+@helper RenderItem(ContentListView m)
+{
+    <li id="@m.Id">
+        @(String.IsNullOrEmpty(m.Title) ? "Root" : m.Title)
+        @if (m.Children.Count > 0)
+        {
+            <ul>
+                ---
+                @foreach (var item in m.Children)
+                {
+                    
+                    <text>
+                        @RenderItem(item)
+                    </text>
+                }
+                ---
+            </ul>
+        }
+    </li>
+}
+
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="jstree_demo_div">
+                            <ul>
+                                @RenderItem(Model)
+                            </ul>
+                        </div>
+                        <input type="button" name="name" onclick="submitList()" value="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section script{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.7/jstree.min.js"></script>
+    <script>
+        function submitList() {
+            var data2 = $("#jstree_demo_div").jstree().get_json();
+        }
+
+        $(function () {
+            $('#jstree_demo_div').jstree({
+                "core": {
+                    "animation": 0,
+                    "check_callback": true,
+                    "themes": { "stripes": true },
+                },
+                "types": {
+                    "#": {
+                        "max_children": 1,
+                        "max_depth": 4,
+                        "valid_children": ["root"]
+                    },
+                    "root": {
+                        "icon": "/static/3.3.7/assets/images/tree_icon.png",
+                        "valid_children": ["default"]
+                    },
+                    "default": {
+                        "valid_children": ["default", "file"]
+                    },
+                    "file": {
+                        "icon": "glyphicon glyphicon-file",
+                        "valid_children": []
+                    }
+                },
+                "plugins": [
+                    "contextmenu", "dnd", "search",
+                    "state", "types", "wholerow"
+                ]
+
+
+
+            });
+        });
+    </script>
+}

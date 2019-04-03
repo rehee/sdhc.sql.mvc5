@@ -109,6 +109,16 @@ namespace SDHC.Common.Entity.Models
     {
       return String.IsNullOrEmpty(this.Title) ? this.Id.ToString() : this.Title;
     }
+
+    [NotMapped]
+    [IgnoreEdit]
+    public IEnumerable<BaseContent> Children
+    {
+      get
+      {
+        return ModelManager.Read<BaseContent>(b => b.ParentId == this.Id).ToList();
+      }
+    }
   }
 
   public abstract class BaseModel : IBasicContent

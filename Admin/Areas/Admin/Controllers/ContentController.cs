@@ -50,7 +50,8 @@ namespace Admin.Areas.Admin.Controllers
 
     public ActionResult Sort(long? id)
     {
-      return View();
+      var model = ContentManager.GetContentListView(id);
+      return View(model);
     }
 
     [HttpPost]

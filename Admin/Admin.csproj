@@ -128,7 +128,6 @@
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ContentController.cs" />
-    <Compile Include="Areas\Admin\Controllers\DashBoardController.cs" />
     <Compile Include="Areas\Admin\Controllers\DropDownController.cs" />
     <Compile Include="Areas\Admin\Controllers\ModelManagementController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
