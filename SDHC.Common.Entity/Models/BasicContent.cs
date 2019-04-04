@@ -48,7 +48,8 @@ namespace SDHC.Common.Entity.Models
       set
       {
         var t = String.IsNullOrEmpty(value) || String.IsNullOrWhiteSpace(value) ? Guid.NewGuid().ToString() : value.Trim();
-        this.Url = t.Replace('/', '_').Replace(" ", "_");
+        t = t.Replace('/', '_').Replace(" ", "-");
+        this.Url = System.Uri.EscapeUriString(t);
         this._title = t;
       }
     }
@@ -98,8 +99,13 @@ namespace SDHC.Common.Entity.Models
 
     [BaseProperty]
     public long? ParentId { get; set; }
+
     [IgnoreEdit]
-    public BaseContent Parent { get; set; }
+    public virtual BaseContent Parent { get; set; }
+
+    [NotMapped]
+    [IgnoreEdit]
+    private IEnumerable<BaseContent> _parents { get; set; }
 
     [NotMapped]
     [IgnoreEdit]
@@ -107,6 +113,8 @@ namespace SDHC.Common.Entity.Models
     {
       get
       {
+        if (_parents != null)
+          return _parents;
         var list = new List<BaseContent>();
         var p = this.Parent;
         do
@@ -116,7 +124,9 @@ namespace SDHC.Common.Entity.Models
             break;
           }
           list.Add(p);
+          p = p.Parent;
         } while (p != null);
+        _parents = list;
         return list;
       }
     }

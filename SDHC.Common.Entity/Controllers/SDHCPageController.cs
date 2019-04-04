@@ -15,21 +15,5 @@ namespace SDHC.Controllers
         return Content("NoContent");
       return View(m.ViewPath, m.Model);
     }
-    public ActionResult Create()
-    {
-      return View();
-    }
-    public ActionResult Read()
-    {
-      return View();
-    }
-    public ActionResult Update()
-    {
-      return View();
-    }
-    public ActionResult Delete()
-    {
-      return View();
-    }
   }
 }

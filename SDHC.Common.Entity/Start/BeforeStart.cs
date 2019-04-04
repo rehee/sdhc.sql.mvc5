@@ -6,6 +6,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace Start
 {
@@ -70,7 +72,11 @@ namespace Start
         setSession((string)LanguageManager.LanguageKey, lang);
       };
 
-
+      if (G.UseContentRouter)
+      {
+        RouteTable.Routes.MapRoute("content", $"{(String.IsNullOrEmpty(G.ContentPageUrl) ? "" : G.ContentPageUrl + "/")}{{*names}}",
+              defaults: new { controller = "SDHCPage", action = "Index" });
+      }
     }
   }
 }

@@ -32,6 +32,10 @@ namespace System
     public static void ConvertToIPost(object input, IPostModel model)
     {
       var type = input.GetType();
+      if (type.Namespace == "System.Data.Entity.DynamicProxies" && type.BaseType != null)
+      {
+        type = type.BaseType;
+      }
       model.FullType = type.FullName;
       model.ThisAssembly = type.Assembly.FullName;
       var resultProperty = model.GetType().GetProperties().Where(b => b.BaseProperty()).ToList();
@@ -156,7 +160,7 @@ namespace System
       {
         result.BaseProperty = true;
       }
-      if (p.GetCustomAttribute<IgnoreEditAttribute>() != null|| p.GetCustomAttribute<HideEditAttribute>() != null)
+      if (p.GetCustomAttribute<IgnoreEditAttribute>() != null || p.GetCustomAttribute<HideEditAttribute>() != null)
       {
         result.IgnoreProperty = true;
       }

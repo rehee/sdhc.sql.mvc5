@@ -21,7 +21,7 @@ namespace System
     [Config]
     public static string ContentViewPath { get; set; } = "";
     [Config]
-    public static string ContentPageUrl { get; set; } = "";
+    public static string ContentPageUrl { get; set; } = "pages";
   }
   
 }

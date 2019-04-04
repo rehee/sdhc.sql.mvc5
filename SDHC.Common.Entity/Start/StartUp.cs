@@ -32,11 +32,7 @@ namespace Start
       SelectManager.BasicSelectType = typeof(TBaseSelect);
       FileManager.BasePath = webBasePath;
       SDHCUserManager.BaseUser = typeof(TBaseUser);
-      if (G.UseContentRouter)
-      {
-        RouteTable.Routes.MapRoute("content", $"{(String.IsNullOrEmpty(G.ContentPageUrl) ? "" : G.ContentPageUrl + "/")}{{*names}}",
-              defaults: new { controller = "SDHCPage", action = "Index" });
-      }
+      
 
     }
     // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864

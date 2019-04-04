@@ -109,16 +109,32 @@ namespace System
 
     public static ContentPostViewModel GetContentPostViewModel(string url)
     {
+      var homePageModel = ModelManager.Read<BaseContent>(BasicContentType, b => b.ParentId == null).OrderBy(b => b.DisplayOrder).FirstOrDefault();
       if (String.IsNullOrEmpty(url))
-      {
-        var model = ModelManager.Read<BaseContent>(BasicContentType, b => b.Parent == null).FirstOrDefault();
-        if (model == null)
-          return new ContentPostViewModel(null);
+        goto gotoHomePage;
+      var urlList = url.Split('/').Select(b => b.Trim()).Where(b => !String.IsNullOrEmpty(b)).ToList();
+      var reOrgnizeUrl = String.Join("/", urlList);
+      var currentUrl = urlList.LastOrDefault();
+      var models = ModelManager.Read<BaseContent>(BasicContentType, b => String.Equals(b.Url, currentUrl)).ToList().Where(b => b.Parents.Count() == urlList.Count - 1).ToList();
+      if (models.Count == 0)
+        goto gotoHomePage;
+
+      var model = models.Where(b => String.Equals(b.GetContentFullUrl(), reOrgnizeUrl, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+      if(model!=null)
         return new ContentPostViewModel(model.ConvertModelToPost());
-      }
-      return new ContentPostViewModel(null);
+      gotoHomePage:
+      if (homePageModel == null)
+        return new ContentPostViewModel(null);
+      return new ContentPostViewModel(homePageModel.ConvertModelToPost());
     }
 
+    public static string GetContentFullUrl(this BaseContent model)
+    {
+      var parents = model.Parents.Select(b => b.Url).ToList();
+      parents.Reverse();
+      parents.Add(model.Url);
+      return String.Join("/", parents);
+    }
     public static ContentListView GetContentListView(long? id)
     {
       if (id.HasValue)
@@ -173,7 +189,7 @@ namespace System
         {
           if (cInput.parentId.HasValue)
           {
-            if(cInput.parentId.Value > 0)
+            if (cInput.parentId.Value > 0)
             {
               c.ParentId = cInput.parentId.Value;
             }
@@ -181,7 +197,7 @@ namespace System
             {
               c.ParentId = null;
             }
-            
+
           }
           if (cInput.displayOrder.HasValue)
           {
