@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -50,7 +51,7 @@ namespace System
         }
         if (t == typeof(T))
         {
-          return (IQueryable<T>) p.GetValue(repo);
+          return (IQueryable<T>)p.GetValue(repo);
         }
       }
       return null;
@@ -66,6 +67,31 @@ namespace System
       var set = repo.GetDbSet(type);
       return (IQueryable<object>)set;
     }
+
+    public static void Create(object input, out ISave repo)
+    {
+      repo = GetRepo();
+      var type = input.GetType();
+      var repoType = repo.GetType();
+      var addMethod = repo.GetMethod(type, "Add", out object p);
+      if (addMethod != null)
+      {
+        try
+        {
+          addMethod.Invoke(p, new object[1] { input });
+          repo.SaveChanges();
+        }
+        catch
+        {
+
+        }
+      }
+    }
+    public static void Create(object input)
+    {
+      Create(input, out var repo);
+    }
+
     public static IQueryable<T> Read<T>(Expression<Func<T, bool>> where, out ISave db) where T : class
     {
       db = GetRepo();
@@ -90,6 +116,23 @@ namespace System
     {
       return Read<T>(type, where, out var repo);
     }
-
+    public static MethodInfo GetMethod(this ISave repo, Type property, string methodName, out object propertyObj)
+    {
+      var repoType = repo.GetType();
+      propertyObj = null;
+      foreach (var p in repoType.GetProperties())
+      {
+        if (p.PropertyType.GenericTypeArguments.FirstOrDefault() == property)
+        {
+          var addMethod = p.PropertyType.GetMethod(methodName);
+          if (addMethod != null)
+          {
+            propertyObj = p.GetValue(repo);
+          }
+          return addMethod;
+        }
+      }
+      return null;
+    }
   }
 }

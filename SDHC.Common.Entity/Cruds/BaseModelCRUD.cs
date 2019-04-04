@@ -28,23 +28,6 @@ namespace System
         }
       }
     }
-    public static MethodInfo GetMethod(this ISave repo, Type property, string methodName, out object propertyObj)
-    {
-      var repoType = repo.GetType();
-      propertyObj = null;
-      foreach (var p in repoType.GetProperties())
-      {
-        if (p.PropertyType.GenericTypeArguments.FirstOrDefault() == property)
-        {
-          var addMethod = p.PropertyType.GetMethod(methodName);
-          if (addMethod != null)
-          {
-            propertyObj = p.GetValue(repo);
-          }
-          return addMethod;
-        }
-      }
-      return null;
-    }
+    
   }
 }

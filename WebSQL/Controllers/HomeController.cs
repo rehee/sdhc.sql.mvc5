@@ -23,7 +23,15 @@ namespace WebSQL.Controllers
 
     public HomeController()
     {
-
+      var g1 = new GenderSelect();
+      g1.Title = "1";
+      var g2 = new GenderSelect();
+      g2.Title = "2";
+      var g3 = new GenderSelect();
+      g3.Title = "3";
+      BaseCruds.Create(g1);
+      BaseCruds.Create(g1);
+      BaseCruds.Create(g1);
     }
     //public ActionResult Index()
     public ActionResult Index()

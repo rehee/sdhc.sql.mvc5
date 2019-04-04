@@ -256,6 +256,59 @@ namespace System
       }
       return value.MyTryConvert<string>();
     }
+    public static T GetPropertyByKey<T>(this object input, string key)
+    {
+      if (input == null)
+      {
+        return default(T);
+      }
+      var type = input.GetType();
+      var p = type.GetProperties().Where(b => string.Equals(b.Name, key, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+      if (p == null)
+      {
+        return default(T);
+      }
+      var inputType = p.GetObjectCustomAttribute<InputTypeAttribute>();
+      var value = p.GetValue(input);
+
+      //TODO 需要把外联到其他表的内容给转换过来
+      if (inputType != null && inputType.RelatedType != null && !inputType.RelatedType.IsEnum)
+      {
+        var longKey = inputType.RelatedType.GetInterfaces().Any(b => b == typeof(IInt64Key));
+        var values = value.Text().StringValueToList();
+        if (inputType.MultiSelect)
+        {
+          if (longKey)
+          {
+            var longValues = values.Select(b => b.MyTryConvert<long>()).ToList();
+            value = ModelManager.Read<IBasicContent>(inputType.RelatedType, b => longValues.Contains(b.Id)).ToList();
+          }
+          else
+          {
+            value = ModelManager.Read<SDHCUser>(inputType.RelatedType, b => values.Contains(b.Id)).ToList();
+          }
+          return (T)value;
+        }
+        else
+        {
+          var firstValue = values.FirstOrDefault();
+          if (longKey)
+          {
+            var longValue = firstValue.MyTryConvert<long>();
+            value = ModelManager.Read<IBasicContent>(inputType.RelatedType, b => b.Id == longValue).FirstOrDefault();
+          }
+          else
+          {
+            value = ModelManager.Read<SDHCUser>(inputType.RelatedType, b => values.Contains(b.Id)).ToList().FirstOrDefault();
+          }
+        }
+      }
+      if (value == null)
+      {
+        return default(T);
+      }
+      return value.MyTryConvert<T>();
+    }
     public static string GetPropertyLabelByKey(this Type input,string key)
     {
       var p = input.GetProperties().Where(b => b.Name == key).FirstOrDefault();

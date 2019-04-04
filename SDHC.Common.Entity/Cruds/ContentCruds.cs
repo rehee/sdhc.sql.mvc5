@@ -82,7 +82,6 @@ namespace System
       db.Contents.Remove(model);
       db.SaveChanges();
     }
-
     public static T GetByPK<T>(long id, out IContent db) where T : BaseContent
     {
       db = GetRepo();
