@@ -42,7 +42,7 @@ namespace Entity.Models
     [InputType(EditorType = EnumInputType.Password)]
     public string Title2 { get; set; }
 
-    [InputType(EditorType = EnumInputType.DropDwon, MultiSelect = false, RelatedType = typeof(GenderSelect))]
+    [InputType(EditorType = EnumInputType.DropDwon, MultiSelect = true, RelatedType = typeof(GenderSelect))]
     public string Gender { get; set; }
 
     [InputType(EditorType = EnumInputType.DropDwon, RelatedType = typeof(E2))]

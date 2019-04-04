@@ -5,6 +5,7 @@ using SDHC.Common.Entity.Extends;
 using SDHC.Common.Entity.Models;
 using Start;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -23,21 +24,11 @@ namespace WebSQL.Controllers
 
     public HomeController()
     {
-      var g1 = new GenderSelect();
-      g1.Title = "1";
-      var g2 = new GenderSelect();
-      g2.Title = "2";
-      var g3 = new GenderSelect();
-      g3.Title = "3";
-      BaseCruds.Create(g1);
-      BaseCruds.Create(g1);
-      BaseCruds.Create(g1);
+
     }
     //public ActionResult Index()
     public ActionResult Index()
     {
-      var user = G.UserManager().FindByEmailAsync("t@t.com").GetAsyncValue<SDHCUser>();
-      var type = TypeExtends.GetAdminAuthorize(user.Id, EnumAdminAuthorize.Create, typeof(E1_2));
       return View();
     }
     public ActionResult Page(string name)

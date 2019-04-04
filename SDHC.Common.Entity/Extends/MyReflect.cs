@@ -207,87 +207,59 @@ namespace System
 
     public static string GetPropertyByKey(this object input, string key)
     {
-      if (input == null)
-      {
-        return "";
-      }
-      var type = input.GetType();
-      var p = type.GetProperties().Where(b => string.Equals(b.Name, key, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
-      if (p == null)
-      {
-        return "";
-      }
-      var inputType = p.GetObjectCustomAttribute<InputTypeAttribute>();
-      var value = p.GetValue(input);
-      //TODO 需要把外联到其他表的内容给转换过来
-      if (inputType != null && inputType.RelatedType != null && !inputType.RelatedType.IsEnum)
-      {
-        var longKey = inputType.RelatedType.GetInterfaces().Any(b => b == typeof(IInt64Key));
-        var values = value.Text().StringValueToList();
-        if (inputType.MultiSelect)
-        {
-          if (longKey)
-          {
-            var longValues = values.Select(b => b.MyTryConvert<long>()).ToList();
-            value = String.Join(",", ModelManager.Read<IBasicContent>(inputType.RelatedType, b => longValues.Contains(b.Id)).ToList().Select(b => b.DisplayName()));
-          }
-          else
-          {
-            value = String.Join(",", ModelManager.Read<SDHCUser>(inputType.RelatedType, b => values.Contains(b.Id)).ToList().Select(b => b.DisplayName()));
-          }
-        }
-        else
-        {
-          var firstValue = values.FirstOrDefault();
-          if (longKey)
-          {
-            var longValue = firstValue.MyTryConvert<long>();
-            value = ModelManager.Read<IBasicContent>(inputType.RelatedType, b => b.Id == longValue).ToList().Select(b => b.DisplayName()).FirstOrDefault();
-          }
-          else
-          {
-            value = ModelManager.Read<SDHCUser>(inputType.RelatedType, b => values.Contains(b.Id)).ToList().Select(b => b.DisplayName()).FirstOrDefault();
-          }
-        }
-      }
-      if (value == null)
-      {
-        return "";
-      }
-      return value.MyTryConvert<string>();
+      return GetPropertyEnumerableByKey<string>(input, key).FirstOrDefault();
     }
     public static T GetPropertyByKey<T>(this object input, string key)
     {
+      return GetPropertyEnumerableByKey<T>(input, key).FirstOrDefault();
+    }
+
+    public static IEnumerable<T> GetPropertyEnumerableByKey<T>(this object input, string key)
+    {
+      var listResult = new List<T>();
       if (input == null)
       {
-        return default(T);
+        return listResult;
       }
       var type = input.GetType();
       var p = type.GetProperties().Where(b => string.Equals(b.Name, key, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
       if (p == null)
       {
-        return default(T);
+        return listResult;
       }
       var inputType = p.GetObjectCustomAttribute<InputTypeAttribute>();
       var value = p.GetValue(input);
-
-      //TODO 需要把外联到其他表的内容给转换过来
       if (inputType != null && inputType.RelatedType != null && !inputType.RelatedType.IsEnum)
       {
         var longKey = inputType.RelatedType.GetInterfaces().Any(b => b == typeof(IInt64Key));
         var values = value.Text().StringValueToList();
         if (inputType.MultiSelect)
         {
+          var types = inputType.RelatedType.GetInterfaces().ToList();
+          types.Add(inputType.RelatedType);
+          IEnumerable<object> objList;
           if (longKey)
           {
             var longValues = values.Select(b => b.MyTryConvert<long>()).ToList();
-            value = ModelManager.Read<IBasicContent>(inputType.RelatedType, b => longValues.Contains(b.Id)).ToList();
+            objList = ModelManager.Read<IBasicContent>(inputType.RelatedType, b => longValues.Contains(b.Id)).ToList();
           }
           else
           {
-            value = ModelManager.Read<SDHCUser>(inputType.RelatedType, b => values.Contains(b.Id)).ToList();
+            objList = ModelManager.Read<SDHCUser>(inputType.RelatedType, b => values.Contains(b.Id)).ToList();
           }
-          return (T)value;
+          if (types.Contains(typeof(T)))
+          {
+            return objList.Select(b => b.MyTryConvert<T>()).ToList();
+          }
+          var isDisplayName = inputType.RelatedType.GetInterfaces().Any(b => b.Name == typeof(IDisplayName).Name);
+          if (isDisplayName)
+          {
+            value = String.Join(",", objList.Select(b => (b as IDisplayName).DisplayName()));
+          }
+          else
+          {
+            value = String.Join(",", objList.ToString());
+          }
         }
         else
         {
@@ -295,21 +267,23 @@ namespace System
           if (longKey)
           {
             var longValue = firstValue.MyTryConvert<long>();
-            value = ModelManager.Read<IBasicContent>(inputType.RelatedType, b => b.Id == longValue).FirstOrDefault();
+            value = ModelManager.Read<IBasicContent>(inputType.RelatedType, b => b.Id == longValue).Select(b => b.MyTryConvert<T>()).FirstOrDefault();
           }
           else
           {
-            value = ModelManager.Read<SDHCUser>(inputType.RelatedType, b => values.Contains(b.Id)).ToList().FirstOrDefault();
+            value = ModelManager.Read<SDHCUser>(inputType.RelatedType, b => values.Contains(b.Id)).Select(b => b.MyTryConvert<T>()).ToList().FirstOrDefault();
           }
         }
       }
       if (value == null)
       {
-        return default(T);
+        return listResult;
       }
-      return value.MyTryConvert<T>();
+      listResult.Add(value.MyTryConvert<T>());
+      return listResult;
     }
-    public static string GetPropertyLabelByKey(this Type input,string key)
+
+    public static string GetPropertyLabelByKey(this Type input, string key)
     {
       var p = input.GetProperties().Where(b => b.Name == key).FirstOrDefault();
       if (p == null)
