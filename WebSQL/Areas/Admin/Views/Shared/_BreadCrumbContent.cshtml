@@ -17,7 +17,7 @@
     @foreach (var item in breadcrumb)
     {
         <li class="breadcrumb-item @(breadcrumb.IndexOf(item)==breadcrumb.Count-1?"active":"")">
-            <a href="@Url.Action("Index","Content",new { area=G.AdminPath,@id = item.Id })">@item.GetType().Name</a>
+            <a href="@Url.Action("Index","Content",new { area=G.AdminPath,@id = item.Id })">@item.DisplayName()</a>
         </li>
     }
 </ol>

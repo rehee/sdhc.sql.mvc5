@@ -40,20 +40,35 @@ namespace System
     public string FirstRowAction { get; set; }
     public string FirstRowController { get; set; }
     public string FirstRowArea { get; set; }
-    public Func<object,object> FirstRowObject { get; set; }
+    public Func<object, object> FirstRowObject { get; set; }
     public string TableClass { get; set; }
 
     public IEnumerable<string> TableHeaders { get; set; }
     public IEnumerable<ContentTableRowItem> Rows { get; set; }
     public bool DisableDelete { get; set; }
+
+    public ContentTableOption FirstRow { get; set; }
+    public List<ContentTableOption> Options { get; set; }
   }
+
+  public class ContentTableOption
+  {
+    public Func<object, object> RowTitle { get; set; }
+    public string ButtonClass { get; set; } = "";
+    public string RowAction { get; set; }
+    public string RowController { get; set; }
+    public string RowArea { get; set; } = "";
+    public Func<object, object> RowObject { get; set; }
+
+  }
+
   public class ContentTableRowItem
   {
     public ContentTableRowItem(long id, IEnumerable<string> values, Type type)
     {
       this.Id = id;
       this.Values = values;
-      this.ThisType = type;
+      this.ThisType = type.GetRealType();
     }
     public long Id { get; set; }
     public IEnumerable<string> Values { get; set; } = Enumerable.Empty<string>();

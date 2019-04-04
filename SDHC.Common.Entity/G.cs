@@ -298,6 +298,15 @@ namespace System
       }
       return stringValue.Split(mark);
     }
+
+    public static string EntityNameSpace { get; set; } = "System.Data.Entity.DynamicProxies";
+
+    public static Type GetRealType(this Type type)
+    {
+      if (type.Namespace == G.EntityNameSpace)
+        return type.BaseType;
+      return type;
+    }
   }
 
   public enum IntCompareType

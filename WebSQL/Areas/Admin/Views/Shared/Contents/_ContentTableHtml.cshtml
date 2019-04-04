@@ -8,9 +8,9 @@
       {
         <th>@item</th>
       }
-        <th>
-            Option
-        </th>
+      <th>
+        Option
+      </th>
 
     </tr>
   </thead>
@@ -21,27 +21,46 @@
       {
         <th>@item</th>
       }
-        <th>
-            Option
-        </th>
+      <th>
+        Option
+      </th>
     </tr>
   </tfoot>
   <tbody>
     @foreach (var row in Model.Rows)
     {
       <tr>
-        <td> <a href="@Url.Action(Model.FirstRowAction,Model.FirstRowController,Model.FirstRowObject(row))">@row.Id</a> </td>
+        <td>
+          @if (Model.FirstRow == null)
+          {
+            <a href="@Url.Action(Model.FirstRowAction,Model.FirstRowController,Model.FirstRowObject(row))">@row.Id</a>
+          }
+          else
+          {
+            <a class="@Model.FirstRow.ButtonClass" href="@Url.Action(Model.FirstRow.RowAction,Model.FirstRow.RowController,Model.FirstRow.RowObject(row))">@Model.FirstRow.RowTitle(row)</a>
+          }
+        </td>
         @foreach (var item in row.Values)
         {
           <td>@item</td>
         }
-          <td>
-              <a href="@Url.Action(Model.FirstRowAction,Model.FirstRowController,Model.FirstRowObject(row))" class="btn btn-primary">Info</a>
-              @if (ViewBag.delete != null && !Model.DisableDelete)
-              {
-                  <button class="btn btn-danger" onclick="@(ViewBag.deleteFunction!=null?ViewBag.deleteFunction+"("+ row.Id +")":"")">Delete</button>
-              }
-          </td>
+        <td>
+          @if (Model.Options == null)
+          {
+            <a href="@Url.Action(Model.FirstRowAction,Model.FirstRowController,Model.FirstRowObject(row))" class="btn btn-primary">Info</a>
+          }
+          else
+          {
+            foreach (var option in Model.Options)
+            {
+              <a href="@Url.Action(option.RowAction,option.RowController, option.RowObject(row))" class="@option.ButtonClass">@option.RowTitle(row)</a>
+            }
+          }
+          @if (ViewBag.delete != null && !Model.DisableDelete)
+          {
+            <button class="btn btn-danger" onclick="@(ViewBag.deleteFunction!=null?ViewBag.deleteFunction+"("+ row.Id +")":"")">Delete</button>
+          }
+        </td>
 
       </tr>
     }

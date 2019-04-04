@@ -267,11 +267,11 @@ namespace System
           if (longKey)
           {
             var longValue = firstValue.MyTryConvert<long>();
-            value = ModelManager.Read<IBasicContent>(inputType.RelatedType, b => b.Id == longValue).Select(b => b.MyTryConvert<T>()).FirstOrDefault();
+            value = ModelManager.Read<IBasicContent>(inputType.RelatedType, b => b.Id == longValue).ToList().Select(b => b.MyTryConvert<T>()).FirstOrDefault();
           }
           else
           {
-            value = ModelManager.Read<SDHCUser>(inputType.RelatedType, b => values.Contains(b.Id)).Select(b => b.MyTryConvert<T>()).ToList().FirstOrDefault();
+            value = ModelManager.Read<SDHCUser>(inputType.RelatedType, b => values.Contains(b.Id)).ToList().Select(b => b.MyTryConvert<T>()).ToList().FirstOrDefault();
           }
         }
       }

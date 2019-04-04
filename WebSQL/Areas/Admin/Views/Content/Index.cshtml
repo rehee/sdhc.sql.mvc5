@@ -1,112 +1,155 @@
 ﻿@using SDHC.Common.Entity.Models
 @model BaseContent
 @{
-    ViewBag.Title = "Content";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout_Content.cshtml";
-    var contentId = Model != null ? (long?)Model.Id : null;
-    var contents = ContentManager.GetContentTableHtmlView(contentId);
-    contents.FirstRowAction = "Index";
-    contents.FirstRowArea = G.AdminPath;
-    contents.FirstRowController = "Content";
-    contents.FirstRowObject = b => new { @id = (b as ContentTableRowItem).Id, @area = G.AdminPath };
-    IEnumerable<string> CreateRole;
-    IEnumerable<string> ReadRole;
-    IEnumerable<string> UpdateRole;
-    IEnumerable<string> DeleteRole;
-    if (Model == null)
+  ViewBag.Title = "Content";
+  Layout = "~/Areas/Admin/Views/Shared/_Layout_Content.cshtml";
+  var contentId = Model != null ? (long?)Model.Id : null;
+  var contents = ContentManager.GetContentTableHtmlView(contentId);
+  contents.FirstRow = new ContentTableOption()
+  {
+    RowAction = "Index",
+    RowController = "Content",
+    RowArea = G.AdminPath,
+    RowTitle = b => $"{(b as ContentTableRowItem).Id} (children list)",
+    RowObject = b => new { @id = (b as ContentTableRowItem).Id, @area = G.AdminPath }
+  };
+  contents.Options = new List<ContentTableOption>();
+  contents.Options.Add(
+    new ContentTableOption()
     {
-        CreateRole = Enumerable.Empty<string>();
-        ReadRole = Enumerable.Empty<string>();
-        UpdateRole = Enumerable.Empty<string>();
-        DeleteRole = Enumerable.Empty<string>();
-        //var type = ContentE.RootType.CustomAttributes.Where(b => b.AttributeType == typeof(SDHCC.AllowChildrenAttribute)).FirstOrDefault();
-        //if (type != null)
-        //{
-        //    var createRoles = type.NamedArguments.Where(b => b.MemberName == "CreateRoles").FirstOrDefault();
-        //    if (createRoles != null)
-        //    {
-        //        var role = (System.Collections.ObjectModel.ReadOnlyCollection<System.Reflection.CustomAttributeTypedArgument>)createRoles.TypedValue.Value;
-        //        CreateRole = role.Select(b => b.Value.ToString()).ToList();
-        //    }
-        //    var editRoles = type.NamedArguments.Where(b => b.MemberName == "EditRoles").FirstOrDefault();
-        //    if (editRoles != null)
-        //    {
-        //        var eRoles = (System.Collections.ObjectModel.ReadOnlyCollection<System.Reflection.CustomAttributeTypedArgument>)editRoles.TypedValue.Value;
-        //        UpdateRole = eRoles.Select(b => b.Value.ToString()).ToList();
-        //    }
-        //}
-    }
-    else
-    {
-        //CreateRole = Model.AdminCreateRoles;
-        //ReadRole = Model.AdminReadRoles;
-        //UpdateRole = Model.AdminUpdateRoles;
-        //DeleteRole = Model.AdminDeleteRoles;
-    }
+      RowAction = "Edit",
+      RowController = "Content",
+      RowArea = G.AdminPath,
+      RowTitle = b => "Detail",
+      ButtonClass = "btn btn-primary",
+      RowObject = b => new { @id = (b as ContentTableRowItem).Id, @area = G.AdminPath }
+    });
+
+
+  IEnumerable<string> CreateRole;
+  IEnumerable<string> ReadRole;
+  IEnumerable<string> UpdateRole;
+  IEnumerable<string> DeleteRole;
+  if (Model == null)
+  {
+    CreateRole = Enumerable.Empty<string>();
+    ReadRole = Enumerable.Empty<string>();
+    UpdateRole = Enumerable.Empty<string>();
+    DeleteRole = Enumerable.Empty<string>();
+    //var type = ContentE.RootType.CustomAttributes.Where(b => b.AttributeType == typeof(SDHCC.AllowChildrenAttribute)).FirstOrDefault();
+    //if (type != null)
+    //{
+    //    var createRoles = type.NamedArguments.Where(b => b.MemberName == "CreateRoles").FirstOrDefault();
+    //    if (createRoles != null)
+    //    {
+    //        var role = (System.Collections.ObjectModel.ReadOnlyCollection<System.Reflection.CustomAttributeTypedArgument>)createRoles.TypedValue.Value;
+    //        CreateRole = role.Select(b => b.Value.ToString()).ToList();
+    //    }
+    //    var editRoles = type.NamedArguments.Where(b => b.MemberName == "EditRoles").FirstOrDefault();
+    //    if (editRoles != null)
+    //    {
+    //        var eRoles = (System.Collections.ObjectModel.ReadOnlyCollection<System.Reflection.CustomAttributeTypedArgument>)editRoles.TypedValue.Value;
+    //        UpdateRole = eRoles.Select(b => b.Value.ToString()).ToList();
+    //    }
+    //}
+  }
+  else
+  {
+    //CreateRole = Model.AdminCreateRoles;
+    //ReadRole = Model.AdminReadRoles;
+    //UpdateRole = Model.AdminUpdateRoles;
+    //DeleteRole = Model.AdminDeleteRoles;
+  }
 }
 
 @section breadcrumb{
-    @{ Html.RenderPartial("_BreadCrumbContent", Model);}
+  @{ Html.RenderPartial("_BreadCrumbContent", Model);}
 }
 <div class="row clearfix">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="card">
-            <div class="card-header">
-                <div class="button-box">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="button-box">
 
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-info btn-group" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Create
-                        </button>
-                        <ul class="dropdown-menu">
-                            @{
-                                var avaliableChild = TypeExtends.GetAllowChildrens(Model);
-                            }
-                            @foreach (var child in avaliableChild)
-                            {
-                                var idguid = Guid.NewGuid().ToString();
-                                <li>
-                                    <a href="#" onclick="subbform('@idguid')">@TypeExtends.GetClassDisplayName(child)</a>
-                                    <form id="@idguid" action="@Url.Action("PreCreate", "Content", new { @area = G.AdminPath })" method="post">
-                                        @Html.Hidden("ContentId", contentId)
-                                        @Html.Hidden("FullType", child.FullName + "," + child.Assembly.FullName)
-                                    </form>
-                                </li>
-                            }
-                        </ul>
-                    </div>
-                    <script>
-                        function subbform(id) {
-                            var form = document.getElementById(id);
-                            form.submit();
-                            return;
-                        }
-                    </script>
-                    <a href="@Url.Action("Edit", "Content", new { @area = G.AdminPath, @id = contentId })" class="btn btn-success">Edit</a>
-                    <a href="@Url.Action("Sort", "Content", new { @area = G.AdminPath, @id = contentId })" class="btn btn-warning">Sort</a>
-                    <a href="#" onclick="deleteCurrent()" class="btn btn-danger">Delete</a>
-                    <form id="ContentDeleteForm" action="@Url.Action("Delete", "Content", new { @area = G.AdminPath })" method="post">
-                        @Html.Hidden("id", contentId)
-                    </form>
-                </div>
-
-            </div>
-
-            <div class="body">
-                @{ Html.RenderPartial("Contents/_ContentTableHtml", contents); }
-
-            </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-info btn-group" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Create
+            </button>
+            <ul class="dropdown-menu">
+              @{
+                var avaliableChild = TypeExtends.GetAllowChildrens(Model);
+              }
+              @foreach (var child in avaliableChild)
+              {
+                var idguid = Guid.NewGuid().ToString();
+                <li>
+                  <a href="#" onclick="subbform('@idguid')">@TypeExtends.GetClassDisplayName(child)</a>
+                  <form id="@idguid" action="@Url.Action("PreCreate", "Content", new { @area = G.AdminPath })" method="post">
+                    @Html.Hidden("ContentId", contentId)
+                    @Html.Hidden("FullType", child.FullName + "," + child.Assembly.FullName)
+                  </form>
+                </li>
+              }
+            </ul>
+          </div>
+          <script>
+            function subbform(id) {
+              var form = document.getElementById(id);
+              form.submit();
+              return;
+            }
+          </script>
+          <a href="@Url.Action("Index", "Content", new { @area = G.AdminPath, @id = contentId })" class="btn btn-success">List</a>
+          <a href="@Url.Action("Edit", "Content", new { @area = G.AdminPath, @id = contentId })" class="btn btn-success">Edit</a>
+          <a href="@Url.Action("Sort", "Content", new { @area = G.AdminPath, @id = contentId })" class="btn btn-warning">Sort</a>
+          <a href="#" onclick="deleteCurrent()" class="btn btn-danger">Delete</a>
+          <form id="ContentDeleteForm" action="@Url.Action("Delete", "Content", new { @area = G.AdminPath })" method="post">
+            @Html.Hidden("id", contentId)
+          </form>
         </div>
+
+      </div>
+
+      <div class="body">
+        @{ Html.RenderPartial("Contents/_ContentTableHtml", contents); }
+
+      </div>
     </div>
+  </div>
 </div>
 @section script{
-    <script>
-        $(function () {
-            $('.basic-example').DataTable();
-        });
-        function deleteCurrent(){
-            document.getElementById('ContentDeleteForm').submit();   
+  <script>
+    $(function () {
+      $('.basic-example').DataTable();
+    });
+
+    function deleteCurrent() {
+      showCancelMessage(function () {
+        document.getElementById('ContentDeleteForm').submit();
+      })
+    }
+    function showCancelMessage(callback) {
+      swal({
+        title: "Are you sure?",
+        text: "Current page and all Children page will delete and not be able to recover!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel plx!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      }, function (isConfirm) {
+        if (isConfirm) {
+          swal("Deleted!", "Your record has been deleted.", "success");
+          if (callback) {
+            callback();
+          }
+        } else {
+          swal("Cancelled", "Your record is safe :)", "error");
         }
-    </script>
-    @*<script src="/admin-lib/assets/js/pages/tables/jquery-datatable.js"></script>*@
+      });
+    }
+  </script>
+  @*<script src="/admin-lib/assets/js/pages/tables/jquery-datatable.js"></script>*@
 }
