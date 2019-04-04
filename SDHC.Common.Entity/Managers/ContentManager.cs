@@ -171,13 +171,17 @@ namespace System
         var cInput = input.Where(b => b.id == c.Id).FirstOrDefault();
         if (cInput != null)
         {
-          if (cInput.parentId.HasValue && cInput.parentId.Value > 0)
+          if (cInput.parentId.HasValue)
           {
-            c.ParentId = cInput.parentId.Value;
-          }
-          else
-          {
-            c.ParentId = null;
+            if(cInput.parentId.Value > 0)
+            {
+              c.ParentId = cInput.parentId.Value;
+            }
+            else
+            {
+              c.ParentId = null;
+            }
+            
           }
           if (cInput.displayOrder.HasValue)
           {
