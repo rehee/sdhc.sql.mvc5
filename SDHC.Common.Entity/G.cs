@@ -8,6 +8,7 @@ namespace System
 {
   public static partial class G
   {
+    public static long MaxLength { get; set; } = 9223372036854775807;
     public static string FileUploadPath { get; set; } = "files";
     public static bool IsNullOrEmpty(this string input)
     {

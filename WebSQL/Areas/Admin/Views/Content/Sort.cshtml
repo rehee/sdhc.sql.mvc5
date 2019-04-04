@@ -47,8 +47,29 @@
 @section script{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.7/jstree.min.js"></script>
     <script>
+        function pushSortItem(item,lists,parentId,displayOrder){
+            lists.push({
+                id:item.id,
+                parentId:parentId,
+                displayOrder:displayOrder,
+            });
+            if(item.children && item.children.length>0){
+                for(var index = 0;index<item.children.length;index++){
+                    pushSortItem(item.children[index],lists,item.id,index);
+                }
+            }
+        }
         function submitList() {
             var data2 = $("#jstree_demo_div").jstree().get_json();
+            var itemList = [];
+            pushSortItem(data2[0],itemList,0,null);
+            console.log(itemList);
+            $.ajax({
+                method: "POST",
+                url: "@Url.Action("Sort","Content",new {@area=G.AdminPath} )",
+                data: JSON.stringify(itemList),
+                contentType: "application/json; charset=utf-8",
+            });
         }
 
         $(function () {

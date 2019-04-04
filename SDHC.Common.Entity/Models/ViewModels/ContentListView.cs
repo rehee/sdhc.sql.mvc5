@@ -12,6 +12,7 @@ namespace SDHC.Common.Entity.Models.ViewModels
     public string Title { get; set; } = "";
     public long? ParentId { get; set; }
     public string Icon { get; set; } = "";
+    public long DisplayOrder { get; set; }
     public List<ContentListView> Children { get; set; } = new List<ContentListView>();
   }
 }

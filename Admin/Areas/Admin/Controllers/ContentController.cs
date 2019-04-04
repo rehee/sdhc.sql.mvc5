@@ -1,6 +1,8 @@
 ﻿using SDHC.Common.Entity.Extends;
 using SDHC.Common.Entity.Models;
+using SDHC.Common.Entity.Models.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace Admin.Areas.Admin.Controllers
@@ -53,7 +55,12 @@ namespace Admin.Areas.Admin.Controllers
       var model = ContentManager.GetContentListView(id);
       return View(model);
     }
-
+    [HttpPost]
+    public ActionResult Sort(IEnumerable<ContentSortPostModel> input)
+    {
+      ContentManager.UpdateContentOrder(input);
+      return RedirectToAction("Sort");
+    }
     [HttpPost]
     public ActionResult Delete(long? id)
     {

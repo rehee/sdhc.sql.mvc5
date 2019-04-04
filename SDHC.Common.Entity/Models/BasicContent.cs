@@ -59,8 +59,23 @@ namespace SDHC.Common.Entity.Models
     {
       get; set;
     }
+
+    private long _displayOrder { get; set; }
+
     [BaseProperty]
-    public long DisplayOrder { get; set; }
+    public long DisplayOrder
+    {
+      get
+      {
+        if (this.Id == 0)
+          return ModelManager.Read<BaseContent>(b => true).Count() + 1;
+        return this._displayOrder;
+      }
+      set
+      {
+        _displayOrder = value;
+      }
+    }
 
     private DateTime? _createTime { get; set; }
 
@@ -116,7 +131,8 @@ namespace SDHC.Common.Entity.Models
     {
       get
       {
-        return ModelManager.Read<BaseContent>(b => b.ParentId == this.Id).ToList();
+        return ModelManager.Read<BaseContent>(b => b.ParentId == this.Id)
+          .OrderBy(b => b.DisplayOrder).ToList();
       }
     }
   }

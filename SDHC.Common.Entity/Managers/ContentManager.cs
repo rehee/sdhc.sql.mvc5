@@ -62,8 +62,8 @@ namespace System
       var content = ContentManager.GetContent(parentId);
       Type type = content != null ? content.GetType() : BasicContentType;
       var allowChild = type.GetObjectCustomAttribute<AllowChildrenAttribute>();
-      IEnumerable<string> additionalList = allowChild != null && allowChild.TableList != null ? allowChild.TableList : new string[] { "Title" };
-      var children = GetAllChildContent(parentId).ToList().ToList();
+      IEnumerable<string> additionalList = allowChild != null && allowChild.TableList != null ? allowChild.TableList : new string[] { "Title", "DisplayOrder" };
+      var children = GetAllChildContent(parentId).OrderBy(b => b.DisplayOrder).ToList().ToList();
       var rowItems = children.Select(b =>
       {
         var values = additionalList.Select(a => b.GetPropertyByKey(a)).ToList();
@@ -112,7 +112,7 @@ namespace System
       if (String.IsNullOrEmpty(url))
       {
         var model = ModelManager.Read<BaseContent>(BasicContentType, b => b.Parent == null).FirstOrDefault();
-        if(model==null)
+        if (model == null)
           return new ContentPostViewModel(null);
         return new ContentPostViewModel(model.ConvertModelToPost());
       }
@@ -141,21 +141,52 @@ namespace System
 
     public static ContentListView GetContentListView(BaseContent model, ContentListView parent)
     {
-      
+
       var result = new ContentListView();
       result.Id = model.Id;
       result.Title = model.Title;
       result.ParentId = model.ParentId;
+      result.DisplayOrder = model.DisplayOrder;
+
       if (parent != null)
       {
         parent.Children.Add(result);
       }
       var children = model.Children;
-      foreach(var item in children)
+      foreach (var item in children)
       {
         GetContentListView(item, result);
       }
       return result;
+    }
+
+    public static long? UpdateContentOrder(IEnumerable<ContentSortPostModel> input)
+    {
+      if (input == null)
+        return null;
+      var idList = input.Where(b => b.id.HasValue).Select(b => b.id).ToList();
+      var contents = ModelManager.Read<BaseContent>(b => idList.Contains(b.Id), out var repo).ToList();
+      contents.ForEach(c =>
+      {
+        var cInput = input.Where(b => b.id == c.Id).FirstOrDefault();
+        if (cInput != null)
+        {
+          if (cInput.parentId.HasValue && cInput.parentId.Value > 0)
+          {
+            c.ParentId = cInput.parentId.Value;
+          }
+          else
+          {
+            c.ParentId = null;
+          }
+          if (cInput.displayOrder.HasValue)
+          {
+            c.DisplayOrder = cInput.displayOrder.Value;
+          }
+        }
+      });
+      repo.SaveChanges();
+      return null;
     }
   }
 
