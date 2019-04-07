@@ -3,7 +3,7 @@
 <table class="table table-bordered table-striped table-hover basic-example dataTable">
   <thead>
     <tr>
-      <th>Id</th>
+      <th>@(String.IsNullOrEmpty(Model.FirstRowTitle) ? "Id" : Model.FirstRowTitle)</th>
       @foreach (var item in Model.TableHeaders)
       {
         <th>@item</th>

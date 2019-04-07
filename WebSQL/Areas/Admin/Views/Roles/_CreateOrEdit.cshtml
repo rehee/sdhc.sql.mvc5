@@ -1,4 +1,4 @@
-﻿@model WebSQL.Areas.Admin.Controllers.UserCreateView
+﻿@model UserCreateView
 @Html.Hidden("Id", Model.Id)
 
 @if (G.UserNameIsNotEmail)
@@ -23,7 +23,7 @@
         <input type="password" @(ViewBag.inEdit != null ? "" : "required") autocomplete="off" class="form-control" name="ConfirmPassword" value="" />
     </div>
 }
-<div class="form-group" style="display:none">
+<div class="form-group">
     <label>Roles</label>
     <select name="SelectedRoles" class="form-control" size="5" multiple="">
         <option value="">--</option>

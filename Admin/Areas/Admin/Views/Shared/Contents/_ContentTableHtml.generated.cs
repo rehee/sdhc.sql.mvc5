@@ -42,7 +42,16 @@ WriteLiteral("<table");
 
 WriteLiteral(" class=\"table table-bordered table-striped table-hover basic-example dataTable\"");
 
-WriteLiteral(">\r\n  <thead>\r\n    <tr>\r\n      <th>Id</th>\r\n");
+WriteLiteral(">\r\n  <thead>\r\n    <tr>\r\n      <th>");
+
+            
+            #line 6 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
+      Write(String.IsNullOrEmpty(Model.FirstRowTitle) ? "Id" : Model.FirstRowTitle);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</th>\r\n");
 
             
             #line 7 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
@@ -145,14 +154,14 @@ WriteLiteral("      <tr>\r\n        <td>\r\n");
             #line hidden
 WriteLiteral("            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 660), Tuple.Create("\"", 751)
+WriteAttribute("href", Tuple.Create(" href=\"", 731), Tuple.Create("\"", 822)
             
             #line 36 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
-, Tuple.Create(Tuple.Create("", 667), Tuple.Create<System.Object, System.Int32>(Url.Action(Model.FirstRowAction,Model.FirstRowController,Model.FirstRowObject(row))
+, Tuple.Create(Tuple.Create("", 738), Tuple.Create<System.Object, System.Int32>(Url.Action(Model.FirstRowAction,Model.FirstRowController,Model.FirstRowObject(row))
             
             #line default
             #line hidden
-, 667), false)
+, 738), false)
 );
 
 WriteLiteral(">");
@@ -177,24 +186,24 @@ WriteLiteral("</a>\r\n");
             #line hidden
 WriteLiteral("            <a");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 822), Tuple.Create("\"", 857)
+WriteAttribute("class", Tuple.Create(" class=\"", 893), Tuple.Create("\"", 928)
             
             #line 40 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
-, Tuple.Create(Tuple.Create("", 830), Tuple.Create<System.Object, System.Int32>(Model.FirstRow.ButtonClass
+, Tuple.Create(Tuple.Create("", 901), Tuple.Create<System.Object, System.Int32>(Model.FirstRow.ButtonClass
             
             #line default
             #line hidden
-, 830), false)
+, 901), false)
 );
 
-WriteAttribute("href", Tuple.Create(" href=\"", 858), Tuple.Create("\"", 961)
+WriteAttribute("href", Tuple.Create(" href=\"", 929), Tuple.Create("\"", 1032)
             
             #line 40 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
-, Tuple.Create(Tuple.Create("", 865), Tuple.Create<System.Object, System.Int32>(Url.Action(Model.FirstRow.RowAction,Model.FirstRow.RowController,Model.FirstRow.RowObject(row))
+, Tuple.Create(Tuple.Create("", 936), Tuple.Create<System.Object, System.Int32>(Url.Action(Model.FirstRow.RowAction,Model.FirstRow.RowController,Model.FirstRow.RowObject(row))
             
             #line default
             #line hidden
-, 865), false)
+, 936), false)
 );
 
 WriteLiteral(">");
@@ -267,14 +276,14 @@ WriteLiteral("        <td>\r\n");
             #line hidden
 WriteLiteral("            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1197), Tuple.Create("\"", 1288)
+WriteAttribute("href", Tuple.Create(" href=\"", 1268), Tuple.Create("\"", 1359)
             
             #line 50 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
-, Tuple.Create(Tuple.Create("", 1204), Tuple.Create<System.Object, System.Int32>(Url.Action(Model.FirstRowAction,Model.FirstRowController,Model.FirstRowObject(row))
+, Tuple.Create(Tuple.Create("", 1275), Tuple.Create<System.Object, System.Int32>(Url.Action(Model.FirstRowAction,Model.FirstRowController,Model.FirstRowObject(row))
             
             #line default
             #line hidden
-, 1204), false)
+, 1275), false)
 );
 
 WriteLiteral(" class=\"btn btn-primary\"");
@@ -294,24 +303,24 @@ WriteLiteral(">Info</a>\r\n");
             #line hidden
 WriteLiteral("              <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1448), Tuple.Create("\"", 1528)
+WriteAttribute("href", Tuple.Create(" href=\"", 1519), Tuple.Create("\"", 1599)
             
             #line 56 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
-, Tuple.Create(Tuple.Create("", 1455), Tuple.Create<System.Object, System.Int32>(Url.Action(option.RowAction,option.RowController, option.RowObject(row))
+, Tuple.Create(Tuple.Create("", 1526), Tuple.Create<System.Object, System.Int32>(Url.Action(option.RowAction,option.RowController, option.RowObject(row))
             
             #line default
             #line hidden
-, 1455), false)
+, 1526), false)
 );
 
-WriteAttribute("class", Tuple.Create(" class=\"", 1529), Tuple.Create("\"", 1556)
+WriteAttribute("class", Tuple.Create(" class=\"", 1600), Tuple.Create("\"", 1627)
             
             #line 56 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
-                         , Tuple.Create(Tuple.Create("", 1537), Tuple.Create<System.Object, System.Int32>(option.ButtonClass
+                         , Tuple.Create(Tuple.Create("", 1608), Tuple.Create<System.Object, System.Int32>(option.ButtonClass
             
             #line default
             #line hidden
-, 1537), false)
+, 1608), false)
 );
 
 WriteLiteral(">");
@@ -347,14 +356,14 @@ WriteLiteral("            <button");
 
 WriteLiteral(" class=\"btn btn-danger\"");
 
-WriteAttribute("onclick", Tuple.Create(" onclick=\"", 1732), Tuple.Create("\"", 1816)
+WriteAttribute("onclick", Tuple.Create(" onclick=\"", 1803), Tuple.Create("\"", 1887)
             
             #line 61 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
-, Tuple.Create(Tuple.Create("", 1742), Tuple.Create<System.Object, System.Int32>(ViewBag.deleteFunction!=null?ViewBag.deleteFunction+"("+ row.Id +")":""
+, Tuple.Create(Tuple.Create("", 1813), Tuple.Create<System.Object, System.Int32>(ViewBag.deleteFunction!=null?ViewBag.deleteFunction+"("+ row.Id +")":""
             
             #line default
             #line hidden
-, 1742), false)
+, 1813), false)
 );
 
 WriteLiteral(">Delete</button>\r\n");
