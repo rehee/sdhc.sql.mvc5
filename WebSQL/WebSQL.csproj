@@ -5274,6 +5274,7 @@
     <Content Include="Areas\Admin\Views\Shared\_LeftSideBar.cshtml">
       <LastGenOutput>_LeftSideBar.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="Libs\SDHC.Admin.Lib.0.0.1.nupkg" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
