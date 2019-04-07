@@ -18,7 +18,7 @@ namespace System
       }
       else
       {
-        type = input.GetType();
+        type = input.GetType().GetRealType();
       }
       var allows = type.GetObjectCustomAttribute<AllowChildrenAttribute>();
       if (allows == null || allows.ChildrenType == null)
@@ -207,7 +207,7 @@ namespace System
 
     public static AllowChildrenAttribute GetAllowChildren(this object input)
     {
-      return input.GetType().GetObjectCustomAttribute<AllowChildrenAttribute>();
+      return input.GetType().GetRealType().GetObjectCustomAttribute<AllowChildrenAttribute>();
     }
     public static bool IsSingleRecordTable(this Type type)
     {
@@ -218,7 +218,7 @@ namespace System
     }
     public static bool IsSingleRecordTable(this object input)
     {
-      return input.GetType().IsSingleRecordTable();
+      return input.GetType().GetRealType().IsSingleRecordTable();
     }
     public static IEnumerable<string> GetTableList(AllowChildrenAttribute model, IEnumerable<string> defaultList)
     {

@@ -178,7 +178,7 @@ namespace SDHC.Common.Entity.Models
     {
       if (model != null)
       {
-        var type = model.GetType();
+        var type = model.GetType().GetRealType();
         FullType = type.FullName;
         ThisAssembly = type.Assembly.FullName;
         model.SetObjectByObject(this);

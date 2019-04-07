@@ -60,14 +60,14 @@ namespace System
     public static ContentTableHtmlView GetContentTableHtmlView(long? parentId)
     {
       var content = ContentManager.GetContent(parentId);
-      Type type = content != null ? content.GetType() : BasicContentType;
+      Type type = content != null ? content.GetType().GetRealType() : BasicContentType;
       var allowChild = type.GetObjectCustomAttribute<AllowChildrenAttribute>();
       IEnumerable<string> additionalList = allowChild != null && allowChild.TableList != null ? allowChild.TableList : new string[] { "Title", "DisplayOrder" };
       var children = GetAllChildContent(parentId).OrderBy(b => b.DisplayOrder).ToList().ToList();
       var rowItems = children.Select(b =>
       {
         var values = additionalList.Select(a => b.GetPropertyByKey(a)).ToList();
-        return new ContentTableRowItem(b.Id, values, b.GetType(), b.DisplayOrder);
+        return new ContentTableRowItem(b.Id, values, b.GetType().GetRealType(), b.DisplayOrder);
       }).ToList();
       var result = new ContentTableHtmlView();
       if (allowChild != null && allowChild.DisableDelete)

@@ -15,7 +15,7 @@ namespace System
       {
         return "";
       }
-      var type = input.GetType();
+      var type = input.GetType().GetRealType();
       foreach (var p in type.GetProperties())
       {
         if(p.Name != key)

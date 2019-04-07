@@ -34,8 +34,8 @@ namespace System
       var type = input.GetType().GetRealType();
       model.FullType = type.FullName;
       model.ThisAssembly = type.Assembly.FullName;
-      var resultProperty = model.GetType().GetProperties().Where(b => b.BaseProperty()).ToList();
-      var properties = input.GetType().GetProperties();
+      var resultProperty = model.GetType().GetRealType().GetProperties().Where(b => b.BaseProperty()).ToList();
+      var properties = input.GetType().GetRealType().GetProperties();
       foreach (var p in properties)
       {
         if (p.SkippedProperty())
@@ -69,8 +69,8 @@ namespace System
       var type = input.FullType;
       var asm = input.ThisAssembly;
 
-      var properties = result.GetType().GetProperties();
-      var baseProperty = input.GetType().GetProperties().Where(b => b.BaseProperty()).ToList();
+      var properties = result.GetType().GetRealType().GetProperties();
+      var baseProperty = input.GetType().GetRealType().GetProperties().Where(b => b.BaseProperty()).ToList();
       foreach (var p in properties)
       {
         try
@@ -101,7 +101,7 @@ namespace System
     {
       var model = new UserPassModel();
 
-      var inputType = input.GetType();
+      var inputType = input.GetType().GetRealType();
       var inputProperty = inputType.GetProperties();
       var userType = typeof(IdentityUser);
       var userProperty = userType.GetProperties();
@@ -126,7 +126,7 @@ namespace System
     }
     public static IdentityUser ConvertPostToUser(this UserPassModel input, IdentityUser user, bool deleteExistFile = true, List<string> oldFiles = null, List<string> newFiles = null)
     {
-      var inputType = user.GetType();
+      var inputType = user.GetType().GetRealType();
       var inputProperty = inputType.GetProperties();
 
       var userType = typeof(IdentityUser);
@@ -195,9 +195,9 @@ namespace System
           result.RangeMax = max;
         }
       }
-      var propertyType = p.GetType();
-      var displayAttribute = p.GetCustomAttributes().Where(b => b.GetType().Name == "DisplayAttribute").FirstOrDefault();
-      var property = displayAttribute != null ? displayAttribute.GetType().GetProperties().Where(b => b.Name == "Name").FirstOrDefault() : null;
+      var propertyType = p.GetType().GetRealType();
+      var displayAttribute = p.GetCustomAttributes().Where(b => b.GetType().GetRealType().Name == "DisplayAttribute").FirstOrDefault();
+      var property = displayAttribute != null ? displayAttribute.GetType().GetRealType().GetProperties().Where(b => b.Name == "Name").FirstOrDefault() : null;
       if (displayAttribute != null && property != null && !String.IsNullOrEmpty((string)property.GetValue(displayAttribute)))
       {
         result.Title = (string)property.GetValue(displayAttribute);
@@ -359,7 +359,7 @@ namespace System
       if (type == null)
         return null;
       var result = Activator.CreateInstance(type);
-      var properties = result.GetType().GetProperties();
+      var properties = result.GetType().GetRealType().GetProperties();
       return result;
     }
     public static bool BaseProperty(this PropertyInfo property)
@@ -391,9 +391,9 @@ namespace System
     {
       if (thisObject == null || targetObject == null)
         return;
-      var thisType = thisObject.GetType();
+      var thisType = thisObject.GetType().GetRealType();
       var thisProperty = thisType.GetProperties();
-      var targetType = targetObject.GetType();
+      var targetType = targetObject.GetType().GetRealType();
       var targetProperty = targetType.GetProperties();
       foreach (var p in targetProperty)
       {

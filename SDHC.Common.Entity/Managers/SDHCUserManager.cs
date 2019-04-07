@@ -21,7 +21,7 @@ namespace System
       {
         id++;
         var values = additionalList.Select(a => b.GetPropertyByKey(a)).ToList();
-        return new ContentTableRowItem(id, values, b.GetType(), 0, b.Id);
+        return new ContentTableRowItem(id, values, b.GetType().GetRealType(), 0, b.Id);
       }).ToList();
       var result = new ContentTableHtmlView();
       if (allowChild != null && allowChild.DisableDelete)

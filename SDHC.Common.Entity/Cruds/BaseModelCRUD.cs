@@ -12,7 +12,7 @@ namespace System
   {
     public static void Create(this IInt64Key model, ISave repo)
     {
-      var type = model.GetType();
+      var type = model.GetType().GetRealType();
       var repoType = repo.GetType();
       var addMethod = repo.GetMethod(type, "Add", out object p);
       if (addMethod != null)

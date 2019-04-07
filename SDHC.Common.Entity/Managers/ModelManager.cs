@@ -50,7 +50,7 @@ namespace System
     }
     public static void Create(object input)
     {
-      var type = input.GetType();
+      var type = input.GetType().GetRealType();
       var repo = BaseCruds.GetRepo();
       var addMethod = repo.GetMethod(type, "Add", out object p);
       if (addMethod != null)
@@ -152,7 +152,7 @@ namespace System
     public static void Delete<T>(ISave repo, T model) where T : class, IInt64Key
     {
       var tType = typeof(T);
-      var modelType = model.GetType();
+      var modelType = model.GetType().GetRealType();
       if (tType != modelType)
       {
         Delete(model as object, repo);
@@ -173,7 +173,7 @@ namespace System
     }
     public static void Delete(object model, ISave repo = null)
     {
-      var type = model.GetType();
+      var type = model.GetType().GetRealType();
       if (repo == null)
       {
         var id = ((IInt64Key)model).Id;
@@ -221,7 +221,7 @@ namespace System
       var rowItems = children.Select(b =>
       {
         var values = additionalList.Select(a => b.GetPropertyByKey(a)).ToList();
-        return new ContentTableRowItem(b.Id, values, b.GetType());
+        return new ContentTableRowItem(b.Id, values, b.GetType().GetRealType());
       }).ToList();
       var result = new ContentTableHtmlView();
       if (allowChild != null && allowChild.DisableDelete)
@@ -241,7 +241,7 @@ namespace System
       var rowItems = children.Select(b =>
       {
         var values = additionalList.Select(a => b.GetPropertyByKey(a)).ToList();
-        return new ContentTableRowItem(b.Id, values, b.GetType());
+        return new ContentTableRowItem(b.Id, values, b.GetType().GetRealType());
       }).ToList();
       var result = new ContentTableHtmlView();
       if (allowChild != null && allowChild.DisableDelete)

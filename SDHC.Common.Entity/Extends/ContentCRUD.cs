@@ -21,7 +21,7 @@ namespace SDHC.Common.Entity.Extends
     }
     public static void CreateContentParent(this IBasicContent model, IBasicContent parent)
     {
-      CreateContent(model, parent.Id, parent.GetType().FullName);
+      CreateContent(model, parent.Id, parent.GetType().GetRealType().FullName);
     }
     public static void CreateContent(this IBasicContent model, Int64 parentId, string fullType)
     {
@@ -35,7 +35,7 @@ namespace SDHC.Common.Entity.Extends
     }
     public static void Move(this IBasicContent model, Guid? parentId = null)
     {
-      //ContentIndex.Move(model.Id, model.GetType().FullName, parentId);
+      //ContentIndex.Move(model.Id, model.GetType().GetRealType().FullName, parentId);
     }
     public static void Move(this Guid id, Guid? parentId = null)
     {

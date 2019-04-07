@@ -15,7 +15,7 @@ namespace System
     public static Func<ISave> GetRepo { get; set; }
     public static object GetDbSet(this ISave repo, Type type)
     {
-      var repoType = repo.GetType();
+      var repoType = repo.GetType().GetRealType();
       foreach (var p in repoType.GetProperties())
       {
         if (p.PropertyType.GenericTypeArguments == null)
@@ -71,8 +71,8 @@ namespace System
     public static void Create(object input, out ISave repo)
     {
       repo = GetRepo();
-      var type = input.GetType();
-      var repoType = repo.GetType();
+      var type = input.GetType().GetRealType();
+      var repoType = repo.GetType().GetRealType();
       var addMethod = repo.GetMethod(type, "Add", out object p);
       if (addMethod != null)
       {

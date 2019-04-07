@@ -20,11 +20,11 @@ namespace System
     /// <returns></returns>
     public static IEnumerable<CustomAttributeData> GetObjectCustomAttribute(this Object o, bool getField = true)
     {
-      Type type = o.GetType();
+      Type type = o.GetType().GetRealType();
       var customeAttribute = type.CustomAttributes;
       if (type.IsEnum && getField)
       {
-        var info = o.GetType().GetField(o.ToString());
+        var info = o.GetType().GetRealType().GetField(o.ToString());
         customeAttribute = info.CustomAttributes;
       }
       return customeAttribute;
@@ -40,14 +40,14 @@ namespace System
     {
       try
       {
-        Type type = o.GetType();
+        Type type = o.GetType().GetRealType();
         if (type.IsEnum && getField)
         {
-          var info = o.GetType().GetField(o.ToString());
+          var info = o.GetType().GetRealType().GetField(o.ToString());
           return info.GetCustomAttribute<T>();
         }
-        var t1 = o.GetType().GetCustomAttribute<T>();
-        var t2 = o.GetType().GetCustomAttribute(typeof(T));
+        var t1 = o.GetType().GetRealType().GetCustomAttribute<T>();
+        var t2 = o.GetType().GetRealType().GetCustomAttribute(typeof(T));
         return (T)t2;
       }
       catch { return default(T); }
@@ -58,7 +58,7 @@ namespace System
       {
         if (p.PropertyType.IsEnum && getField)
         {
-          var info = p.PropertyType.GetType().GetField(p.Name);
+          var info = p.PropertyType.GetType().GetRealType().GetField(p.Name);
           return info.GetCustomAttribute<T>();
         }
         var t1 = p.GetCustomAttribute<T>(false);
@@ -72,7 +72,7 @@ namespace System
       {
         if (p.IsEnum && getField)
         {
-          var info = p.GetType().GetField(p.Name);
+          var info = p.GetType().GetRealType().GetField(p.Name);
           return info.GetCustomAttribute<T>(inhe);
         }
         //var t1 = p.CustomAttributes.Where(b => b.AttributeType == typeof(T)).FirstOrDefault();
@@ -106,11 +106,11 @@ namespace System
     /// <returns></returns>
     public static object GetObjectAttribute(this Object o, string attributeName, string name, bool getField = true)
     {
-      Type type = o.GetType();
+      Type type = o.GetType().GetRealType();
       var customeAttribute = type.CustomAttributes.Where(b => b.AttributeType.Name == attributeName).FirstOrDefault();
       if (type.IsEnum && getField)
       {
-        var info = o.GetType().GetField(o.ToString());
+        var info = o.GetType().GetRealType().GetField(o.ToString());
         customeAttribute = info.CustomAttributes.Where(b => b.AttributeType.Name == attributeName).FirstOrDefault();
       }
       if (customeAttribute == null)
@@ -195,7 +195,7 @@ namespace System
       if (value == null)
         return;
       var targetType = property.PropertyType;
-      var valueType = value.GetType();
+      var valueType = value.GetType().GetRealType();
       if (targetType == valueType)
       {
         property.SetValue(result, value);

@@ -27,7 +27,7 @@ namespace System
       {
         [typeof(DateTime)] = b =>
         {
-          if (b.GetType() != typeof(DateTime))
+          if (b.GetType().GetRealType() != typeof(DateTime))
             return "";
           var date = (DateTime)b;
           if (String.IsNullOrEmpty(G.DateConvertFormats))
@@ -69,7 +69,7 @@ namespace System
     {
       if (value == null)
         return null;
-      var valueType = value.GetType();
+      var valueType = value.GetType().GetRealType();
       if (valueType == typeof(string))
         return MyTryConvert((string)value, type);
       if (type.IsEnum)
@@ -96,7 +96,7 @@ namespace System
       var targetType = typeof(T);
       if (targetType.IsEnum)
       {
-        var valueType = value.GetType();
+        var valueType = value.GetType().GetRealType();
         if (!valueType.IsEnum)
           return default(T);
         var targetElementType = targetType.GetElementType();
@@ -133,7 +133,7 @@ namespace System
     {
       if (value == null)
         return null;
-      var valueType = value.GetType();
+      var valueType = value.GetType().GetRealType();
       var elementType = type.GetElementType();
       var valueElementType = valueType.GetElementType();
       if (elementType != null)
