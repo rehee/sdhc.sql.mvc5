@@ -5264,40 +5264,16 @@
     <Content Include="admin-lib\plugins\weather-icons-master\_docs\less\variables.less" />
     <Content Include="admin-lib\plugins\x-editable\LICENSE-MIT" />
     <Content Include="admin-lib\plugins\x-editable\README.md" />
-    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\web.config" />
-    <Content Include="Areas\Admin\Views\Shared\_LeftSideBar.cshtml">
-      <LastGenOutput>_LeftSideBar.generated.cs</LastGenOutput>
-    </Content>
-    <Content Include="Areas\Admin\Views\Content\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Content\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Content\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Content\_CreateOrEdit.cshtml" />
     <Content Include="Areas\Admin\Views\DashBoard\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\DropDown\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\ModelManagement\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\ModelManagement\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\ModelManagement\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\ModelManagement\_CreateOrEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\CreateUser.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\EditUser.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\RoleList.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\_CreateOrEdit.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\AdminInputs\_AdminInput.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\AdminInputs\_AdminInput_Ignore.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\AdminInputs\_PropertiesEdit.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\Contents\_ContentTable.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_BreadCrumbContent.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_css.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_head.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Header.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_js.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Layout_Content.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Root.cshtml" />
-    <Content Include="Areas\Admin\Views\Content\Sort.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LeftSideBar.cshtml">
+      <LastGenOutput>_LeftSideBar.generated.cs</LastGenOutput>
+    </Content>
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

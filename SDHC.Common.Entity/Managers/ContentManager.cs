@@ -67,7 +67,7 @@ namespace System
       var rowItems = children.Select(b =>
       {
         var values = additionalList.Select(a => b.GetPropertyByKey(a)).ToList();
-        return new ContentTableRowItem(b.Id, values, b.GetType());
+        return new ContentTableRowItem(b.Id, values, b.GetType(), b.DisplayOrder);
       }).ToList();
       var result = new ContentTableHtmlView();
       if (allowChild != null && allowChild.DisableDelete)
@@ -120,7 +120,7 @@ namespace System
         goto gotoHomePage;
 
       var model = models.Where(b => String.Equals(b.GetContentFullUrl(), reOrgnizeUrl, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
-      if(model!=null)
+      if (model != null)
         return new ContentPostViewModel(model.ConvertModelToPost());
       gotoHomePage:
       if (homePageModel == null)

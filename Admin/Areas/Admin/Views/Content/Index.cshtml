@@ -10,7 +10,7 @@
     RowAction = "Index",
     RowController = "Content",
     RowArea = G.AdminPath,
-    RowTitle = b => $"{(b as ContentTableRowItem).Id} (children list)",
+    RowTitle = b => $"{(b as ContentTableRowItem).DisplayOrder} (children list)",
     RowObject = b => new { @id = (b as ContentTableRowItem).Id, @area = G.AdminPath }
   };
   contents.Options = new List<ContentTableOption>();

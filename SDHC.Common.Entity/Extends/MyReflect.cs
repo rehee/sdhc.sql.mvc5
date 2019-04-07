@@ -221,7 +221,7 @@ namespace System
       {
         return listResult;
       }
-      var type = input.GetType();
+      var type = input.GetType().GetRealType();
       var p = type.GetProperties().Where(b => string.Equals(b.Name, key, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
       if (p == null)
       {
@@ -245,7 +245,14 @@ namespace System
           }
           else
           {
-            objList = ModelManager.Read<SDHCUser>(inputType.RelatedType, b => values.Contains(b.Id)).ToList();
+            if (typeof(T) == typeof(string) || typeof(T) == typeof(String))
+            {
+              objList = ModelManager.Read<SDHCUser>(inputType.RelatedType, b => values.Contains(b.Id)).ToList().Select(b => (b as IDisplayName).DisplayName()).ToList();
+            }
+            else
+            {
+              objList = ModelManager.Read<SDHCUser>(inputType.RelatedType, b => values.Contains(b.Id)).ToList();
+            }
           }
           if (types.Contains(typeof(T)))
           {
@@ -271,7 +278,14 @@ namespace System
           }
           else
           {
-            value = ModelManager.Read<SDHCUser>(inputType.RelatedType, b => values.Contains(b.Id)).ToList().Select(b => b.MyTryConvert<T>()).ToList().FirstOrDefault();
+            if (typeof(T) == typeof(string) || typeof(T) == typeof(String))
+            {
+              value = ModelManager.Read<SDHCUser>(inputType.RelatedType, b => values.Contains(b.Id)).ToList().Select(b => (b as IDisplayName).DisplayName()).ToList().FirstOrDefault();
+            }
+            else
+            {
+              value = ModelManager.Read<SDHCUser>(inputType.RelatedType, b => values.Contains(b.Id)).ToList().Select(b => b.MyTryConvert<T>()).ToList().FirstOrDefault();
+            }
           }
         }
       }

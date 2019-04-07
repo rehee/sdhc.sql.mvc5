@@ -64,13 +64,15 @@ namespace System
 
   public class ContentTableRowItem
   {
-    public ContentTableRowItem(long id, IEnumerable<string> values, Type type)
+    public ContentTableRowItem(long id, IEnumerable<string> values, Type type, long displayOrder = 0)
     {
       this.Id = id;
       this.Values = values;
       this.ThisType = type.GetRealType();
+      this.DisplayOrder = displayOrder;
     }
     public long Id { get; set; }
+    public long DisplayOrder { get; set; }
     public IEnumerable<string> Values { get; set; } = Enumerable.Empty<string>();
 
     public Type ThisType { get; set; }
