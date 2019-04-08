@@ -7,22 +7,24 @@ using System.Web.Mvc;
 
 namespace Admin.Areas.Admin.Controllers
 {
-  [Admin]
+
   public class ContentController : Controller
   {
-    // GET: Admin/Content
+    [Admin(adminRole: "ContentIndex")]
     public ActionResult Index(long? id)
     {
       var content = ContentManager.GetContent(id);
       return View(content);
     }
     [HttpPost]
+    [Admin(adminRole: "ContentCreate")]
     public ActionResult PreCreate(long? ContentId, string FullType)
     {
       var content = ContentManager.GetPreCreate(ContentId, FullType);
       return View("Create", content);
     }
     [HttpPost]
+    [Admin(adminRole: "ContentCreate")]
     public ActionResult Create(ContentPostModel model)
     {
       var content = model.ConvertToBaseModel() as BaseContent;
@@ -30,6 +32,7 @@ namespace Admin.Areas.Admin.Controllers
       return RedirectToAction("Index");
     }
     [HttpGet]
+    [Admin(adminRole: "ContentEdit")]
     public ActionResult Edit(long? id)
     {
       if (!id.HasValue)
@@ -44,24 +47,27 @@ namespace Admin.Areas.Admin.Controllers
       return View(content.ConvertModelToPost());
     }
     [HttpPost]
+    [Admin(adminRole: "ContentEdit")]
     public ActionResult Edit(ContentPostModel model)
     {
       ContentManager.UpdateContent(model);
       return RedirectToAction("Index");
     }
-
+    [Admin(adminRole: "ContentSort")]
     public ActionResult Sort(long? id)
     {
       var model = ContentManager.GetContentListView(id);
       return View(model);
     }
     [HttpPost]
+    [Admin(adminRole: "ContentSort")]
     public ActionResult Sort(IEnumerable<ContentSortPostModel> input)
     {
       ContentManager.UpdateContentOrder(input);
       return RedirectToAction("Sort");
     }
     [HttpPost]
+    [Admin(adminRole: "ContentDelete")]
     public ActionResult Delete(long? id)
     {
       if (!id.HasValue)

@@ -20,6 +20,7 @@ namespace Admin.Areas.Admin.Controllers
     {
       return roleManager.Roles.Select(b => new RoleNameAndUser() { RoleName = b.Name, RoleDisplayName = b.Name, Users = b.Users.Count, Id = b.Id }).ToList();
     }
+    [Admin(adminRole: "RolesIndex")]
     public ActionResult Index(string id = "")
     {
       var allRoles = roleManager.Roles
@@ -73,11 +74,13 @@ namespace Admin.Areas.Admin.Controllers
         Users = users,
       });
     }
+    [Admin(adminRole: "RolesRoleList")]
     public ActionResult RoleList()
     {
       return View(getRoleAndUsers());
     }
     [HttpPost]
+    [Admin(adminRole: "RolesCreateRole")]
     public async Task<ActionResult> CreateRole(string name)
     {
       if (String.IsNullOrEmpty(name))
@@ -96,6 +99,7 @@ namespace Admin.Areas.Admin.Controllers
       return RedirectToAction("RoleList", "Roles", new { @area = G.AdminPath });
     }
     [HttpPost]
+    [Admin(adminRole: "RolesDeleteRole")]
     public async Task<ActionResult> DeleteRole(string id)
     {
       var role = await roleManager.FindByIdAsync(id);
@@ -121,11 +125,13 @@ namespace Admin.Areas.Admin.Controllers
       }
       return model;
     }
+    [Admin(adminRole: "RolesCreateUser")]
     public ActionResult CreateUser()
     {
       return View(GetUserView());
     }
     [HttpPost]
+    [Admin(adminRole: "RolesCreateUser")]
     public async Task<ActionResult> CreateUser(UserCreateView model)
     {
       if (model.ConfirmPassword != model.Password)
@@ -153,7 +159,7 @@ namespace Admin.Areas.Admin.Controllers
       await setRolesForUser(user, model.SelectedRoles);
       return RedirectToAction("Index", "Roles", new { @area = G.AdminPath });
     }
-
+    [Admin(adminRole: "RolesEditUser")]
     public async Task<ActionResult> EditUser(string id)
     {
       var user = await userManager.FindByIdAsync(id);
@@ -171,8 +177,8 @@ namespace Admin.Areas.Admin.Controllers
       model.SelectedRoles = user.Roles.Select(b => b.RoleId).ToList();
       return View(model);
     }
-
     [HttpPost]
+    [Admin(adminRole: "RolesEditUser")]
     public async Task<ActionResult> EditUser(UserCreateView model)
     {
       var user = await userManager.FindByIdAsync(model.Id);

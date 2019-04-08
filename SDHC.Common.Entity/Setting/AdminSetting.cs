@@ -19,9 +19,6 @@ namespace System
     public static string AdminCopyright { get; set; } = "";
     [Config]
     public static string AdminPath { get; set; } = "Admin";
-
-    public static bool AdminRequestLogin { get; set; } = true;
-
     [Config]
     public static string SuperUserRole { get; set; } = "Admin";
     [Config]

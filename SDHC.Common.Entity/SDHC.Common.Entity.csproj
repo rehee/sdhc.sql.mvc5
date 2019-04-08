@@ -161,8 +161,8 @@
     <Compile Include="Models\ViewModels\ContentListView.cs" />
     <Compile Include="Models\ViewModels\ContentSortPostModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Setting\GAdmin.cs" />
-    <Compile Include="Setting\GGeneral.cs" />
+    <Compile Include="Setting\AdminSetting.cs" />
+    <Compile Include="Setting\GeneralSetting.cs" />
     <Compile Include="Start\BeforeStart.cs" />
     <Compile Include="Start\IdentityConfig.cs" />
     <Compile Include="Start\StartUp.cs" />
