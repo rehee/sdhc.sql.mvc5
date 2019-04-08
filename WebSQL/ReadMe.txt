@@ -1,11 +1,16 @@
 ﻿使用SDHC.CMF
-1. 将 , 删除
+1. 将 App_start 中的 IdentityConfig.cs, Startup.Auth.cs删除
 2. 在dbcontent的类 加入IContent接口.
 3. 建立3个model (BaseContent,BaseSelect,SDHCUser) 并放入dbcontext
 4. 在Global.asax 的start方法的最开始位置加入E.Init();
 5, 在Startup.cs 开始处加入
 SDHCStartup.Init<[dbcontext], [basetype for basecontent], [basetype for baseselect], [basetype for sdhcuser]>(
         app, [Action 创建新的dbcontext 例如 () => ApplicationDbContext.Create()], HostingEnvironment.MapPath("/"));
+例如 将ConfigureAuth(app); 替换为
+
+SDHCStartup.Init<ApplicationDbContext, SCHCContent, SDHCBascSelect, MyUser>(
+        app, () => ApplicationDbContext.Create(), HostingEnvironment.MapPath("/"));
+
 6. 运行ef data migration
 7. account/manager 控制器需要添加对应的命名空间
 
