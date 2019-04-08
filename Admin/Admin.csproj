@@ -156,11 +156,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_CreateOrEdit.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Admin\Views\DropDown\Index.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Index.cshtml</DependentUpon>
-    </Compile>
     <Compile Include="Areas\Admin\Views\ModelManagement\Create.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -286,10 +281,6 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Sort.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Areas\Admin\Views\DropDown\Index.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Index.generated.cs</LastGenOutput>
-    </Content>
     <Content Include="Areas\Admin\Views\ModelManagement\_CreateOrEdit.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_CreateOrEdit.generated.cs</LastGenOutput>
@@ -366,6 +357,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\DropDown\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

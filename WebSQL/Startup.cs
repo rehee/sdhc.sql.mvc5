@@ -22,11 +22,12 @@ namespace WebSQL
       ModelManager.ModelMapper = new Dictionary<string, Type>()
       {
         ["S1"] = typeof(S1),
-        ["S2"] = typeof(S2)
+        ["S2"] = typeof(S2),
+        ["Gender"] = typeof(GenderSelect),
       };
       ModelManager.ModelManagerMapper = new List<string>()
       {
-        "S1","S2"
+        "S1","S2","Gender"
       };
 
       

@@ -5276,6 +5276,9 @@
       <LastGenOutput>_LeftSideBar.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Libs\SDHC.Admin.Lib.0.0.1.nupkg" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Dropdown\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Dropdown\IndexSelect.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

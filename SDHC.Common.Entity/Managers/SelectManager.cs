@@ -14,7 +14,25 @@ namespace System
     public static IEnumerable<BaseSelect> GetAllSelect(Type selectType)
     {
       var dbset = BaseCruds.GetRepo().GetDbSet(selectType);
-      return Queryable.Where<BaseSelect>(dbset as IQueryable<BaseSelect>, b => true).ToList();
+      if(dbset==null)
+        return Enumerable.Empty<BaseSelect>();
+      try
+      {
+        return Queryable.Where<BaseSelect>(dbset as IQueryable<BaseSelect>, b => true).ToList();
+      }
+      catch {
+        return Enumerable.Empty<BaseSelect>();
+      }
+    }
+    public static IEnumerable<BaseSelect> GetAllSelect(string type)
+    {
+      var children = BasicSelectType.GetAllowChildren();
+      if (children == null)
+        return Enumerable.Empty<BaseSelect>();
+      var selectType = children.ChildrenType.Where(b => String.Equals(b.FullName, type, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+      if (children == null)
+        return Enumerable.Empty<BaseSelect>();
+      return GetAllSelect(selectType);
     }
     public static IEnumerable<Type> GetAllAvaliableSelect()
     {

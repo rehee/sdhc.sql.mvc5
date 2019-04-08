@@ -9,10 +9,18 @@ namespace Admin.Areas.Admin.Controllers
   public class DropDownController : Controller
   {
     // GET: Admin/DropDown
-    public ActionResult Index()
+    public ActionResult Index(string id)
     {
-      var list = SelectManager.GetAllAvaliableSelectList();
-      return View(list);
+      if (String.IsNullOrEmpty(id))
+      {
+
+        var list = SelectManager.GetAllAvaliableSelectList();
+        return View(list);
+      }
+      var list2 = SelectManager.GetAllSelect(id.Replace('_', '.'));
+      return View("IndexSelect", list2);
     }
+
+
   }
 }
