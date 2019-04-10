@@ -24,6 +24,17 @@
       ButtonClass = "btn btn-primary",
       RowObject = b => new { @id = (b as ContentTableRowItem).Id, @area = G.AdminPath }
     });
+  contents.Options.Add(
+    new ContentTableOption()
+    {
+      RowAction = "Preview",
+      RowController = "SDHCPage",
+      RowArea = "",
+      RowTitle = b => "Preview",
+      ButtonClass = "btn btn-success",
+      RowObject = b => new { @id = (b as ContentTableRowItem).Id, @area = "" },
+      UrlAttribute = c => $"target=\"_blank\"",
+    });
 
 
   IEnumerable<string> CreateRole;

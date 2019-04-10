@@ -20,6 +20,18 @@ namespace SDHC.Common.Entity.Models
       if (model != null)
         Model = model;
     }
+    public ContentPostViewModel(BaseContent model)
+    {
+      if (model != null)
+      {
+        Model = model.ConvertModelToPost();
+        Parents = model.Parents;
+        ThisUrl = model.Url;
+      }
+
+
+    }
+
     public ContentPostModel Model { get; set; }
     public string ViewPath
     {
@@ -30,6 +42,26 @@ namespace SDHC.Common.Entity.Models
         var t = Type.GetType($"{Model.FullType},{Model.ThisAssembly}");
         var path = String.IsNullOrEmpty(G.ContentViewPath) ? "" : $"/{G.ContentViewPath}";
         return $"~/Views{path}/{t.Name}.cshtml";
+      }
+    }
+    IEnumerable<BaseContent> Parents { get; set; } = Enumerable.Empty<BaseContent>();
+    IEnumerable<BaseContent> BreadCrumbs
+    {
+      get
+      {
+        if (Parents == null)
+          Enumerable.Empty<BaseContent>();
+        var list = Parents.ToList();
+        list.Reverse();
+        return list;
+      }
+    }
+    public string ThisUrl { get; set; }
+    public string Url
+    {
+      get
+      {
+        return $"/{G.ContentPageUrl}{(BreadCrumbs.Count() == 0 ? "" : "/")}{String.Join("/", BreadCrumbs.Select(b => b.Url))}/{ThisUrl}";
       }
     }
   }

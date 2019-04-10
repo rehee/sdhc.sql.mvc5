@@ -39,7 +39,7 @@
             }
             else
             {
-              <a class="@Model.FirstRow.ButtonClass" href="@Url.Action(Model.FirstRow.RowAction,Model.FirstRow.RowController,Model.FirstRow.RowObject(row))">@Model.FirstRow.RowTitle(row)</a>
+              <a class="@Model.FirstRow.ButtonClass" href="@Url.Action(Model.FirstRow.RowAction,Model.FirstRow.RowController,Model.FirstRow.RowObject(row))" @Model.FirstRow.UrlAttribute(row)>@Model.FirstRow.RowTitle(row)</a>
             }
           }
           else
@@ -62,13 +62,13 @@
         <td>
           @if (Model.Options == null)
           {
-            <a href="@Url.Action(Model.FirstRowAction,Model.FirstRowController,Model.FirstRowObject(row))" class="btn btn-primary">Info</a>
+            <a href="@Url.Action(Model.FirstRowAction,Model.FirstRowController,Model.FirstRowObject(row)) @Model.FirstRow.UrlAttribute(row)" class="btn btn-primary">Info</a>
           }
           else
           {
             foreach (var option in Model.Options)
             {
-              <a href="@Url.Action(option.RowAction,option.RowController, option.RowObject(row))" class="@option.ButtonClass">@option.RowTitle(row)</a>
+              <a href="@Url.Action(option.RowAction,option.RowController, option.RowObject(row))" @option.UrlAttribute(row) class="@option.ButtonClass">@option.RowTitle(row)</a>
             }
           }
           @if (!String.IsNullOrEmpty(Model.DeleteFunctionName) && !Model.DisableDelete)

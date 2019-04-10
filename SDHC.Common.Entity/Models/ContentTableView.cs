@@ -45,7 +45,7 @@ namespace System
 
     public IEnumerable<string> TableHeaders { get; set; }
     public IEnumerable<ContentTableRowItem> Rows { get; set; }
-    
+
 
     public string FirstRowTitle { get; set; }
     public ContentTableOption FirstRow { get; set; }
@@ -64,6 +64,7 @@ namespace System
     public string RowController { get; set; }
     public string RowArea { get; set; } = "";
     public Func<object, object> RowObject { get; set; }
+    public Func<object, string> UrlAttribute { get; set; } = (o) => "";
 
   }
 

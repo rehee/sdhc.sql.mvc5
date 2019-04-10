@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SDHC.Common.Entity.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,7 +14,16 @@ namespace SDHC.Controllers
       var m = ContentManager.GetContentPostViewModel(names);
       if(string.IsNullOrEmpty(m.ViewPath))
         return Content("NoContent");
-      return View(m.ViewPath, m.Model);
+      return View(m.ViewPath, m);
+    }
+    [Admin]
+    public ActionResult Preview(long? id)
+    {
+      var model = ContentManager.GetContent(id);
+      if (model == null)
+        return RedirectToAction("Index", "Content", new { @id = "", @area = G.AdminPath });
+      var m = new ContentPostViewModel(model);
+      return View(m.ViewPath, m);
     }
   }
 }

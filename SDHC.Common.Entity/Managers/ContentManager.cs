@@ -121,11 +121,11 @@ namespace System
 
       var model = models.Where(b => String.Equals(b.GetContentFullUrl(), reOrgnizeUrl, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
       if (model != null)
-        return new ContentPostViewModel(model.ConvertModelToPost());
+        return new ContentPostViewModel(model);
       gotoHomePage:
       if (homePageModel == null)
-        return new ContentPostViewModel(null);
-      return new ContentPostViewModel(homePageModel.ConvertModelToPost());
+        return new ContentPostViewModel();
+      return new ContentPostViewModel(homePageModel);
     }
 
     public static string GetContentFullUrl(this BaseContent model)
@@ -176,15 +176,17 @@ namespace System
       return result;
     }
 
-    public static long? UpdateContentOrder(IEnumerable<ContentSortPostModel> input)
+    public static long? UpdateContentOrder(IEnumerable<ContentSortPostModel> inputs)
     {
-      if (input == null)
+      if (inputs == null)
         return null;
-      var idList = input.Where(b => b.id.HasValue).Select(b => b.id).ToList();
+      var list = inputs.ToList();
+      list.RemoveAt(0);
+      var idList = list.Where(b => b.id.HasValue).Select(b => b.id).ToList();
       var contents = ModelManager.Read<BaseContent>(b => idList.Contains(b.Id), out var repo).ToList();
       contents.ForEach(c =>
       {
-        var cInput = input.Where(b => b.id == c.Id).FirstOrDefault();
+        var cInput = list.Where(b => b.id == c.Id).FirstOrDefault();
         if (cInput != null)
         {
           if (cInput.parentId.HasValue)

@@ -12,7 +12,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using SDHC.Common.Entity.Models;
 
-namespace Start
+namespace System
 {
   public class EmailService : IIdentityMessageService
   {
@@ -118,4 +118,9 @@ namespace Start
       return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
     }
   }
+}
+
+namespace Start
+{
+
 }
