@@ -45,11 +45,15 @@ namespace System
 
     public IEnumerable<string> TableHeaders { get; set; }
     public IEnumerable<ContentTableRowItem> Rows { get; set; }
-    public bool DisableDelete { get; set; }
+    
 
     public string FirstRowTitle { get; set; }
     public ContentTableOption FirstRow { get; set; }
     public List<ContentTableOption> Options { get; set; }
+
+    public bool FirstRowIsNotAction { get; set; }
+    public bool DisableDelete { get; set; }
+    public string DeleteFunctionName { get; set; }
   }
 
   public class ContentTableOption

@@ -39,6 +39,8 @@
             <br />
             <br />
             <input type="button" class="btn btn-info" name="name" onclick="submitList()" value="Save" />
+            <input type="button" class="btn btn-success" name="name" onclick="goToList()" value="List" />
+            <input type="button" class="btn btn-warning" name="name" onclick="goToEdit()" value="Edit" />
           </div>
         </div>
       </div>
@@ -49,6 +51,7 @@
 @section script{
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.7/jstree.min.js"></script>
   <script>
+
         function pushSortItem(item,lists,parentId,displayOrder){
             lists.push({
                 id:item.id,
@@ -60,8 +63,26 @@
                     pushSortItem(item.children[index],lists,item.id,index);
                 }
             }
-        }
-        function submitList() {
+    }
+    function getSelectNode(){
+      var selectId = $('#jstree_demo_div').jstree(true).get_selected();
+      if (selectId == null || selectId.length <= 0) {
+        return "";
+      }
+      return selectId[0];
+    }
+    function goToList() {
+      var url = "@Url.Action("Index","Content",new { @id="[id]",@area=G.AdminPath })";
+      console.log(url);
+      window.location.href = url.replace("[id]", getSelectNode());
+    }
+    function goToEdit() {
+      var url = "@Url.Action("Edit","Content",new { @id="[id]",@area=G.AdminPath })";
+      console.log(url);
+      window.location.href = url.replace("[id]", getSelectNode());
+    }
+
+    function submitList() {
             var data2 = $("#jstree_demo_div").jstree().get_json();
             var itemList = [];
             pushSortItem(data2[0],itemList,0,null);
@@ -102,7 +123,7 @@
                     }
                 },
                 "plugins": [
-                    "contextmenu", "dnd", "search",
+                    "dnd", "search",
                     "state", "types", "wholerow"
                 ]
 

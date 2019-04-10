@@ -207,7 +207,7 @@ namespace System
 
     public static string GetPropertyByKey(this object input, string key)
     {
-      return GetPropertyEnumerableByKey<string>(input, key).FirstOrDefault();
+      return String.Join(",", GetPropertyEnumerableByKey<string>(input, key));
     }
     public static T GetPropertyByKey<T>(this object input, string key)
     {

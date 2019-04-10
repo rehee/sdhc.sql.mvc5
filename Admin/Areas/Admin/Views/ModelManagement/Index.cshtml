@@ -5,8 +5,7 @@
   Model.FirstRowController = "ModelManagement";
   Model.FirstRowArea = "Area";
   Model.FirstRowObject = b => new { @area = G.AdminPath, @id = (b as ContentTableRowItem).Id, @type = ModelManager.GetMapperKey((b as ContentTableRowItem).ThisType.FullName) };
-  ViewBag.delete = true;
-  ViewBag.deleteFunction = "deleteRole";
+  Model.DeleteFunctionName = "deleteRole";
 }
 <form id="modelDeleteForm" action="@Url.Action("Delete","ModelManagement","@area=G.AdminPath")" method="post">
   <input type="hidden" name="type" value="@ViewBag.id" />

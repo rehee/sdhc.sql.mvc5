@@ -225,6 +225,30 @@ WriteLiteral(" onclick=\"submitList()\"");
 
 WriteLiteral(" value=\"Save\"");
 
+WriteLiteral(" />\r\n            <input");
+
+WriteLiteral(" type=\"button\"");
+
+WriteLiteral(" class=\"btn btn-success\"");
+
+WriteLiteral(" name=\"name\"");
+
+WriteLiteral(" onclick=\"goToList()\"");
+
+WriteLiteral(" value=\"List\"");
+
+WriteLiteral(" />\r\n            <input");
+
+WriteLiteral(" type=\"button\"");
+
+WriteLiteral(" class=\"btn btn-warning\"");
+
+WriteLiteral(" name=\"name\"");
+
+WriteLiteral(" onclick=\"goToEdit()\"");
+
+WriteLiteral(" value=\"Edit\"");
+
 WriteLiteral(" />\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>" +
 "\r\n\r\n");
 
@@ -236,6 +260,7 @@ WriteLiteral(" src=\"https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.7/jstree.
 
 WriteLiteral(@"></script>
   <script>
+
         function pushSortItem(item,lists,parentId,displayOrder){
             lists.push({
                 id:item.id,
@@ -247,8 +272,40 @@ WriteLiteral(@"></script>
                     pushSortItem(item.children[index],lists,item.id,index);
                 }
             }
-        }
-        function submitList() {
+    }
+    function getSelectNode(){
+      var selectId = $('#jstree_demo_div').jstree(true).get_selected();
+      if (selectId == null || selectId.length <= 0) {
+        return """";
+      }
+      return selectId[0];
+    }
+    function goToList() {
+      var url = """);
+
+            
+            #line 75 "..\..\Areas\Admin\Views\Content\Sort.cshtml"
+            Write(Url.Action("Index","Content",new { @id="[id]",@area=G.AdminPath }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\";\r\n      console.log(url);\r\n      window.location.href = url.replace(\"[id]\", get" +
+"SelectNode());\r\n    }\r\n    function goToEdit() {\r\n      var url = \"");
+
+            
+            #line 80 "..\..\Areas\Admin\Views\Content\Sort.cshtml"
+            Write(Url.Action("Edit","Content",new { @id="[id]",@area=G.AdminPath }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral(@""";
+      console.log(url);
+      window.location.href = url.replace(""[id]"", getSelectNode());
+    }
+
+    function submitList() {
             var data2 = $(""#jstree_demo_div"").jstree().get_json();
             var itemList = [];
             pushSortItem(data2[0],itemList,0,null);
@@ -258,7 +315,7 @@ WriteLiteral(@"></script>
                 url: """);
 
             
-            #line 71 "..\..\Areas\Admin\Views\Content\Sort.cshtml"
+            #line 92 "..\..\Areas\Admin\Views\Content\Sort.cshtml"
                  Write(Url.Action("Sort","Content",new {@area=G.AdminPath} ));
 
             
@@ -269,7 +326,7 @@ WriteLiteral("\",\r\n                data: JSON.stringify(itemList),\r\n        
 "      window.location.replace(\'");
 
             
-            #line 75 "..\..\Areas\Admin\Views\Content\Sort.cshtml"
+            #line 96 "..\..\Areas\Admin\Views\Content\Sort.cshtml"
                                   Write(Url.Action("Index", "Content", new { @id=Model.Id, area = G.AdminPath }));
 
             
@@ -305,7 +362,7 @@ WriteLiteral(@"');
                     }
                 },
                 ""plugins"": [
-                    ""contextmenu"", ""dnd"", ""search"",
+                    ""dnd"", ""search"",
                     ""state"", ""types"", ""wholerow""
                 ]
 

@@ -46,8 +46,7 @@ namespace ASP
   Model.FirstRowController = "ModelManagement";
   Model.FirstRowArea = "Area";
   Model.FirstRowObject = b => new { @area = G.AdminPath, @id = (b as ContentTableRowItem).Id, @type = ModelManager.GetMapperKey((b as ContentTableRowItem).ThisType.FullName) };
-  ViewBag.delete = true;
-  ViewBag.deleteFunction = "deleteRole";
+  Model.DeleteFunctionName = "deleteRole";
 
             
             #line default
@@ -56,14 +55,14 @@ WriteLiteral("\r\n<form");
 
 WriteLiteral(" id=\"modelDeleteForm\"");
 
-WriteAttribute("action", Tuple.Create(" action=\"", 495), Tuple.Create("\"", 563)
+WriteAttribute("action", Tuple.Create(" action=\"", 471), Tuple.Create("\"", 539)
             
-            #line 11 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 504), Tuple.Create<System.Object, System.Int32>(Url.Action("Delete","ModelManagement","@area=G.AdminPath")
+            #line 10 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 480), Tuple.Create<System.Object, System.Int32>(Url.Action("Delete","ModelManagement","@area=G.AdminPath")
             
             #line default
             #line hidden
-, 504), false)
+, 480), false)
 );
 
 WriteLiteral(" method=\"post\"");
@@ -74,14 +73,14 @@ WriteLiteral(" type=\"hidden\"");
 
 WriteLiteral(" name=\"type\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 615), Tuple.Create("\"", 634)
+WriteAttribute("value", Tuple.Create(" value=\"", 591), Tuple.Create("\"", 610)
             
-            #line 12 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 623), Tuple.Create<System.Object, System.Int32>(ViewBag.id
+            #line 11 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 599), Tuple.Create<System.Object, System.Int32>(ViewBag.id
             
             #line default
             #line hidden
-, 623), false)
+, 599), false)
 );
 
 WriteLiteral(" />\r\n  <input");
@@ -116,14 +115,14 @@ WriteLiteral(" class=\"button-box\"");
 
 WriteLiteral(">\r\n\r\n          <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 905), Tuple.Create("\"", 992)
+WriteAttribute("href", Tuple.Create(" href=\"", 881), Tuple.Create("\"", 968)
             
-            #line 21 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 912), Tuple.Create<System.Object, System.Int32>(Url.Action("Create","ModelManagement",new { @area=G.AdminPath,@id=ViewBag.id })
+            #line 20 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 888), Tuple.Create<System.Object, System.Int32>(Url.Action("Create","ModelManagement",new { @area=G.AdminPath,@id=ViewBag.id })
             
             #line default
             #line hidden
-, 912), false)
+, 888), false)
 );
 
 WriteLiteral(" class=\"btn btn-info btn-group\"");
@@ -135,13 +134,13 @@ WriteLiteral(" class=\"body\"");
 WriteLiteral(">\r\n");
 
             
-            #line 27 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
+            #line 26 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 27 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
+            #line 26 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
            Html.RenderPartial("Contents/_ContentTableHtml", Model); 
             
             #line default

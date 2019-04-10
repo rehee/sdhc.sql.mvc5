@@ -86,7 +86,16 @@ WriteLiteral("</th>\r\n");
             #line default
             #line hidden
 WriteLiteral("      <th>\r\n        Option\r\n      </th>\r\n\r\n    </tr>\r\n  </thead>\r\n  <tfoot>\r\n    " +
-"<tr>\r\n      <th>Id</th>\r\n");
+"<tr>\r\n      <th>");
+
+            
+            #line 19 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
+      Write(String.IsNullOrEmpty(Model.FirstRowTitle)?"Id": Model.FirstRowTitle);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</th>\r\n");
 
             
             #line 20 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
@@ -146,29 +155,31 @@ WriteLiteral("      <tr>\r\n        <td>\r\n");
             #line hidden
             
             #line 34 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
-           if (Model.FirstRow == null)
+           if (!Model.FirstRowIsNotAction)
           {
+            if (Model.FirstRow == null)
+            {
 
             
             #line default
             #line hidden
-WriteLiteral("            <a");
+WriteLiteral("              <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 731), Tuple.Create("\"", 822)
+WriteAttribute("href", Tuple.Create(" href=\"", 861), Tuple.Create("\"", 952)
             
-            #line 36 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
-, Tuple.Create(Tuple.Create("", 738), Tuple.Create<System.Object, System.Int32>(Url.Action(Model.FirstRowAction,Model.FirstRowController,Model.FirstRowObject(row))
+            #line 38 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
+, Tuple.Create(Tuple.Create("", 868), Tuple.Create<System.Object, System.Int32>(Url.Action(Model.FirstRowAction,Model.FirstRowController,Model.FirstRowObject(row))
             
             #line default
             #line hidden
-, 738), false)
+, 868), false)
 );
 
 WriteLiteral(">");
 
             
-            #line 36 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
-                                                                                                      Write(row.Id);
+            #line 38 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
+                                                                                                        Write(row.Id);
 
             
             #line default
@@ -176,64 +187,108 @@ WriteLiteral(">");
 WriteLiteral("</a>\r\n");
 
             
-            #line 37 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
-          }
-          else
-          {
+            #line 39 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
+            }
+            else
+            {
 
             
             #line default
             #line hidden
-WriteLiteral("            <a");
+WriteLiteral("              <a");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 893), Tuple.Create("\"", 928)
+WriteAttribute("class", Tuple.Create(" class=\"", 1031), Tuple.Create("\"", 1066)
             
-            #line 40 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
-, Tuple.Create(Tuple.Create("", 901), Tuple.Create<System.Object, System.Int32>(Model.FirstRow.ButtonClass
+            #line 42 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
+, Tuple.Create(Tuple.Create("", 1039), Tuple.Create<System.Object, System.Int32>(Model.FirstRow.ButtonClass
             
             #line default
             #line hidden
-, 901), false)
+, 1039), false)
 );
 
-WriteAttribute("href", Tuple.Create(" href=\"", 929), Tuple.Create("\"", 1032)
+WriteAttribute("href", Tuple.Create(" href=\"", 1067), Tuple.Create("\"", 1170)
             
-            #line 40 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
-, Tuple.Create(Tuple.Create("", 936), Tuple.Create<System.Object, System.Int32>(Url.Action(Model.FirstRow.RowAction,Model.FirstRow.RowController,Model.FirstRow.RowObject(row))
+            #line 42 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
+, Tuple.Create(Tuple.Create("", 1074), Tuple.Create<System.Object, System.Int32>(Url.Action(Model.FirstRow.RowAction,Model.FirstRow.RowController,Model.FirstRow.RowObject(row))
             
             #line default
             #line hidden
-, 936), false)
+, 1074), false)
 );
 
 WriteLiteral(">");
 
             
-            #line 40 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
-                                                                                                                                                      Write(Model.FirstRow.RowTitle(row));
+            #line 42 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
+                                                                                                                                                        Write(Model.FirstRow.RowTitle(row));
 
             
             #line default
             #line hidden
 WriteLiteral("</a>\r\n");
-
-            
-            #line 41 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
-          }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("        </td>\r\n");
 
             
             #line 43 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
+            }
+          }
+          else
+          {
+            if (Model.FirstRow == null)
+            {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("              <span>");
+
+            
+            #line 49 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
+               Write(row.Id);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span>\r\n");
+
+            
+            #line 50 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
+            }
+            else
+            {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("              <span>");
+
+            
+            #line 53 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
+               Write(Model.FirstRow.RowTitle(row));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span>\r\n");
+
+            
+            #line 54 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
+            }
+          }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n        </td>\r\n");
+
+            
+            #line 58 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 43 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
+            #line 58 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
          foreach (var item in row.Values)
         {
 
@@ -243,7 +298,7 @@ WriteLiteral("        </td>\r\n");
 WriteLiteral("          <td>");
 
             
-            #line 45 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
+            #line 60 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
          Write(item);
 
             
@@ -252,7 +307,7 @@ WriteLiteral("          <td>");
 WriteLiteral("</td>\r\n");
 
             
-            #line 46 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
+            #line 61 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
         }
 
             
@@ -261,13 +316,13 @@ WriteLiteral("</td>\r\n");
 WriteLiteral("        <td>\r\n");
 
             
-            #line 48 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
+            #line 63 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
           
             
             #line default
             #line hidden
             
-            #line 48 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
+            #line 63 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
            if (Model.Options == null)
           {
 
@@ -276,14 +331,14 @@ WriteLiteral("        <td>\r\n");
             #line hidden
 WriteLiteral("            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1268), Tuple.Create("\"", 1359)
+WriteAttribute("href", Tuple.Create(" href=\"", 1678), Tuple.Create("\"", 1769)
             
-            #line 50 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
-, Tuple.Create(Tuple.Create("", 1275), Tuple.Create<System.Object, System.Int32>(Url.Action(Model.FirstRowAction,Model.FirstRowController,Model.FirstRowObject(row))
+            #line 65 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
+, Tuple.Create(Tuple.Create("", 1685), Tuple.Create<System.Object, System.Int32>(Url.Action(Model.FirstRowAction,Model.FirstRowController,Model.FirstRowObject(row))
             
             #line default
             #line hidden
-, 1275), false)
+, 1685), false)
 );
 
 WriteLiteral(" class=\"btn btn-primary\"");
@@ -291,7 +346,7 @@ WriteLiteral(" class=\"btn btn-primary\"");
 WriteLiteral(">Info</a>\r\n");
 
             
-            #line 51 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
+            #line 66 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
           }
           else
           {
@@ -303,30 +358,30 @@ WriteLiteral(">Info</a>\r\n");
             #line hidden
 WriteLiteral("              <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1519), Tuple.Create("\"", 1599)
+WriteAttribute("href", Tuple.Create(" href=\"", 1929), Tuple.Create("\"", 2009)
             
-            #line 56 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
-, Tuple.Create(Tuple.Create("", 1526), Tuple.Create<System.Object, System.Int32>(Url.Action(option.RowAction,option.RowController, option.RowObject(row))
+            #line 71 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
+, Tuple.Create(Tuple.Create("", 1936), Tuple.Create<System.Object, System.Int32>(Url.Action(option.RowAction,option.RowController, option.RowObject(row))
             
             #line default
             #line hidden
-, 1526), false)
+, 1936), false)
 );
 
-WriteAttribute("class", Tuple.Create(" class=\"", 1600), Tuple.Create("\"", 1627)
+WriteAttribute("class", Tuple.Create(" class=\"", 2010), Tuple.Create("\"", 2037)
             
-            #line 56 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
-                         , Tuple.Create(Tuple.Create("", 1608), Tuple.Create<System.Object, System.Int32>(option.ButtonClass
+            #line 71 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
+                         , Tuple.Create(Tuple.Create("", 2018), Tuple.Create<System.Object, System.Int32>(option.ButtonClass
             
             #line default
             #line hidden
-, 1608), false)
+, 2018), false)
 );
 
 WriteLiteral(">");
 
             
-            #line 56 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
+            #line 71 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
                                                                                                                          Write(option.RowTitle(row));
 
             
@@ -335,7 +390,7 @@ WriteLiteral(">");
 WriteLiteral("</a>\r\n");
 
             
-            #line 57 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
+            #line 72 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
             }
           }
 
@@ -345,8 +400,8 @@ WriteLiteral("</a>\r\n");
 WriteLiteral("          ");
 
             
-            #line 59 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
-           if (ViewBag.delete != null && !Model.DisableDelete)
+            #line 74 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
+           if (!String.IsNullOrEmpty(Model.DeleteFunctionName) && !Model.DisableDelete)
           {
 
             
@@ -356,20 +411,20 @@ WriteLiteral("            <button");
 
 WriteLiteral(" class=\"btn btn-danger\"");
 
-WriteAttribute("onclick", Tuple.Create(" onclick=\"", 1803), Tuple.Create("\"", 1887)
+WriteAttribute("onclick", Tuple.Create(" onclick=\"", 2238), Tuple.Create("\"", 2292)
             
-            #line 61 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
-, Tuple.Create(Tuple.Create("", 1813), Tuple.Create<System.Object, System.Int32>(ViewBag.deleteFunction!=null?ViewBag.deleteFunction+"("+ row.Id +")":""
+            #line 76 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
+, Tuple.Create(Tuple.Create("", 2248), Tuple.Create<System.Object, System.Int32>(Model.DeleteFunctionName+"("+ row.Id +")"
             
             #line default
             #line hidden
-, 1813), false)
+, 2248), false)
 );
 
 WriteLiteral(">Delete</button>\r\n");
 
             
-            #line 62 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
+            #line 77 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
           }
 
             
@@ -378,7 +433,7 @@ WriteLiteral(">Delete</button>\r\n");
 WriteLiteral("        </td>\r\n\r\n      </tr>\r\n");
 
             
-            #line 66 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
+            #line 81 "..\..\Areas\Admin\Views\Shared\Contents\_ContentTableHtml.cshtml"
     }
 
             

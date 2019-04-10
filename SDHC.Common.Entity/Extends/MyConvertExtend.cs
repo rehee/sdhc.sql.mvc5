@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SDHC.Common.Entity.Models;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -78,6 +79,11 @@ namespace System
       {
         if (MyObjectStringConvertDictionary.ContainsKey(valueType))
           return MyObjectStringConvertDictionary[valueType](value);
+        var thisType = value.GetType().GetRealType();
+        if(thisType.GetInterfaces().Any(b=>b == typeof(IDisplayName)))
+        {
+          return ((IDisplayName)value).DisplayName();
+        }
         return value.ToString();
       }
       try
