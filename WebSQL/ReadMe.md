@@ -25,7 +25,7 @@
 * 完成商业逻辑
 * 上前端出工
 
-# 使用方法
+# 安装方法
 * 创建一个新的 ASP.NET Web Application (.Net Framework). Framework 版本 4.6.2
 * 选择MVC, 选择Individual Usar Account.
 * 下载nuget 包 SDHC.CMS.E
@@ -91,7 +91,9 @@ web.config中的setting中加入对应的设置,如果未设置则为默认值. 
 | RolesDeleteRole       | string    |Roles          |DeleteRole |""|
 | RolesCreateUser       | string    |Roles          |CreateUser |""|
 | RolesEditUser         | string    |Roles          |EditUser|""|
+
 一般属性
+
 | 属性                  | 类型       |内容         |默认值|
 | -------------         |:----:     | -------:| ----:| 
 |UseContentRouter | bool| 是否使用 内容通配符 | false|
