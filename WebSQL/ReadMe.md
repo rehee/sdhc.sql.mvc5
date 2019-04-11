@@ -27,8 +27,8 @@
 
 # 安装方法
 * 创建一个新的 ASP.NET Web Application (.Net Framework). Framework 版本 4.6.2
-* 选择MVC, 选择Individual Usar Account.
-* 下载nuget 包 SDHC.CMS.E
+* 选择MVC, 选择Individual User Account.
+* 在nuget package manager中搜索并下载 SDHC.CMF.E
 * 将 App_start 中的 IdentityConfig.cs, Startup.Auth.cs删除
 * 在dbcontent的类 加入IContent接口. 并使用SDHCUser
 ```
