@@ -12,7 +12,9 @@ namespace System
     public static bool UseContentRouter { get; set; } = false;
     [Config]
     public static bool AdminFree { get; set; } = false;
-    
+    [Config]
+    public static int SortChildLevel { get; set; } = 4;
+
     [Config]
     public static string AdminTitle { get; set; } = "";
     [Config]

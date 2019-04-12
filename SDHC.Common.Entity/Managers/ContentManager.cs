@@ -135,7 +135,7 @@ namespace System
       parents.Add(model.Url);
       return String.Join("/", parents);
     }
-    public static ContentListView GetContentListView(long? id)
+    public static ContentListView GetContentListView(long? id, int parentLevel = 0)
     {
       if (id.HasValue)
       {
@@ -144,20 +144,32 @@ namespace System
         {
           return null;
         }
-        return GetContentListView(model, null);
+        var result = new ContentListView()
+        {
+          Id = model.Id,
+          ParentId = model.ParentId,
+          Title = model.Title,
+        };
+
+        GetContentListView(model, result, 0);
+        return result;
       }
       else
       {
         var roots = ModelManager.Read<BaseContent>(b => b.ParentId == null).ToList();
         var result = new ContentListView();
-        roots.ForEach(b => GetContentListView(b, result));
+        roots.ForEach(b => GetContentListView(b, result, 0));
         return result;
       }
     }
 
-    public static ContentListView GetContentListView(BaseContent model, ContentListView parent)
+    public static void GetContentListView(BaseContent model, ContentListView parent, int parentLevel = 0)
     {
-
+      if (parentLevel > G.SortChildLevel)
+      {
+        return;
+      }
+      parentLevel = parentLevel + 1;
       var result = new ContentListView();
       result.Id = model.Id;
       result.Title = model.Title;
@@ -171,9 +183,10 @@ namespace System
       var children = model.Children;
       foreach (var item in children)
       {
-        GetContentListView(item, result);
+        GetContentListView(item, result, parentLevel);
+
       }
-      return result;
+      return;
     }
 
     public static long? UpdateContentOrder(IEnumerable<ContentSortPostModel> inputs)
