@@ -17,6 +17,7 @@ namespace Admin.Areas.Admin.Controllers
       return View(content);
     }
     [HttpPost]
+    [ValidateInput(false)]
     [Admin(adminRole: "ContentCreate")]
     public ActionResult PreCreate(long? ContentId, string FullType)
     {
@@ -24,6 +25,7 @@ namespace Admin.Areas.Admin.Controllers
       return View("Create", content);
     }
     [HttpPost]
+    [ValidateInput(false)]
     [Admin(adminRole: "ContentCreate")]
     public ActionResult Create(ContentPostModel model)
     {
@@ -32,6 +34,7 @@ namespace Admin.Areas.Admin.Controllers
       return RedirectToAction("Index");
     }
     [HttpGet]
+    [ValidateInput(false)]
     [Admin(adminRole: "ContentEdit")]
     public ActionResult Edit(long? id)
     {
@@ -47,6 +50,7 @@ namespace Admin.Areas.Admin.Controllers
       return View(content.ConvertModelToPost());
     }
     [HttpPost]
+    [ValidateInput(false)]
     [Admin(adminRole: "ContentEdit")]
     public ActionResult Edit(ContentPostModel model)
     {
@@ -60,6 +64,7 @@ namespace Admin.Areas.Admin.Controllers
       return View(model);
     }
     [HttpPost]
+    [ValidateInput(false)]
     [Admin(adminRole: "ContentSort")]
     public ActionResult Sort(IEnumerable<ContentSortPostModel> input)
     {
@@ -67,6 +72,7 @@ namespace Admin.Areas.Admin.Controllers
       return RedirectToAction("Sort");
     }
     [HttpPost]
+    [ValidateInput(false)]
     [Admin(adminRole: "ContentDelete")]
     public ActionResult Delete(long? id)
     {

@@ -16,7 +16,7 @@
   </thead>
   <tfoot>
     <tr>
-      <th>@(String.IsNullOrEmpty(Model.FirstRowTitle)?"Id": Model.FirstRowTitle)</th>
+      <th>@(String.IsNullOrEmpty(Model.FirstRowTitle) ? "Id" : Model.FirstRowTitle)</th>
       @foreach (var item in Model.TableHeaders)
       {
         <th>@item</th>
@@ -59,23 +59,20 @@
         {
           <td>@item</td>
         }
-        <td>
-          @if (Model.Options == null)
-          {
-            <a href="@Url.Action(Model.FirstRowAction,Model.FirstRowController,Model.FirstRowObject(row)) @Model.FirstRow.UrlAttribute(row)" class="btn btn-primary">Info</a>
-          }
-          else
-          {
-            foreach (var option in Model.Options)
+          <td>
+            @if (Model.Options != null)
             {
-              <a href="@Url.Action(option.RowAction,option.RowController, option.RowObject(row))" @option.UrlAttribute(row) class="@option.ButtonClass">@option.RowTitle(row)</a>
+              foreach (var option in Model.Options)
+              {
+                <a href="@Url.Action(option.RowAction,option.RowController, option.RowObject(row))" @option.UrlAttribute(row) class="@option.ButtonClass">@option.RowTitle(row)</a>
+              }
             }
-          }
-          @if (!String.IsNullOrEmpty(Model.DeleteFunctionName) && !Model.DisableDelete)
-          {
-            <button class="btn btn-danger" onclick="@(Model.DeleteFunctionName+"("+ row.Id +")")">Delete</button>
-          }
-        </td>
+
+            @if (!String.IsNullOrEmpty(Model.DeleteFunctionName) && !Model.DisableDelete)
+            {
+              <button class="btn btn-danger" onclick="@(Model.DeleteFunctionName+"("+ row.Id +")")">Delete</button>
+            }
+          </td>
 
       </tr>
     }

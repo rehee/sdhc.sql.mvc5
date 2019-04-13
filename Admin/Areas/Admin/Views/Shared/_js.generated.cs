@@ -318,23 +318,51 @@ WriteAttribute("src", Tuple.Create(" src=\"", 3440), Tuple.Create("\"", 3504)
 , 3446), false)
 );
 
-WriteLiteral("></script>\r\n\r\n\r\n<!-- LAYOUT JS -->\r\n<script");
+WriteLiteral("></script>\r\n<script");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 3548), Tuple.Create("\"", 3583)
-, Tuple.Create(Tuple.Create("", 3554), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/assets/js/demo.js")
-, 3554), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 3524), Tuple.Create("\"", 3570)
+, Tuple.Create(Tuple.Create("", 3530), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/ckeditor/ckeditor.js")
+, 3530), false)
+);
+
+WriteLiteral("></script>\r\n\r\n<!-- LAYOUT JS -->\r\n<script");
+
+WriteAttribute("src", Tuple.Create(" src=\"", 3612), Tuple.Create("\"", 3647)
+, Tuple.Create(Tuple.Create("", 3618), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/assets/js/demo.js")
+, 3618), false)
 );
 
 WriteLiteral("></script>\r\n<script");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 3603), Tuple.Create("\"", 3640)
-, Tuple.Create(Tuple.Create("", 3609), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/assets/js/layout.js")
-, 3609), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 3667), Tuple.Create("\"", 3704)
+, Tuple.Create(Tuple.Create("", 3673), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/assets/js/layout.js")
+, 3673), false)
 );
 
 WriteLiteral("></script>\r\n\r\n");
 
-WriteLiteral("\r\n");
+WriteLiteral(@"
+
+<script>
+  function resetEditor(id) {
+    CKEDITOR.replace(id, {
+      height: 300
+    });
+  }
+  $(function () {
+    var htmlEditor = $(""textarea[id^=html_editor_]"");
+    for (var i = 0; i < htmlEditor.length; i++) {
+      var e = $(htmlEditor[i]).attr('id');
+      if (e) {
+        resetEditor(e);
+      }
+    }
+    //CKEDITOR.replace('html-editor')
+    //CKEDITOR.config.height = 600;
+
+  });
+</script>
+");
 
         }
     }

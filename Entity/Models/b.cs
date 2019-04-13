@@ -39,7 +39,7 @@ namespace Entity.Models
   [Table("S2")]
   public class S2 : SCHCContent
   {
-    [InputType(EditorType = EnumInputType.Password)]
+    [InputType(EditorType = EnumInputType.Html)]
     public string Title2 { get; set; }
 
     [InputType(EditorType = EnumInputType.DropDwon, MultiSelect = true, RelatedType = typeof(GenderSelect))]

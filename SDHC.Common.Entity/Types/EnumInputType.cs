@@ -17,6 +17,7 @@ namespace SDHC.Common.Entity.Types
     DropDwon,
     FileUpload,
     Bool,
-    Range
+    Range,
+    Html,
   }
 }
