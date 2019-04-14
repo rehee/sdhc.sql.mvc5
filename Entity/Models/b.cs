@@ -1,13 +1,6 @@
-﻿using SDHC.Common.Entity.Attributes;
-using SDHC.Common.Entity.Models;
-using SDHC.Common.Entity.Types;
+﻿using SDHC.Common.Entity.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entity.Models
 {

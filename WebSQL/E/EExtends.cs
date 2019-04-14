@@ -1,10 +1,4 @@
-﻿using SDHC.Common.Entity.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace System
+﻿namespace System
 {
   public static partial class E
   {

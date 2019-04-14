@@ -126,8 +126,6 @@
   <ItemGroup>
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
     <Compile Include="Attributes\AdminAttribute.cs" />
-    <Compile Include="Attributes\BasePropertyAttribute.cs" />
-    <Compile Include="Attributes\ConfigAttribute.cs" />
     <Compile Include="Controllers\SDHCPageController.cs" />
     <Compile Include="Cruds\BaseCruds.cs" />
     <Compile Include="Cruds\ContentCruds.cs" />
@@ -164,7 +162,7 @@
     <Compile Include="Start\BeforeStart.cs" />
     <Compile Include="Start\IdentityConfig.cs" />
     <Compile Include="Start\StartUp.cs" />
-    <Compile Include="Types\EnumInputType.cs" />
+    <Compile Include="Types\Class1.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -174,6 +172,10 @@
     <Content Include="ToDoList.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SDHC.Common\SDHC.Common.csproj">
+      <Project>{7b0bc2ab-c8ea-47eb-addb-e970333618f3}</Project>
+      <Name>SDHC.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SDHC.Core\SDHC.Core.csproj">
       <Project>{dc85a3fd-2e7b-4eca-9cd9-50840c52f110}</Project>
       <Name>SDHC.Core</Name>

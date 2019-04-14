@@ -6,18 +6,11 @@ using System.Threading.Tasks;
 
 namespace SDHC.Common.Entity.Types
 {
-  public enum EnumInputType
+  class Class1
   {
-    Text,
-    Password,
-    TextArea,
-    Hidden,
-    Number,
-    DateTime,
-    DropDwon,
-    FileUpload,
-    Bool,
-    Range,
-    Html,
   }
+}
+namespace SDHC.Common.Entity.Attributes
+{
+
 }
