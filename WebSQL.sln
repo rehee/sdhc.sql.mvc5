@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27703.2000
+VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSQL", "WebSQL\WebSQL.csproj", "{1EA6F42A-5800-476B-A185-67ECFA60B5C7}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDHC.Payment.Stripe", "Services\SDHC.Payment.Stripe\SDHC.Payment.Stripe.csproj", "{C3121872-6E67-4C2F-AAC5-5FD99FF3DC9B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Admin", "Admin\Admin.csproj", "{429CB85D-6359-4365-B5D4-8E97722A730D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SDHC.Core", "SDHC.Core\SDHC.Core.csproj", "{DC85A3FD-2E7B-4ECA-9CD9-50840C52F110}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{429CB85D-6359-4365-B5D4-8E97722A730D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{429CB85D-6359-4365-B5D4-8E97722A730D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{429CB85D-6359-4365-B5D4-8E97722A730D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC85A3FD-2E7B-4ECA-9CD9-50840C52F110}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC85A3FD-2E7B-4ECA-9CD9-50840C52F110}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC85A3FD-2E7B-4ECA-9CD9-50840C52F110}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC85A3FD-2E7B-4ECA-9CD9-50840C52F110}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

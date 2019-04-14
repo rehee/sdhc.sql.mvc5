@@ -14,6 +14,8 @@ namespace System
     public static bool AdminFree { get; set; } = false;
     [Config]
     public static int SortChildLevel { get; set; } = 4;
+    [Config]
+    public static string FileUploadPath { get; set; } = "files";
 
     [Config]
     public static string AdminTitle { get; set; } = "";

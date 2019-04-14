@@ -75,7 +75,7 @@ web.config中的setting中加入对应的设置,如果未设置则为默认值. 
 
 
 | 属性                  | 类型       |控制器         |方法  |默认值|
-| -------------         |:----:     | ---:          | -----:| ----:| 
+| :-------------         |:----     | :---          | :-----| :----| 
 | ContentIndex          | string    |Content        |Index |""    |
 | ContentCreate         | string    |Content        |Create , PreCreate|""|
 | ContentEdit           | string    |Content        |Edit |""|
@@ -95,7 +95,7 @@ web.config中的setting中加入对应的设置,如果未设置则为默认值. 
 一般属性
 
 | 属性                  | 类型       |内容         |默认值|
-| -------------         |:----:     | -------:| ----:| 
+| :-------------         |:----     | :-------| :----| 
 |UseContentRouter | bool| 是否使用 内容通配符 | false|
 |AdminFree | bool |后台是否关闭 | false|
 |AdminTitle | string |后台 title |""|
@@ -107,6 +107,8 @@ web.config中的setting中加入对应的设置,如果未设置则为默认值. 
 |DefaultLanguage | int| 默认语言 | 0
 |ContentViewPath | string |Content Model对应的views的目录(根目录为Views) | ""|
 |ContentPageUrl | string |content通配符的默认路由名 | "pages"|
+|SortChildLevel | int |sort时显示的最大深度 | 4|
+|FileUploadPath | string |文件上传默认路径 | "files"|
 
 环境设置
 在静态方法E中 加入property,与[Config] filter. 这样在对应web.config中的setting中加入对应的设置.

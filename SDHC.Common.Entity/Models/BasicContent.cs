@@ -31,6 +31,10 @@ namespace SDHC.Common.Entity.Models
     {
       return String.IsNullOrEmpty(this.Title) ? this.Id.ToString() : this.Title;
     }
+    public override string ToString()
+    {
+      return this.DisplayName();
+    }
   }
 
   public abstract class BaseContent : IBasicContent
@@ -134,7 +138,10 @@ namespace SDHC.Common.Entity.Models
     {
       return String.IsNullOrEmpty(this.Title) ? this.Id.ToString() : this.Title;
     }
-
+    public override string ToString()
+    {
+      return this.DisplayName();
+    }
     [NotMapped]
     [IgnoreEdit]
     public IEnumerable<BaseContent> Children
@@ -157,6 +164,10 @@ namespace SDHC.Common.Entity.Models
     public virtual string DisplayName()
     {
       return String.IsNullOrEmpty(this.Title) ? this.Id.ToString() : this.Title;
+    }
+    public override string ToString()
+    {
+      return this.DisplayName();
     }
   }
 

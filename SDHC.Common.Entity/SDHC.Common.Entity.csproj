@@ -134,7 +134,7 @@
     <Compile Include="Cruds\BaseModelCRUD.cs" />
     <Compile Include="Extends\ContentCRUD.cs" />
     <Compile Include="Extends\ContentExtends.cs" />
-    <Compile Include="Extends\MyReflect.cs" />
+    <Compile Include="Extends\MyReflectExtends.cs" />
     <Compile Include="Extends\TypeExtends.cs" />
     <Compile Include="Managers\ConfigManager.cs" />
     <Compile Include="Managers\ContentManager.cs" />
@@ -150,8 +150,6 @@
     <Compile Include="Models\BasicModel.cs" />
     <Compile Include="Extends\Convert.cs" />
     <Compile Include="Extends\Files.cs" />
-    <Compile Include="Extends\MyConvertExtend.cs" />
-    <Compile Include="G.cs" />
     <Compile Include="Models\ContentTableView.cs" />
     <Compile Include="Models\DropdownModel.cs" />
     <Compile Include="Models\IContent.cs" />
@@ -175,6 +173,11 @@
   <ItemGroup>
     <Content Include="ToDoList.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SDHC.Core\SDHC.Core.csproj">
+      <Project>{dc85a3fd-2e7b-4eca-9cd9-50840c52f110}</Project>
+      <Name>SDHC.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

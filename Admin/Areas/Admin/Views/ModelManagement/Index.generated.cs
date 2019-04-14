@@ -41,7 +41,7 @@ namespace ASP
             
             #line 2 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
   
-  ViewBag.Title = G.GetModelTitle(G.Text(ViewBag.id)) + " Management";
+  ViewBag.Title = G.GetModelTitle(C.Text(ViewBag.id)) + " Management";
   Model.FirstRowAction = "Edit";
   Model.FirstRowController = "ModelManagement";
   Model.FirstRowArea = "Area";

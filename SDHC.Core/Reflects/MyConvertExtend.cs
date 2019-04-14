@@ -1,10 +1,6 @@
-﻿using SDHC.Common.Entity.Models;
-using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace System
 {
@@ -31,9 +27,9 @@ namespace System
           if (b.GetType().GetRealType() != typeof(DateTime))
             return "";
           var date = (DateTime)b;
-          if (String.IsNullOrEmpty(G.DateConvertFormats))
+          if (String.IsNullOrEmpty(C.DateConvertFormats))
             return date.ToString();
-          return date.ToString(G.DateConvertFormats);
+          return date.ToString(C.DateConvertFormats);
         },
       };
     public static object MyTryConvert(this string value, Type type)
@@ -79,11 +75,6 @@ namespace System
       {
         if (MyObjectStringConvertDictionary.ContainsKey(valueType))
           return MyObjectStringConvertDictionary[valueType](value);
-        var thisType = value.GetType().GetRealType();
-        if(thisType.GetInterfaces().Any(b=>b == typeof(IDisplayName)))
-        {
-          return ((IDisplayName)value).DisplayName();
-        }
         return value.ToString();
       }
       try

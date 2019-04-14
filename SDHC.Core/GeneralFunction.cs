@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace System
 {
-  public static partial class G
+  public static class C
   {
     public static long MaxLength { get; set; } = 9223372036854775807;
-    public static string FileUploadPath { get; set; } = "files";
+    
     public static bool IsNullOrEmpty(this string input)
     {
       return String.IsNullOrEmpty(input);
@@ -44,11 +43,6 @@ namespace System
       }
       return value;
     }
-
-
-  }
-  public static partial class G
-  {
     //经常需要把dynamic或者其他乱七八糟的转成字符,trim 或者如果是空取默认值或者第几个字母开始大写等等
     #region
     public static string Text(this object input, string defaultValue = "", int captalString = -1, bool trim = true)
@@ -303,7 +297,7 @@ namespace System
 
     public static Type GetRealType(this Type type)
     {
-      if (type.Namespace == G.EntityNameSpace)
+      if (type.Namespace == EntityNameSpace)
         return type.BaseType;
       return type;
     }

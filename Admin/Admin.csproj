@@ -254,6 +254,10 @@
       <Project>{27b1ce81-9446-4e82-a23d-10d6f4269c16}</Project>
       <Name>SDHC.Common.Entity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SDHC.Core\SDHC.Core.csproj">
+      <Project>{dc85a3fd-2e7b-4eca-9cd9-50840c52f110}</Project>
+      <Name>SDHC.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

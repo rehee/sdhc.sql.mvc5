@@ -54,6 +54,7 @@
       <HintPath>..\packages\QueryInterceptor.Core.1.0.7\lib\net40\QueryInterceptor.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Json, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -62,7 +63,6 @@
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xml.Linq" />
@@ -5280,6 +5280,7 @@
     <Content Include="Areas\Admin\Views\Dropdown\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Dropdown\IndexSelect.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <Content Include="ReadMe.md" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -5352,6 +5353,10 @@
     <ProjectReference Include="..\SDHC.Common.Entity\SDHC.Common.Entity.csproj">
       <Project>{27b1ce81-9446-4e82-a23d-10d6f4269c16}</Project>
       <Name>SDHC.Common.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SDHC.Core\SDHC.Core.csproj">
+      <Project>{dc85a3fd-2e7b-4eca-9cd9-50840c52f110}</Project>
+      <Name>SDHC.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
