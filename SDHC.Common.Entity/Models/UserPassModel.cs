@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -16,7 +17,7 @@ namespace SDHC.Common.Entity.Models
 
   public class SDHCUser : IdentityUser, IDisplayName
   {
-    public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<SDHCUser> manager)
+    public virtual async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<SDHCUser> manager)
     {
       // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
       var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
@@ -28,8 +29,19 @@ namespace SDHC.Common.Entity.Models
     {
       return String.IsNullOrEmpty(this.UserName) ? this.Id : this.UserName;
     }
+    public override string ToString()
+    {
+      return this.DisplayName();
+    }
+
+    [IgnoreEdit]
+    public virtual TUser GetCustomUser<TUser>() where TUser : SDHCUser
+    {
+      return this as TUser;
+    }
   }
 
+  
 }
 
 
