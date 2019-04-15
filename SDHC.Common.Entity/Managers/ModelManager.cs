@@ -135,7 +135,11 @@ namespace System
     {
       BaseModelCRUD.Update(model);
     }
-    
+    public static void Update(BaseViewModel model)
+    {
+      BaseModelCRUD.Update(model);
+    }
+
 
     public static void Delete<T>(ISave repo, T model) where T : class, IInt64Key
     {
