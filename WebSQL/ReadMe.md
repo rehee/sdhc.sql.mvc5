@@ -22,7 +22,7 @@
 ## 预期结果
 * 简化开发流程
 * 确定需求,定义Entity
-* 完成商业逻辑
+* 完成商业逻辑C:\code\sdhc.sql.mvc5\WebSQL\ReadMe.md
 * 上前端出工
 
 # 安装方法

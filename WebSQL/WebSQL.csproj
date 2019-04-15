@@ -4636,7 +4636,6 @@
     <Content Include="lib\admin\scss\icons\weather-icons\less\css\variables-night.css" />
     <Content Include="lib\admin\scss\icons\weather-icons\less\css\variables-time.css" />
     <Content Include="lib\admin\scss\icons\weather-icons\less\css\variables-wind-names.css" />
-    <Content Include="ReadMe.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -5292,6 +5291,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="ToDo.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
