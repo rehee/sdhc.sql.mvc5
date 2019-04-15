@@ -75,14 +75,12 @@ namespace System
       {
         childrens.ForEach(b => Delete(b.Id, db));
       }
-      var method = db.GetMethod(model.GetType().GetRealType(), "Remove", out object p);
-      method.Invoke(p, new object[1] { model });
-      db.SaveChanges();
+      BaseCruds.Delete(model, db);
     }
     public static T GetByPK<T>(long id, out ISave db) where T : class, IContentModel
     {
       db = GetRepo();
-      return BaseCruds.Read<T>(BaseIContentModelType, b => b.Id == id).FirstOrDefault();
+      return BaseCruds.Read<T>(BaseIContentModelType, b => b.Id == id, db).FirstOrDefault();
 
     }
   }

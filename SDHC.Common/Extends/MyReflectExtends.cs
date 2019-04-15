@@ -1,10 +1,7 @@
-﻿using SDHC.Common.Entity.Attributes;
-using SDHC.Common.Entity.Models;
+﻿using SDHC.Common.Entity.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace System
 {
@@ -45,17 +42,17 @@ namespace System
           if (longKey)
           {
             var longValues = values.Select(b => b.MyTryConvert<long>()).ToList();
-            objList = ModelManager.Read<IBasicContent>(inputType.RelatedType, b => longValues.Contains(b.Id)).ToList();
+            objList = BaseCruds.Read<IInt64Key>(inputType.RelatedType, b => longValues.Contains(b.Id)).ToList();
           }
           else
           {
             if (typeof(T) == typeof(string) || typeof(T) == typeof(String))
             {
-              objList = ModelManager.Read<SDHCUser>(inputType.RelatedType, b => values.Contains(b.Id)).ToList().Select(b => (b as IDisplayName).DisplayName()).ToList();
+              objList = BaseCruds.Read<IStringKey>(inputType.RelatedType, b => values.Contains(b.Id)).ToList().Select(b => (b as IDisplayName).DisplayName()).ToList();
             }
             else
             {
-              objList = ModelManager.Read<SDHCUser>(inputType.RelatedType, b => values.Contains(b.Id)).ToList();
+              objList = BaseCruds.Read<IStringKey>(inputType.RelatedType, b => values.Contains(b.Id)).ToList();
             }
           }
           if (types.Contains(typeof(T)))
@@ -78,17 +75,17 @@ namespace System
           if (longKey)
           {
             var longValue = firstValue.MyTryConvert<long>();
-            value = ModelManager.Read<IBasicContent>(inputType.RelatedType, b => b.Id == longValue).ToList().Select(b => b.MyTryConvert<T>()).FirstOrDefault();
+            value = BaseCruds.Read<IInt64Key>(inputType.RelatedType, b => b.Id == longValue).ToList().Select(b => b.MyTryConvert<T>()).FirstOrDefault();
           }
           else
           {
             if (typeof(T) == typeof(string) || typeof(T) == typeof(String))
             {
-              value = ModelManager.Read<SDHCUser>(inputType.RelatedType, b => values.Contains(b.Id)).ToList().Select(b => (b as IDisplayName).DisplayName()).ToList().FirstOrDefault();
+              value = BaseCruds.Read<IStringKey>(inputType.RelatedType, b => values.Contains(b.Id)).ToList().Select(b => (b as IDisplayName).DisplayName()).ToList().FirstOrDefault();
             }
             else
             {
-              value = ModelManager.Read<SDHCUser>(inputType.RelatedType, b => values.Contains(b.Id)).ToList().Select(b => b.MyTryConvert<T>()).ToList().FirstOrDefault();
+              value = BaseCruds.Read<IStringKey>(inputType.RelatedType, b => values.Contains(b.Id)).ToList().Select(b => b.MyTryConvert<T>()).ToList().FirstOrDefault();
             }
           }
         }

@@ -43,7 +43,6 @@ namespace System
       }
       return avaliable.ChildrenType;
     }
-
     public static IEnumerable<DropDownSummary> GetAllAvaliableSelectList()
     {
       var list = GetAllAvaliableSelect();

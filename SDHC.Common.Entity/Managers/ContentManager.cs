@@ -106,7 +106,6 @@ namespace System
       model.ParentId = parentId;
       return model.ConvertModelToPost();
     }
-
     public static ContentPostViewModel GetContentPostViewModel(string url)
     {
       var homePageModel = ModelManager.Read<BaseContent>(BasicContentType, b => b.ParentId == null).OrderBy(b => b.DisplayOrder).FirstOrDefault();

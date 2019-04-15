@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using SDHC.Common.Entity.Extends;
+using SDHC.Common.Entity.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -77,6 +79,12 @@ namespace Start
         RouteTable.Routes.MapRoute("content", $"{(String.IsNullOrEmpty(G.ContentPageUrl) ? "" : G.ContentPageUrl + "/")}{{*names}}",
               defaults: new { controller = "SDHCPage", action = "Index" });
       }
+
+      ContentPostViewModel.GetContentPageUrl = () => G.ContentPageUrl;
+      ContentPostViewModel.GetContentViewPath = () => G.ContentViewPath;
+      ContentPostViewModel.Convert = (input) => input.ConvertModelToPost();
+      PassModeConvert.GetSaveFile = Files.SaveFile;
+      PassModeConvert.GetDeleteFile = Files.DeleteFile;
     }
   }
 }

@@ -80,7 +80,5 @@ namespace SDHC.Common.Entity.Managers
       smtp.SendCompleted += (s, e) => { smtp.Dispose(); };
       return smtp;
     }
-
-
   }
 }

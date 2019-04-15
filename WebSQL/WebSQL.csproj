@@ -5332,6 +5332,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="files\Entity.Models.S2_Title2\" />
     <Folder Include="Views\Content\" />
   </ItemGroup>
   <ItemGroup>

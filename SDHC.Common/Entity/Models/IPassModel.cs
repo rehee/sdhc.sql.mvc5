@@ -1,10 +1,6 @@
-﻿using SDHC.Common.Entity.Attributes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SDHC.Common.Entity.Models
 {
@@ -12,60 +8,6 @@ namespace SDHC.Common.Entity.Models
   {
     List<ContentProperty> Properties { get; set; }
   }
-
-  public class ContentPostViewModel
-  {
-    public ContentPostViewModel(ContentPostModel model = null)
-    {
-      if (model != null)
-        Model = model;
-    }
-    public ContentPostViewModel(IContentModel model)
-    {
-      if (model != null)
-      {
-        Model = model.ConvertModelToPost();
-        Parents = model.Parents;
-        ThisUrl = model.Url;
-      }
-
-
-    }
-
-    public ContentPostModel Model { get; set; }
-    public string ViewPath
-    {
-      get
-      {
-        if (Model == null)
-          return "";
-        var t = Type.GetType($"{Model.FullType},{Model.ThisAssembly}");
-        var path = String.IsNullOrEmpty(G.ContentViewPath) ? "" : $"/{G.ContentViewPath}";
-        return $"~/Views{path}/{t.Name}.cshtml";
-      }
-    }
-    IEnumerable<IContentModel> Parents { get; set; } = Enumerable.Empty<IContentModel>();
-    IEnumerable<IContentModel> BreadCrumbs
-    {
-      get
-      {
-        if (Parents == null)
-          Enumerable.Empty<IContentModel>();
-        var list = Parents.ToList();
-        list.Reverse();
-        return list;
-      }
-    }
-    public string ThisUrl { get; set; }
-    public string Url
-    {
-      get
-      {
-        return $"/{G.ContentPageUrl}{(BreadCrumbs.Count() == 0 ? "" : "/")}{String.Join("/", BreadCrumbs.Select(b => b.Url))}/{ThisUrl}";
-      }
-    }
-  }
-
 
   public class ContentPostModel : IPostModel
   {

@@ -10,11 +10,28 @@ namespace SDHC.Common.Entity.Extends
 {
   public static class Files
   {
-    public static void SaveFile(this HttpPostedFileBase file, out string filePath, string extraPath = "")
+    public static bool SaveFile(this object input, out string filePath, string extraPath = "")
     {
       filePath = "";
-      if (file == null)
-        return;
+      if (!(input.GetType().GetRealType() == typeof(HttpPostedFileBase)
+        || input.GetType().GetRealType() == typeof(HttpPostedFileBase[])))
+      {
+        return false;
+      }
+        
+      if (input == null)
+        return false;
+      HttpPostedFileBase file;
+      if (input.GetType().GetRealType() == typeof(HttpPostedFileBase))
+      {
+        file = (HttpPostedFileBase)input;
+      }
+      else
+      {
+        file = ((HttpPostedFileBase[])input).FirstOrDefault();
+        if (file == null)
+          return false;
+      }
       try
       {
         
@@ -36,13 +53,14 @@ namespace SDHC.Common.Entity.Extends
         }
         file.SaveAs(path);
         filePath = uploadPath;
+        return true;
       }
       catch (Exception ex)
       {
         Console.WriteLine(ex.Message);
+        return false;
       }
     }
-
     public static void DeleteFile(this string filePath, out bool success)
     {
       var path = Path.Combine(FileManager.BasePath, filePath);

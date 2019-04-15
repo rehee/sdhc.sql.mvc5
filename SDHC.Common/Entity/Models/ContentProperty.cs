@@ -1,10 +1,5 @@
-﻿using SDHC.Common.Entity.Types;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
 
 namespace SDHC.Common.Entity.Models
 {
@@ -18,7 +13,7 @@ namespace SDHC.Common.Entity.Models
     public EnumInputType EditorType { get; set; } = EnumInputType.Text;
     public bool MultiSelect { get; set; } = false;
     public IEnumerable<DropDownViewModel> SelectItems { get; set; } = new List<DropDownViewModel>();
-    public HttpPostedFileBase File { get; set; }
+    public object File { get; set; }
     public bool RemoveFile { get; set; } = false;
     public bool BaseProperty { get; set; } = false;
     public bool IgnoreProperty { get; set; } = false;

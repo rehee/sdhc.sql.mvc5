@@ -1,16 +1,10 @@
-﻿using SDHC.Common.Entity.Extends;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace System
+﻿namespace System
 {
   public static class ContentExtends
   {
     public static string GetValueByKey(this object input, string key)
     {
+      
       if (input == null)
       {
         return "";
@@ -18,7 +12,7 @@ namespace System
       var type = input.GetType().GetRealType();
       foreach (var p in type.GetProperties())
       {
-        if(p.Name != key)
+        if (p.Name != key)
         {
           continue;
         }
@@ -27,6 +21,5 @@ namespace System
       }
       return "";
     }
-
   }
 }

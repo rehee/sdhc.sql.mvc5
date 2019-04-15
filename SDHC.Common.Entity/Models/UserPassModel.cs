@@ -15,7 +15,7 @@ namespace SDHC.Common.Entity.Models
     public List<ContentProperty> Properties { get; set; } = new List<ContentProperty>();
   }
 
-  public class SDHCUser : IdentityUser, IDisplayName
+  public class SDHCUser : IdentityUser, IDisplayName, IStringKey
   {
     public virtual async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<SDHCUser> manager)
     {
@@ -24,7 +24,6 @@ namespace SDHC.Common.Entity.Models
       // Add custom user claims here
       return userIdentity;
     }
-
     public virtual string DisplayName()
     {
       return String.IsNullOrEmpty(this.UserName) ? this.Id : this.UserName;
@@ -41,7 +40,7 @@ namespace SDHC.Common.Entity.Models
     }
   }
 
-  
+
 }
 
 
