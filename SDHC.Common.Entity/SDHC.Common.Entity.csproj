@@ -127,7 +127,6 @@
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
     <Compile Include="Attributes\AdminAttribute.cs" />
     <Compile Include="Controllers\SDHCPageController.cs" />
-    <Compile Include="Extends\ContentCRUD.cs" />
     <Compile Include="Extends\TypeExtends.cs" />
     <Compile Include="Managers\ConfigManager.cs" />
     <Compile Include="Managers\ContentManager.cs" />
