@@ -20,7 +20,7 @@ namespace SDHC.Common.Entity.Models
       if (model != null)
         Model = model;
     }
-    public ContentPostViewModel(BaseContent model)
+    public ContentPostViewModel(IContentModel model)
     {
       if (model != null)
       {
@@ -44,13 +44,13 @@ namespace SDHC.Common.Entity.Models
         return $"~/Views{path}/{t.Name}.cshtml";
       }
     }
-    IEnumerable<BaseContent> Parents { get; set; } = Enumerable.Empty<BaseContent>();
-    IEnumerable<BaseContent> BreadCrumbs
+    IEnumerable<IContentModel> Parents { get; set; } = Enumerable.Empty<IContentModel>();
+    IEnumerable<IContentModel> BreadCrumbs
     {
       get
       {
         if (Parents == null)
-          Enumerable.Empty<BaseContent>();
+          Enumerable.Empty<IContentModel>();
         var list = Parents.ToList();
         list.Reverse();
         return list;

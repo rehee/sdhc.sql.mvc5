@@ -1,12 +1,6 @@
-﻿using SDHC.Common.Entity.Models;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
+﻿using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace System
 {
@@ -106,16 +100,22 @@ namespace System
     }
     public static IQueryable<T> Read<T>(Type type, Expression<Func<T, bool>> where, out ISave db)
     {
-      db = GetRepo();
-      var dbset = db.GetDbSet(type) as IQueryable<T>;
-      if (dbset == null)
-        return null;
-      return Queryable.Where<T>(dbset, where);
+      var set = BaseCruds.GetDbSet(type, out db);
+      var q = Queryable.Where<T>((IQueryable<T>)set, where);
+      return q;
     }
     public static IQueryable<T> Read<T>(Type type, Expression<Func<T, bool>> where)
     {
       return Read<T>(type, where, out var repo);
     }
+    public static IQueryable<T> Read<T>(Type type, Expression<Func<T, bool>> where,ISave db)
+    {
+      var dbset = db.GetDbSet(type) as IQueryable<T>;
+      if (dbset == null)
+        return null;
+      return Queryable.Where<T>(dbset, where);
+    }
+
     public static MethodInfo GetMethod(this ISave repo, Type property, string methodName, out object propertyObj)
     {
       var repoType = repo.GetType();

@@ -32,7 +32,7 @@ namespace System
     }
     public static void UpdateContent(ContentPostModel input)
     {
-      var content = ContentCruds.GetByPK<BaseContent>(input.Id, out IContent db);
+      var content = ContentCruds.GetByPK<BaseContent>(input.Id, out ISave db);
       if (content == null)
       {
         return;
@@ -163,7 +163,7 @@ namespace System
       }
     }
 
-    public static void GetContentListView(BaseContent model, ContentListView parent, int parentLevel = 0)
+    public static void GetContentListView(IContentModel model, ContentListView parent, int parentLevel = 0)
     {
       if (parentLevel > G.SortChildLevel)
       {

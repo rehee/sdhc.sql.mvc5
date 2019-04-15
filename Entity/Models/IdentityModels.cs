@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Entity.Models;
@@ -31,7 +32,7 @@ namespace WebSQL.Models
     public ApplicationDbContext()
         : base("DefaultConnection", throwIfV1Schema: false)
     {
-
+      
     }
     
     public DbSet<BaseContent> Contents { get; set; }
@@ -44,7 +45,7 @@ namespace WebSQL.Models
     public DbSet<E2> E2s { get; set; }
 
     public DbSet<GenderSelect> GenderSelects { get; set; }
-
+    
     public static ApplicationDbContext Create()
     {
       return new ApplicationDbContext();

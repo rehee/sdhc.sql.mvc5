@@ -1,7 +1,7 @@
 ﻿@using SDHC.Common.Entity.Models
 @model BaseContent
 @{
-    var breadcrumb = new List<BaseContent>();
+    var breadcrumb = new List<IContentModel>();
     if (Model != null)
     {
         var parents = Model.Parents.Select(b => b).ToList();

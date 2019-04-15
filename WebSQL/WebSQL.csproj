@@ -5355,7 +5355,7 @@
       <Name>SDHC.Common.Entity</Name>
     </ProjectReference>
     <ProjectReference Include="..\SDHC.Common\SDHC.Common.csproj">
-      <Project>{7b0bc2ab-c8ea-47eb-addb-e970333618f3}</Project>
+      <Project>{38ac9be4-4fd0-4db7-827a-e0bb80e3dde3}</Project>
       <Name>SDHC.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\SDHC.Core\SDHC.Core.csproj">

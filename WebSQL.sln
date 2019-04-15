@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Admin", "Admin\Admin.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SDHC.Core", "SDHC.Core\SDHC.Core.csproj", "{DC85A3FD-2E7B-4ECA-9CD9-50840C52F110}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDHC.Common", "SDHC.Common\SDHC.Common.csproj", "{7B0BC2AB-C8EA-47EB-ADDB-E970333618F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SDHC.Common", "SDHC.Common\SDHC.Common.csproj", "{38AC9BE4-4FD0-4DB7-827A-E0BB80E3DDE3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +47,10 @@ Global
 		{DC85A3FD-2E7B-4ECA-9CD9-50840C52F110}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC85A3FD-2E7B-4ECA-9CD9-50840C52F110}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC85A3FD-2E7B-4ECA-9CD9-50840C52F110}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7B0BC2AB-C8EA-47EB-ADDB-E970333618F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7B0BC2AB-C8EA-47EB-ADDB-E970333618F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7B0BC2AB-C8EA-47EB-ADDB-E970333618F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7B0BC2AB-C8EA-47EB-ADDB-E970333618F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38AC9BE4-4FD0-4DB7-827A-E0BB80E3DDE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38AC9BE4-4FD0-4DB7-827A-E0BB80E3DDE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38AC9BE4-4FD0-4DB7-827A-E0BB80E3DDE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38AC9BE4-4FD0-4DB7-827A-E0BB80E3DDE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

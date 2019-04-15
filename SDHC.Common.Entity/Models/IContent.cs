@@ -16,10 +16,5 @@ namespace System
     DbSet<BaseContent> Contents { get; set; }
     DbSet<BaseSelect> Selects { get; set; }
   }
-  public interface ISave
-  {
-    int SaveChanges();
-    Task<int> SaveChangesAsync(CancellationToken cancellationToken);
-    Task<int> SaveChangesAsync();
-  }
+  
 }

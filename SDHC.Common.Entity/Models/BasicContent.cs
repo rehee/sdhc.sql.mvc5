@@ -9,14 +9,6 @@ using System.Threading.Tasks;
 
 namespace SDHC.Common.Entity.Models
 {
-  public interface IBasicContent : IInt64Key, IDisplayName
-  {
-
-  }
-  public interface IBasicSelect : IBasicContent
-  {
-
-  }
 
   public abstract class BaseSelect : IBasicSelect
   {
@@ -34,13 +26,13 @@ namespace SDHC.Common.Entity.Models
     }
   }
 
-  public abstract class BaseContent : IBasicContent
+  public abstract class BaseContent : IContentModel
   {
     [Key]
     [BaseProperty]
     public long Id { get; set; }
     [BaseProperty]
-    public string Title
+    public virtual string Title
     {
       get
       {
@@ -99,24 +91,35 @@ namespace SDHC.Common.Entity.Models
     }
 
     [BaseProperty]
+    [ForeignKey("ThisParent")]
     public long? ParentId { get; set; }
 
     [IgnoreEdit]
-    public virtual BaseContent Parent { get; set; }
+    public virtual BaseContent ThisParent { get; set; }
 
     [NotMapped]
     [IgnoreEdit]
-    private IEnumerable<BaseContent> _parents { get; set; }
+    public IContentModel Parent
+    {
+      get
+      {
+        return (IContentModel)this.ThisParent;
+      }
+    }
 
     [NotMapped]
     [IgnoreEdit]
-    public IEnumerable<BaseContent> Parents
+    private IEnumerable<IContentModel> _parents { get; set; }
+
+    [NotMapped]
+    [IgnoreEdit]
+    public IEnumerable<IContentModel> Parents
     {
       get
       {
         if (_parents != null)
           return _parents;
-        var list = new List<BaseContent>();
+        var list = new List<IContentModel>();
         var p = this.Parent;
         do
         {
@@ -141,7 +144,7 @@ namespace SDHC.Common.Entity.Models
     }
     [NotMapped]
     [IgnoreEdit]
-    public IEnumerable<BaseContent> Children
+    public IEnumerable<IContentModel> Children
     {
       get
       {
@@ -151,7 +154,7 @@ namespace SDHC.Common.Entity.Models
     }
   }
 
-  public abstract class BaseModel : IBasicContent
+  public abstract class BaseModel : IBasicModel
   {
     [Key]
     [BaseProperty]

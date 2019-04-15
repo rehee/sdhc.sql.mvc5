@@ -28,6 +28,7 @@ namespace Start
     {
       ConfigureAuth<TRepo>(app, repoCreate);
       BaseCruds.GetRepo = () => new TRepo();
+      ContentCruds.BaseIContentModelType = typeof(TBaseContent);
       ContentManager.BasicContentType = typeof(TBaseContent);
       SelectManager.BasicSelectType = typeof(TBaseSelect);
       FileManager.BasePath = webBasePath;

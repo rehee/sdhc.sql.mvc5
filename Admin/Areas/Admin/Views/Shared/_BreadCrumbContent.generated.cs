@@ -47,7 +47,7 @@ namespace ASP
             
             #line 3 "..\..\Areas\Admin\Views\Shared\_BreadCrumbContent.cshtml"
   
-    var breadcrumb = new List<BaseContent>();
+    var breadcrumb = new List<IContentModel>();
     if (Model != null)
     {
         var parents = Model.Parents.Select(b => b).ToList();
@@ -65,27 +65,27 @@ WriteLiteral(" class=\"breadcrumb\"");
 
 WriteLiteral(">\r\n    <li");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 350), Tuple.Create("\"", 408)
-, Tuple.Create(Tuple.Create("", 358), Tuple.Create("breadcrumb-item", 358), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 352), Tuple.Create("\"", 410)
+, Tuple.Create(Tuple.Create("", 360), Tuple.Create("breadcrumb-item", 360), true)
             
             #line 14 "..\..\Areas\Admin\Views\Shared\_BreadCrumbContent.cshtml"
-, Tuple.Create(Tuple.Create(" ", 373), Tuple.Create<System.Object, System.Int32>(breadcrumb.Count==0?"active":""
+, Tuple.Create(Tuple.Create(" ", 375), Tuple.Create<System.Object, System.Int32>(breadcrumb.Count==0?"active":""
             
             #line default
             #line hidden
-, 374), false)
+, 376), false)
 );
 
 WriteLiteral(">\r\n        <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 422), Tuple.Create("\"", 490)
+WriteAttribute("href", Tuple.Create(" href=\"", 424), Tuple.Create("\"", 492)
             
             #line 15 "..\..\Areas\Admin\Views\Shared\_BreadCrumbContent.cshtml"
-, Tuple.Create(Tuple.Create("", 429), Tuple.Create<System.Object, System.Int32>(Url.Action("Index","Content",new { area=G.AdminPath,id="" })
+, Tuple.Create(Tuple.Create("", 431), Tuple.Create<System.Object, System.Int32>(Url.Action("Index","Content",new { area=G.AdminPath,id="" })
             
             #line default
             #line hidden
-, 429), false)
+, 431), false)
 );
 
 WriteLiteral(">Root</a>\r\n    </li>\r\n");
@@ -106,27 +106,27 @@ WriteLiteral(">Root</a>\r\n    </li>\r\n");
             #line hidden
 WriteLiteral("        <li");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 570), Tuple.Create("\"", 653)
-, Tuple.Create(Tuple.Create("", 578), Tuple.Create("breadcrumb-item", 578), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 572), Tuple.Create("\"", 655)
+, Tuple.Create(Tuple.Create("", 580), Tuple.Create("breadcrumb-item", 580), true)
             
             #line 19 "..\..\Areas\Admin\Views\Shared\_BreadCrumbContent.cshtml"
-, Tuple.Create(Tuple.Create(" ", 593), Tuple.Create<System.Object, System.Int32>(breadcrumb.IndexOf(item)==breadcrumb.Count-1?"active":""
+, Tuple.Create(Tuple.Create(" ", 595), Tuple.Create<System.Object, System.Int32>(breadcrumb.IndexOf(item)==breadcrumb.Count-1?"active":""
             
             #line default
             #line hidden
-, 594), false)
+, 596), false)
 );
 
 WriteLiteral(">\r\n            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 671), Tuple.Create("\"", 747)
+WriteAttribute("href", Tuple.Create(" href=\"", 673), Tuple.Create("\"", 749)
             
             #line 20 "..\..\Areas\Admin\Views\Shared\_BreadCrumbContent.cshtml"
-, Tuple.Create(Tuple.Create("", 678), Tuple.Create<System.Object, System.Int32>(Url.Action("Index","Content",new { area=G.AdminPath,@id = item.Id })
+, Tuple.Create(Tuple.Create("", 680), Tuple.Create<System.Object, System.Int32>(Url.Action("Index","Content",new { area=G.AdminPath,@id = item.Id })
             
             #line default
             #line hidden
-, 678), false)
+, 680), false)
 );
 
 WriteLiteral(">");
