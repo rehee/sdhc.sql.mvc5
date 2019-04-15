@@ -8,6 +8,7 @@ namespace System
   {
     public static Func<ISave> GetRepo { get; set; } = () => BaseCruds.GetRepo();
     public static Type BaseIContentModelType { get; set; }
+
     public static void Create(IContentModel input)
     {
       var db = GetRepo();
@@ -16,6 +17,7 @@ namespace System
       method.Invoke(IContent, new object[1] { input });
       db.SaveChanges();
     }
+    
     public static T Read<T>(long id) where T : class, IContentModel
     {
       return GetByPK<T>(id, out ISave db);

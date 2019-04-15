@@ -212,5 +212,11 @@ namespace System
       return null;
     }
 
+    public static MethodInfo GetMethod(this object input, string methodName)
+    {
+      var type = input.GetType();
+      var addMethod = type.GetMethod(methodName);
+      return addMethod;
+    }
   }
 }

@@ -365,6 +365,11 @@ namespace System
         catch { }
       }
     }
-    
+
+    public static ModelPostModel GetModelPostModelByType(this Type type)
+    {
+      var baseModel = Activator.CreateInstance(type);
+      return baseModel.ConvertModelToModelPostModel();
+    }
   }
 }

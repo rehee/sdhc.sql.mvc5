@@ -35,67 +35,51 @@ namespace System
       var key = ModelMapper.Where(b => b.Value.FullName == type).Select(b => b.Key).FirstOrDefault();
       return key;
     }
+
     public static ModelPostModel GetModelPostModelByType(Type type)
     {
-      var baseModel = Activator.CreateInstance(type);
-      return baseModel.ConvertModelToModelPostModel();
+      return type.GetModelPostModelByType();
     }
 
     public static void Create<T>(T input) where T : class
     {
-      var type = typeof(T);
-      var set = BaseCruds.GetDbSet<T>(out ISave repo) as DbSet<T>;
-      set.Add(input);
-      repo.SaveChanges();
+      BaseModelCRUD.Create<T>(input);
     }
     public static void Create(object input)
     {
-      var type = input.GetType().GetRealType();
-      var repo = BaseCruds.GetRepo();
-      var addMethod = repo.GetMethod(type, "Add", out object p);
-      if (addMethod != null)
-      {
-        try
-        {
-          addMethod.Invoke(p, new object[1] { input });
-          repo.SaveChanges();
-        }
-        catch
-        {
-
-        }
-      }
+      BaseModelCRUD.Create(input);
     }
     public static void Create(ModelPostModel model)
     {
-      var obj = model.ConvertToBaseModel();
-      Create(obj);
+      BaseModelCRUD.Create(model);
     }
-
     public static IQueryable<T> Read<T>(Expression<Func<T, bool>> where, out ISave repo) where T : class
     {
-      var set = BaseCruds.GetDbSet<T>(out var raepo);
-      return BaseCruds.GetDbSet<T>(out repo).Where(where);
+      return BaseModelCRUD.Read<T>(where, out repo);
     }
-
     public static IQueryable<T> Read<T>(Expression<Func<T, bool>> where) where T : class
     {
-      var result = Read<T>(where, out ISave repo);
-      return result;
+      return BaseModelCRUD.Read<T>(where, out var repo);
     }
+    public static IQueryable<T> Read<T>(Expression<Func<T, bool>> where, ISave repo) where T : class
+    {
+      return BaseModelCRUD.Read<T>(where, repo);
+    }
+
     public static IQueryable<T> Read<T>(Type type, Expression<Func<T, bool>> where, out ISave repo)
     {
-      var tType = typeof(T);
-
-      var set = BaseCruds.GetDbSet(type, out repo);
-      var q = Queryable.Where<T>((IQueryable<T>)set, where);
-      return q;
+      return BaseModelCRUD.Read<T>(type, where, out repo);
     }
     public static IQueryable<T> Read<T>(Type type, Expression<Func<T, bool>> where)
     {
-      var result = Read<T>(type, where, out ISave repo);
-      return result;
+      return Read<T>(type, where, out ISave repo);
+
     }
+    public static IQueryable<T> Read<T>(Type type, Expression<Func<T, bool>> where, ISave repo)
+    {
+      return BaseModelCRUD.Read<T>(type, where, repo);
+    }
+
     public static IQueryable<T> Read<T>(string typeString, Expression<Func<T, bool>> where, out ISave repo)
     {
       var type = GetModelType(typeString);
@@ -106,8 +90,12 @@ namespace System
       var result = Read<T>(typeString, where, out ISave repo);
       return result;
     }
-
-
+    public static IQueryable<T> Read<T>(string typeString, Expression<Func<T, bool>> where, ISave repo)
+    {
+      var type = GetModelType(typeString);
+      return Read<T>(type, where, repo);
+    }
+    //todo找时间需要把find也放入cuid
     public static T Find<T>(long id, out ISave repo) where T : class, IInt64Key
     {
       var result = Read<T>(b => b.Id == id, out repo).FirstOrDefault();
@@ -118,6 +106,7 @@ namespace System
       var result = Read<T>(b => b.Id == id, out ISave repo).FirstOrDefault();
       return result;
     }
+    
     public static object Find(Type type, long id, out ISave repo)
     {
       var result = Read<IInt64Key>(type, b => b.Id == id, out repo).FirstOrDefault();
@@ -128,6 +117,7 @@ namespace System
       var result = Find(type, id, out ISave repo);
       return result;
     }
+
     public static object Find(string typeString, long id, out ISave repo)
     {
       var type = GetModelType(typeString);
@@ -143,11 +133,9 @@ namespace System
 
     public static void Update(ModelPostModel model)
     {
-      var type = Type.GetType($"{model.FullType},{model.ThisAssembly}");
-      var target = Read<IInt64Key>(type, b => b.Id == model.Id, out ISave repo).FirstOrDefault();
-      model.ConvertToBaseModel(target);
-      repo.SaveChanges();
+      BaseModelCRUD.Update(model);
     }
+    
 
     public static void Delete<T>(ISave repo, T model) where T : class, IInt64Key
     {

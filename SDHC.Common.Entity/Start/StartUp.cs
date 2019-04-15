@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
+using SDHC.Common.Entity.Extends;
 using SDHC.Common.Entity.Models;
 using System;
 using System.Collections.Generic;
@@ -28,12 +29,19 @@ namespace Start
     {
       ConfigureAuth<TRepo>(app, repoCreate);
       BaseCruds.GetRepo = () => new TRepo();
+
       ContentCruds.BaseIContentModelType = typeof(TBaseContent);
       ContentManager.BasicContentType = typeof(TBaseContent);
       SelectManager.BasicSelectType = typeof(TBaseSelect);
       FileManager.BasePath = webBasePath;
       SDHCUserManager.BaseUser = typeof(TBaseUser);
-      
+
+      ContentPostViewModel.GetContentPageUrl = () => G.ContentPageUrl;
+      ContentPostViewModel.GetContentViewPath = () => G.ContentViewPath;
+      ContentPostViewModel.Convert = (input) => input.ConvertModelToPost();
+      PassModeConvert.GetSaveFile = Files.SaveFile;
+      PassModeConvert.GetDeleteFile = Files.DeleteFile;
+
 
     }
     // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864

@@ -13,6 +13,7 @@ namespace System
   public static class ContentManager
   {
     public static Type BasicContentType { get; set; } = typeof(BaseContent);
+
     public static void CreateContent(BaseContent input, long? parentId = null)
     {
       if (parentId != null)
