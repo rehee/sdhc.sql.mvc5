@@ -52,9 +52,20 @@ namespace System
     {
     }
 
+    
     public static ApplicationUserManager Create<T>(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) where T : DbContext
     {
-      var manager = new ApplicationUserManager(new UserStore<SDHCUser>(context.Get<T>()));
+      ApplicationUserManager manager;
+      //if (G.MongoDbIuserStore != null)
+      //{
+      //  manager = new ApplicationUserManager(G.MongoDbIuserStore());
+      //}
+      //else
+      //{
+      //  manager = new ApplicationUserManager(new UserStore<SDHCUser>(context.Get<T>()));
+      //}
+      
+      manager = new ApplicationUserManager(new UserStore<SDHCUser>(context.Get<T>()));
       // Configure validation logic for usernames
       manager.UserValidator = new UserValidator<SDHCUser>(manager)
       {
