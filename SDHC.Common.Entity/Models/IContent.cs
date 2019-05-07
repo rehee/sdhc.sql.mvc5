@@ -13,8 +13,8 @@ namespace System
 {
   public interface IContent : ISave
   {
-    DbSet<BaseContent> Contents { get; set; }
-    DbSet<BaseSelect> Selects { get; set; }
+    IDbSet<BaseContent> Contents { get; set; }
+    IDbSet<BaseSelect> Selects { get; set; }
   }
   
 }

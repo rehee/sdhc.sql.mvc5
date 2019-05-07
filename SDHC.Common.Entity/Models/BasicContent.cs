@@ -28,6 +28,14 @@ namespace SDHC.Common.Entity.Models
 
   public abstract class BaseContent : IContentModel
   {
+    public BaseContent()
+    {
+      if (Id == 0)
+      {
+        this.CreateTime = DateTime.UtcNow;
+        this.DisplayOrder = ModelManager.Read<BaseContent>(b => true).Count() + 1;
+      }
+    }
     [Key]
     [BaseProperty]
     public long Id { get; set; }
@@ -74,7 +82,7 @@ namespace SDHC.Common.Entity.Models
     private DateTime? _createTime { get; set; }
 
     [BaseProperty]
-    public DateTime? CreateTime
+    public virtual DateTime? CreateTime
     {
       get
       {

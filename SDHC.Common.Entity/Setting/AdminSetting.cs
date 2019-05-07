@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using SDHC.Common.Entity.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -62,5 +64,6 @@ namespace System
       return "";
     }
 
+    public static Func<IUserStore<SDHCUser>> MongoDbIuserStore { get; set; }
   }
 }

@@ -35,8 +35,8 @@ namespace WebSQL.Models
       
     }
     
-    public DbSet<BaseContent> Contents { get; set; }
-    public DbSet<BaseSelect> Selects { get; set; }
+    public IDbSet<BaseContent> Contents { get; set; }
+    public IDbSet<BaseSelect> Selects { get; set; }
     public DbSet<MyUser> MyUsers { get; set; }
     public DbSet<SCHCContent> SCHCContents { get; set; }
 
