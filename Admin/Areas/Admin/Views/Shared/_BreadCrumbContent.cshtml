@@ -1,23 +1,26 @@
 ﻿@using SDHC.Common.Entity.Models
 @model BaseContent
 @{
-    var breadcrumb = new List<IContentModel>();
-    if (Model != null)
-    {
-        var parents = Model.Parents.Select(b => b).ToList();
-        parents.Reverse();
-        parents.ForEach(b => breadcrumb.Add(b));
-        breadcrumb.Add(Model);
-    }
+  var breadcrumb = new List<IContentModel>();
+  if (Model != null)
+  {
+    var parents = Model.Parents.Select(b => b).ToList();
+    parents.Reverse();
+    parents.ForEach(b => breadcrumb.Add(b));
+    breadcrumb.Add(Model);
+  }
 }
 <ol class="breadcrumb">
-    <li class="breadcrumb-item @(breadcrumb.Count==0?"active":"")">
-        <a href="@Url.Action("Index","Content",new { area=G.AdminPath,id="" })">Root</a>
-    </li>
-    @foreach (var item in breadcrumb)
+  <li class="breadcrumb-item @(breadcrumb.Count==0?"active":"")">
+    <a href="@Url.Action("Index","Content",new { area=G.AdminPath,id="" })">Root</a>
+  </li>
+  @foreach (var item in breadcrumb)
+  {
+    if (item.Id > 0)
     {
-        <li class="breadcrumb-item @(breadcrumb.IndexOf(item)==breadcrumb.Count-1?"active":"")">
-            <a href="@Url.Action("Index","Content",new { area=G.AdminPath,@id = item.Id })">@item.DisplayName()</a>
-        </li>
+      <li class="breadcrumb-item @(breadcrumb.IndexOf(item)==breadcrumb.Count-1?"active":"")">
+        <a href="@Url.Action("Index","Content",new { area=G.AdminPath,@id = item.Id })">@item.DisplayName()</a>
+      </li>
     }
+  }
 </ol>

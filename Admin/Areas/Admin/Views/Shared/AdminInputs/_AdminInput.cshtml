@@ -53,6 +53,13 @@
       {
         <textarea id="html_editor_@Model.Index" class="form-control" @requiredAttr(Model.Property.Required) name="@inputName">@Model.Property.Value</textarea>
       }
+      @if (Model.Property.EditorType == EnumInputType.Bool)
+      {
+        <select name="@inputName" @requiredAttr(Model.Property.Required) @(Model.Property.Readonly ? "disabled" : "") class="form-control">
+          <option @(Model.Property.Value == "True"?"selected":"") value="True">Yes</option>
+          <option @(Model.Property.Value == "False"?"selected":"") value="False">No</option>
+        </select>
+      }
       @if (Model.Property.EditorType == EnumInputType.DateTime)
       {
         @*<div class='input-group date datetimepicker' id="mydatepicker">

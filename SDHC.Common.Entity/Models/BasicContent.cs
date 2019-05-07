@@ -103,7 +103,12 @@ namespace SDHC.Common.Entity.Models
     {
       get
       {
-        return (IContentModel)this.ThisParent;
+        var p = (IContentModel)this.ThisParent;
+        if (p == null && this.ParentId.HasValue && ParentId.Value >0)
+        {
+          p = ContentCruds.Read<BaseContent>(ParentId.Value);
+        }
+        return p;
       }
     }
 

@@ -333,9 +333,6 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_Layout_Content.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Areas\Admin\Views\Shared\_LeftSideBar.cshtml">
-      <LastGenOutput>_LeftSideBar.generated.cs</LastGenOutput>
-    </Content>
     <Content Include="Areas\Admin\Views\Shared\_Root.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_Root.generated.cs</LastGenOutput>

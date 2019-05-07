@@ -6,14 +6,17 @@ namespace Entity.Models
 {
   [AllowChildren(
     ChildrenType = new Type[] { typeof(S1), typeof(S2) },
-    TableList = new string[] {"Id","Title", "E2Select" }
+    TableList = new string[] { "Id", "Title", "E2Select" }
     //,
     //CreateRoles = new string[] { "Admin" },
     //EditRoles = new string[] { "Admin" }
-    
+
     )]
   public class SCHCContent : BaseContent
   {
+    [NotMapped]
+    [InputType(EditorType = EnumInputType.Bool)]
+    public virtual bool IsBool { get; set; } = true;
     public virtual string Title_Title { get; set; }
   }
   [AllowChildren(
