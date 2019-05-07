@@ -27,7 +27,7 @@ namespace Start
       where TBaseSelect : BaseSelect
       where TBaseUser : SDHCUser
     {
-      ConfigureAuth<TRepo>(app, repoCreate);
+      ConfigureAuth<TRepo, TBaseUser>(app, repoCreate);
       BaseCruds.GetRepo = () => new TRepo();
 
       ContentCruds.BaseIContentModelType = typeof(TBaseContent);
@@ -45,12 +45,15 @@ namespace Start
 
     }
     // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
-    public static void ConfigureAuth<T>(IAppBuilder app, Func<T> create) where T : DbContext
+    public static void ConfigureAuth<T,TUser>(IAppBuilder app, Func<T> create) where T : DbContext where TUser : SDHCUser
     {
       // Configure the db context, user manager and signin manager to use a single instance per request
       app.CreatePerOwinContext(create);
+      app.CreatePerOwinContext<ApplicationUserManagerG<TUser>>(ApplicationUserManagerG<TUser>.Create<T>);
       app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create<T>);
+      app.CreatePerOwinContext<ApplicationSignInManagerG<TUser>>(ApplicationSignInManagerG<TUser>.Create);
       app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
+      //app.CreatePerOwinContext<ApplicationSignInManager<S>>(ApplicationSignInManager<TUser>.Create);
       app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create<T>);
 
       // Enable the application to use a cookie to store information for the signed in user
@@ -64,7 +67,7 @@ namespace Start
         {
           // Enables the application to validate the security stamp when the user logs in.
           // This is a security feature which is used when you change a password or add an external login to your account.  
-          OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, SDHCUser>(
+          OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManagerG<TUser>, TUser>(
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
         }

@@ -25,6 +25,7 @@ namespace WebSQL.Models
   public class MyUser: SDHCUser
   {
     public string AAA { get; set; }
+    
   }
 
   public class ApplicationDbContext : IdentityDbContext<SDHCUser>, IContent

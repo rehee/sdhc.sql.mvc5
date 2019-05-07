@@ -23,9 +23,10 @@ namespace Start
       Func<IOwinContext> getContext)
     {
       G.GetSetting = getConfig;
+      G.GetContext = getContext;
       var eProperty = E.GetProperties();
-      G.UserManager = () => OwinContextExtensions.Get<ApplicationUserManager>(getContext());
-      G.SignManager = () => OwinContextExtensions.Get<ApplicationSignInManager>(getContext());
+      //G.UserManager = () => OwinContextExtensions.Get<ApplicationUserManager>(getContext());
+      //G.SignManager = () => OwinContextExtensions.Get<ApplicationSignInManager>(getContext());
       G.RoleManager = () => OwinContextExtensions.Get<ApplicationRoleManager>(getContext());
       Action<PropertyInfo> setValue = p =>
       {

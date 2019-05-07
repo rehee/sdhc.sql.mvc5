@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.DataProtection;
 using SDHC.Common.Entity.Models;
 
 namespace System
@@ -44,30 +45,40 @@ namespace System
     }
   }
   // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
-  public class ApplicationUserManager : UserManager<SDHCUser>
+  public class ApplicationUserManager : ApplicationUserManagerG<SDHCUser>
   {
-
     public ApplicationUserManager(IUserStore<SDHCUser> store)
         : base(store)
     {
     }
-
-    
     public static ApplicationUserManager Create<T>(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) where T : DbContext
     {
-      ApplicationUserManager manager;
-      //if (G.MongoDbIuserStore != null)
-      //{
-      //  manager = new ApplicationUserManager(G.MongoDbIuserStore());
-      //}
-      //else
-      //{
-      //  manager = new ApplicationUserManager(new UserStore<SDHCUser>(context.Get<T>()));
-      //}
-      
-      manager = new ApplicationUserManager(new UserStore<SDHCUser>(context.Get<T>()));
+      return ApplicationUserManagerG<SDHCUser>.GetManager<ApplicationUserManager, T>(options.DataProtectionProvider, context);
+    }
+
+  }
+  public class ApplicationUserManagerG<TUser> : UserManager<TUser> where TUser : SDHCUser
+  {
+
+    public ApplicationUserManagerG(IUserStore<TUser> store)
+        : base(store)
+    {
+    }
+
+
+    public static ApplicationUserManagerG<TUser> Create<T>(IdentityFactoryOptions<ApplicationUserManagerG<TUser>> options, IOwinContext context) where T : DbContext
+    {
+      return ApplicationUserManagerG<TUser>.GetManager<ApplicationUserManagerG<TUser>, T>(options.DataProtectionProvider, context);
+    }
+
+    public static TManager GetManager<TManager, T>(IDataProtectionProvider dataProtectionProvider, IOwinContext context)
+      where T : DbContext
+      where TManager : UserManager<TUser>
+    {
+      TManager manager;
+      manager = (TManager)Activator.CreateInstance(typeof(TManager), new UserStore<TUser>(context.Get<T>()));
       // Configure validation logic for usernames
-      manager.UserValidator = new UserValidator<SDHCUser>(manager)
+      manager.UserValidator = new UserValidator<TUser>(manager)
       {
         AllowOnlyAlphanumericUserNames = false,
         RequireUniqueEmail = true
@@ -90,43 +101,53 @@ namespace System
 
       // Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user
       // You can write your own provider and plug it in here.
-      manager.RegisterTwoFactorProvider("Phone Code", new PhoneNumberTokenProvider<SDHCUser>
+      manager.RegisterTwoFactorProvider("Phone Code", new PhoneNumberTokenProvider<TUser>
       {
         MessageFormat = "Your security code is {0}"
       });
-      manager.RegisterTwoFactorProvider("Email Code", new EmailTokenProvider<SDHCUser>
+      manager.RegisterTwoFactorProvider("Email Code", new EmailTokenProvider<TUser>
       {
         Subject = "Security Code",
         BodyFormat = "Your security code is {0}"
       });
       manager.EmailService = new EmailService();
       manager.SmsService = new SmsService();
-      var dataProtectionProvider = options.DataProtectionProvider;
       if (dataProtectionProvider != null)
       {
         manager.UserTokenProvider =
-            new DataProtectorTokenProvider<SDHCUser>(dataProtectionProvider.Create("ASP.NET Identity"));
+            new DataProtectorTokenProvider<TUser>(dataProtectionProvider.Create("ASP.NET Identity"));
       }
       return manager;
     }
   }
 
   // Configure the application sign-in manager which is used in this application.
-  public class ApplicationSignInManager : SignInManager<SDHCUser, string>
+  public class ApplicationSignInManager : ApplicationSignInManagerG<SDHCUser>
   {
     public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager)
         : base(userManager, authenticationManager)
     {
     }
-
-    public override Task<ClaimsIdentity> CreateUserIdentityAsync(SDHCUser user)
-    {
-      return user.GenerateUserIdentityAsync((ApplicationUserManager)UserManager);
-    }
-
     public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)
     {
       return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
+    }
+  }
+  public class ApplicationSignInManagerG<TUser> : SignInManager<TUser, string> where TUser : SDHCUser
+  {
+    public ApplicationSignInManagerG(ApplicationUserManagerG<TUser> userManager, IAuthenticationManager authenticationManager)
+        : base(userManager, authenticationManager)
+    {
+    }
+
+    public override Task<ClaimsIdentity> CreateUserIdentityAsync(TUser user)
+    {
+      return user.GenerateUserIdentityAsync((ApplicationUserManagerG<TUser>)UserManager);
+    }
+
+    public static ApplicationSignInManagerG<TUser> Create(IdentityFactoryOptions<ApplicationSignInManagerG<TUser>> options, IOwinContext context)
+    {
+      return new ApplicationSignInManagerG<TUser>(context.GetUserManager<ApplicationUserManagerG<TUser>>(), context.Authentication);
     }
   }
 }

@@ -24,7 +24,7 @@ namespace WebSQL.Controllers
 
     public HomeController()
     {
-
+      var g = G.UserManager();
     }
     //public ActionResult Index()
     public ActionResult Index()

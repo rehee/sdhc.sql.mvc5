@@ -17,15 +17,24 @@ namespace SDHC.Common.Entity.Models
 
   public class SDHCUser : IdentityUser, IDisplayName, IStringKey
   {
-    public virtual async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<SDHCUser> manager)
+    public SDHCUser()
+    {
+
+    }
+    public SDHCUser(IStringKey input)
+    {
+      Console.WriteLine(input.ToString());
+    }
+    public virtual async Task<ClaimsIdentity> GenerateUserIdentityAsync<TUser>(UserManager<TUser> manager) where TUser : SDHCUser
     {
       // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
-      var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+      var userIdentity = await manager.CreateIdentityAsync(this as TUser, DefaultAuthenticationTypes.ApplicationCookie);
       // Add custom user claims here
       return userIdentity;
     }
     public virtual string DisplayName()
     {
+      
       return String.IsNullOrEmpty(this.UserName) ? this.Id : this.UserName;
     }
     public override string ToString()
@@ -38,6 +47,8 @@ namespace SDHC.Common.Entity.Models
     {
       return this as TUser;
     }
+
+    
   }
 
 

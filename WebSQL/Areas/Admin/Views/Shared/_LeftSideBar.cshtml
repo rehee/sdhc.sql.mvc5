@@ -42,7 +42,10 @@
           <h4>LogOff</h4>
         </li>
         <li>
-          <a href="@Url.Action("LogOff","Account",new { @area="" })" title="Management User">
+          <form id="btnLogOff" action="@Url.Action("LogOff","Account",new { @area="" })" method="post">
+            @Html.AntiForgeryToken()
+          </form>
+          <a onclick="document.getElementById('btnLogOff').submit()">
             <em class="material-icons">power_settings_new</em>
             <span>LogOff System</span>
           </a>

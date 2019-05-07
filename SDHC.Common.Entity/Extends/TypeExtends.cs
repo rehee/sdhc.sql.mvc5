@@ -52,7 +52,7 @@ namespace System
       }
       return UserIsInRoles(userId, basicRole);
     }
-    public static bool UserIsInRoles(this string id, string role)
+    public static bool UserIsInRoles(this string id, string role) 
     {
       if (String.IsNullOrEmpty(id) || String.IsNullOrEmpty(role))
       {
