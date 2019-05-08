@@ -152,7 +152,7 @@ namespace System
         };
 
         GetContentListView(model, result, 0);
-        return result;
+        return result.Children.FirstOrDefault();
       }
       else
       {

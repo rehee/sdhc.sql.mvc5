@@ -14,6 +14,33 @@ namespace Admin.Areas.Admin.Controllers
     public ActionResult Index(long? id)
     {
       var content = ContentManager.GetContent(id);
+      string CreateRole = "";
+      string ReadRole = "";
+      string UpdateRole = "";
+      string DeleteRole = "";
+      string SortRole = "";
+      AllowChildrenAttribute childrenAttribute;
+      if (content == null)
+      {
+        childrenAttribute = ContentManager.BasicContentType.GetObjectCustomAttribute<AllowChildrenAttribute>();
+      }
+      else
+      {
+        childrenAttribute = content.GetObjectCustomAttribute<AllowChildrenAttribute>();
+      }
+      if (childrenAttribute != null)
+      {
+        CreateRole = String.Join(",", childrenAttribute.CreateRoles);
+        ReadRole = String.Join(",", childrenAttribute.ReadRoles);
+        UpdateRole = String.Join(",", childrenAttribute.EditRoles);
+        DeleteRole = String.Join(",", childrenAttribute.DeleteRoles);
+        SortRole = String.Join(",", childrenAttribute.SortRoles);
+      }
+      ViewBag.CreateRole = CreateRole;
+      ViewBag.ReadRole = ReadRole;
+      ViewBag.UpdateRole = UpdateRole;
+      ViewBag.DeleteRole = DeleteRole;
+      ViewBag.SortRole = SortRole;
       return View(content);
     }
     [HttpPost]
