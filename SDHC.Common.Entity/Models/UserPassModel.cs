@@ -19,11 +19,10 @@ namespace SDHC.Common.Entity.Models
   {
     public SDHCUser()
     {
-
     }
-    public SDHCUser(IStringKey input)
+    public SDHCUser(IStringKey input) : this()
     {
-      Console.WriteLine(input.ToString());
+
     }
     public virtual async Task<ClaimsIdentity> GenerateUserIdentityAsync<TUser>(UserManager<TUser> manager) where TUser : SDHCUser
     {
@@ -34,7 +33,7 @@ namespace SDHC.Common.Entity.Models
     }
     public virtual string DisplayName()
     {
-      
+
       return String.IsNullOrEmpty(this.UserName) ? this.Id : this.UserName;
     }
     public override string ToString()
@@ -48,7 +47,26 @@ namespace SDHC.Common.Entity.Models
       return this as TUser;
     }
 
-    
+    private DateTime? _createDate { get; set; }
+
+    [IgnoreEdit]
+    public virtual DateTime? CreateDate
+    {
+      get
+      {
+        if (_createDate == null)
+        {
+          _createDate = DateTime.UtcNow;
+        }
+        return _createDate;
+      }
+      set
+      {
+        if(value.HasValue)
+          _createDate = value;
+        _createDate = DateTime.UtcNow;
+      }
+    }
   }
 
 

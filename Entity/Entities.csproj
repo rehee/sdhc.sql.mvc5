@@ -115,6 +115,10 @@
     <Compile Include="Migrations\201904011659056_a10.Designer.cs">
       <DependentUpon>201904011659056_a10.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905200955532_sdhcuser_add_createDate.cs" />
+    <Compile Include="Migrations\201905200955532_sdhcuser_add_createDate.Designer.cs">
+      <DependentUpon>201905200955532_sdhcuser_add_createDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\b.cs" />
@@ -150,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904011659056_a10.resx">
       <DependentUpon>201904011659056_a10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905200955532_sdhcuser_add_createDate.resx">
+      <DependentUpon>201905200955532_sdhcuser_add_createDate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
