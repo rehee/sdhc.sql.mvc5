@@ -3,6 +3,7 @@ using SDHC.Common.Entity.Models;
 using SDHC.Common.Entity.Models.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace Admin.Areas.Admin.Controllers
@@ -14,11 +15,6 @@ namespace Admin.Areas.Admin.Controllers
     public ActionResult Index(long? id)
     {
       var content = ContentManager.GetContent(id);
-      string CreateRole = "";
-      string ReadRole = "";
-      string UpdateRole = "";
-      string DeleteRole = "";
-      string SortRole = "";
       AllowChildrenAttribute childrenAttribute;
       if (content == null)
       {
@@ -28,19 +24,21 @@ namespace Admin.Areas.Admin.Controllers
       {
         childrenAttribute = content.GetObjectCustomAttribute<AllowChildrenAttribute>();
       }
-      if (childrenAttribute != null)
-      {
-        CreateRole = String.Join(",", childrenAttribute.CreateRoles);
-        ReadRole = String.Join(",", childrenAttribute.ReadRoles);
-        UpdateRole = String.Join(",", childrenAttribute.EditRoles);
-        DeleteRole = String.Join(",", childrenAttribute.DeleteRoles);
-        SortRole = String.Join(",", childrenAttribute.SortRoles);
-      }
-      ViewBag.CreateRole = CreateRole;
-      ViewBag.ReadRole = ReadRole;
-      ViewBag.UpdateRole = UpdateRole;
-      ViewBag.DeleteRole = DeleteRole;
-      ViewBag.SortRole = SortRole;
+      ViewBag.childrenAttribute = childrenAttribute;
+      var u = HttpContext.User;
+      Func<IEnumerable<string>, bool> isInRole = b =>
+       {
+         if (G.AdminFree)
+           return true;
+         if (!u.Identity.IsAuthenticated)
+           return false;
+         return b.Any(c => u.IsInRole(c));
+       };
+      ViewBag.IsInCreateRoles = isInRole(childrenAttribute.CreateRoles);
+      ViewBag.IsInReadRoles = isInRole(childrenAttribute.ReadRoles);
+      ViewBag.IsInEditRoles = isInRole(childrenAttribute.EditRoles);
+      ViewBag.IsInDeleteRoles = isInRole(childrenAttribute.DeleteRoles);
+      ViewBag.IsInSortRoles = isInRole(childrenAttribute.SortRoles);
       return View(content);
     }
     [HttpPost]

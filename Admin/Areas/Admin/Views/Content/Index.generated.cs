@@ -82,41 +82,7 @@ namespace ASP
       UrlAttribute = c => $"target=\"_blank\"",
     });
 
-
-  IEnumerable<string> CreateRole;
-  IEnumerable<string> ReadRole;
-  IEnumerable<string> UpdateRole;
-  IEnumerable<string> DeleteRole;
-  if (Model == null)
-  {
-    CreateRole = Enumerable.Empty<string>();
-    ReadRole = Enumerable.Empty<string>();
-    UpdateRole = Enumerable.Empty<string>();
-    DeleteRole = Enumerable.Empty<string>();
-    //var type = ContentE.RootType.CustomAttributes.Where(b => b.AttributeType == typeof(SDHCC.AllowChildrenAttribute)).FirstOrDefault();
-    //if (type != null)
-    //{
-    //    var createRoles = type.NamedArguments.Where(b => b.MemberName == "CreateRoles").FirstOrDefault();
-    //    if (createRoles != null)
-    //    {
-    //        var role = (System.Collections.ObjectModel.ReadOnlyCollection<System.Reflection.CustomAttributeTypedArgument>)createRoles.TypedValue.Value;
-    //        CreateRole = role.Select(b => b.Value.ToString()).ToList();
-    //    }
-    //    var editRoles = type.NamedArguments.Where(b => b.MemberName == "EditRoles").FirstOrDefault();
-    //    if (editRoles != null)
-    //    {
-    //        var eRoles = (System.Collections.ObjectModel.ReadOnlyCollection<System.Reflection.CustomAttributeTypedArgument>)editRoles.TypedValue.Value;
-    //        UpdateRole = eRoles.Select(b => b.Value.ToString()).ToList();
-    //    }
-    //}
-  }
-  else
-  {
-    //CreateRole = Model.AdminCreateRoles;
-    //ReadRole = Model.AdminReadRoles;
-    //UpdateRole = Model.AdminUpdateRoles;
-    //DeleteRole = Model.AdminDeleteRoles;
-  }
+ 
 
             
             #line default
@@ -128,13 +94,13 @@ DefineSection("breadcrumb", () => {
 WriteLiteral("\r\n");
 
             
-            #line 77 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+            #line 43 "..\..\Areas\Admin\Views\Content\Index.cshtml"
   
             
             #line default
             #line hidden
             
-            #line 77 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+            #line 43 "..\..\Areas\Admin\Views\Content\Index.cshtml"
      Html.RenderPartial("_BreadCrumbContent", Model);
             
             #line default
@@ -143,7 +109,8 @@ WriteLiteral("\r\n");
 
 });
 
-WriteLiteral("<div");
+WriteLiteral("<script>\r\n  function subbform(id) {\r\n    var form = document.getElementById(id);\r" +
+"\n    form.submit();\r\n    return;\r\n  }\r\n</script>\r\n<div");
 
 WriteLiteral(" class=\"row clearfix\"");
 
@@ -163,11 +130,27 @@ WriteLiteral(">\r\n        <div");
 
 WriteLiteral(" class=\"button-box\"");
 
-WriteLiteral(">\r\n\r\n          <div");
+WriteLiteral(">\r\n");
+
+            
+            #line 57 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+          
+            
+            #line default
+            #line hidden
+            
+            #line 57 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+           if (ViewBag.IsInCreateRoles)
+          {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            <div");
 
 WriteLiteral(" class=\"btn-group\"");
 
-WriteLiteral(">\r\n            <button");
+WriteLiteral(">\r\n              <button");
 
 WriteLiteral(" type=\"button\"");
 
@@ -179,169 +162,242 @@ WriteLiteral(" aria-haspopup=\"true\"");
 
 WriteLiteral(" aria-expanded=\"false\"");
 
-WriteLiteral(">\r\n              Create\r\n            </button>\r\n            <ul");
+WriteLiteral(">\r\n                Create\r\n              </button>\r\n              <ul");
 
 WriteLiteral(" class=\"dropdown-menu\"");
 
 WriteLiteral(">\r\n");
 
             
-            #line 90 "..\..\Areas\Admin\Views\Content\Index.cshtml"
-              
+            #line 64 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+                
             
             #line default
             #line hidden
             
-            #line 90 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+            #line 64 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+                  
+                  var avaliableChild = TypeExtends.GetAllowChildrens(Model);
                 
-                var avaliableChild = TypeExtends.GetAllowChildrens(Model);
-              
             
             #line default
             #line hidden
 WriteLiteral("\r\n");
 
             
-            #line 93 "..\..\Areas\Admin\Views\Content\Index.cshtml"
-              
+            #line 67 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+                
             
             #line default
             #line hidden
             
-            #line 93 "..\..\Areas\Admin\Views\Content\Index.cshtml"
-               foreach (var child in avaliableChild)
-              {
-                var idguid = Guid.NewGuid().ToString();
+            #line 67 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+                 foreach (var child in avaliableChild)
+                {
+                  var idguid = Guid.NewGuid().ToString();
 
             
             #line default
             #line hidden
-WriteLiteral("                <li>\r\n                  <a");
+WriteLiteral("                  <li>\r\n                    <a");
 
 WriteLiteral(" href=\"#\"");
 
-WriteAttribute("onclick", Tuple.Create(" onclick=\"", 3668), Tuple.Create("\"", 3697)
-, Tuple.Create(Tuple.Create("", 3678), Tuple.Create("subbform(\'", 3678), true)
+WriteAttribute("onclick", Tuple.Create(" onclick=\"", 2356), Tuple.Create("\"", 2385)
+, Tuple.Create(Tuple.Create("", 2366), Tuple.Create("subbform(\'", 2366), true)
             
-            #line 97 "..\..\Areas\Admin\Views\Content\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 3688), Tuple.Create<System.Object, System.Int32>(idguid
+            #line 71 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 2376), Tuple.Create<System.Object, System.Int32>(idguid
             
             #line default
             #line hidden
-, 3688), false)
-, Tuple.Create(Tuple.Create("", 3695), Tuple.Create("\')", 3695), true)
+, 2376), false)
+, Tuple.Create(Tuple.Create("", 2383), Tuple.Create("\')", 2383), true)
 );
 
 WriteLiteral(">");
 
             
-            #line 97 "..\..\Areas\Admin\Views\Content\Index.cshtml"
-                                                       Write(TypeExtends.GetClassDisplayName(child));
+            #line 71 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+                                                         Write(TypeExtends.GetClassDisplayName(child));
 
             
             #line default
             #line hidden
-WriteLiteral("</a>\r\n                  <form");
+WriteLiteral("</a>\r\n                    <form");
 
-WriteAttribute("id", Tuple.Create(" id=\"", 3767), Tuple.Create("\"", 3779)
+WriteAttribute("id", Tuple.Create(" id=\"", 2457), Tuple.Create("\"", 2469)
             
-            #line 98 "..\..\Areas\Admin\Views\Content\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 3772), Tuple.Create<System.Object, System.Int32>(idguid
+            #line 72 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 2462), Tuple.Create<System.Object, System.Int32>(idguid
             
             #line default
             #line hidden
-, 3772), false)
+, 2462), false)
 );
 
-WriteAttribute("action", Tuple.Create(" action=\"", 3780), Tuple.Create("\"", 3853)
+WriteAttribute("action", Tuple.Create(" action=\"", 2470), Tuple.Create("\"", 2543)
             
-            #line 98 "..\..\Areas\Admin\Views\Content\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 3789), Tuple.Create<System.Object, System.Int32>(Url.Action("PreCreate", "Content", new { @area = G.AdminPath })
+            #line 72 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 2479), Tuple.Create<System.Object, System.Int32>(Url.Action("PreCreate", "Content", new { @area = G.AdminPath })
             
             #line default
             #line hidden
-, 3789), false)
+, 2479), false)
 );
 
 WriteLiteral(" method=\"post\"");
 
 WriteLiteral(">\r\n");
 
-WriteLiteral("                    ");
+WriteLiteral("                      ");
 
             
-            #line 99 "..\..\Areas\Admin\Views\Content\Index.cshtml"
-               Write(Html.Hidden("ContentId", contentId));
+            #line 73 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+                 Write(Html.Hidden("ContentId", contentId));
 
             
             #line default
             #line hidden
 WriteLiteral("\r\n");
 
-WriteLiteral("                    ");
+WriteLiteral("                      ");
 
             
-            #line 100 "..\..\Areas\Admin\Views\Content\Index.cshtml"
-               Write(Html.Hidden("FullType", child.FullName + "," + child.Assembly.FullName));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                  </form>\r\n                </li>\r\n");
-
-            
-            #line 103 "..\..\Areas\Admin\Views\Content\Index.cshtml"
-              }
+            #line 74 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+                 Write(Html.Hidden("FullType", child.FullName + "," + child.Assembly.FullName));
 
             
             #line default
             #line hidden
-WriteLiteral("            </ul>\r\n          </div>\r\n          <script>\r\n            function sub" +
-"bform(id) {\r\n              var form = document.getElementById(id);\r\n            " +
-"  form.submit();\r\n              return;\r\n            }\r\n          </script>\r\n   " +
-"       <a");
+WriteLiteral("\r\n                    </form>\r\n                  </li>\r\n");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4340), Tuple.Create("\"", 4424)
             
-            #line 113 "..\..\Areas\Admin\Views\Content\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 4347), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Content", new { @area = G.AdminPath, @id = contentId })
+            #line 77 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+                }
+
             
             #line default
             #line hidden
-, 4347), false)
+WriteLiteral("              </ul>\r\n            </div>\r\n");
+
+            
+            #line 80 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+          }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("          ");
+
+            
+            #line 81 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+           if (ViewBag.IsInEditRoles)
+          {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            <a");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 2910), Tuple.Create("\"", 2994)
+            
+            #line 83 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 2917), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Content", new { @area = G.AdminPath, @id = contentId })
+            
+            #line default
+            #line hidden
+, 2917), false)
 );
 
 WriteLiteral(" class=\"btn btn-success\"");
 
-WriteLiteral(">List</a>\r\n          <a");
+WriteLiteral(">List</a>\r\n");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4472), Tuple.Create("\"", 4555)
             
-            #line 114 "..\..\Areas\Admin\Views\Content\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 4479), Tuple.Create<System.Object, System.Int32>(Url.Action("Edit", "Content", new { @area = G.AdminPath, @id = contentId })
+            #line 84 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+          }
+
             
             #line default
             #line hidden
-, 4479), false)
+WriteLiteral("          ");
+
+            
+            #line 85 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+           if (ViewBag.IsInEditRoles)
+          {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            <a");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 3109), Tuple.Create("\"", 3192)
+            
+            #line 87 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 3116), Tuple.Create<System.Object, System.Int32>(Url.Action("Edit", "Content", new { @area = G.AdminPath, @id = contentId })
+            
+            #line default
+            #line hidden
+, 3116), false)
 );
 
 WriteLiteral(" class=\"btn btn-success\"");
 
-WriteLiteral(">Edit</a>\r\n          <a");
+WriteLiteral(">Edit</a>\r\n");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4603), Tuple.Create("\"", 4686)
             
-            #line 115 "..\..\Areas\Admin\Views\Content\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 4610), Tuple.Create<System.Object, System.Int32>(Url.Action("Sort", "Content", new { @area = G.AdminPath, @id = contentId })
+            #line 88 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+          }
+
             
             #line default
             #line hidden
-, 4610), false)
+WriteLiteral("          ");
+
+            
+            #line 89 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+           if (ViewBag.IsInSortRoles)
+          {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            <a");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 3307), Tuple.Create("\"", 3390)
+            
+            #line 91 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 3314), Tuple.Create<System.Object, System.Int32>(Url.Action("Sort", "Content", new { @area = G.AdminPath, @id = contentId })
+            
+            #line default
+            #line hidden
+, 3314), false)
 );
 
 WriteLiteral(" class=\"btn btn-warning\"");
 
-WriteLiteral(">Sort</a>\r\n          <a");
+WriteLiteral(">Sort</a>\r\n");
+
+            
+            #line 92 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+          }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("          ");
+
+            
+            #line 93 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+           if (ViewBag.IsInDeleteRoles)
+          {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            <a");
 
 WriteLiteral(" href=\"#\"");
 
@@ -349,47 +405,58 @@ WriteLiteral(" onclick=\"deleteCurrent()\"");
 
 WriteLiteral(" class=\"btn btn-danger\"");
 
-WriteLiteral(">Delete</a>\r\n          <form");
+WriteLiteral(">Delete</a>\r\n");
+
+WriteLiteral("            <form");
 
 WriteLiteral(" id=\"ContentDeleteForm\"");
 
-WriteAttribute("action", Tuple.Create(" action=\"", 4843), Tuple.Create("\"", 4913)
+WriteAttribute("action", Tuple.Create(" action=\"", 3618), Tuple.Create("\"", 3688)
             
-            #line 117 "..\..\Areas\Admin\Views\Content\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 4852), Tuple.Create<System.Object, System.Int32>(Url.Action("Delete", "Content", new { @area = G.AdminPath })
+            #line 96 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 3627), Tuple.Create<System.Object, System.Int32>(Url.Action("Delete", "Content", new { @area = G.AdminPath })
             
             #line default
             #line hidden
-, 4852), false)
+, 3627), false)
 );
 
 WriteLiteral(" method=\"post\"");
 
 WriteLiteral(">\r\n");
 
-WriteLiteral("            ");
+WriteLiteral("              ");
 
             
-            #line 118 "..\..\Areas\Admin\Views\Content\Index.cshtml"
-       Write(Html.Hidden("id", contentId));
+            #line 97 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+         Write(Html.Hidden("id", contentId));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n          </form>\r\n        </div>\r\n\r\n      </div>\r\n\r\n      <div");
+WriteLiteral("\r\n            </form>\r\n");
+
+            
+            #line 99 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+          }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n        </div>\r\n\r\n      </div>\r\n\r\n      <div");
 
 WriteLiteral(" class=\"body\"");
 
 WriteLiteral(">\r\n");
 
             
-            #line 125 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+            #line 106 "..\..\Areas\Admin\Views\Content\Index.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 125 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+            #line 106 "..\..\Areas\Admin\Views\Content\Index.cshtml"
            Html.RenderPartial("Contents/_ContentTableHtml", contents); 
             
             #line default

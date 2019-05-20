@@ -36,87 +36,68 @@
       UrlAttribute = c => $"target=\"_blank\"",
     });
 
-
-  IEnumerable<string> CreateRole;
-  IEnumerable<string> ReadRole;
-  IEnumerable<string> UpdateRole;
-  IEnumerable<string> DeleteRole;
-  if (Model == null)
-  {
-    CreateRole = Enumerable.Empty<string>();
-    ReadRole = Enumerable.Empty<string>();
-    UpdateRole = Enumerable.Empty<string>();
-    DeleteRole = Enumerable.Empty<string>();
-    //var type = ContentE.RootType.CustomAttributes.Where(b => b.AttributeType == typeof(SDHCC.AllowChildrenAttribute)).FirstOrDefault();
-    //if (type != null)
-    //{
-    //    var createRoles = type.NamedArguments.Where(b => b.MemberName == "CreateRoles").FirstOrDefault();
-    //    if (createRoles != null)
-    //    {
-    //        var role = (System.Collections.ObjectModel.ReadOnlyCollection<System.Reflection.CustomAttributeTypedArgument>)createRoles.TypedValue.Value;
-    //        CreateRole = role.Select(b => b.Value.ToString()).ToList();
-    //    }
-    //    var editRoles = type.NamedArguments.Where(b => b.MemberName == "EditRoles").FirstOrDefault();
-    //    if (editRoles != null)
-    //    {
-    //        var eRoles = (System.Collections.ObjectModel.ReadOnlyCollection<System.Reflection.CustomAttributeTypedArgument>)editRoles.TypedValue.Value;
-    //        UpdateRole = eRoles.Select(b => b.Value.ToString()).ToList();
-    //    }
-    //}
-  }
-  else
-  {
-    //CreateRole = Model.AdminCreateRoles;
-    //ReadRole = Model.AdminReadRoles;
-    //UpdateRole = Model.AdminUpdateRoles;
-    //DeleteRole = Model.AdminDeleteRoles;
-  }
+ 
 }
 
 @section breadcrumb{
   @{ Html.RenderPartial("_BreadCrumbContent", Model);}
 }
+<script>
+  function subbform(id) {
+    var form = document.getElementById(id);
+    form.submit();
+    return;
+  }
+</script>
 <div class="row clearfix">
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="card">
       <div class="card-header">
         <div class="button-box">
+          @if (ViewBag.IsInCreateRoles)
+          {
+            <div class="btn-group">
+              <button type="button" class="btn btn-info btn-group" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Create
+              </button>
+              <ul class="dropdown-menu">
+                @{
+                  var avaliableChild = TypeExtends.GetAllowChildrens(Model);
+                }
+                @foreach (var child in avaliableChild)
+                {
+                  var idguid = Guid.NewGuid().ToString();
+                  <li>
+                    <a href="#" onclick="subbform('@idguid')">@TypeExtends.GetClassDisplayName(child)</a>
+                    <form id="@idguid" action="@Url.Action("PreCreate", "Content", new { @area = G.AdminPath })" method="post">
+                      @Html.Hidden("ContentId", contentId)
+                      @Html.Hidden("FullType", child.FullName + "," + child.Assembly.FullName)
+                    </form>
+                  </li>
+                }
+              </ul>
+            </div>
+          }
+          @if (ViewBag.IsInEditRoles)
+          {
+            <a href="@Url.Action("Index", "Content", new { @area = G.AdminPath, @id = contentId })" class="btn btn-success">List</a>
+          }
+          @if (ViewBag.IsInEditRoles)
+          {
+            <a href="@Url.Action("Edit", "Content", new { @area = G.AdminPath, @id = contentId })" class="btn btn-success">Edit</a>
+          }
+          @if (ViewBag.IsInSortRoles)
+          {
+            <a href="@Url.Action("Sort", "Content", new { @area = G.AdminPath, @id = contentId })" class="btn btn-warning">Sort</a>
+          }
+          @if (ViewBag.IsInDeleteRoles)
+          {
+            <a href="#" onclick="deleteCurrent()" class="btn btn-danger">Delete</a>
+            <form id="ContentDeleteForm" action="@Url.Action("Delete", "Content", new { @area = G.AdminPath })" method="post">
+              @Html.Hidden("id", contentId)
+            </form>
+          }
 
-          <div class="btn-group">
-            <button type="button" class="btn btn-info btn-group" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Create
-            </button>
-            <ul class="dropdown-menu">
-              @{
-                var avaliableChild = TypeExtends.GetAllowChildrens(Model);
-              }
-              @foreach (var child in avaliableChild)
-              {
-                var idguid = Guid.NewGuid().ToString();
-                <li>
-                  <a href="#" onclick="subbform('@idguid')">@TypeExtends.GetClassDisplayName(child)</a>
-                  <form id="@idguid" action="@Url.Action("PreCreate", "Content", new { @area = G.AdminPath })" method="post">
-                    @Html.Hidden("ContentId", contentId)
-                    @Html.Hidden("FullType", child.FullName + "," + child.Assembly.FullName)
-                  </form>
-                </li>
-              }
-            </ul>
-          </div>
-          <script>
-            function subbform(id) {
-              var form = document.getElementById(id);
-              form.submit();
-              return;
-            }
-          </script>
-          <a href="@Url.Action("Index", "Content", new { @area = G.AdminPath, @id = contentId })" class="btn btn-success">List</a>
-          <a href="@Url.Action("Edit", "Content", new { @area = G.AdminPath, @id = contentId })" class="btn btn-success">Edit</a>
-          <a href="@Url.Action("Sort", "Content", new { @area = G.AdminPath, @id = contentId })" class="btn btn-warning">Sort</a>
-          <a href="#" onclick="deleteCurrent()" class="btn btn-danger">Delete</a>
-          <form id="ContentDeleteForm" action="@Url.Action("Delete", "Content", new { @area = G.AdminPath })" method="post">
-            @Html.Hidden("id", contentId)
-          </form>
         </div>
 
       </div>
