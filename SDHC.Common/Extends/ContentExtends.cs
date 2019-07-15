@@ -21,5 +21,17 @@
       }
       return "";
     }
+    public static string GetUrlPath(this string input)
+    {
+      if (string.IsNullOrEmpty(input))
+      {
+        return "/";
+      }
+      if (input.ToLower().IndexOf("http://") == 0)
+      {
+        return input;
+      }
+      return $"/{input}";
+    }
   }
 }

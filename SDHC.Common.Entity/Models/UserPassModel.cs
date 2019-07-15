@@ -67,6 +67,9 @@ namespace SDHC.Common.Entity.Models
         _createDate = DateTime.UtcNow;
       }
     }
+
+    [IgnoreEdit]
+    public string WeChatOpenId { get; set; }
   }
 
 

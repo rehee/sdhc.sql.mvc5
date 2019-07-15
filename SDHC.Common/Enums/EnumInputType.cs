@@ -16,6 +16,7 @@ namespace System
     DateTime,
     DropDwon,
     FileUpload,
+    OuterFile,
     Bool,
     Range,
     Html,
