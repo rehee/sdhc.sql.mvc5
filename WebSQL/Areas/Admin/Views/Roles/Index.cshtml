@@ -1,27 +1,6 @@
 ﻿@model RolesIndexView
 @{
   ViewBag.Title = "User and Roles";
-
-  //tableContent.FirstRow = new ContentTableOption()
-  //{
-  //  ButtonClass = "",
-  //  RowAction = "A",
-  //  RowArea = "A",
-  //  RowController = "A",
-  //  RowObject = (b) => new { },
-  //  RowTitle = b => "1",
-  //};
-  //tableContent.Options = new List<ContentTableOption>();
-  //tableContent.Options.Add(new ContentTableOption()
-  //{
-  //  ButtonClass = "",
-  //  RowAction = "A",
-  //  RowArea = "A",
-  //  RowController = "A",
-  //  RowObject = (b) => new { },
-  //  RowTitle = b => "",
-  //});
-  //tableContent.DisableDelete = true;
 }
 
 <div class="row clearfix">
@@ -48,12 +27,20 @@
 
       <div class="body">
         <table>
+          <tr>
+            <th>User ID</th>
+            <th>User Name</th>
+
+          </tr>
           @foreach (var item in Model.Users)
           {
-            <tr>
-              <td> <a href="@Url.Action("EditUser","Roles",new { @area="Admin",@id=item.Id })">@item.Id</a> </td>
-            </tr>
+          <tr>
+            <td> <a href="@Url.Action("EditUser","Roles",new { @area="Admin",@id=item.Id })">@item.Id</a> </td>
+            <td> <a href="@Url.Action("EditUser","Roles",new { @area="Admin",@id=item.Id })">@item.UserName</a> </td>
+          </tr>
           }
+
+
 
         </table>
 
