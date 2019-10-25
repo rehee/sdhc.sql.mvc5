@@ -13,7 +13,13 @@ namespace System
   public static class ModelManager
   {
     public static Dictionary<string, Type> ModelMapper { get; set; } = new Dictionary<string, Type>();
-    public static IEnumerable<string> ModelManagerMapper { get; set; } = Enumerable.Empty<string>();
+    public static IEnumerable<string> ModelManagerMapper
+    {
+      get
+      {
+        return ModelMapper.Select(b => b.Key);
+      }
+    }
     public static Type GetModelType(string typeKey)
     {
       if (string.IsNullOrEmpty(typeKey))
@@ -106,7 +112,7 @@ namespace System
       var result = Read<T>(b => b.Id == id, out ISave repo).FirstOrDefault();
       return result;
     }
-    
+
     public static object Find(Type type, long id, out ISave repo)
     {
       var result = Read<IInt64Key>(type, b => b.Id == id, out repo).FirstOrDefault();

@@ -25,12 +25,6 @@ namespace WebSQL
         ["S2"] = typeof(S2),
         ["Gender"] = typeof(GenderSelect),
       };
-      ModelManager.ModelManagerMapper = new List<string>()
-      {
-        "S1","S2","Gender"
-      };
-
-      
     }
   }
   

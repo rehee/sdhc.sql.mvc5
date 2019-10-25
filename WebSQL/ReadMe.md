@@ -30,7 +30,7 @@
 * 选择MVC, 选择Individual User Account.
 * 在nuget package manager中搜索并下载 SDHC.CMF.E
 * 将 App_start 中的 IdentityConfig.cs, Startup.Auth.cs删除
-* 在dbcontent的类 加入IContent接口. 并使用SDHCUser
+* 在dbcontent的类 加入IContent接口. 并使用SDHCUser泛型
 ```
 public class ApplicationDbContext : IdentityDbContext<SDHCUser>, IContent
 ```
@@ -41,8 +41,8 @@ public class SDHCBascSelect : BaseSelect
 public class MyUser: SDHCUser
 
 //在dbcontext中加入
-public DbSet<BaseContent> Contents { get; set; }
-public DbSet<BaseSelect> Selects { get; set; }
+ public IDbSet<BaseContent> Contents { get; set; }
+ public IDbSet<BaseSelect> Selects { get; set; }
 public DbSet<MyUser> MyUsers { get; set; }
 public DbSet<SCHCContent> SCHCContents { get; set; }
 
@@ -65,7 +65,16 @@ Entity 分为三类.
 使用 ContentManager,ModelManager,SelectManager 来进行crud操作
 * 命名空间SDHC.Controllers下的SDHCPageController 为默认的获取content内容的控制器.
 * ContentPageUrl 设置了默认路径 比如/pages/123, 则会 读取第一个title为123 且没有父元素的content. 如果重名将会读取displayorder最小的一个.
-
+* admin 下,默认左侧菜单的Model列表为下方所示, key 为想显示的名字 type为对应的model的类
+```
+ModelManager.ModelMapper = new Dictionary<string, Type>()
+      {
+        ["S1"] = typeof(S1),
+        ["S2"] = typeof(S2),
+        ["Gender"] = typeof(GenderSelect),
+      };
+      
+```
 
 ## 设置.
 ### 管理员设置
