@@ -47,6 +47,7 @@ namespace ASP
   Model.FirstRowArea = "Area";
   Model.FirstRowObject = b => new { @area = G.AdminPath, @id = (b as ContentTableRowItem).Id, @type = ModelManager.GetMapperKey((b as ContentTableRowItem).ThisType.FullName) };
   Model.DeleteFunctionName = "deleteRole";
+  var tableSize = TypeExtends.GetTableSize(Model.ThisTypeFrom);
 
             
             #line default
@@ -55,14 +56,14 @@ WriteLiteral("\r\n<form");
 
 WriteLiteral(" id=\"modelDeleteForm\"");
 
-WriteAttribute("action", Tuple.Create(" action=\"", 471), Tuple.Create("\"", 539)
+WriteAttribute("action", Tuple.Create(" action=\"", 536), Tuple.Create("\"", 604)
             
-            #line 10 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 480), Tuple.Create<System.Object, System.Int32>(Url.Action("Delete","ModelManagement","@area=G.AdminPath")
+            #line 11 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 545), Tuple.Create<System.Object, System.Int32>(Url.Action("Delete","ModelManagement","@area=G.AdminPath")
             
             #line default
             #line hidden
-, 480), false)
+, 545), false)
 );
 
 WriteLiteral(" method=\"post\"");
@@ -73,14 +74,14 @@ WriteLiteral(" type=\"hidden\"");
 
 WriteLiteral(" name=\"type\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 591), Tuple.Create("\"", 610)
+WriteAttribute("value", Tuple.Create(" value=\"", 656), Tuple.Create("\"", 675)
             
-            #line 11 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 599), Tuple.Create<System.Object, System.Int32>(ViewBag.id
+            #line 12 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 664), Tuple.Create<System.Object, System.Int32>(ViewBag.id
             
             #line default
             #line hidden
-, 599), false)
+, 664), false)
 );
 
 WriteLiteral(" />\r\n  <input");
@@ -115,14 +116,14 @@ WriteLiteral(" class=\"button-box\"");
 
 WriteLiteral(">\r\n\r\n          <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 881), Tuple.Create("\"", 968)
+WriteAttribute("href", Tuple.Create(" href=\"", 946), Tuple.Create("\"", 1033)
             
-            #line 20 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 888), Tuple.Create<System.Object, System.Int32>(Url.Action("Create","ModelManagement",new { @area=G.AdminPath,@id=ViewBag.id })
+            #line 21 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 953), Tuple.Create<System.Object, System.Int32>(Url.Action("Create","ModelManagement",new { @area=G.AdminPath,@id=ViewBag.id })
             
             #line default
             #line hidden
-, 888), false)
+, 953), false)
 );
 
 WriteLiteral(" class=\"btn btn-info btn-group\"");
@@ -134,13 +135,13 @@ WriteLiteral(" class=\"body\"");
 WriteLiteral(">\r\n");
 
             
-            #line 26 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
+            #line 27 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 26 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
+            #line 27 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
            Html.RenderPartial("Contents/_ContentTableHtml", Model); 
             
             #line default
@@ -149,8 +150,17 @@ WriteLiteral("\r\n\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n")
 
 DefineSection("script", () => {
 
-WriteLiteral("\r\n  <script>\r\n    $(function () {\r\n      $(\'.basic-example\').DataTable();\r\n    })" +
-";\r\n  </script>\r\n  ");
+WriteLiteral("\r\n  <script>\r\n    $(function () {\r\n      $(\'.basic-example\').DataTable(\r\n        " +
+"{\r\n          \"pageLength\": ");
+
+            
+            #line 39 "..\..\Areas\Admin\Views\ModelManagement\Index.cshtml"
+                   Write(tableSize);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n        } \r\n      );\r\n    });\r\n  </script>\r\n  ");
 
 WriteLiteral(@"
   <script>

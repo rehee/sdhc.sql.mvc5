@@ -1,6 +1,16 @@
 ﻿@model RolesIndexView
 @{
   ViewBag.Title = "User and Roles";
+  var size = 10;
+  var c = SDHCUserManager.BaseUser.GetObjectCustomAttribute<AllowChildrenAttribute>();
+  if (c != null && c.TableSize != EnumTablePageSize.L0)
+  {
+    size = (int)c.TableSize;
+  }
+  else
+  {
+    size = G.DefaultTablePageSize;
+  }
 }
 
 <div class="row clearfix">
@@ -43,7 +53,6 @@
           </tfoot>
           <tbody>
 
-
             @foreach (var item in Model.Users)
             {
               <tr>
@@ -73,7 +82,10 @@
   <script src="/admin-lib/plugins/footable/js/footable.min.js"></script>
   <script>
     $(function () {
-      $('.basic-example').DataTable();
+      $('.basic-example').DataTable(
+        {
+          "pageLength": @size
+        });
     });
   </script>
 }

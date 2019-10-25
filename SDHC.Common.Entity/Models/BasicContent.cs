@@ -30,7 +30,7 @@ namespace SDHC.Common.Entity.Models
   {
     public BaseContent()
     {
-      if (Id == 0)
+      if (Id <= 0)
       {
         this.CreateTime = DateTime.UtcNow;
         this.DisplayOrder = ModelManager.Read<BaseContent>(b => true).Count() + 1;

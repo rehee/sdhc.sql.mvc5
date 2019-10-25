@@ -6,6 +6,7 @@
   Model.FirstRowArea = "Area";
   Model.FirstRowObject = b => new { @area = G.AdminPath, @id = (b as ContentTableRowItem).Id, @type = ModelManager.GetMapperKey((b as ContentTableRowItem).ThisType.FullName) };
   Model.DeleteFunctionName = "deleteRole";
+  var tableSize = TypeExtends.GetTableSize(Model.ThisTypeFrom);
 }
 <form id="modelDeleteForm" action="@Url.Action("Delete","ModelManagement","@area=G.AdminPath")" method="post">
   <input type="hidden" name="type" value="@ViewBag.id" />
@@ -33,7 +34,11 @@
 @section script{
   <script>
     $(function () {
-      $('.basic-example').DataTable();
+      $('.basic-example').DataTable(
+        {
+          "pageLength": @tableSize
+        } 
+      );
     });
   </script>
   @*<script src="/admin-lib/assets/js/pages/tables/jquery-datatable.js"></script>*@

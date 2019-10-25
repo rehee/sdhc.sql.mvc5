@@ -222,6 +222,7 @@ namespace System
       }
       result.TableHeaders = additionalList.Select(b => type.GetPropertyLabelByKey(b)).ToList();
       result.Rows = rowItems;
+      result.ThisTypeFrom = type;
       return result;
     }
     public static ContentTableHtmlView GetContentTableHtmlView<T>(Type type, Expression<Func<T, bool>> where) where T : IInt64Key

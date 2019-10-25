@@ -27,6 +27,28 @@ namespace System
       }
       return allows.ChildrenType;
     }
+    public static int GetTableSize(object input)
+    {
+      Type type;
+      if (input == null)
+      {
+        type = ContentManager.BasicContentType;
+      }
+      else
+      {
+        type = input.GetType().GetRealType();
+      }
+      return GetTableSize(type);
+    }
+    public static int GetTableSize(Type type)
+    {
+      var allows = type.GetObjectCustomAttribute<AllowChildrenAttribute>();
+      if (allows == null || allows.TableSize == EnumTablePageSize.L0)
+      {
+        return G.DefaultTablePageSize;
+      }
+      return (int)allows.TableSize;
+    }
     public static string GetClassDisplayName(Type input)
     {
       var display = input.GetObjectCustomAttribute<AllowChildrenAttribute>();
@@ -52,7 +74,7 @@ namespace System
       }
       return UserIsInRoles(userId, basicRole);
     }
-    public static bool UserIsInRoles(this string id, string role) 
+    public static bool UserIsInRoles(this string id, string role)
     {
       if (String.IsNullOrEmpty(id) || String.IsNullOrEmpty(role))
       {

@@ -16,5 +16,8 @@ namespace System
     public static string ContentViewPath { get; set; } = "";
     [Config]
     public static string ContentPageUrl { get; set; } = "pages";
+
+    [Config]
+    public static int DefaultTablePageSize { get; set; } = (int)EnumTablePageSize.L10;
   }
 }

@@ -81,8 +81,8 @@ namespace ASP
       RowObject = b => new { @id = (b as ContentTableRowItem).Id, @area = "" },
       UrlAttribute = c => $"target=\"_blank\"",
     });
+  var tableSize = TypeExtends.GetTableSize(Model);
 
- 
 
             
             #line default
@@ -203,16 +203,16 @@ WriteLiteral("                  <li>\r\n                    <a");
 
 WriteLiteral(" href=\"#\"");
 
-WriteAttribute("onclick", Tuple.Create(" onclick=\"", 2356), Tuple.Create("\"", 2385)
-, Tuple.Create(Tuple.Create("", 2366), Tuple.Create("subbform(\'", 2366), true)
+WriteAttribute("onclick", Tuple.Create(" onclick=\"", 2405), Tuple.Create("\"", 2434)
+, Tuple.Create(Tuple.Create("", 2415), Tuple.Create("subbform(\'", 2415), true)
             
             #line 71 "..\..\Areas\Admin\Views\Content\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 2376), Tuple.Create<System.Object, System.Int32>(idguid
+, Tuple.Create(Tuple.Create("", 2425), Tuple.Create<System.Object, System.Int32>(idguid
             
             #line default
             #line hidden
-, 2376), false)
-, Tuple.Create(Tuple.Create("", 2383), Tuple.Create("\')", 2383), true)
+, 2425), false)
+, Tuple.Create(Tuple.Create("", 2432), Tuple.Create("\')", 2432), true)
 );
 
 WriteLiteral(">");
@@ -226,24 +226,24 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</a>\r\n                    <form");
 
-WriteAttribute("id", Tuple.Create(" id=\"", 2457), Tuple.Create("\"", 2469)
+WriteAttribute("id", Tuple.Create(" id=\"", 2506), Tuple.Create("\"", 2518)
             
             #line 72 "..\..\Areas\Admin\Views\Content\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 2462), Tuple.Create<System.Object, System.Int32>(idguid
+, Tuple.Create(Tuple.Create("", 2511), Tuple.Create<System.Object, System.Int32>(idguid
             
             #line default
             #line hidden
-, 2462), false)
+, 2511), false)
 );
 
-WriteAttribute("action", Tuple.Create(" action=\"", 2470), Tuple.Create("\"", 2543)
+WriteAttribute("action", Tuple.Create(" action=\"", 2519), Tuple.Create("\"", 2592)
             
             #line 72 "..\..\Areas\Admin\Views\Content\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 2479), Tuple.Create<System.Object, System.Int32>(Url.Action("PreCreate", "Content", new { @area = G.AdminPath })
+, Tuple.Create(Tuple.Create("", 2528), Tuple.Create<System.Object, System.Int32>(Url.Action("PreCreate", "Content", new { @area = G.AdminPath })
             
             #line default
             #line hidden
-, 2479), false)
+, 2528), false)
 );
 
 WriteLiteral(" method=\"post\"");
@@ -300,14 +300,14 @@ WriteLiteral("          ");
             #line hidden
 WriteLiteral("            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2910), Tuple.Create("\"", 2994)
+WriteAttribute("href", Tuple.Create(" href=\"", 2959), Tuple.Create("\"", 3043)
             
             #line 83 "..\..\Areas\Admin\Views\Content\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 2917), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Content", new { @area = G.AdminPath, @id = contentId })
+, Tuple.Create(Tuple.Create("", 2966), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Content", new { @area = G.AdminPath, @id = contentId })
             
             #line default
             #line hidden
-, 2917), false)
+, 2966), false)
 );
 
 WriteLiteral(" class=\"btn btn-success\"");
@@ -333,14 +333,14 @@ WriteLiteral("          ");
             #line hidden
 WriteLiteral("            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 3109), Tuple.Create("\"", 3192)
+WriteAttribute("href", Tuple.Create(" href=\"", 3158), Tuple.Create("\"", 3241)
             
             #line 87 "..\..\Areas\Admin\Views\Content\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 3116), Tuple.Create<System.Object, System.Int32>(Url.Action("Edit", "Content", new { @area = G.AdminPath, @id = contentId })
+, Tuple.Create(Tuple.Create("", 3165), Tuple.Create<System.Object, System.Int32>(Url.Action("Edit", "Content", new { @area = G.AdminPath, @id = contentId })
             
             #line default
             #line hidden
-, 3116), false)
+, 3165), false)
 );
 
 WriteLiteral(" class=\"btn btn-success\"");
@@ -366,14 +366,14 @@ WriteLiteral("          ");
             #line hidden
 WriteLiteral("            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 3307), Tuple.Create("\"", 3390)
+WriteAttribute("href", Tuple.Create(" href=\"", 3356), Tuple.Create("\"", 3439)
             
             #line 91 "..\..\Areas\Admin\Views\Content\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 3314), Tuple.Create<System.Object, System.Int32>(Url.Action("Sort", "Content", new { @area = G.AdminPath, @id = contentId })
+, Tuple.Create(Tuple.Create("", 3363), Tuple.Create<System.Object, System.Int32>(Url.Action("Sort", "Content", new { @area = G.AdminPath, @id = contentId })
             
             #line default
             #line hidden
-, 3314), false)
+, 3363), false)
 );
 
 WriteLiteral(" class=\"btn btn-warning\"");
@@ -411,14 +411,14 @@ WriteLiteral("            <form");
 
 WriteLiteral(" id=\"ContentDeleteForm\"");
 
-WriteAttribute("action", Tuple.Create(" action=\"", 3618), Tuple.Create("\"", 3688)
+WriteAttribute("action", Tuple.Create(" action=\"", 3667), Tuple.Create("\"", 3737)
             
             #line 96 "..\..\Areas\Admin\Views\Content\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 3627), Tuple.Create<System.Object, System.Int32>(Url.Action("Delete", "Content", new { @area = G.AdminPath })
+, Tuple.Create(Tuple.Create("", 3676), Tuple.Create<System.Object, System.Int32>(Url.Action("Delete", "Content", new { @area = G.AdminPath })
             
             #line default
             #line hidden
-, 3627), false)
+, 3676), false)
 );
 
 WriteLiteral(" method=\"post\"");
@@ -465,10 +465,18 @@ WriteLiteral("\r\n\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n");
 
 DefineSection("script", () => {
 
+WriteLiteral("\r\n  <script>\r\n    $(function () {\r\n      $(\'.basic-example\').DataTable(\r\n        " +
+"{\r\n          \"pageLength\": ");
+
+            
+            #line 117 "..\..\Areas\Admin\Views\Content\Index.cshtml"
+                   Write(tableSize);
+
+            
+            #line default
+            #line hidden
 WriteLiteral(@"
-  <script>
-    $(function () {
-      $('.basic-example').DataTable();
+        } );
     });
 
     function deleteCurrent() {

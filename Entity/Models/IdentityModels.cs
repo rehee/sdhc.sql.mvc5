@@ -21,7 +21,7 @@ namespace WebSQL.Models
       return userIdentity;
     }
   }
-
+  [AllowChildren(TableSize = EnumTablePageSize.L100)]
   public class MyUser: SDHCUser
   {
     public string AAA { get; set; }

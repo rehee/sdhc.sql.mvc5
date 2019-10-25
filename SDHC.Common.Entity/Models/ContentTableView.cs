@@ -54,6 +54,7 @@ namespace System
     public bool FirstRowIsNotAction { get; set; }
     public bool DisableDelete { get; set; }
     public string DeleteFunctionName { get; set; }
+    public Type ThisTypeFrom { get; set; } = null;
   }
 
   public class ContentTableOption
