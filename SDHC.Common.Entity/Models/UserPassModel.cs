@@ -49,7 +49,8 @@ namespace SDHC.Common.Entity.Models
 
     private DateTime? _createDate { get; set; }
 
-    [IgnoreEdit]
+    [InputType(EditorType = EnumInputType.DateTime)]
+    [HideEdit]
     public virtual DateTime? CreateDate
     {
       get
@@ -64,7 +65,6 @@ namespace SDHC.Common.Entity.Models
       {
         if(value.HasValue)
           _createDate = value;
-        _createDate = DateTime.UtcNow;
       }
     }
 
