@@ -26,20 +26,33 @@
       </div>
 
       <div class="body">
-        <table>
-          <tr>
-            <th>User ID</th>
-            <th>User Name</th>
+        <table class="table table-bordered table-striped table-hover basic-example dataTable">
+          <thead>
+            <tr>
+              <th>User ID</th>
+              <th>User Name</th>
+              <th>Create Date</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>User ID</th>
+              <th>User Name</th>
+              <th>Create Date</th>
+            </tr>
+          </tfoot>
+          <tbody>
 
-          </tr>
-          @foreach (var item in Model.Users)
-          {
-          <tr>
-            <td> <a href="@Url.Action("EditUser","Roles",new { @area="Admin",@id=item.Id })">@item.Id</a> </td>
-            <td> <a href="@Url.Action("EditUser","Roles",new { @area="Admin",@id=item.Id })">@item.UserName</a> </td>
-          </tr>
-          }
 
+            @foreach (var item in Model.Users)
+            {
+              <tr>
+                <td> <a href="@Url.Action("EditUser","Roles",new { @area="Admin",@id=item.Id })">@item.Id</a> </td>
+                <td> <a href="@Url.Action("EditUser","Roles",new { @area="Admin",@id=item.Id })">@item.UserName</a> </td>
+                <td> <a href="@Url.Action("EditUser","Roles",new { @area="Admin",@id=item.Id })">@item.CreateDate</a> </td>
+              </tr>
+            }
+          </tbody>
 
 
         </table>
