@@ -38,6 +38,9 @@ namespace SDHC.Common.Entity.Models
     [BaseProperty]
     public string ThisAssembly { get; set; }
 
+    public string PostUrl { get; set; }
+    public string PostReturnUrl { get; set; }
+
     public List<ContentProperty> Properties { get; set; } = new List<ContentProperty>();
   }
 

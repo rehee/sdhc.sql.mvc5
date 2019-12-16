@@ -82,6 +82,7 @@
       @if (Model.Property.EditorType == EnumInputType.DropDwon)
       {
         <select name="@inputName" @requiredAttr(Model.Property.Required) @(Model.Property.Readonly ? "disabled" : "") class="form-control" @(Model.Property.MultiSelect ? "multiple" : "")>
+          <option>- -</option>
           @foreach (var item in Model.Property.SelectItems)
           {
             if (item.Select)

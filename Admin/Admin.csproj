@@ -201,6 +201,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_ContentTableHtml.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Admin\Views\Shared\GeneralModelView.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GeneralModelView.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Admin\Views\Shared\_BreadCrumbContent.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -358,6 +363,10 @@
       <LastGenOutput>_ContentTableHtml.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Shared\GeneralModelView.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>GeneralModelView.generated.cs</LastGenOutput>
+    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

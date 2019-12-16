@@ -41,54 +41,20 @@ namespace ASP
             
             #line 2 "..\..\Areas\Admin\Views\ModelManagement\Create.cshtml"
   
-    ViewBag.Title = G.GetModelTitleFullType(Model.FullType, Model.ThisAssembly) + " Create";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout_Content.cshtml";
+  ViewBag.Title = G.GetModelTitleFullType(Model.FullType, Model.ThisAssembly) + " Create";
+  Layout = "~/Areas/Admin/Views/Shared/_Layout_Content.cshtml";
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n<div");
+WriteLiteral("\r\n");
 
-WriteLiteral(" class=\"card\"");
-
-WriteLiteral(">\r\n    <div");
-
-WriteLiteral(" class=\"body\"");
-
-WriteLiteral(">\r\n        <form");
-
-WriteAttribute("action", Tuple.Create(" action=\"", 276), Tuple.Create("\"", 350)
             
-            #line 9 "..\..\Areas\Admin\Views\ModelManagement\Create.cshtml"
-, Tuple.Create(Tuple.Create("", 285), Tuple.Create<System.Object, System.Int32>(Url.Action("Create","ModelManagement",new { @area=G.AdminPath })
+            #line 6 "..\..\Areas\Admin\Views\ModelManagement\Create.cshtml"
+   Html.RenderPartial("GeneralModelView", Model);
             
             #line default
             #line hidden
-, 285), false)
-);
-
-WriteLiteral(" class=\"\"");
-
-WriteLiteral(" method=\"post\"");
-
-WriteLiteral(" enctype=\"multipart/form-data\"");
-
-WriteLiteral(">\r\n");
-
-            
-            #line 10 "..\..\Areas\Admin\Views\ModelManagement\Create.cshtml"
-            
-            
-            #line default
-            #line hidden
-            
-            #line 10 "..\..\Areas\Admin\Views\ModelManagement\Create.cshtml"
-               Html.RenderPartial("_CreateOrEdit", Model);
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n        </form>\r\n    </div>\r\n</div>");
-
         }
     }
 }

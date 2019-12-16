@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace System
@@ -8,7 +10,7 @@ namespace System
   public static class C
   {
     public static long MaxLength { get; set; } = 9223372036854775807;
-    
+
     public static bool IsNullOrEmpty(this string input)
     {
       return String.IsNullOrEmpty(input);
@@ -24,14 +26,29 @@ namespace System
     {
       Task.Run(async () => await task).ConfigureAwait(false).GetAwaiter().GetResult();
     }
+    /// <summary>
+    /// 将字符按照camel case 的分隔方式拆开. AA 将被拆分成 A A. 如果为空则返回"", 首字母大写
+    /// </summary>
+    /// <param name="value">camel case的字符串</param>
+    /// <returns>
+    /// string
+    /// </returns>
     public static string SpacesFromCamel(this string value)
     {
-      if (value.Length > 0)
+      var returnValue = "";
+      if (value.IsNullOrEmpty())
+      {
+        returnValue = value;
+        goto returnvalue;
+      }
+      if (value.Length >= 2)
       {
         var result = new List<char>();
+        result.Add(value[0].ToString().ToUpper()[0]);
         char[] array = value.ToCharArray();
-        foreach (var item in array)
+        for (var i = 1; i < value.Length; i++)
         {
+          var item = value[i];
           if (char.IsUpper(item))
           {
             result.Add(' ');
@@ -39,25 +56,24 @@ namespace System
           result.Add(item);
         }
 
-        return new string(result.ToArray());
-      }
-      return value;
-    }
-    //经常需要把dynamic或者其他乱七八糟的转成字符,trim 或者如果是空取默认值或者第几个字母开始大写等等
-    #region
-    public static string Text(this object input, string defaultValue = "", int captalString = -1, bool trim = true)
-    {
-      var result = "";
-      if (input == null)
-      {
-        result = defaultValue;
+        returnValue = new string(result.ToArray());
       }
       else
       {
-        result = Convert.ToString(input);
+        returnValue = value.ToUpper();
       }
-      return result.Text(captalString: captalString, trim: trim);
+      returnvalue:
+      return returnValue.Text("");
     }
+    #region 经常需要把dynamic或者其他乱七八糟的转成字符,trim 或者如果是空取默认值或者第几个字母开始大写等等
+    /// <summary>
+    /// 如果输入为空则返回默认值
+    /// </summary>
+    /// <param name="input">检测的字符串</param>
+    /// <param name="defaultValue">默认字符串</param>
+    /// <param name="captalString">大写选项 -1 为不变 0 为全小写 大于0 则超之前(包括本身)为大写 其余为小写</param>
+    /// <param name="trim">是否收空格</param>
+    /// <returns></returns>
     public static string Text(this string input, string defaultValue = "", int captalString = -1, bool trim = true)
     {
       var result = input;
@@ -69,9 +85,36 @@ namespace System
         result = result.Trim();
       return result.CaptalString(captalString);
     }
+    /// <summary>
+    /// 如果输入为空则返回默认值
+    /// </summary>
+    /// <param name="input">检测的字符串</param>
+    /// <param name="defaultValue">默认字符串</param>
+    /// <param name="captalString">大写选项 -1 为不变 0 为全小写 大于0 则超之前(包括本身)为大写 其余为小写</param>
+    /// <param name="trim">是否收空格</param>
+    /// <returns></returns>
+    public static string Text(this object input, string defaultValue = "", int captalString = -1, bool trim = true)
+    {
+      var result = "";
+      if (input == null)
+      {
+        result = defaultValue;
+      }
+      else
+      {
+        result = Convert.ToString(input);
+      }
+      return result.Text(defaultValue, captalString, trim);
+    }
+    /// <summary>
+    /// 将字符串大写
+    /// </summary>
+    /// <param name="input">输入字符 如果为空则返回""</param>
+    /// <param name="captalString">开始大写的字符(1 based index)</param>
+    /// <returns></returns>
     public static string CaptalString(this string input, int captalString = -1)
     {
-      if (input == null)
+      if (String.IsNullOrEmpty(input))
       {
         input = "";
       }
@@ -87,11 +130,15 @@ namespace System
 
     public static int Int32(this string input, int defaultValue = 0)
     {
-      try
+      if (String.IsNullOrEmpty(input))
       {
-        return Convert.ToInt32(input);
+        return defaultValue;
       }
-      catch { return defaultValue; }
+      if (System.Int32.TryParse(input, out var value))
+      {
+        return value;
+      }
+      return defaultValue;
     }
     public static int Int32(this bool input)
     {
@@ -123,17 +170,11 @@ namespace System
     //不想用三目怎么办呢
     public static string Compare(this string input, string check, string trueResult = "", string errorResult = "")
     {
-      if (input.Text() == check.Text())
-      {
-        return trueResult.Text();
-      }
-      return errorResult.Text();
+      return C.Text(String.Equals(input, check) ? trueResult : errorResult);
     }
     public static string Compare(this bool input, bool check, string trueResult = "", string errorResult = "")
     {
-      if (input == check)
-        return trueResult.Text();
-      return errorResult.Text();
+      return C.Text(input == check ? trueResult : errorResult);
     }
     public static string Compare(this int input, int check, IntCompareType type = IntCompareType.equal, string trueResult = "", string errorResult = "")
     {
@@ -163,15 +204,20 @@ namespace System
     //想要变成现金又不想写Format.
     public static string DefaultMoneyFormat { get; set; } = "#,##0.00";
     #region
-    public static string MoneyString(this object input, string moneyString = "")
+    public static string MoneyString(this string input, string moneyString = "")
     {
       decimal result = 0;
-      try
+      Decimal.TryParse(input.Text(), out result);
+      return result.MoneyString(moneyString.Text(DefaultMoneyFormat));
+    }
+    public static string MoneyString(this object input, string moneyString = "")
+    {
+      var stringValue = "";
+      if (input != null)
       {
-        result = Convert.ToDecimal(input);
+        stringValue = Convert.ToString(input);
       }
-      catch { }
-      return result.ToString(moneyString.Text(DefaultMoneyFormat));
+      return MoneyString(stringValue, moneyString.Text(DefaultMoneyFormat));
     }
     public static string MoneyString(this Int16 input, string moneyString = "")
     {
@@ -261,7 +307,7 @@ namespace System
     }
 
     #endregion
-
+    [Obsolete]
     public static string RenderTemplate(string temp, IDictionary<string, string> model, string separatFormat = "[{0}]")
     {
       foreach (var item in model)
@@ -269,6 +315,38 @@ namespace System
         temp = temp.Replace(String.Format(separatFormat, item.Key), item.Value);
       }
       return temp;
+    }
+    ///<summary>
+    /// Replace placeholder to value from templete. if the value is null, then leave the placeholder.
+    ///</summary>
+    ///<remarks>
+    /// nested delimiters will ignore out side delimiters. and delimiters will only accectped {} key will ignore space or any empty char
+    ///</remarks>
+    ///<example>
+    /// {{a}} will be {value of a here} \r\n
+    /// {aa{b}{a}} will be "{aavalue of b herevalue of a here}\r\n
+    /// {a a}{b} will be "{a a}value b here"\r\n
+    /// </example>
+    public static String PlaceHolderReplace(this string template, Func<string, string> getValueByKey)
+    {
+      if (String.IsNullOrEmpty(template))
+      {
+        return template;
+      }
+      Regex rx = new Regex(@"(?<=\{)[^\{\} \f\n\r\t\v]+(?=\})", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+      MatchCollection matches = rx.Matches(template);
+      var parameters = new Dictionary<string, string>();
+      var keys = matches.Cast<Match>()
+              .Select(m => m.Value).GroupBy(b => b).Select(b => b.Key).ToList();
+      foreach (var k in keys)
+      {
+        var value = getValueByKey(k);
+        if (value != null)
+        {
+          parameters.Add($"{{{k}}}", value);
+        }
+      }
+      return parameters.Aggregate(template, (current, parameter) => current.Replace(parameter.Key, parameter.Value.ToString()));
     }
 
     public static string ToLowerNth(this string input, int index = 1)

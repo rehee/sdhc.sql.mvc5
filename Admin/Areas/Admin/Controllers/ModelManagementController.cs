@@ -59,6 +59,8 @@ namespace Admin.Areas.Admin.Controllers
     {
       ModelManager.Create(model);
       var key = ModelManager.GetMapperKey(model.FullType);
+      if (!String.IsNullOrEmpty(model.PostReturnUrl))
+        return Redirect(model.PostReturnUrl);
       if (String.IsNullOrEmpty(key))
       {
         return RedirectToAction("Index", "DashBoard", new { @area = G.AdminPath, @id = key });
@@ -87,6 +89,8 @@ namespace Admin.Areas.Admin.Controllers
         ModelManager.Update(model);
       }
       catch { }
+      if (!String.IsNullOrEmpty(model.PostReturnUrl))
+        return Redirect(model.PostReturnUrl);
       return RedirectToAction("Index", "ModelManagement", new { @area = G.AdminPath, @id = key });
     }
 
