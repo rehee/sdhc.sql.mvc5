@@ -26,8 +26,8 @@
         <!-- START navbar header-->
         <div class="navbar-header">
           <a href="@Url.Action("Index","Dashboard",new { @area = G.AdminPath })" class="navbar-brand">
-              <br/>
-              Admin
+            <br />
+            Admin
             @*<div class="brand-logo">
                 <img src="/admin-lib/assets/images/logo.png" alt="Admin Logo" class="img-responsive">
               </div>
@@ -67,16 +67,15 @@
   </div>
 
   @{ Html.RenderPartial("_js"); }
-  <script>
-      $(".form_datetime").datepicker({
-          format: 'yyyy-mm-dd',
-          fontAwesome: !0,
-          autoclose: true,
-          pickerPosition: "top-right"
-
-      });
-  </script>
   @RenderSection("script", false)
+  <script>
+    $(".form_datetime").datepicker({
+      format: 'yyyy-mm-dd',
+      fontAwesome: !0,
+      autoclose: true,
+      pickerPosition: "top-right"
 
+    });
+  </script>
 </body>
 </html>

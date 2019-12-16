@@ -135,7 +135,7 @@ WriteAttribute("href", Tuple.Create(" href=\"", 849), Tuple.Create("\"", 916)
 
 WriteLiteral(" class=\"navbar-brand\"");
 
-WriteLiteral(">\r\n              <br/>\r\n              Admin\r\n            ");
+WriteLiteral(">\r\n            <br />\r\n            Admin\r\n            ");
 
 WriteLiteral("\r\n          </a>\r\n        </div>\r\n        <!-- END navbar header-->\r\n        <!--" +
 " START Nav wrapper-->\r\n        <div");
@@ -228,20 +228,20 @@ WriteLiteral("</span>\r\n    </footer>\r\n  </div>\r\n\r\n");
             
             #line default
             #line hidden
-WriteLiteral("\r\n  <script>\r\n      $(\".form_datetime\").datepicker({\r\n          format: \'yyyy-mm-" +
-"dd\',\r\n          fontAwesome: !0,\r\n          autoclose: true,\r\n          pickerPo" +
-"sition: \"top-right\"\r\n\r\n      });\r\n  </script>\r\n");
+WriteLiteral("\r\n");
 
 WriteLiteral("  ");
 
             
-            #line 79 "..\..\Areas\Admin\Views\Shared\_Root.cshtml"
+            #line 70 "..\..\Areas\Admin\Views\Shared\_Root.cshtml"
 Write(RenderSection("script", false));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n</body>\r\n</html>");
+WriteLiteral("\r\n  <script>\r\n    $(\".form_datetime\").datepicker({\r\n      format: \'yyyy-mm-dd\',\r\n" +
+"      fontAwesome: !0,\r\n      autoclose: true,\r\n      pickerPosition: \"top-right" +
+"\"\r\n\r\n    });\r\n  </script>\r\n</body>\r\n</html>");
 
         }
     }
