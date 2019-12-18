@@ -1,130 +1,176 @@
 ﻿@using SDHC.Common.Entity.Models
 @using SDHC.Common.Entity.Types
 @model ContentPropertyIndex
-@Html.Hidden("Properties[" + Model.Index.ToString() + "].Key", Model.Property.Key)
-@Html.Hidden("Properties[" + Model.Index.ToString() + "].ValueType", Model.Property.ValueType)
-@Html.Hidden("Properties[" + Model.Index.ToString() + "].EditorType", Model.Property.EditorType)
-@Html.Hidden("Properties[" + Model.Index.ToString() + "].MultiSelect", Model.Property.MultiSelect)
 @{
-    var valueName = "Value";
-    if (Model.Property.MultiSelect)
-    {
+  var randomIndex = Guid.NewGuid().ToString().Replace('-', '_');
+}
+<input type="hidden" id="@(randomIndex)_Properties[@(Model.Index.ToString())].Key" name="Properties[@(Model.Index.ToString())].Key" value="@Model.Property.Key" />
+<input type="hidden" id="@(randomIndex)_Properties[@(Model.Index.ToString())].ValueType" name="Properties[@(Model.Index.ToString())].ValueType" value="@Model.Property.ValueType" />
+<input type="hidden" id="@(randomIndex)_Properties[@(Model.Index.ToString())].EditorType" name="Properties[@(Model.Index.ToString())].EditorType" value="@Model.Property.EditorType" />
+<input type="hidden" id="@(randomIndex)_Properties[@(Model.Index.ToString())].MultiSelect" name="Properties[@(Model.Index.ToString())].MultiSelect" value="@Model.Property.MultiSelect" />
+@{
+  var valueName = "Value";
+  if (Model.Property.MultiSelect)
+  {
 
-        valueName = "MultiValue";
+    valueName = "MultiValue";
 
-    }
-    var inputName = "Properties[" + @Model.Index.ToString() + "]." + @valueName;
-    var FileName = "Properties[" + @Model.Index.ToString() + "].File";
-    
+  }
+  var inputName = "Properties[" + @Model.Index.ToString() + "]." + @valueName;
+  var FileName = "Properties[" + @Model.Index.ToString() + "].File";
+
 }
 
 @helper requiredMark(bool required)
 {
-    if (required)
-    {
-        <text>*</text>
-    }
+  if (required)
+  {
+    <text>*</text>
+  }
 }
 @helper requiredAttr(bool required)
 {
-    if (required)
-    {
-        <text>required</text>
-    }
+  if (required)
+  {
+    <text>required</text>
+  }
 }
 @if (Model.Property.NewLine)
 {
-    <br />
+  <br />
 }
-    <div class="form-group" style="@(Model.Property.InputWidth>0?"width:"+Model.Property.InputWidth+"%;display:inline-block;":"")">
-      <label>@Model.Property.Title @requiredMark(Model.Property.Required)</label>
-      @if (Model.Property.EditorType == EnumInputType.Text)
-      {
-        <input type="text" @requiredAttr(Model.Property.Required) class="form-control" name="@inputName" value="@Model.Property.Value" />
+@if (Model.Property.Readonly)
+{
+  <input type="hidden" name="@inputName" value="@Model.Property.Value" />
+}
+
+<div class="form-group" style="@(Model.Property.InputWidth>0?"width:"+Model.Property.InputWidth+"%;display:inline-block;":"")">
+  <label>
+    @Model.Property.Title
+    @if (Model.Property.EditorType == EnumInputType.Range)
+    {
+      <script>
+      function on_range_select_change_@(randomIndex)(v) {
+        $('#range_value_@randomIndex').text(v.value);
       }
-      @if (Model.Property.EditorType == EnumInputType.Password)
-      {
-        <input type="password" @requiredAttr(Model.Property.Required) class="form-control" name="@inputName" value="@Model.Property.Value" />
-      }
-      @if (Model.Property.EditorType == EnumInputType.TextArea)
-      {
-        <textarea class="form-control" @requiredAttr(Model.Property.Required) rows="5" name="@inputName">@Model.Property.Value</textarea>
-      }
-      @if (Model.Property.EditorType == EnumInputType.Number)
-      {
-        <input type="number" @requiredAttr(Model.Property.Required) class="form-control" name="@inputName" value="@Model.Property.Value" />
-      }
-      @if (Model.Property.EditorType == EnumInputType.Html)
-      {
-        <textarea id="html_editor_@Model.Index" class="form-control" @requiredAttr(Model.Property.Required) name="@inputName">@Model.Property.Value</textarea>
-      }
-      @if (Model.Property.EditorType == EnumInputType.Bool)
-      {
-        <select name="@inputName" @requiredAttr(Model.Property.Required) @(Model.Property.Readonly ? "disabled" : "") class="form-control">
-          <option @(Model.Property.Value == "True" ? "selected" : "") value="True">Yes</option>
-          <option @(Model.Property.Value == "False" ? "selected" : "") value="False">No</option>
-        </select>
-      }
-      @if (Model.Property.EditorType == EnumInputType.DateTime)
-      {
-        @*<div class='input-group date datetimepicker' id="mydatepicker">
+      </script>
+      <span id="range_value_@randomIndex">
+        @Model.Property.Value
+      </span>
+    }
+    @requiredMark(Model.Property.Required)
+  </label>
+  @if (Model.Property.EditorType == EnumInputType.Text)
+  {
+    <input type="text" @requiredAttr(Model.Property.Required) class="form-control" name="@inputName" value="@Model.Property.Value" @(Model.Property.Readonly ? "disabled" : null)/>
+  }
+  @if (Model.Property.EditorType == EnumInputType.Password)
+  {
+    <input type="password" @requiredAttr(Model.Property.Required) class="form-control" name="@inputName" value="@Model.Property.Value" @(Model.Property.Readonly ? "disabled" : null)/>
+  }
+  @if (Model.Property.EditorType == EnumInputType.TextArea)
+  {
+    <textarea class="form-control" @requiredAttr(Model.Property.Required) rows="5" name="@inputName" @(Model.Property.Readonly ? "disabled" : null)>@Model.Property.Value</textarea>
+  }
+  @if (Model.Property.EditorType == EnumInputType.Number)
+  {
+    <div class="input-group spinner" data-trigger="spinner">
+      <span class="input-group-addon" data-spin="up">
+        <a href="javascript:;" class="spin-up"><i class="glyphicon glyphicon-plus"></i></a>
+      </span>
+      <input type="text" data-rule="quantity" data-min="@(Model.Property.HasRangeMin?Model.Property.RangeMin.ToString():"null")" data-max="@(Model.Property.HasRangeMax?Model.Property.RangeMax.ToString():"null")" @requiredAttr(Model.Property.Required) class="form-control" name="@inputName" value="@Model.Property.Value" @(Model.Property.Readonly ? "disabled" : null)/>
+      <span class="input-group-addon" data-spin="down">
+        <a href="javascript:;" class="spin-down"><i class="glyphicon glyphicon-minus"></i></a>
+      </span>
+    </div>
+  }
+  @if (Model.Property.EditorType == EnumInputType.Currency)
+  {
+    <div class="input-group spinner" data-trigger="spinner">
+      <span class="input-group-addon" data-spin="up">
+        <a href="javascript:;" class="spin-up"><i class="glyphicon glyphicon-plus"></i></a>
+      </span>
+      <input type="text" data-rule="currency" data-min="@(Model.Property.HasRangeMin?Model.Property.RangeMin.ToString():"null")" data-max="@(Model.Property.HasRangeMax?Model.Property.RangeMax.ToString():"null")" @requiredAttr(Model.Property.Required) class="form-control" name="@inputName" value="@Model.Property.Value" @(Model.Property.Readonly ? "disabled" : null)/>
+      <span class="input-group-addon" data-spin="down">
+        <a href="javascript:;" class="spin-down"><i class="glyphicon glyphicon-minus"></i></a>
+      </span>
+    </div>
+  }
+  @if (Model.Property.EditorType == EnumInputType.Range)
+  {
+    <input type="range" onchange="on_range_select_change_@(randomIndex)(this)" min="@Model.Property.RangeMin" max="@Model.Property.RangeMax" @requiredAttr(Model.Property.Required) class="form-control" name="@inputName" value="@Model.Property.Value" @(Model.Property.Readonly ? "disabled" : null)/>
+  }
+  @if (Model.Property.EditorType == EnumInputType.Html)
+  {
+    <textarea id="html_editor_@Model.Index@randomIndex" class="form-control" @requiredAttr(Model.Property.Required) name="@inputName" @(Model.Property.Readonly ? "disabled" : null)>@Model.Property.Value</textarea>
+  }
+  @if (Model.Property.EditorType == EnumInputType.Bool)
+  {
+    <select name="@inputName" @requiredAttr(Model.Property.Required) @(Model.Property.Readonly ? "disabled" : "") class="form-control">
+      <option @(Model.Property.Value == "True" ? "selected" : "") value="True">Yes</option>
+      <option @(Model.Property.Value == "False" ? "selected" : "") value="False">No</option>
+    </select>
+  }
+  @if (Model.Property.EditorType == EnumInputType.DateTime)
+  {
+    @*<div class='input-group date datetimepicker' id="mydatepicker">
           <input type='text' class="form-control" name="@inputName" value="@Model.Property.Value.Split(' ').FirstOrDefault()" placeholder="yyyy-mm-dd" />
           <span class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
           </span>
       </div>*@
-        <div class="input-group date form_datetime ">
-          <span class="input-group-addon bg"><i class="fa fa-calendar"></i></span>
-          <input type="text" @requiredAttr(Model.Property.Required) name="@inputName" value="@(!String.IsNullOrEmpty(Model.Property.Value)?Model.Property.Value.Contains("T")? Model.Property.Value.Split('T').FirstOrDefault() : Model.Property.Value.Split(' ').FirstOrDefault() :"" )" placeholder="yyyy-mm-dd" readonly class="form-control">
+    <div class="input-group date form_datetime ">
+      <span class="input-group-addon bg"><i class="fa fa-calendar"></i></span>
+      <input type="text" @requiredAttr(Model.Property.Required) name="@inputName" value="@(!String.IsNullOrEmpty(Model.Property.Value)?Model.Property.Value.Contains("T")? Model.Property.Value.Split('T').FirstOrDefault() : Model.Property.Value.Split(' ').FirstOrDefault() :"" )" placeholder="yyyy-mm-dd" readonly class="form-control">
 
-        </div>
-      }
-      @if (Model.Property.EditorType == EnumInputType.DropDwon)
-      {
-        <select name="@inputName" @requiredAttr(Model.Property.Required) @(Model.Property.Readonly ? "disabled" : "") class="form-control" @(Model.Property.MultiSelect ? "multiple" : "")>
-          <option>- -</option>
-          @foreach (var item in Model.Property.SelectItems)
-          {
-            if (item.Select)
-            {
-              <option selected value="@(item.Value)">@(item.Name)</option>
-            }
-            else
-            {
-              <option value="@(item.Value)">@(item.Name)</option>
-            }
-
-          }
-        </select>
-      }
-      @if (Model.Property.EditorType == EnumInputType.FileUpload)
-      {
-        if (!string.IsNullOrEmpty(Model.Property.Value))
-        {
-          <p>
-            <img style="display:block; max-width: 120px;max-height: 120px; margin-bottom: 10px;" src="@ContentExtends.GetUrlPath(Model.Property.Value.ImagePath())" />
-          </p>
-
-        }
-        <input style="display:block" type="file" @requiredAttr(Model.Property.Required) class="form-control" name="@FileName" /> <br />
-        <input type="hidden" name="@inputName" value="@Model.Property.Value" />
-      }
-      @if (Model.Property.EditorType == EnumInputType.OuterFile)
-      {
-        if (!string.IsNullOrEmpty(Model.Property.Value))
-        {
-          <p>
-            <img style="display:block; max-width: 120px;max-height: 120px; margin-bottom: 10px;" src="@ContentExtends.GetUrlPath(Model.Property.Value.ImagePath())" />
-          </p>
-          <p>
-            <a href="@ContentExtends.GetUrlPath(Model.Property.Value.ImagePath())" download >Download</a>
-          </p>
-
-        }
-        <input type="hidden" name="@inputName" value="@Model.Property.Value" />
-      }
     </div>
+  }
+  @if (Model.Property.EditorType == EnumInputType.DropDwon)
+  {
+    <select name="@inputName" @requiredAttr(Model.Property.Required) @(Model.Property.Readonly ? "disabled" : "") class="form-control" @(Model.Property.MultiSelect ? "multiple" : "")>
+      <option>- -</option>
+      @foreach (var item in Model.Property.SelectItems)
+      {
+        if (item.Select)
+        {
+          <option selected value="@(item.Value)">@(item.Name)</option>
+        }
+        else
+        {
+          <option value="@(item.Value)">@(item.Name)</option>
+        }
+
+      }
+    </select>
+  }
+  @if (Model.Property.EditorType == EnumInputType.FileUpload)
+  {
+    if (!string.IsNullOrEmpty(Model.Property.Value))
+    {
+      <p>
+        <img style="display:block; max-width: 120px;max-height: 120px; margin-bottom: 10px;" src="@ContentExtends.GetUrlPath(Model.Property.Value.ImagePath())" />
+      </p>
+
+    }
+    <input style="display:block" type="file" @requiredAttr(Model.Property.Required) class="form-control" name="@FileName" @(Model.Property.Readonly ? "disabled" : null)/> <br />
+    <input type="hidden" name="@inputName" value="@Model.Property.Value" />
+  }
+  @if (Model.Property.EditorType == EnumInputType.OuterFile)
+  {
+    if (!string.IsNullOrEmpty(Model.Property.Value))
+    {
+      <p>
+        <img style="display:block; max-width: 120px;max-height: 120px; margin-bottom: 10px;" src="@ContentExtends.GetUrlPath(Model.Property.Value.ImagePath())" />
+      </p>
+      <p>
+        <a href="@ContentExtends.GetUrlPath(Model.Property.Value.ImagePath())" download>Download</a>
+      </p>
+
+    }
+    <input type="hidden" name="@inputName" value="@Model.Property.Value" />
+  }
+</div>
 @if (Model.Property.NewLineAfter)
 {
-    <br />
+  <br />
 }

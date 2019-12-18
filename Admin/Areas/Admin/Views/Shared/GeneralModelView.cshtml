@@ -7,12 +7,7 @@
 <div class="card">
   <div class="body">
     <form action="@postUrl" class="" method="post" enctype="multipart/form-data">
-      @Html.Hidden("Id", Model.Id)
-      @Html.Hidden("FullType", Model.FullType)
-      @Html.Hidden("ThisAssembly", Model.ThisAssembly)
-      @Html.Hidden("PostUrl", Model.PostUrl)
-      @Html.Hidden("PostReturnUrl", Model.PostReturnUrl)
-      @{ Html.RenderPartial("AdminInputs/_PropertiesEdit", Model);}
+      @{ Html.RenderPartial("_ModelFormViewCore", Model);}
       <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
     </form>
   </div>

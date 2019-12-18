@@ -77,5 +77,24 @@
 
     });
   </script>
+  <script>
+    function resetEditor(id) {
+      CKEDITOR.replace(id, {
+        height: 300
+      });
+    }
+    $(function () {
+      var htmlEditor = $("textarea[id^=html_editor_]");
+      for (var i = 0; i < htmlEditor.length; i++) {
+        var e = $(htmlEditor[i]).attr('id');
+        if (e) {
+          resetEditor(e);
+        }
+      }
+      //CKEDITOR.replace('html-editor')
+      //CKEDITOR.config.height = 600;
+
+    });
+  </script>
 </body>
 </html>

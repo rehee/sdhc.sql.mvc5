@@ -46,6 +46,9 @@
 <script src="~/admin-lib/plugins/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
 <script src="~/admin-lib/plugins/bootstrap-daterange/daterangepicker.js"></script>
 <script src="~/admin-lib/plugins/ckeditor/ckeditor.js"></script>
+<script src="~/admin-lib/plugins/jquery-spinner/js/jquery.spinner.js"></script>
+<script src="~/admin-lib/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+<script src="~/admin-lib/plugins/bootstrap-selectsplitter/bootstrap-selectsplitter.js"></script>
 
 <!-- LAYOUT JS -->
 <script src="~/admin-lib/assets/js/demo.js"></script>
@@ -62,22 +65,4 @@
 
   </script>*@
 
-<script>
-  function resetEditor(id) {
-    CKEDITOR.replace(id, {
-      height: 300
-    });
-  }
-  $(function () {
-    var htmlEditor = $("textarea[id^=html_editor_]");
-    for (var i = 0; i < htmlEditor.length; i++) {
-      var e = $(htmlEditor[i]).attr('id');
-      if (e) {
-        resetEditor(e);
-      }
-    }
-    //CKEDITOR.replace('html-editor')
-    //CKEDITOR.config.height = 600;
 
-  });
-</script>

@@ -201,6 +201,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_ContentTableHtml.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Admin\Views\Shared\GeneralModelModal.generated.cs">
+      <DependentUpon>GeneralModelModal.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\Shared\_ModelFormViewCore.generated.cs">
+      <DependentUpon>_ModelFormViewCore.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Areas\Admin\Views\Shared\GeneralModelView.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -366,6 +376,14 @@
     <Content Include="Areas\Admin\Views\Shared\GeneralModelView.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>GeneralModelView.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Views\Shared\_ModelFormViewCore.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_ModelFormViewCore.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Views\Shared\GeneralModelModal.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>GeneralModelModal.generated.cs</LastGenOutput>
     </Content>
     <None Include="packages.config" />
   </ItemGroup>

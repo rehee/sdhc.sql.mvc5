@@ -9,7 +9,9 @@ namespace System
     public EnumInputType EditorType { get; set; } = EnumInputType.Text;
     public bool MultiSelect { get; set; } = false;
     public Type RelatedType { get; set; } = null;
+    public bool HasRangeMin { get; set; }
     public int RangeMin { get; set; } = 0;
+    public bool HasRangeMax { get; set; }
     public int RangeMax { get; set; } = 100;
     public bool RangeMaxSelf { get; set; } = false;
     public int SortOrder { get; set; } = 0;

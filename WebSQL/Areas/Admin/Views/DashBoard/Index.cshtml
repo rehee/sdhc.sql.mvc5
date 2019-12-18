@@ -1,4 +1,17 @@
 ﻿@{
-    ViewBag.Title = "Dash board";
+  ViewBag.Title = "Dash board";
+  var testModel = (new Entity.Models.E2()).ConvertModelToModelPostModel();
+  testModel.IsPostAjax = true;
+  testModel.PostResponseMethod = "responseAjax";
+  testModel.PostUrl = Url.Action("Edit", "DashBoard", new { @area = G.AdminPath });
 }
+<script>
+  function responseAjax(r) {
+    console.log(r);
+  }
+</script>
+<input type="button" name="name" @G.ModalButton(testModel.PostFormId) value="Open" />
 
+@{
+  Html.RenderPartial(G.GeneralModal, testModel);
+}

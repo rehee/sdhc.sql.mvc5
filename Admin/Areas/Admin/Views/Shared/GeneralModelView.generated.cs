@@ -76,70 +76,15 @@ WriteLiteral(" enctype=\"multipart/form-data\"");
 
 WriteLiteral(">\r\n");
 
-WriteLiteral("      ");
-
             
             #line 10 "..\..\Areas\Admin\Views\Shared\GeneralModelView.cshtml"
- Write(Html.Hidden("Id", Model.Id));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("      ");
-
-            
-            #line 11 "..\..\Areas\Admin\Views\Shared\GeneralModelView.cshtml"
- Write(Html.Hidden("FullType", Model.FullType));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("      ");
-
-            
-            #line 12 "..\..\Areas\Admin\Views\Shared\GeneralModelView.cshtml"
- Write(Html.Hidden("ThisAssembly", Model.ThisAssembly));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("      ");
-
-            
-            #line 13 "..\..\Areas\Admin\Views\Shared\GeneralModelView.cshtml"
- Write(Html.Hidden("PostUrl", Model.PostUrl));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("      ");
-
-            
-            #line 14 "..\..\Areas\Admin\Views\Shared\GeneralModelView.cshtml"
- Write(Html.Hidden("PostReturnUrl", Model.PostReturnUrl));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-            
-            #line 15 "..\..\Areas\Admin\Views\Shared\GeneralModelView.cshtml"
       
             
             #line default
             #line hidden
             
-            #line 15 "..\..\Areas\Admin\Views\Shared\GeneralModelView.cshtml"
-         Html.RenderPartial("AdminInputs/_PropertiesEdit", Model);
+            #line 10 "..\..\Areas\Admin\Views\Shared\GeneralModelView.cshtml"
+         Html.RenderPartial("_ModelFormViewCore", Model);
             
             #line default
             #line hidden

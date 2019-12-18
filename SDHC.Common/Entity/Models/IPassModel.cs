@@ -38,8 +38,13 @@ namespace SDHC.Common.Entity.Models
     [BaseProperty]
     public string ThisAssembly { get; set; }
 
-    public string PostUrl { get; set; }
+public string PostUrl { get; set; }
     public string PostReturnUrl { get; set; }
+    public bool IsPostAjax { get; set; }
+    public string PostBeforeMethod { get; set; }
+    public string PostResponseMethod { get; set; }
+    public string PostFormId { get; set; } = Guid.NewGuid().ToString().Replace('-', '_');
+    public string PostFormTitle { get; set; }
 
     public List<ContentProperty> Properties { get; set; } = new List<ContentProperty>();
   }

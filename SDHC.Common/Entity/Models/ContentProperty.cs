@@ -27,6 +27,8 @@ namespace SDHC.Common.Entity.Models
     public int InputWidth { get; set; }
     public bool NewLine { get; set; }
     public bool NewLineAfter { get; set; }
+    public bool HasRangeMin { get; set; }
+    public bool HasRangeMax { get; set; }
   }
   public class DropDownViewModel
   {

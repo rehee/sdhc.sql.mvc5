@@ -325,44 +325,44 @@ WriteAttribute("src", Tuple.Create(" src=\"", 3524), Tuple.Create("\"", 3570)
 , 3530), false)
 );
 
-WriteLiteral("></script>\r\n\r\n<!-- LAYOUT JS -->\r\n<script");
+WriteLiteral("></script>\r\n<script");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 3612), Tuple.Create("\"", 3647)
-, Tuple.Create(Tuple.Create("", 3618), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/assets/js/demo.js")
-, 3618), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 3590), Tuple.Create("\"", 3651)
+, Tuple.Create(Tuple.Create("", 3596), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/jquery-spinner/js/jquery.spinner.js")
+, 3596), false)
 );
 
 WriteLiteral("></script>\r\n<script");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 3667), Tuple.Create("\"", 3704)
-, Tuple.Create(Tuple.Create("", 3673), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/assets/js/layout.js")
-, 3673), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 3671), Tuple.Create("\"", 3739)
+, Tuple.Create(Tuple.Create("", 3677), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js")
+, 3677), false)
+);
+
+WriteLiteral("></script>\r\n<script");
+
+WriteAttribute("src", Tuple.Create(" src=\"", 3759), Tuple.Create("\"", 3837)
+, Tuple.Create(Tuple.Create("", 3765), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/plugins/bootstrap-selectsplitter/bootstrap-selectsplitter.js")
+, 3765), false)
+);
+
+WriteLiteral("></script>\r\n\r\n<!-- LAYOUT JS -->\r\n<script");
+
+WriteAttribute("src", Tuple.Create(" src=\"", 3879), Tuple.Create("\"", 3914)
+, Tuple.Create(Tuple.Create("", 3885), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/assets/js/demo.js")
+, 3885), false)
+);
+
+WriteLiteral("></script>\r\n<script");
+
+WriteAttribute("src", Tuple.Create(" src=\"", 3934), Tuple.Create("\"", 3971)
+, Tuple.Create(Tuple.Create("", 3940), Tuple.Create<System.Object, System.Int32>(Href("~/admin-lib/assets/js/layout.js")
+, 3940), false)
 );
 
 WriteLiteral("></script>\r\n\r\n");
 
-WriteLiteral(@"
-
-<script>
-  function resetEditor(id) {
-    CKEDITOR.replace(id, {
-      height: 300
-    });
-  }
-  $(function () {
-    var htmlEditor = $(""textarea[id^=html_editor_]"");
-    for (var i = 0; i < htmlEditor.length; i++) {
-      var e = $(htmlEditor[i]).attr('id');
-      if (e) {
-        resetEditor(e);
-      }
-    }
-    //CKEDITOR.replace('html-editor')
-    //CKEDITOR.config.height = 600;
-
-  });
-</script>
-");
+WriteLiteral("\r\n\r\n\r\n");
 
         }
     }

@@ -20,5 +20,6 @@ namespace System
     Bool,
     Range,
     Html,
+    Currency
   }
 }

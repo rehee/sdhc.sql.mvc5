@@ -19,5 +19,8 @@ namespace System
 
     [Config]
     public static int DefaultTablePageSize { get; set; } = (int)EnumTablePageSize.L10;
+
+    public static string GeneralModal { get; set; } = "GeneralModelModal";
+    public static string ModalButton(string id) => $"data-toggle=modal data-target=#{id}";
   }
 }

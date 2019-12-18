@@ -239,9 +239,37 @@ Write(RenderSection("script", false));
             
             #line default
             #line hidden
-WriteLiteral("\r\n  <script>\r\n    $(\".form_datetime\").datepicker({\r\n      format: \'yyyy-mm-dd\',\r\n" +
-"      fontAwesome: !0,\r\n      autoclose: true,\r\n      pickerPosition: \"top-right" +
-"\"\r\n\r\n    });\r\n  </script>\r\n</body>\r\n</html>");
+WriteLiteral(@"
+  <script>
+    $("".form_datetime"").datepicker({
+      format: 'yyyy-mm-dd',
+      fontAwesome: !0,
+      autoclose: true,
+      pickerPosition: ""top-right""
+
+    });
+  </script>
+  <script>
+    function resetEditor(id) {
+      CKEDITOR.replace(id, {
+        height: 300
+      });
+    }
+    $(function () {
+      var htmlEditor = $(""textarea[id^=html_editor_]"");
+      for (var i = 0; i < htmlEditor.length; i++) {
+        var e = $(htmlEditor[i]).attr('id');
+        if (e) {
+          resetEditor(e);
+        }
+      }
+      //CKEDITOR.replace('html-editor')
+      //CKEDITOR.config.height = 600;
+
+    });
+  </script>
+</body>
+</html>");
 
         }
     }
