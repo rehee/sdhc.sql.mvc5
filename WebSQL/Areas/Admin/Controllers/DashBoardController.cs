@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Admin.Areas.Admin.Controllers
 {
+  [Admin("Admin")]
   public class DashBoardController : Controller
   {
     // GET: Admin/Home

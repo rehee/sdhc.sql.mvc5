@@ -50,11 +50,11 @@ namespace System
       base.HandleUnauthorizedRequest(filterContext);
 
       filterContext.Result = new RedirectToRouteResult(
-        new RouteValueDictionary(new { controller = ControllerName, action = ActionName, area = AreaName }));
+        new RouteValueDictionary(new { controller = ControllerName, action = ActionName, area = AreaName, returnUrl = filterContext.HttpContext.Request.RawUrl }));
     }
-    public static string ControllerName { get; set; } = "User";
+    public static string ControllerName { get; set; } = "Account";
     public static string ActionName { get; set; } = "Login";
-    public static string AreaName { get; set; } = "Admin";
+    public static string AreaName { get; set; } = "";
   }
   public class MemberAttribute : AuthorizeAttribute
   {
@@ -63,7 +63,7 @@ namespace System
       base.HandleUnauthorizedRequest(filterContext);
 
       filterContext.Result = new RedirectToRouteResult(
-        new RouteValueDictionary(new { controller = ControllerName, action = ActionName, area = AreaName }));
+        new RouteValueDictionary(new { controller = ControllerName, action = ActionName, area = AreaName, returnUrl = filterContext.HttpContext.Request.RawUrl }));
     }
     public static string ControllerName { get; set; } = "Account";
     public static string ActionName { get; set; } = "Login";
