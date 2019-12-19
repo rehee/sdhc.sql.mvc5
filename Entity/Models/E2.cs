@@ -10,9 +10,9 @@ namespace Entity.Models
 {
   public class E2 : BaseModel
   {
-    [InputType(EditorType = EnumInputType.Number, Readonly = true)]
+    [InputType(EditorType = EnumInputType.Number, InputWidth = 48, Readonly = true)]
     public int MMM { get; set; } = 10;
-    [InputType(EditorType = EnumInputType.Currency)]
+    [InputType(EditorType = EnumInputType.Bool, InputWidth = 48)]
     public int MMM2 { get; set; }
     [InputType(EditorType = EnumInputType.Number)]
     public int MMM3 { get; set; }
