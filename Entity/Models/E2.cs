@@ -12,7 +12,7 @@ namespace Entity.Models
   {
     [InputType(EditorType = EnumInputType.Number, InputWidth = 48, Readonly = true)]
     public int MMM { get; set; } = 10;
-    [InputType(EditorType = EnumInputType.Bool, InputWidth = 48)]
+    [InputType(EditorType = EnumInputType.Number, HasRangeMax = true, HasRangeMin = true, InputWidth = 48)]
     public int MMM2 { get; set; }
     [InputType(EditorType = EnumInputType.Number)]
     public int MMM3 { get; set; }

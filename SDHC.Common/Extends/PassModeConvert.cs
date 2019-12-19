@@ -95,6 +95,7 @@ namespace System
       return result;
     }
 
+
     public static ContentProperty GetContentPropertyByPropertyInfo(this PropertyInfo p, object input)
     {
       var result = new ContentProperty();
@@ -112,29 +113,16 @@ namespace System
       }
       result.Key = p.Name;
       var inputType = p.GetObjectCustomAttribute<InputTypeAttribute>();
-      if (inputType != null)
-      {
-        result.SortOrder = inputType.SortOrder;
-        result.Required = inputType.Required;
-        result.Readonly = inputType.Readonly;
-        result.ReadonlyEdit = inputType.ReadonlyEdit;
-        result.NewLine = inputType.NewLine;
-        result.NewLineAfter = inputType.NewLineAfter;
-        result.InputWidth = inputType.InputWidth;
-      }
+      result.SetSameType<IInputCommon>(inputType);
       var cValue = p.GetValue(input).MyTryConvert(typeof(string));
       if (cValue != null)
         result.Value = (string)cValue;
 
       Type relatedType = null;
-      var inputAttribute = p.GetCustomAttribute<InputTypeAttribute>();
+      var inputAttribute = inputType;
       if (inputAttribute != null)
       {
-        result.EditorType = inputAttribute.EditorType;
-        result.MultiSelect = inputAttribute.MultiSelect;
         relatedType = inputAttribute.RelatedType;
-        result.RangeMax = inputAttribute.RangeMax;
-        result.RangeMin = inputAttribute.RangeMin;
         if (inputAttribute.RangeMaxSelf)
         {
           var max = input.MyTryConvert<int>();
@@ -306,7 +294,7 @@ namespace System
         p.SetValue(result, value);
       }
       catch { }
-      
+
     }
 
     public static object ConvertBaseTypeToEnity(this IPostModel input, out string typeName, out string assemblyName)
@@ -370,6 +358,22 @@ namespace System
     {
       var baseModel = Activator.CreateInstance(type);
       return baseModel.ConvertModelToModelPostModel();
+    }
+    public static void SetSameType<T>(this T target, T source)
+    {
+      if (target == null || source == null)
+      {
+        return;
+      }
+      var properties = typeof(T).GetProperties();
+      foreach (var p in properties)
+      {
+        try
+        {
+          p.SetValue(target, p.GetValue(source));
+        }
+        catch { }
+      }
     }
   }
 }

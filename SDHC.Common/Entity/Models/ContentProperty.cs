@@ -3,13 +3,14 @@ using System.Collections.Generic;
 
 namespace SDHC.Common.Entity.Models
 {
-  public class ContentProperty
+  public class ContentProperty : IInputCommon
   {
     public string Key { get; set; } = "";
     public string Value { get; set; } = "";
     public IEnumerable<string> MultiValue { get; set; } = new List<string>();
     public string ValueType { get; set; } = "";
     public string Title { get; set; } = "";
+
     public EnumInputType EditorType { get; set; } = EnumInputType.Text;
     public bool MultiSelect { get; set; } = false;
     public IEnumerable<DropDownViewModel> SelectItems { get; set; } = new List<DropDownViewModel>();
