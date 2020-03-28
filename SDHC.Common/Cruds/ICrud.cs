@@ -27,6 +27,8 @@ namespace SDHC.Common.Cruds
 
     T Find<T>(long id, out ISave repo) where T : class, IInt64Key;
     T Find<T>(long id) where T : class, IInt64Key;
+    T Find<T>(Type type, long id, out ISave repo) where T : class, IInt64Key;
+    T Find<T>(Type type, long id) where T : class, IInt64Key;
     object Find(Type type, long id, out ISave repo);
     object Find(Type type, long id);
     void Delete<T>(ISave repo, T model) where T : class, IInt64Key;

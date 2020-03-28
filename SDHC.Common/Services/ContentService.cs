@@ -82,14 +82,14 @@ namespace SDHC.Common.Services
       {
         return null;
       }
-      return Find<IContentModel>(id.Value);
+      return Find<IContentModel>(BaseIContentModelType, id.Value);
     }
     public ContentPostModel GetPreCreate(long? id, string fullType)
     {
       long? parentId = null;
       if (id.HasValue)
       {
-        var parent = Find<IContentModel>(id.Value);
+        var parent = Find<IContentModel>(BaseIContentModelType, id.Value);
         if (parent != null)
         {
           parentId = parent.Id;
@@ -153,7 +153,7 @@ namespace SDHC.Common.Services
       }
       else
       {
-        var roots = Read<IContentModel>(b => b.ParentId == null).ToList();
+        var roots = Read<IContentModel>(BaseIContentModelType, b => b.ParentId == null).ToList();
         var result = new ContentListView();
         roots.ForEach(b => GetContentListView(b, result, 0));
         return result;
@@ -193,7 +193,7 @@ namespace SDHC.Common.Services
       var list = inputs.ToList();
       list.RemoveAt(0);
       var idList = list.Where(b => b.id.HasValue).Select(b => b.id).ToList();
-      var contents = Read<IContentModel>(b => idList.Contains(b.Id), out var repo).ToList();
+      var contents = Read<IContentModel>(BaseIContentModelType, b => idList.Contains(b.Id), out var repo).ToList();
       contents.ForEach(c =>
       {
         var cInput = list.Where(b => b.id == c.Id).FirstOrDefault();

@@ -148,6 +148,16 @@ namespace System
       var result = Read<T>(b => b.Id == id, out ISave repo).FirstOrDefault();
       return result;
     }
+    public virtual T Find<T>(Type type, long id, out ISave repo) where T : class, IInt64Key
+    {
+      var result = Read<T>(type, b => b.Id == id, out repo).FirstOrDefault();
+      return result;
+    }
+    public virtual T Find<T>(Type type, long id) where T : class, IInt64Key
+    {
+      var result = Read<T>(type, b => b.Id == id).FirstOrDefault();
+      return result;
+    }
     public virtual object Find(Type type, long id, out ISave repo)
     {
       var result = Read<IInt64Key>(type, b => b.Id == id, out repo).FirstOrDefault();
