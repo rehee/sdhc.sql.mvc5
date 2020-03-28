@@ -9,10 +9,10 @@ namespace System
 {
   public class ContentTableView
   {
-    public IEnumerable<IBasicTitle> Contents { get; set; } = Enumerable.Empty<IBasicTitle>();
+    public IEnumerable<IBasicModel> Contents { get; set; } = Enumerable.Empty<IBasicModel>();
     public string RowClickFunction { get; set; } = "";
     public IEnumerable<ItemKeyAndName> Keys { get; set; } = Enumerable.Empty<ItemKeyAndName>();
-    public ContentTableView(IEnumerable<IBasicTitle> contents, string rowClickFunction = "", Type contentType = null)
+    public ContentTableView(IEnumerable<IBasicModel> contents, string rowClickFunction = "", Type contentType = null)
     {
       if (contents != null)
         Contents = contents;

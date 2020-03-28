@@ -51,7 +51,7 @@ namespace SDHC.Common.Services
     }
     public IEnumerable<IContentModel> GetAllChildContent(long? parentId)
     {
-      return Read<IContentModel>(
+      return Read<IContentModel>(BaseIContentModelType,
         b => b.ParentId == parentId)
         .AsQueryable();
     }
@@ -78,7 +78,7 @@ namespace SDHC.Common.Services
     }
     public IContentModel GetContent(long? id)
     {
-      if (!id.HasValue)
+      if (!id.HasValue || id <= 0)
       {
         return null;
       }

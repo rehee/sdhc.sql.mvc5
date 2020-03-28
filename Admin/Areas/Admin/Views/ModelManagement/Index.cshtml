@@ -4,7 +4,7 @@
   Model.FirstRowAction = "Edit";
   Model.FirstRowController = "ModelManagement";
   Model.FirstRowArea = "Area";
-  Model.FirstRowObject = b => new { @area = G.AdminPath, @id = (b as ContentTableRowItem).Id, @type = ModelManager.GetMapperKey((b as ContentTableRowItem).ThisType.FullName) };
+  Model.FirstRowObject = b => new { @area = G.AdminPath, @id = (b as ContentTableRowItem).Id, @type = ServiceContainer.ModelService.GetMapperKey((b as ContentTableRowItem).ThisType.FullName) };
   Model.DeleteFunctionName = "deleteRole";
   var tableSize = TypeExtends.GetTableSize(Model.ThisTypeFrom);
 }

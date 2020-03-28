@@ -14,11 +14,11 @@ namespace Admin.Areas.Admin.Controllers
     [Admin(adminRole: "ContentIndex")]
     public ActionResult Index(long? id)
     {
-      var content = ContentManager.GetContent(id);
+      var content = ServiceContainer.ContentService.GetContent(id.HasValue && id.Value > 0 ? id : null);
       AllowChildrenAttribute childrenAttribute;
       if (content == null)
       {
-        childrenAttribute = ContentManager.BasicContentType.GetObjectCustomAttribute<AllowChildrenAttribute>();
+        childrenAttribute = ServiceContainer.ContentService.BaseIContentModelType.GetObjectCustomAttribute<AllowChildrenAttribute>();
       }
       else
       {
@@ -46,7 +46,7 @@ namespace Admin.Areas.Admin.Controllers
     [Admin(adminRole: "ContentCreate")]
     public ActionResult PreCreate(long? ContentId, string FullType)
     {
-      var content = ContentManager.GetPreCreate(ContentId, FullType);
+      var content = ServiceContainer.ContentService.GetPreCreate(ContentId, FullType);
       return View("Create", content);
     }
     [HttpPost]
@@ -55,7 +55,7 @@ namespace Admin.Areas.Admin.Controllers
     public ActionResult Create(ContentPostModel model)
     {
       var content = model.ConvertToBaseModel() as BaseContent;
-      ContentManager.CreateContent(content, content.ParentId);
+      ServiceContainer.ContentService.CreateContent(content, content.ParentId);
       return RedirectToAction("Index");
     }
     [HttpGet]
@@ -67,7 +67,7 @@ namespace Admin.Areas.Admin.Controllers
       {
         return RedirectToAction("index");
       }
-      var content = ContentManager.GetContent(id);
+      var content = ServiceContainer.ContentService.GetContent(id);
       if (content == null)
       {
         return RedirectToAction("index");
@@ -79,13 +79,13 @@ namespace Admin.Areas.Admin.Controllers
     [Admin(adminRole: "ContentEdit")]
     public ActionResult Edit(ContentPostModel model)
     {
-      ContentManager.UpdateContent(model);
+      ServiceContainer.ContentService.UpdateContent(model);
       return RedirectToAction("Index");
     }
     [Admin(adminRole: "ContentSort")]
     public ActionResult Sort(long? id)
     {
-      var model = ContentManager.GetContentListView(id);
+      var model = ServiceContainer.ContentService.GetContentListView(id);
       return View(model);
     }
     [HttpPost]
@@ -93,7 +93,7 @@ namespace Admin.Areas.Admin.Controllers
     [Admin(adminRole: "ContentSort")]
     public ActionResult Sort(IEnumerable<ContentSortPostModel> input)
     {
-      ContentManager.UpdateContentOrder(input);
+      ServiceContainer.ContentService.UpdateContentOrder(input);
       return RedirectToAction("Sort");
     }
     [HttpPost]
@@ -103,10 +103,10 @@ namespace Admin.Areas.Admin.Controllers
     {
       if (!id.HasValue)
         return RedirectToAction("Index", "Content", new { @area = G.AdminPath });
-      var content = ContentManager.GetContent(id);
+      var content = ServiceContainer.ContentService.GetContent(id);
       if (content == null)
         return RedirectToAction("Index", "Content", new { @area = G.AdminPath });
-      ContentCruds.Delete(id.Value);
+      CrudContainer.CrudContent.Delete(id.Value);
       return RedirectToAction("Index");
     }
 

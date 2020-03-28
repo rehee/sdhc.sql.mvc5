@@ -151,9 +151,9 @@ namespace System
       //  {
       //    if (String.IsNullOrEmpty(id))
       //    {
-      //      return GetAdminAuthorizeRoles(EnumAdminAuthorize.Read, ContentManager.BasicContentType);
+      //      return GetAdminAuthorizeRoles(EnumAdminAuthorize.Read, ServiceContainer.ContentService.BaseIContentModelType);
       //    }
-      //    var model = ModelManager.Find<BaseContent>(id.MyTryConvert<long>());
+      //    var model = ServiceContainer.ModelService.Find<BaseContent>(id.MyTryConvert<long>());
       //    if (model != null)
       //    {
       //      return GetAdminAuthorizeRoles(EnumAdminAuthorize.Read, model.GetType());
@@ -181,7 +181,7 @@ namespace System
       //  {
       //    if (!String.IsNullOrEmpty(id))
       //    {
-      //      var model = ModelManager.Find<BaseContent>(id.MyTryConvert<long>());
+      //      var model = ServiceContainer.ModelService.Find<BaseContent>(id.MyTryConvert<long>());
       //      if (model != null)
       //      {
       //        return GetAdminAuthorizeRoles(EnumAdminAuthorize.Read, model.GetType());
@@ -200,7 +200,7 @@ namespace System
       //  {
       //    if (!String.IsNullOrEmpty(id))
       //    {
-      //      var model = ModelManager.Find<BaseContent>(id.MyTryConvert<long>());
+      //      var model = ServiceContainer.ModelService.Find<BaseContent>(id.MyTryConvert<long>());
       //      if (model != null)
       //      {
       //        return GetAdminAuthorizeRoles(EnumAdminAuthorize.Delete, model.GetType());

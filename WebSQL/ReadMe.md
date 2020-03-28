@@ -62,12 +62,12 @@ Entity 分为三类.
 * 基础的Entity. 继承了基础的IInt64Key 与IDisplayName
 * Content. 这类Entity有父子继承的关系.做内容时候用, 其中content的title则会被转换为url '/'与' '将会被转换为'_'其余特殊字符将会被转义
 * Select 这类作为列表选项出现在基础与content中
-使用 ContentManager,ModelManager,SelectManager 来进行crud操作
+使用 ServiceContainer.ContentService,ModelManager,SelectManager 来进行crud操作
 * 命名空间SDHC.Controllers下的SDHCPageController 为默认的获取content内容的控制器.
 * ContentPageUrl 设置了默认路径 比如/pages/123, 则会 读取第一个title为123 且没有父元素的content. 如果重名将会读取displayorder最小的一个.
 * admin 下,默认左侧菜单的Model列表为下方所示, key 为想显示的名字 type为对应的model的类
 ```
-ModelManager.ModelMapper = new Dictionary<string, Type>()
+ServiceContainer.ModelService.ModelMapper = new Dictionary<string, Type>()
       {
         ["S1"] = typeof(S1),
         ["S2"] = typeof(S2),

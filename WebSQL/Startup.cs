@@ -19,7 +19,7 @@ namespace WebSQL
     {
       SDHCStartup.Init<ApplicationDbContext, SCHCContent, SDHCBascSelect, MyUser>(
         app, () => ApplicationDbContext.Create(), HostingEnvironment.MapPath("/"));
-      ModelManager.ModelMapper = new Dictionary<string, Type>()
+      ServiceContainer.ModelService.ModelMapper = new Dictionary<string, Type>()
       {
         ["S1"] = typeof(S1),
         ["S2"] = typeof(S2),

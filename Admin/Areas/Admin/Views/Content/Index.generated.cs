@@ -50,7 +50,7 @@ namespace ASP
   ViewBag.Title = "Content";
   Layout = "~/Areas/Admin/Views/Shared/_Layout_Content.cshtml";
   var contentId = Model != null ? (long?)Model.Id : null;
-  var contents = ContentManager.GetContentTableHtmlView(contentId);
+  var contents = ServiceContainer.ContentService.GetContentTableHtmlView(contentId);
   contents.FirstRow = new ContentTableOption()
   {
     RowAction = "Index",

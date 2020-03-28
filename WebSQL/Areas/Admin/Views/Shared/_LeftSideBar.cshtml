@@ -17,7 +17,7 @@
         <li class="nav-heading ">
           <h4>WEB CONTENTS</h4>
         </li>
-        @foreach (var item in ModelManager.ModelManagerMapper)
+        @foreach (var item in ServiceContainer.ModelService.ModelManagerMapper)
         {
           <li>
             <a href="@Url.Action("Index","ModelManagement",new { @area=G.AdminPath,@id=item })" title="@item">

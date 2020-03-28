@@ -13,14 +13,14 @@ namespace Admin.Areas.Admin.Controllers
     [Admin(adminRole: "ModelManagementIndex")]
     public ActionResult Index(string id)
     {
-      var type = ModelManager.GetModelType(id);
+      var type = ServiceContainer.ModelService.GetModelType(id);
       if (type == null)
       {
         goto GoToDashBoard;
       }
       if (type.IsSingleRecordTable())
       {
-        var singleRecord = ModelManager.Read<IInt64Key>(type, b => true).FirstOrDefault();
+        var singleRecord = ServiceContainer.ModelService.Read<IInt64Key>(type, b => true).FirstOrDefault();
         if (singleRecord == null)
         {
           return RedirectToAction("Create", "ModelManagement", new { @id = id, @area = G.AdminPath });
@@ -28,7 +28,7 @@ namespace Admin.Areas.Admin.Controllers
         return RedirectToAction("Edit", "ModelManagement", new { @type = id, @id = singleRecord.Id, @area = G.AdminPath });
       }
       ViewBag.id = id;
-      var model = ModelManager.GetContentTableHtmlView(type);
+      var model = ServiceContainer.ModelService.GetContentTableHtmlView(type);
       return View(model);
       GoToDashBoard:
       return RedirectToAction("Index", "DashBoard", new { @area = G.AdminPath });
@@ -37,13 +37,13 @@ namespace Admin.Areas.Admin.Controllers
     [Admin(adminRole: "ModelManagementCreate")]
     public ActionResult Create(string id)
     {
-      var type = ModelManager.GetModelType(id);
+      var type = ServiceContainer.ModelService.GetModelType(id);
       if (type == null)
       {
         goto GoToDashBoard;
       }
 
-      var passModel = ModelManager.GetModelPostModelByType(type);
+      var passModel = ServiceContainer.ModelService.GetModelPostModelByType(type);
       if (passModel == null)
       {
         goto GoToDashBoard;
@@ -57,8 +57,8 @@ namespace Admin.Areas.Admin.Controllers
     [Admin(adminRole: "ModelManagementCreate")]
     public ActionResult Create(ModelPostModel model)
     {
-      ModelManager.Create(model);
-      var key = ModelManager.GetMapperKey(model.FullType);
+      ServiceContainer.ModelService.Create(model);
+      var key = ServiceContainer.ModelService.GetMapperKey(model.FullType);
       if (!String.IsNullOrEmpty(model.PostReturnUrl))
         return Redirect(model.PostReturnUrl);
       if (String.IsNullOrEmpty(key))
@@ -75,7 +75,7 @@ namespace Admin.Areas.Admin.Controllers
       {
         return RedirectToAction("Index", "DashBoard", new { @area = G.AdminPath });
       }
-      var model = ModelManager.Find(type, id, out ISave repo);
+      var model = ServiceContainer.ModelService.Find(type, id, out ISave repo);
       return View(model.ConvertModelToModelPostModel());
     }
     [HttpPost]
@@ -83,10 +83,10 @@ namespace Admin.Areas.Admin.Controllers
     [Admin(adminRole: "ModelManagementEdit")]
     public ActionResult Edit(ModelPostModel model)
     {
-      var key = ModelManager.GetMapperKey(model.FullType);
+      var key = ServiceContainer.ModelService.GetMapperKey(model.FullType);
       try
       {
-        ModelManager.Update(model);
+        ServiceContainer.ModelService.Update(model);
       }
       catch { }
       if (!String.IsNullOrEmpty(model.PostReturnUrl))
@@ -100,7 +100,7 @@ namespace Admin.Areas.Admin.Controllers
     public ActionResult Delete(string deleteId, string type)
     {
       var start = DateTime.Now;
-      ModelManager.Delete(type, deleteId.MyTryConvert<long>());
+      ServiceContainer.ModelService.Delete(type, deleteId.MyTryConvert<long>());
       var end = DateTime.Now;
       var ms = (end - start).Milliseconds;
       if (ms < 1000)

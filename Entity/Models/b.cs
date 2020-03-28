@@ -16,7 +16,7 @@ namespace Entity.Models
   {
     [NotMapped]
     [InputType(EditorType = EnumInputType.Bool)]
-    public virtual bool IsBool { get; set; } = true;
+    public virtual bool IsBool { get; set; }
     public virtual string Title_Title { get; set; }
   }
   [AllowChildren(

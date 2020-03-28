@@ -4,37 +4,42 @@
   ViewBag.Title = "Content";
   Layout = "~/Areas/Admin/Views/Shared/_Layout_Content.cshtml";
   var contentId = Model != null ? (long?)Model.Id : null;
-  var contents = ContentManager.GetContentTableHtmlView(contentId);
-  contents.FirstRow = new ContentTableOption()
+
+  var contents = contentId != null ? ServiceContainer.ContentService.GetContentTableHtmlView(contentId) : null;
+  if (contents != null)
   {
-    RowAction = "Index",
-    RowController = "Content",
-    RowArea = G.AdminPath,
-    RowTitle = b => $"{(b as ContentTableRowItem).DisplayOrder} (children list)",
-    RowObject = b => new { @id = (b as ContentTableRowItem).Id, @area = G.AdminPath }
-  };
-  contents.Options = new List<ContentTableOption>();
-  contents.Options.Add(
-    new ContentTableOption()
+    contents.FirstRow = new ContentTableOption()
     {
-      RowAction = "Edit",
+      RowAction = "Index",
       RowController = "Content",
       RowArea = G.AdminPath,
-      RowTitle = b => "Detail",
-      ButtonClass = "btn btn-primary",
+      RowTitle = b => $"{(b as ContentTableRowItem).DisplayOrder} (children list)",
       RowObject = b => new { @id = (b as ContentTableRowItem).Id, @area = G.AdminPath }
-    });
-  contents.Options.Add(
-    new ContentTableOption()
-    {
-      RowAction = "Preview",
-      RowController = "SDHCPage",
-      RowArea = "",
-      RowTitle = b => "Preview",
-      ButtonClass = "btn btn-success",
-      RowObject = b => new { @id = (b as ContentTableRowItem).Id, @area = "" },
-      UrlAttribute = c => $"target=\"_blank\"",
-    });
+    };
+    contents.Options = new List<ContentTableOption>();
+    contents.Options.Add(
+      new ContentTableOption()
+      {
+        RowAction = "Edit",
+        RowController = "Content",
+        RowArea = G.AdminPath,
+        RowTitle = b => "Detail",
+        ButtonClass = "btn btn-primary",
+        RowObject = b => new { @id = (b as ContentTableRowItem).Id, @area = G.AdminPath }
+      });
+    contents.Options.Add(
+      new ContentTableOption()
+      {
+        RowAction = "Preview",
+        RowController = "SDHCPage",
+        RowArea = "",
+        RowTitle = b => "Preview",
+        ButtonClass = "btn btn-success",
+        RowObject = b => new { @id = (b as ContentTableRowItem).Id, @area = "" },
+        UrlAttribute = c => $"target=\"_blank\"",
+      });
+  }
+
   var tableSize = TypeExtends.GetTableSize(Model);
 
 }
@@ -103,7 +108,14 @@
       </div>
 
       <div class="body">
-        @{ Html.RenderPartial("Contents/_ContentTableHtml", contents); }
+        
+        @{
+          if (contents!=null)
+          {
+            Html.RenderPartial("Contents/_ContentTableHtml", contents);
+          }
+
+         }
 
       </div>
     </div>

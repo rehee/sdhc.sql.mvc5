@@ -20,15 +20,12 @@ namespace SDHC.Common.Entity.Models
   {
 
   }
-  public interface IBasicTitle : IInt64Key, IDisplayName
-  {
-
-  }
-  public interface IBasicModel : IBasicTitle
+  
+  public interface IBasicModel : IBasicContent
   {
     string Title { get; set; }
   }
-  public interface IContentModel: IBasicTitle
+  public interface IContentModel: IBasicModel
   {
     string Title { get; set; }
     string Url { get; set; }
