@@ -199,7 +199,7 @@ namespace System
         var isContent = relatedType.GetInterfaces().Any(b => b == typeof(IInt64Key));
         if (isContent)
         {
-          var allSelect = BaseCruds.Read<IBasicContent>(relatedType, b => true).ToList();
+          var allSelect = CrudContainer.Crud.Read<IBasicContent>(relatedType, b => true).ToList();
 
           var selects = new List<DropDownViewModel>();
           foreach (var item in allSelect)
@@ -213,7 +213,7 @@ namespace System
         }
         else
         {
-          var allSelect = BaseCruds.Read<IStringKey>(relatedType, b => true).ToList();
+          var allSelect = CrudContainer.Crud.Read<IStringKey>(relatedType, b => true).ToList();
 
           var selects = new List<DropDownViewModel>();
           foreach (var item in allSelect)

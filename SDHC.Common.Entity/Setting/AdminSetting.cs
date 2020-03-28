@@ -34,9 +34,9 @@ namespace System
 
     public static string GetModelTitle(this string key)
     {
-      if (ModelManager.ModelMapper.ContainsKey(key))
+      if (ServiceContainer.ModelService.ModelMapper.ContainsKey(key))
       {
-        var type = ModelManager.ModelMapper[key];
+        var type = ServiceContainer.ModelService.ModelMapper[key];
 
         var allow = type.GetAllowChildren();
         if (allow == null || String.IsNullOrEmpty(allow.Name))

@@ -38,7 +38,7 @@ namespace SDHC.Common.Entity.Models
     [BaseProperty]
     public string ThisAssembly { get; set; }
 
-public string PostUrl { get; set; }
+    public string PostUrl { get; set; }
     public string PostReturnUrl { get; set; }
     public bool IsPostAjax { get; set; }
     public string PostBeforeMethod { get; set; }

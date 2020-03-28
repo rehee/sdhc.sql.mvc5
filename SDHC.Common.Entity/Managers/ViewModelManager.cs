@@ -11,7 +11,7 @@ namespace System
   {
     public static void Update(this BaseViewModel input)
     {
-      var model = ModelManager.Find(input.ModelType(), input.Id,out ISave repo);
+      var model = ServiceContainer.ModelService.Find(input.ModelType(), input.Id,out ISave repo);
       if (model == null)
         return;
       input.ConvertToModel(model as IInt64Key);

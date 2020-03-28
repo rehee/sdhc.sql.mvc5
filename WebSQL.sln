@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.572
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29920.165
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSQL", "WebSQL\WebSQL.csproj", "{1EA6F42A-5800-476B-A185-67ECFA60B5C7}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SDHC.Common", "SDHC.Common\SDHC.Common.csproj", "{38AC9BE4-4FD0-4DB7-827A-E0BB80E3DDE3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDHC.Core.Test", "test\SDHC.Core.Test\SDHC.Core.Test.csproj", "{AC4C9753-16CE-4058-8B4A-47EF4546E86F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDHC.Crud", "SDHC.Crud\SDHC.Crud.csproj", "{786A7C0E-620D-4E6F-B03B-B31910BC19B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{AC4C9753-16CE-4058-8B4A-47EF4546E86F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC4C9753-16CE-4058-8B4A-47EF4546E86F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC4C9753-16CE-4058-8B4A-47EF4546E86F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{786A7C0E-620D-4E6F-B03B-B31910BC19B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{786A7C0E-620D-4E6F-B03B-B31910BC19B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{786A7C0E-620D-4E6F-B03B-B31910BC19B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{786A7C0E-620D-4E6F-B03B-B31910BC19B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -4,8 +4,10 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
+using SDHC.Common.Cruds;
 using SDHC.Common.Entity.Extends;
 using SDHC.Common.Entity.Models;
+using SDHC.Common.Services;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -28,10 +30,16 @@ namespace Start
       where TBaseUser : SDHCUser
     {
       ConfigureAuth<TRepo, TBaseUser>(app, repoCreate);
-      BaseCruds.GetRepo = () => new TRepo();
+      var crudInit = new CrudInit(
+        () => new TRepo(), typeof(TBaseContent)
+        );
+      
+      CrudContainer.Crud = new BaseCruds(crudInit);
+      CrudContainer.CrudModel = new CrudModel(crudInit);
+      CrudContainer.CrudContent = new CrudContent(crudInit);
+      ServiceContainer.ModelService = new ModelService(crudInit);
+      ServiceContainer.ContentService = new ContentService(crudInit);
 
-      ContentCruds.BaseIContentModelType = typeof(TBaseContent);
-      ContentManager.BasicContentType = typeof(TBaseContent);
       SelectManager.BasicSelectType = typeof(TBaseSelect);
       FileManager.BasePath = webBasePath;
       SDHCUserManager.BaseUser = typeof(TBaseUser);
@@ -45,7 +53,7 @@ namespace Start
 
     }
     // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
-    public static void ConfigureAuth<T,TUser>(IAppBuilder app, Func<T> create) where T : DbContext where TUser : SDHCUser
+    public static void ConfigureAuth<T, TUser>(IAppBuilder app, Func<T> create) where T : DbContext where TUser : SDHCUser
     {
       // Configure the db context, user manager and signin manager to use a single instance per request
       app.CreatePerOwinContext(create);

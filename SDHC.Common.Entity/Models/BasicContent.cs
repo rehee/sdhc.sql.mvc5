@@ -33,7 +33,7 @@ namespace SDHC.Common.Entity.Models
       if (Id <= 0)
       {
         this.CreateTime = DateTime.UtcNow;
-        this.DisplayOrder = ModelManager.Read<BaseContent>(b => true).Count() + 1;
+        this.DisplayOrder = ServiceContainer.ModelService.Read<BaseContent>(b => true).Count() + 1;
       }
     }
     [Key]
@@ -70,7 +70,7 @@ namespace SDHC.Common.Entity.Models
       get
       {
         if (this.Id == 0)
-          return ModelManager.Read<BaseContent>(b => true).Count() + 1;
+          return ServiceContainer.ModelService.Read<BaseContent>(b => true).Count() + 1;
         return this._displayOrder;
       }
       set
@@ -114,7 +114,7 @@ namespace SDHC.Common.Entity.Models
         var p = (IContentModel)this.ThisParent;
         if (p == null && this.ParentId.HasValue && ParentId.Value >0)
         {
-          p = ContentCruds.Read<BaseContent>(ParentId.Value);
+          p = ServiceContainer.ContentService.Read<BaseContent>(ParentId.Value);
         }
         return p;
       }
@@ -161,7 +161,7 @@ namespace SDHC.Common.Entity.Models
     {
       get
       {
-        return ModelManager.Read<BaseContent>(b => b.ParentId == this.Id)
+        return ServiceContainer.ModelService.Read<BaseContent>(b => b.ParentId == this.Id)
           .OrderBy(b => b.DisplayOrder).ToList();
       }
     }

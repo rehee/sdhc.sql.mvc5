@@ -1,39 +1,37 @@
-﻿using SDHC.Common.Entity.Attributes;
+﻿using SDHC.Common.Cruds;
 using SDHC.Common.Entity.Models;
 using SDHC.Common.Entity.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Web.Mvc;
 
-namespace System
+namespace SDHC.Common.Services
 {
-  public static class ContentManager
+  public class ContentService : CrudContent, IContentService
   {
-    public static Type BasicContentType { get; set; } = typeof(BaseContent);
+    public ContentService(ICrudInit container) : base(container)
+    { }
 
-    public static void CreateContent(BaseContent input, long? parentId = null)
+    public void CreateContent(IContentModel input, long? parentId = null)
     {
-      if (parentId != null)
+      if (parentId.HasValue)
       {
-        var parent = ContentCruds.Read<BaseContent>(parentId.Value);
+        var parent = Read(BaseIContentModelType, b => b.Id == parentId.Value);
         if (parent != null)
         {
-          input.ParentId = parent.Id;
+          input.ParentId = parentId.Value;
         }
       }
-
-      ContentCruds.Create(input);
+      Create(input);
     }
-    public static void UpdateContent(BaseContent input)
+    public void UpdateContent(IContentModel input)
     {
-      ContentCruds.Update<BaseContent>(input);
+      Update(BaseIContentModelType, input);
     }
-    public static void UpdateContent(ContentPostModel input)
+    public void UpdateContent(ContentPostModel input)
     {
-      var content = ContentCruds.GetByPK<BaseContent>(input.Id, out ISave db);
+      var content = Find(BaseIContentModelType, input.Id, out ISave db);
       if (content == null)
       {
         return;
@@ -41,27 +39,26 @@ namespace System
       input.ConvertToBaseModel(content);
       db.SaveChanges();
     }
-    public static void MoveContent(long contentId, long? parentId)
+    public void MoveContent(long contentId, long? parentId)
     {
-      var content = ContentCruds.Read<BaseContent>(contentId);
-      var parent = parentId.HasValue ? ContentCruds.Read<BaseContent>(parentId.Value) : null;
+      var content = Find(BaseIContentModelType, contentId);
       if (content == null)
-      {
         return;
-      }
-      content.ParentId = parent != null ? (long?)parent.Id : null;
-      ContentCruds.Update<BaseContent>(content);
+      var parent = parentId.HasValue ? Find(BaseIContentModelType, parentId.Value) : null;
+
+      (content as IContentModel).ParentId = parent != null ? parentId : null;
+      Update(BaseIContentModelType, content as IInt64Key);
     }
-    public static IEnumerable<BaseContent> GetAllChildContent(long? parentId)
+    public IEnumerable<IContentModel> GetAllChildContent(long? parentId)
     {
-      return ContentCruds.Read<BaseContent>(
+      return Read<IContentModel>(
         b => b.ParentId == parentId)
         .AsQueryable();
     }
-    public static ContentTableHtmlView GetContentTableHtmlView(long? parentId)
+    public ContentTableHtmlView GetContentTableHtmlView(long? parentId)
     {
-      var content = ContentManager.GetContent(parentId);
-      Type type = content != null ? content.GetType().GetRealType() : BasicContentType;
+      var content = GetContent(parentId);
+      Type type = content != null ? content.GetType().GetRealType() : BaseIContentModelType;
       var allowChild = type.GetObjectCustomAttribute<AllowChildrenAttribute>();
       IEnumerable<string> additionalList = allowChild != null && allowChild.TableList != null ? allowChild.TableList : new string[] { "Title", "DisplayOrder" };
       var children = GetAllChildContent(parentId).OrderBy(b => b.DisplayOrder).ToList().ToList();
@@ -79,20 +76,20 @@ namespace System
       result.Rows = rowItems;
       return result;
     }
-    public static BaseContent GetContent(long? id)
+    public IContentModel GetContent(long? id)
     {
       if (!id.HasValue)
       {
         return null;
       }
-      return ContentCruds.Read<BaseContent>(id.Value);
+      return Find<IContentModel>(id.Value);
     }
-    public static ContentPostModel GetPreCreate(long? id, string fullType)
+    public ContentPostModel GetPreCreate(long? id, string fullType)
     {
       long? parentId = null;
       if (id.HasValue)
       {
-        var parent = ContentCruds.Read<BaseContent>(id.Value);
+        var parent = Find<IContentModel>(id.Value);
         if (parent != null)
         {
           parentId = parent.Id;
@@ -103,23 +100,23 @@ namespace System
       {
         return null;
       }
-      var model = Activator.CreateInstance(type) as BaseContent;
+      var model = Activator.CreateInstance(type) as IContentModel;
       model.ParentId = parentId;
       return model.ConvertModelToPost();
     }
-    public static ContentPostViewModel GetContentPostViewModel(string url)
+    public ContentPostViewModel GetContentPostViewModel(string url)
     {
-      var homePageModel = ModelManager.Read<BaseContent>(BasicContentType, b => b.ParentId == null).OrderBy(b => b.DisplayOrder).FirstOrDefault();
+      var homePageModel = Read<IContentModel>(BaseIContentModelType, b => b.ParentId == null).OrderBy(b => b.DisplayOrder).FirstOrDefault();
       if (String.IsNullOrEmpty(url))
         goto gotoHomePage;
       var urlList = url.Split('/').Select(b => b.Trim()).Where(b => !String.IsNullOrEmpty(b)).ToList();
       var reOrgnizeUrl = String.Join("/", urlList);
       var currentUrl = urlList.LastOrDefault();
-      var models = ModelManager.Read<BaseContent>(BasicContentType, b => String.Equals(b.Url, currentUrl)).ToList().Where(b => b.Parents.Count() == urlList.Count - 1).ToList();
+      var models = Read<IContentModel>(BaseIContentModelType, b => String.Equals(b.Url, currentUrl)).ToList().Where(b => b.Parents.Count() == urlList.Count - 1).ToList();
       if (models.Count == 0)
         goto gotoHomePage;
 
-      var model = models.Where(b => String.Equals(b.GetContentFullUrl(), reOrgnizeUrl, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+      var model = models.Where(b => String.Equals(GetContentFullUrl(b), reOrgnizeUrl, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
       if (model != null)
         return new ContentPostViewModel(model);
       gotoHomePage:
@@ -128,14 +125,14 @@ namespace System
       return new ContentPostViewModel(homePageModel);
     }
 
-    public static string GetContentFullUrl(this BaseContent model)
+    public string GetContentFullUrl(IContentModel model)
     {
       var parents = model.Parents.Select(b => b.Url).ToList();
       parents.Reverse();
       parents.Add(model.Url);
       return String.Join("/", parents);
     }
-    public static ContentListView GetContentListView(long? id, int parentLevel = 0)
+    public ContentListView GetContentListView(long? id, int parentLevel = 0)
     {
       if (id.HasValue)
       {
@@ -156,16 +153,16 @@ namespace System
       }
       else
       {
-        var roots = ModelManager.Read<BaseContent>(b => b.ParentId == null).ToList();
+        var roots = Read<IContentModel>(b => b.ParentId == null).ToList();
         var result = new ContentListView();
         roots.ForEach(b => GetContentListView(b, result, 0));
         return result;
       }
     }
 
-    public static void GetContentListView(IContentModel model, ContentListView parent, int parentLevel = 0)
+    public void GetContentListView(IContentModel model, ContentListView parent, int parentLevel = 0, int sortChildLevel = 4)
     {
-      if (parentLevel > G.SortChildLevel)
+      if (parentLevel > sortChildLevel)
       {
         return;
       }
@@ -189,14 +186,14 @@ namespace System
       return;
     }
 
-    public static long? UpdateContentOrder(IEnumerable<ContentSortPostModel> inputs)
+    public long? UpdateContentOrder(IEnumerable<ContentSortPostModel> inputs)
     {
       if (inputs == null)
         return null;
       var list = inputs.ToList();
       list.RemoveAt(0);
       var idList = list.Where(b => b.id.HasValue).Select(b => b.id).ToList();
-      var contents = ModelManager.Read<BaseContent>(b => idList.Contains(b.Id), out var repo).ToList();
+      var contents = Read<IContentModel>(b => idList.Contains(b.Id), out var repo).ToList();
       contents.ForEach(c =>
       {
         var cInput = list.Where(b => b.id == c.Id).FirstOrDefault();
@@ -224,5 +221,4 @@ namespace System
       return null;
     }
   }
-
 }

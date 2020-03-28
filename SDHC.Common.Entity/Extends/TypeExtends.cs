@@ -14,7 +14,7 @@ namespace System
       Type type;
       if (input == null)
       {
-        type = ContentManager.BasicContentType;
+        type = ServiceContainer.ContentService.BaseIContentModelType;
       }
       else
       {
@@ -32,7 +32,7 @@ namespace System
       Type type;
       if (input == null)
       {
-        type = ContentManager.BasicContentType;
+        type = ServiceContainer.ContentService.BaseIContentModelType;
       }
       else
       {

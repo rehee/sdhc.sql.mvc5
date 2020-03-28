@@ -42,17 +42,17 @@ namespace System
           if (longKey)
           {
             var longValues = values.Select(b => b.MyTryConvert<long>()).ToList();
-            objList = BaseCruds.Read<IInt64Key>(inputType.RelatedType, b => longValues.Contains(b.Id)).ToList();
+            objList = CrudContainer.Crud.Read<IInt64Key>(inputType.RelatedType, b => longValues.Contains(b.Id)).ToList();
           }
           else
           {
             if (typeof(T) == typeof(string) || typeof(T) == typeof(String))
             {
-              objList = BaseCruds.Read<IStringKey>(inputType.RelatedType, b => values.Contains(b.Id)).ToList().Select(b => (b as IDisplayName).DisplayName()).ToList();
+              objList = CrudContainer.Crud.Read<IStringKey>(inputType.RelatedType, b => values.Contains(b.Id)).ToList().Select(b => (b as IDisplayName).DisplayName()).ToList();
             }
             else
             {
-              objList = BaseCruds.Read<IStringKey>(inputType.RelatedType, b => values.Contains(b.Id)).ToList();
+              objList = CrudContainer.Crud.Read<IStringKey>(inputType.RelatedType, b => values.Contains(b.Id)).ToList();
             }
           }
           if (types.Contains(typeof(T)))
@@ -75,17 +75,17 @@ namespace System
           if (longKey)
           {
             var longValue = firstValue.MyTryConvert<long>();
-            value = BaseCruds.Read<IInt64Key>(inputType.RelatedType, b => b.Id == longValue).ToList().Select(b => b.MyTryConvert<T>()).FirstOrDefault();
+            value = CrudContainer.Crud.Read<IInt64Key>(inputType.RelatedType, b => b.Id == longValue).ToList().Select(b => b.MyTryConvert<T>()).FirstOrDefault();
           }
           else
           {
             if (typeof(T) == typeof(string) || typeof(T) == typeof(String))
             {
-              value = BaseCruds.Read<IStringKey>(inputType.RelatedType, b => values.Contains(b.Id)).ToList().Select(b => (b as IDisplayName).DisplayName()).ToList().FirstOrDefault();
+              value = CrudContainer.Crud.Read<IStringKey>(inputType.RelatedType, b => values.Contains(b.Id)).ToList().Select(b => (b as IDisplayName).DisplayName()).ToList().FirstOrDefault();
             }
             else
             {
-              value = BaseCruds.Read<IStringKey>(inputType.RelatedType, b => values.Contains(b.Id)).ToList().Select(b => b.MyTryConvert<T>()).ToList().FirstOrDefault();
+              value = CrudContainer.Crud.Read<IStringKey>(inputType.RelatedType, b => values.Contains(b.Id)).ToList().Select(b => b.MyTryConvert<T>()).ToList().FirstOrDefault();
             }
           }
         }

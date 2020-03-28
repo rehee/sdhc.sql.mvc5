@@ -13,7 +13,7 @@ namespace System
     public static Type BasicSelectType { get; set; } = typeof(BaseSelect);
     public static IEnumerable<BaseSelect> GetAllSelect(Type selectType)
     {
-      var dbset = BaseCruds.GetRepo().GetDbSet(selectType);
+      var dbset = CrudContainer.Crud.GetRepo().GetDbSet(selectType);
       if(dbset==null)
         return Enumerable.Empty<BaseSelect>();
       try
@@ -50,7 +50,7 @@ namespace System
         return Enumerable.Empty<DropDownSummary>();
       return list.Select(b =>
       {
-        var count = BaseCruds.Read<IInt64Key>(b, c => true, out ISave db).ToList().Count;
+        var count = CrudContainer.Crud.Read<IInt64Key>(b, c => true, out ISave db).ToList().Count;
         var allowChild = b.GetObjectCustomAttribute<AllowChildrenAttribute>();
         var dropDownName = allowChild != null && String.IsNullOrEmpty(allowChild.Name) ? allowChild.Name : b.Name;
         return new DropDownSummary()

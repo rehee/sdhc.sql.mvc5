@@ -1,5 +1,4 @@
-﻿using SDHC.Common.Entity.Attributes;
-using SDHC.Common.Entity.Models;
+﻿using SDHC.Common.Entity.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +9,10 @@ namespace System
 {
   public class ContentTableView
   {
-    public IEnumerable<BaseContent> Contents { get; set; } = Enumerable.Empty<BaseContent>();
+    public IEnumerable<IBasicTitle> Contents { get; set; } = Enumerable.Empty<IBasicTitle>();
     public string RowClickFunction { get; set; } = "";
     public IEnumerable<ItemKeyAndName> Keys { get; set; } = Enumerable.Empty<ItemKeyAndName>();
-    public ContentTableView(IEnumerable<BaseContent> contents, string rowClickFunction = "", Type contentType = null)
+    public ContentTableView(IEnumerable<IBasicTitle> contents, string rowClickFunction = "", Type contentType = null)
     {
       if (contents != null)
         Contents = contents;
