@@ -7,12 +7,11 @@ using System.Text;
 
 namespace System
 {
-  public delegate bool SaveFile(object input, out string filePath, string extraPath = "");
-  public delegate void DeleteFile(string filePath, out bool success);
+
   public static class PassModeConvert
   {
-    public static SaveFile GetSaveFile { get; set; }
-    public static DeleteFile GetDeleteFile { get; set; }
+    public static SaveFile GetSaveFile => ServiceContainer.SDHCFileService.SaveFile;
+    public static DeleteFile GetDeleteFile => ServiceContainer.SDHCFileService.DeleteFile;
 
     public static ContentPostModel ConvertModelToPost(this object input)
     {

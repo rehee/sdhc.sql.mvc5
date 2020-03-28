@@ -17,6 +17,7 @@ namespace Entity.Models
     [NotMapped]
     [InputType(EditorType = EnumInputType.Bool)]
     public virtual bool IsBool { get; set; }
+    [InputType(EditorType = EnumInputType.FileUpload,RangeMax =)]
     public virtual string Title_Title { get; set; }
   }
   [AllowChildren(

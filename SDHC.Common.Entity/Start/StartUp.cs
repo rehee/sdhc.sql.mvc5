@@ -14,6 +14,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Configuration;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -33,7 +34,7 @@ namespace Start
       var crudInit = new CrudInit(
         () => new TRepo(), typeof(TBaseContent)
         );
-      
+
       CrudContainer.Crud = new BaseCruds(crudInit);
       CrudContainer.CrudModel = new CrudModel(crudInit);
       CrudContainer.CrudContent = new CrudContent(crudInit);
@@ -47,10 +48,35 @@ namespace Start
       ContentPostViewModel.GetContentPageUrl = () => G.ContentPageUrl;
       ContentPostViewModel.GetContentViewPath = () => G.ContentViewPath;
       ContentPostViewModel.Convert = (input) => input.ConvertModelToPost();
-      PassModeConvert.GetSaveFile = Files.SaveFile;
-      PassModeConvert.GetDeleteFile = Files.DeleteFile;
 
-
+      ServiceContainer.SDHCFileService = new SDHCFileService(new SDHCFileConfig(
+        webBasePath, G.FileUploadPath, new Dictionary<Type, SDHCSaveAble>()
+        {
+          [typeof(HttpPostedFileBase)] = new SDHCSaveAble(
+            (input) =>
+            {
+              if (input == null)
+                return null;
+              return (input as HttpPostedFileBase).FileName;
+            }, (input, fileName) =>
+             {
+               if (input == null)
+                 return;
+               (input as HttpPostedFileBase).SaveAs(fileName);
+             }),
+          [typeof(HttpPostedFileBase[])] = new SDHCSaveAble(
+            (input) =>
+            {
+              if (input == null)
+                return null;
+              return (input as HttpPostedFileBase[]).FirstOrDefault().FileName;
+            }, (input, fileName) =>
+            {
+              if (input == null)
+                return;
+              (input as HttpPostedFileBase[]).FirstOrDefault().SaveAs(fileName);
+            }),
+        }));
     }
     // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
     public static void ConfigureAuth<T, TUser>(IAppBuilder app, Func<T> create) where T : DbContext where TUser : SDHCUser
