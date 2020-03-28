@@ -27,7 +27,6 @@ namespace SDHC.Common.Entity.Models
   }
   public interface IContentModel: IBasicModel
   {
-    string Title { get; set; }
     string Url { get; set; }
     long DisplayOrder { get; set; }
     DateTime? CreateTime { get; set; }

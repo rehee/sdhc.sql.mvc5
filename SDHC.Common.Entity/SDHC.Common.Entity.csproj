@@ -139,7 +139,6 @@
     <Compile Include="Models\BasicContent.cs" />
     <Compile Include="Extends\Convert.cs" />
     <Compile Include="Extends\Files.cs" />
-    <Compile Include="Models\DropdownModel.cs" />
     <Compile Include="Models\IContent.cs" />
     <Compile Include="Models\UserPassModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
