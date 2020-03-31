@@ -19,8 +19,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SDHC.Common", "SDHC.Common\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDHC.Core.Test", "test\SDHC.Core.Test\SDHC.Core.Test.csproj", "{AC4C9753-16CE-4058-8B4A-47EF4546E86F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDHC.Crud", "SDHC.Crud\SDHC.Crud.csproj", "{786A7C0E-620D-4E6F-B03B-B31910BC19B3}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,10 +57,6 @@ Global
 		{AC4C9753-16CE-4058-8B4A-47EF4546E86F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC4C9753-16CE-4058-8B4A-47EF4546E86F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC4C9753-16CE-4058-8B4A-47EF4546E86F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{786A7C0E-620D-4E6F-B03B-B31910BC19B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{786A7C0E-620D-4E6F-B03B-B31910BC19B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{786A7C0E-620D-4E6F-B03B-B31910BC19B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{786A7C0E-620D-4E6F-B03B-B31910BC19B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

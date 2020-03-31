@@ -83,7 +83,7 @@ namespace Admin.Areas.Admin.Controllers
     [Admin(adminRole: "ModelManagementEdit")]
     public ActionResult Edit(ModelPostModel model)
     {
-      var key = ServiceContainer.ModelService.GetMapperKey(model.FullType);
+        var key = ServiceContainer.ModelService.GetMapperKey(model.FullType);
       try
       {
         ServiceContainer.ModelService.Update(model);

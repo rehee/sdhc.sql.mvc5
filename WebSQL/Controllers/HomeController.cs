@@ -1,14 +1,5 @@
-﻿using Entity.Models;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
-using SDHC.Common.Entity.Extends;
-using SDHC.Common.Entity.Models;
-using Start;
+﻿using Microsoft.AspNet.Identity.Owin;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using WebSQL.Models;

@@ -31,23 +31,20 @@ namespace Start
       where TBaseUser : SDHCUser
     {
       ConfigureAuth<TRepo, TBaseUser>(app, repoCreate);
-      var crudInit = new CrudInit(
-        () => new TRepo(), typeof(TBaseContent)
+      var crudInit = new CrudSelectInit(
+        () => new TRepo(), typeof(TBaseContent), typeof(TBaseSelect)
         );
+
 
       CrudContainer.Crud = new BaseCruds(crudInit);
       CrudContainer.CrudModel = new CrudModel(crudInit);
       CrudContainer.CrudContent = new CrudContent(crudInit);
       ServiceContainer.ModelService = new ModelService(crudInit);
       ServiceContainer.ContentService = new ContentService(crudInit);
+      ServiceContainer.SelectService = new SelectService(crudInit);
 
-      SelectManager.BasicSelectType = typeof(TBaseSelect);
       FileManager.BasePath = webBasePath;
       SDHCUserManager.BaseUser = typeof(TBaseUser);
-
-      ContentPostViewModel.GetContentPageUrl = () => G.ContentPageUrl;
-      ContentPostViewModel.GetContentViewPath = () => G.ContentViewPath;
-      ContentPostViewModel.Convert = (input) => input.ConvertModelToPost();
 
       ServiceContainer.SDHCFileService = new SDHCFileService(new SDHCFileConfig(
         webBasePath, G.FileUploadPath, new Dictionary<Type, SDHCSaveAble>()
@@ -69,12 +66,17 @@ namespace Start
             {
               if (input == null)
                 return null;
-              return (input as HttpPostedFileBase[]).FirstOrDefault().FileName;
+              var f = (input as HttpPostedFileBase[]).FirstOrDefault();
+              return f != null ? f.FileName : null;
             }, (input, fileName) =>
             {
               if (input == null)
                 return;
-              (input as HttpPostedFileBase[]).FirstOrDefault().SaveAs(fileName);
+              var f = (input as HttpPostedFileBase[]).FirstOrDefault();
+              if (f != null)
+              {
+                f.SaveAs(fileName);
+              }
             }),
         }));
     }

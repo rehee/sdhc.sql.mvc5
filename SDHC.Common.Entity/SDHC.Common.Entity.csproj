@@ -138,7 +138,6 @@
     <Compile Include="Managers\ViewModelManager.cs" />
     <Compile Include="Models\BasicContent.cs" />
     <Compile Include="Extends\Convert.cs" />
-    <Compile Include="Extends\Files.cs" />
     <Compile Include="Models\IContent.cs" />
     <Compile Include="Models\UserPassModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -164,10 +163,6 @@
     <ProjectReference Include="..\SDHC.Core\SDHC.Core.csproj">
       <Project>{dc85a3fd-2e7b-4eca-9cd9-50840c52f110}</Project>
       <Name>SDHC.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SDHC.Crud\SDHC.Crud.csproj">
-      <Project>{786A7C0E-620D-4E6F-B03B-B31910BC19B3}</Project>
-      <Name>SDHC.Crud</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

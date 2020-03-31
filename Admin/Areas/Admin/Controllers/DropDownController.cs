@@ -14,10 +14,10 @@ namespace Admin.Areas.Admin.Controllers
       if (String.IsNullOrEmpty(id))
       {
 
-        var list = SelectManager.GetAllAvaliableSelectList();
+        var list = ServiceContainer.SelectService.GetAllAvaliableSelectList();
         return View(list);
       }
-      var list2 = SelectManager.GetAllSelect(id.Replace('_', '.'));
+      var list2 = ServiceContainer.SelectService.GetAllSelect(id.Replace('_', '.'));
       return View("IndexSelect", list2);
     }
 

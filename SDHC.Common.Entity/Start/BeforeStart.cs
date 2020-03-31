@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using SDHC.Common.Configs;
 using SDHC.Common.Entity.Extends;
 using SDHC.Common.Entity.Models;
 using System;
@@ -28,6 +29,7 @@ namespace Start
       //G.UserManager = () => OwinContextExtensions.Get<ApplicationUserManager>(getContext());
       //G.SignManager = () => OwinContextExtensions.Get<ApplicationSignInManager>(getContext());
       G.RoleManager = () => OwinContextExtensions.Get<ApplicationRoleManager>(getContext());
+      ConfigContainer.Systems = new SDHC.Common.Configs.SystemConfig();
       Action<PropertyInfo> setValue = p =>
       {
         var value = G.GetSetting(p.Name);
@@ -37,6 +39,16 @@ namespace Start
           return;
         p.SetValue(null, value.MyTryConvert(p.PropertyType));
       };
+      typeof(SystemConfig).GetProperties().Where(b => true)
+        .ToList()
+        .ForEach(b =>
+        {
+          try
+          {
+            setValue(b);
+          }
+          catch { }
+        });
       typeof(G).GetProperties().Where(b => b.GetObjectCustomAttribute<ConfigAttribute>() != null)
         .ToList()
         .ForEach(b =>

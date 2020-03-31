@@ -1,5 +1,4 @@
-﻿using SDHC.Common.Entity.Extends;
-using SDHC.Common.Entity.Models;
+﻿using SDHC.Common.Entity.Models;
 using SDHC.Common.Entity.Models.ViewModels;
 using System;
 using System.Collections.Generic;

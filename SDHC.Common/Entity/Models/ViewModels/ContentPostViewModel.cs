@@ -7,9 +7,9 @@ namespace SDHC.Common.Entity.Models
 {
   public class ContentPostViewModel
   {
-    public static Func<string> GetContentViewPath { get; set; }
-    public static Func<string> GetContentPageUrl { get; set; }
-    public static Func<IContentModel,ContentPostModel> Convert { get; set; }
+    public static Func<string> GetContentViewPath { get; set; } = () => ConfigContainer.Systems.ContentViewPath;
+    public static Func<string> GetContentPageUrl { get; set; } = () => ConfigContainer.Systems.ContentPageUrl;
+    public static Func<IContentModel, ContentPostModel> Convert { get; set; } = (input) => input.ConvertModelToPost();
 
     public ContentPostViewModel(ContentPostModel model = null)
     {

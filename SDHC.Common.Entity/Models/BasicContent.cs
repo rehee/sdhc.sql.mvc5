@@ -13,9 +13,9 @@ namespace SDHC.Common.Entity.Models
   public abstract class BaseSelect : AbstractBaseSelect
   {
     [Key]
+    [BaseProperty]
     public override long Id { get; set; }
   }
-
   public abstract class BaseContent : AbstractBaseContent
   {
     [Key]
@@ -27,7 +27,7 @@ namespace SDHC.Common.Entity.Models
     public override long? ParentId { get; set; }
 
     [IgnoreEdit]
-    public virtual BaseSelect ThisParent { get; set; }
+    public virtual BaseContent ThisParent { get; set; }
 
     [IgnoreEdit]
     public override IContentModel Parent
@@ -45,7 +45,6 @@ namespace SDHC.Common.Entity.Models
       }
     }
   }
-
   public abstract class BaseModel : AbstractBaseModel
   {
     [Key]
