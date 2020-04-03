@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Options;
+using SDHC.Common.Configs;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -13,10 +15,18 @@ namespace SDHC.Models.NetCore.Authorizes
 
   public class SDHCAdminHandler : AuthorizationHandler<SDHCAdminRequirement>
   {
-    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context,
-                                                   SDHCAdminRequirement requirement)
+    private SystemConfig config { get; set; }
+    public SDHCAdminHandler(IOptions<SystemConfig> config)
     {
-      context.Succeed(requirement);
+      this.config = config.Value;
+    }
+    protected override Task HandleRequirementAsync(
+      AuthorizationHandlerContext context, SDHCAdminRequirement requirement)
+    {
+      if (this.config.AdminFree)
+      {
+        context.Succeed(requirement);
+      }
       return Task.CompletedTask;
     }
 

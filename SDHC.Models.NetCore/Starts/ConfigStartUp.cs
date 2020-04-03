@@ -19,7 +19,7 @@ namespace Microsoft.Extensions.DependencyInjection
 {
   public static class ConfigStartUp
   {
-    public static void InitSDHC<TRepo, TBaseContent, TBaseSelect, TFileSngle>([NotNullAttribute] this IServiceCollection serviceCollection,
+    public static void InitSDHCContainer<TRepo, TBaseContent, TBaseSelect, TFileSngle>([NotNullAttribute] this IServiceCollection serviceCollection,
       IConfiguration configuration, Action<DbContextOptionsBuilder> optionsAction, string basicRoot, string systemConfigKey)
       where TRepo : DbContext, IContent
       where TBaseContent : BaseContent
@@ -27,11 +27,9 @@ namespace Microsoft.Extensions.DependencyInjection
       where TFileSngle : IFormFile
     {
       serviceCollection.SystemConfigInit(configuration, systemConfigKey);
-      serviceCollection.ContainerInit<TRepo, TBaseContent, TBaseSelect>(optionsAction);
+      serviceCollection.ContainerInit<TRepo, TBaseContent, TBaseSelect>(optionsAction, ConfigContainer.Systems);
       serviceCollection.TryAddScoped<ISDHCLanguageService, SDHCLanguageService>();
       serviceCollection.FileServiceInit<TFileSngle>(basicRoot);
-
-
     }
   }
 }

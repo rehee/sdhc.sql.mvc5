@@ -33,7 +33,7 @@ namespace Core31
     // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
     public void ConfigureServices(IServiceCollection services)
     {
-      services.SUFunction<MyDBContext, SDHCUser, BaseContentModel, BaseSelectModel>(Configuration, WebHostEnvironment);
+      services.StartUpFunction<MyDBContext, SDHCUser, BaseContentModel, BaseSelectModel>(Configuration, WebHostEnvironment);
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,10 +41,9 @@ namespace Core31
     {
       if (env.IsDevelopment())
       {
-
       }
       app.UseDeveloperExceptionPage();
-      SUContainer.Configure(app, env);
+      StartUpContainer.Configure(app, env);
     }
   }
 }

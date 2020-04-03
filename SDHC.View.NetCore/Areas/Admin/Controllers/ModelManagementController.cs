@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SDHC.Common.Entity.Models;
+using SDHC.Models.NetCore.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Admin.Areas.Admin.Controllers
 {
   public class ModelManagementController : Controller
   {
-    //[Admin(adminRole: "ModelManagementIndex")]
+    [Admin(adminRole: "ModelManagementIndex")]
     public ActionResult Index(string id)
     {
       var type = ServiceContainer.ModelService.GetModelType(id);
@@ -33,7 +34,7 @@ namespace Admin.Areas.Admin.Controllers
       return RedirectToAction("Index", "DashBoard", new { @area = ConfigContainer.Systems.AdminPath });
     }
 
-    //[Admin(adminRole: "ModelManagementCreate")]
+    [Admin(adminRole: "ModelManagementCreate")]
     public ActionResult Create(string id)
     {
       var type = ServiceContainer.ModelService.GetModelType(id);
@@ -52,7 +53,7 @@ namespace Admin.Areas.Admin.Controllers
       return RedirectToAction("Index", "DashBoard", new { @area = ConfigContainer.Systems.AdminPath });
     }
     [HttpPost]
-    //[Admin(adminRole: "ModelManagementCreate")]
+    [Admin(adminRole: "ModelManagementCreate")]
     public ActionResult Create(ModelPostModel model)
     {
       ServiceContainer.ModelService.Create(model);
@@ -66,7 +67,7 @@ namespace Admin.Areas.Admin.Controllers
       return RedirectToAction("Index", "ModelManagement", new { @area = ConfigContainer.Systems.AdminPath, @id = key });
     }
 
-    //[Admin(adminRole: "ModelManagementEdit")]
+    [Admin(adminRole: "ModelManagementEdit")]
     public ActionResult Edit(string type, long id)
     {
       if (string.IsNullOrEmpty(type))
@@ -77,7 +78,7 @@ namespace Admin.Areas.Admin.Controllers
       return View(model.ConvertModelToModelPostModel());
     }
     [HttpPost]
-    //[Admin(adminRole: "ModelManagementEdit")]
+    [Admin(adminRole: "ModelManagementEdit")]
     public ActionResult Edit(ModelPostModel model)
     {
       var key = ServiceContainer.ModelService.GetMapperKey(model.FullType);
@@ -92,7 +93,7 @@ namespace Admin.Areas.Admin.Controllers
     }
 
     [HttpPost]
-    //[Admin(adminRole: "ModelManagementDelete")]
+    [Admin(adminRole: "ModelManagementDelete")]
     public ActionResult Delete(string deleteId, string type)
     {
       var start = DateTime.Now;

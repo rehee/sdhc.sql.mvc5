@@ -15,6 +15,7 @@ namespace SDHC.Common.Configs
     public  string AdminPath { get; set; } = "Admin";
     public  string SuperUserRole { get; set; } = "Admin";
     public  string AdminRole { get; set; } = "Admin";
+    public string AdminPolicy { get; set; } = "AdminPolicy";
     public  bool UserNameIsNotEmail { get; set; } = true;
     public  int DefaultLanguage { get; set; } = 0;
     public  string ContentViewPath { get; set; } = "";

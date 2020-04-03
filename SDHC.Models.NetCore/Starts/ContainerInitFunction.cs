@@ -1,7 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
+using SDHC.Common.Configs;
 using SDHC.Common.Cruds;
 using SDHC.Common.EntityCore.Models;
 using SDHC.Common.Services;
+using SDHC.Models.NetCore.Authorizes;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -12,7 +15,7 @@ namespace Microsoft.Extensions.DependencyInjection
   public static class ContainerInitFunction
   {
     public static void ContainerInit<TRepo, TBaseContent, TBaseSelect>([NotNullAttribute] this IServiceCollection serviceCollection,
-      Action<DbContextOptionsBuilder> optionsAction)
+      Action<DbContextOptionsBuilder> optionsAction, SystemConfig config)
       where TRepo : DbContext, IContent
       where TBaseContent : BaseContent
       where TBaseSelect : BaseSelect
@@ -30,6 +33,9 @@ namespace Microsoft.Extensions.DependencyInjection
       ServiceContainer.ModelService = new ModelService(crudInit);
       ServiceContainer.ContentService = new ContentService(crudInit);
       ServiceContainer.SelectService = new SelectService(crudInit);
+
+      serviceCollection.AddSingleton<ISecretService, SecretService>(s => new SecretService(config));
+      ServiceContainer.SecretService = new SecretService(config);
     }
   }
 }

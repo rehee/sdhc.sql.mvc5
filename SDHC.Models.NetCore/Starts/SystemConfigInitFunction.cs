@@ -24,7 +24,8 @@ namespace Microsoft.Extensions.DependencyInjection
         {
           try
           {
-            p.SetValue(obj, value);
+            var cValue = value.MyTryConvert(p.PropertyType);
+            p.SetValue(obj, cValue);
           }
           catch { }
         }
