@@ -1,0 +1,16 @@
+﻿@model UserCreateView
+@{
+  ViewBag.Title = "Edit User";
+  ViewBag.inEdit = true;
+}
+<div class="row clearfix">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card">
+      <div class="body">
+        <form autocomplete="off" action="@Url.Action("EditUser","Roles",new { @area="Admin" })" method="post" enctype="multipart/form-data">
+          @{ await Html.RenderPartialAsync("_CreateOrEdit", Model);}
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

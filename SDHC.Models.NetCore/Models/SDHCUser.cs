@@ -10,6 +10,8 @@ namespace SDHC.Models.NetCore.Models
 {
   public class UserPassModel : IdentityUser, IPassModel
   {
+    public string FullType { get; set; }
+    public string ThisAssembly { get; set; }
     public List<ContentProperty> Properties { get; set; } = new List<ContentProperty>();
   }
 
@@ -53,6 +55,11 @@ namespace SDHC.Models.NetCore.Models
 
     [IgnoreEdit]
     public string WeChatOpenId { get; set; }
-  }
 
+    public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
+  }
+  public class IdentityRoleUser : IdentityRole
+  {
+    public virtual ICollection<IdentityUserRole<string>> Users { get; set; }
+  }
 }

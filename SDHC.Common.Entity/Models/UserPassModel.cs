@@ -65,7 +65,7 @@ namespace SDHC.Common.Entity.Models
       }
       set
       {
-        if(value.HasValue)
+        if (value.HasValue)
           _createDate = value;
       }
     }

@@ -40,13 +40,12 @@ namespace SDHC.Common.EntityCore.Services
       services.AddScoped<ISDHCLanguageServiceInit, SDHCLanguageServiceInit>();
       services.AddDbContext<TRepo>(dbAction);
 
-      services.AddIdentity<TUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
-          .AddEntityFrameworkStores<TRepo>();
-
+      services.AddIdentity<TUser, IdentityRoleUser>(options => 
+        options.SignIn.RequireConfirmedAccount = false)
+        .AddEntityFrameworkStores<TRepo>();
+      services.AddScoped<RoleManager<IdentityRoleUser>>();
       services.InitSDHCContainer<TRepo, TBaseContent, TBaseSelect, FormFile>(configuration, dbAction,
                env.ContentRootPath, systemConfigKey);
-
-      services.AddScoped<RoleManager<IdentityRole>>();
       services.AddScoped<ISDHCUserManager<TUser>, SDHCUserManager<TUser>>();
 
       services.AddSingleton<IEmailService, EmailService>(b => new EmailService(ConfigContainer.Systems));

@@ -1,18 +1,11 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using SDHC.Common.Entity.Attributes;
-using SDHC.Common.Entity.Extends;
-using SDHC.Common.Entity.Models;
-using SDHC.Common.Entity.Types;
+﻿using Microsoft.AspNetCore.Identity;
+using SDHC.Models.NetCore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
+using System.Text;
 
-namespace SDHC.Common.Entity.Extends
-{
-}
-
-namespace System
+namespace SDHC.Models.NetCore.Models
 {
   public static class ConvertExtends
   {

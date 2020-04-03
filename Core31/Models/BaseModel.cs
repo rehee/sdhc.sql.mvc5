@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Core31.Models
+namespace Models
 {
   [AllowChildren(ChildrenType = new Type[] { typeof(BaseContentModel) })]
   public class BaseContentModel : BaseContent

@@ -1,9 +1,6 @@
-using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Core31.Controllers;
-using IdentityModels;
 using IdentityModels.AccountViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
