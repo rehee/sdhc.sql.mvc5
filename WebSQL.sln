@@ -19,6 +19,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SDHC.Common", "SDHC.Common\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDHC.Core.Test", "test\SDHC.Core.Test\SDHC.Core.Test.csproj", "{AC4C9753-16CE-4058-8B4A-47EF4546E86F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core31", "Core31\Core31.csproj", "{5D9C5FEA-254D-4B6A-B514-BB26FADB69DB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SDHC.Libs.NetCore", "SDHC.Libs.NetCore\SDHC.Libs.NetCore.csproj", "{24BC298F-EA8D-4FB1-A497-CC6F3D0EB01C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SDHC.Models.NetCore", "SDHC.Models.NetCore\SDHC.Models.NetCore.csproj", "{0B37CAC3-D903-48B9-B316-A863FAED1C9B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SDHC.View.NetCore", "SDHC.View.NetCore\SDHC.View.NetCore.csproj", "{27710266-46C9-4B19-99FB-0D58A6493FCA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +65,22 @@ Global
 		{AC4C9753-16CE-4058-8B4A-47EF4546E86F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC4C9753-16CE-4058-8B4A-47EF4546E86F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC4C9753-16CE-4058-8B4A-47EF4546E86F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D9C5FEA-254D-4B6A-B514-BB26FADB69DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D9C5FEA-254D-4B6A-B514-BB26FADB69DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D9C5FEA-254D-4B6A-B514-BB26FADB69DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D9C5FEA-254D-4B6A-B514-BB26FADB69DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24BC298F-EA8D-4FB1-A497-CC6F3D0EB01C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24BC298F-EA8D-4FB1-A497-CC6F3D0EB01C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24BC298F-EA8D-4FB1-A497-CC6F3D0EB01C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24BC298F-EA8D-4FB1-A497-CC6F3D0EB01C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B37CAC3-D903-48B9-B316-A863FAED1C9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B37CAC3-D903-48B9-B316-A863FAED1C9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B37CAC3-D903-48B9-B316-A863FAED1C9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B37CAC3-D903-48B9-B316-A863FAED1C9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27710266-46C9-4B19-99FB-0D58A6493FCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27710266-46C9-4B19-99FB-0D58A6493FCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27710266-46C9-4B19-99FB-0D58A6493FCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27710266-46C9-4B19-99FB-0D58A6493FCA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

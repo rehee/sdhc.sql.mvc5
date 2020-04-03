@@ -1,0 +1,138 @@
+﻿@using SDHC.Common.Entity.Models.ViewModels
+@model ContentListView
+@{
+  ViewBag.Title = "Sort Content";
+  Layout = "~/Areas/Admin/Views/Shared/_Layout_Content.cshtml";
+}
+@functions{
+  private void RenderItem(ContentListView m)
+  {
+    <li id="@m.Id">
+      @(String.IsNullOrEmpty(m.Title) ? "Root" : m.Title)
+      @if (m.Children.Count > 0)
+      {
+        <ul>
+          ---
+          @foreach (var item in m.Children)
+          {
+
+            <text>
+              @{RenderItem(item);}
+            </text>
+          }
+          ---
+        </ul>
+      }
+    </li>
+  }
+
+}
+
+<div class="row clearfix">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card">
+      <div class="body">
+        <div class="row">
+          <div class="col-md-12">
+            <div id="jstree_demo_div">
+              <ul>
+                @{ RenderItem(Model); }
+              </ul>
+            </div>
+            <br />
+            <br />
+            <input type="button" class="btn btn-info" name="name" onclick="submitList()" value="Save" />
+            <input type="button" class="btn btn-success" name="name" onclick="goToList()" value="List" />
+            <input type="button" class="btn btn-warning" name="name" onclick="goToEdit()" value="Edit" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@section script{
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.7/jstree.min.js"></script>
+  <script>
+
+        function pushSortItem(item,lists,parentId,displayOrder){
+            lists.push({
+                id:item.id,
+                parentId:parentId,
+                displayOrder:displayOrder,
+            });
+            if(item.children && item.children.length>0){
+                for(var index = 0;index<item.children.length;index++){
+                    pushSortItem(item.children[index],lists,item.id,index);
+                }
+            }
+    }
+    function getSelectNode(){
+      var selectId = $('#jstree_demo_div').jstree(true).get_selected();
+      if (selectId == null || selectId.length <= 0) {
+        return "";
+      }
+      return selectId[0];
+    }
+    function goToList() {
+      var url = "@Url.Action("Index","Content",new { @id="[id]",@area=ConfigContainer.Systems.AdminPath })";
+      console.log(url);
+      window.location.href = url.replace("[id]", getSelectNode());
+    }
+    function goToEdit() {
+      var url = "@Url.Action("Edit","Content",new { @id="[id]",@area= ConfigContainer.Systems.AdminPath })";
+      console.log(url);
+      window.location.href = url.replace("[id]", getSelectNode());
+    }
+
+    function submitList() {
+            var data2 = $("#jstree_demo_div").jstree().get_json();
+            var itemList = [];
+            pushSortItem(data2[0],itemList,0,null);
+            console.log(itemList);
+            $.ajax({
+                method: "POST",
+                url: "@Url.Action("Sort","Content",new {@area= ConfigContainer.Systems.AdminPath} )",
+                data: JSON.stringify(itemList),
+                contentType: "application/json; charset=utf-8",
+            }).done(function () {
+              window.location.replace('@Url.Action("Index", "Content", new { @id=Model.Id, area = ConfigContainer.Systems.AdminPath })');
+            });
+        }
+
+        $(function () {
+            $('#jstree_demo_div').jstree({
+                "core": {
+                    "animation": 0,
+                    "check_callback": true,
+                    "themes": { "stripes": true },
+                },
+                "types": {
+                    "#": {
+                        "max_children": 1,
+                        "max_depth": 9,
+                        "valid_children": ["root"]
+                    },
+                    "root": {
+                        "icon": "/static/3.3.7/assets/images/tree_icon.png",
+                        "valid_children": ["default"]
+                    },
+                    "default": {
+                        "valid_children": ["default", "file"]
+                    },
+                    "file": {
+                        "icon": "glyphicon glyphicon-file",
+                        "valid_children": []
+                    }
+                },
+                "plugins": [
+                    "dnd", "search",
+                    "state", "types", "wholerow"
+                ]
+
+
+
+            });
+        });
+  </script>
+}

@@ -1,0 +1,80 @@
+﻿@model ContentTableHtmlView
+
+<table class="table table-bordered table-striped table-hover basic-example dataTable">
+  <thead>
+    <tr>
+      <th>@(String.IsNullOrEmpty(Model.FirstRowTitle) ? "Id" : Model.FirstRowTitle)</th>
+      @foreach (var item in Model.TableHeaders)
+      {
+        <th>@item</th>
+      }
+      <th>
+        Option
+      </th>
+
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th>@(String.IsNullOrEmpty(Model.FirstRowTitle) ? "Id" : Model.FirstRowTitle)</th>
+      @foreach (var item in Model.TableHeaders)
+      {
+        <th>@item</th>
+      }
+      <th>
+        Option
+      </th>
+    </tr>
+  </tfoot>
+  <tbody>
+    @foreach (var row in Model.Rows)
+    {
+      <tr>
+        <td>
+          @if (!Model.FirstRowIsNotAction)
+          {
+            if (Model.FirstRow == null)
+            {
+              <a href="@Url.Action(Model.FirstRowAction,Model.FirstRowController,Model.FirstRowObject(row))">@row.Id</a>
+            }
+            else
+            {
+              <a class="@Model.FirstRow.ButtonClass" href="@Url.Action(Model.FirstRow.RowAction,Model.FirstRow.RowController,Model.FirstRow.RowObject(row))" @Model.FirstRow.UrlAttribute(row)>@Model.FirstRow.RowTitle(row)</a>
+            }
+          }
+          else
+          {
+            if (Model.FirstRow == null)
+            {
+              <span>@row.Id</span>
+            }
+            else
+            {
+              <span>@Model.FirstRow.RowTitle(row)</span>
+            }
+          }
+
+        </td>
+        @foreach (var item in row.Values)
+        {
+          <td>@item</td>
+        }
+        <td>
+          @if (Model.Options != null)
+          {
+            foreach (var option in Model.Options)
+            {
+              <a href="@Url.Action(option.RowAction,option.RowController, option.RowObject(row))" @option.UrlAttribute(row) class="@option.ButtonClass">@option.RowTitle(row)</a>
+            }
+          }
+
+          @if (!String.IsNullOrEmpty(Model.DeleteFunctionName) && !Model.DisableDelete)
+          {
+            <button class="btn btn-danger" onclick="@(Model.DeleteFunctionName+"("+ row.Id +")")">Delete</button>
+          }
+        </td>
+
+      </tr>
+    }
+  </tbody>
+</table>

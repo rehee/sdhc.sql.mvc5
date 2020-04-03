@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 
 namespace SDHC.Common.Entity.Models
@@ -14,7 +15,19 @@ namespace SDHC.Common.Entity.Models
     public EnumInputType EditorType { get; set; } = EnumInputType.Text;
     public bool MultiSelect { get; set; } = false;
     public IEnumerable<DropDownViewModel> SelectItems { get; set; } = new List<DropDownViewModel>();
-    public object File { get; set; }
+    public virtual object File
+    {
+      get
+      {
+        return FileCore != null ? FileCore : FileMvc;
+      }
+      set
+      {
+        
+      }
+    }
+    public object FileMvc { get; set; }
+    public IFormFile FileCore { get; set; }
     public bool RemoveFile { get; set; } = false;
     public bool BaseProperty { get; set; } = false;
     public bool IgnoreProperty { get; set; } = false;

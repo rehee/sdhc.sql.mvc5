@@ -231,7 +231,8 @@ namespace System
     public string Email { get; set; }
     public string Password { get; set; }
     public string ConfirmPassword { get; set; }
-
+    public string FullType { get; set; }
+    public string ThisAssembly { get; set; }
     public List<ContentProperty> Properties { get; set; } = new List<ContentProperty>();
     public IEnumerable<string> SelectedRoles { get; set; } = Enumerable.Empty<string>();
     public IEnumerable<RoleNameAndUser> Roles { get; set; }

@@ -11,5 +11,6 @@ namespace System
     public static IContentService ContentService { get; set; }
     public static ISDHCFileService SDHCFileService { get; set; }
     public static ISelectService SelectService { get; set; }
+    public static ISecretService SecretService { get; set; }
   }
 }

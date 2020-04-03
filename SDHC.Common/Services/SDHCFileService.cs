@@ -12,6 +12,7 @@ namespace SDHC.Common.Services
     public SDHCFileService(ISDHCFileConfig config)
     {
       this.config = config;
+      this.BasePath = config.BasePath;
     }
     public bool SaveFile(object input, out string filePath, string extraPath = "")
     {
@@ -57,6 +58,7 @@ namespace SDHC.Common.Services
         return false;
       }
     }
+    public string BasePath { get; }
     public void DeleteFile(string filePath, out bool success)
     {
       var path = Path.Combine(config.BasePath, filePath);

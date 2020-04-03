@@ -26,7 +26,7 @@ namespace SDHC.Common.Entity.Models
     [BaseProperty]
     public long DisplayOrder { get; set; }
 
-    public List<ContentProperty> Properties { get; set; } = new List<ContentProperty>();
+    public List<ContentProperty> Properties { get; set; } = PassModeConvert.NewContentPropertyList();
   }
 
   public class ModelPostModel : IPostModel

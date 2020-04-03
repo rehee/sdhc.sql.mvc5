@@ -42,6 +42,7 @@ namespace Start
       ServiceContainer.ModelService = new ModelService(crudInit);
       ServiceContainer.ContentService = new ContentService(crudInit);
       ServiceContainer.SelectService = new SelectService(crudInit);
+     
 
       FileManager.BasePath = webBasePath;
       SDHCUserManager.BaseUser = typeof(TBaseUser);

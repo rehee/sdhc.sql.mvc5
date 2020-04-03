@@ -1,0 +1,15 @@
+﻿@model ModelPostModel
+@{
+  var randomKey = Guid.NewGuid().ToString().Replace('-', '_');
+}
+@Html.Hidden("Id", Model.Id, new { @id = "Id" + randomKey })
+@Html.Hidden("FullType", Model.FullType, new { @id = "FullType" + randomKey })
+@Html.Hidden("ThisAssembly", Model.ThisAssembly, new { @id = "ThisAssembly" + randomKey })
+@Html.Hidden("PostUrl", Model.PostUrl, new { @id = "PostUrl" + randomKey })
+@Html.Hidden("PostReturnUrl", Model.PostReturnUrl, new { @id = "PostReturnUrl" + randomKey })
+@Html.Hidden("IsPostAjax", Model.IsPostAjax, new { @id = "IsPostAjax" + randomKey })
+@Html.Hidden("PostBeforeMethod", Model.PostBeforeMethod, new { @id = "PostBeforeMethod" + randomKey })
+@Html.Hidden("PostResponseMethod", Model.PostResponseMethod, new { @id = "PostResponseMethod" + randomKey })
+@Html.Hidden("PostFormId", Model.PostFormId, new { @id = "PostFormId" + randomKey })
+
+@{ Html.RenderPartial("AdminInputs/_PropertiesEdit", Model);}

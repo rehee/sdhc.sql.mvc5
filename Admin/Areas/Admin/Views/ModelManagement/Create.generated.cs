@@ -41,7 +41,7 @@ namespace ASP
             
             #line 2 "..\..\Areas\Admin\Views\ModelManagement\Create.cshtml"
   
-  ViewBag.Title = G.GetModelTitleFullType(Model.FullType, Model.ThisAssembly) + " Create";
+  ViewBag.Title = TypeExtends.GetModelTitleFullType(Model.FullType, Model.ThisAssembly) + " Create";
   Layout = "~/Areas/Admin/Views/Shared/_Layout_Content.cshtml";
 
             

@@ -120,5 +120,45 @@ namespace System
     {
       return GetTableList(type.GetAllowChildren(), defaultList);
     }
+
+    public static string GetModelTitle(this string key)
+    {
+      if (ServiceContainer.ModelService.ModelMapper.ContainsKey(key))
+      {
+        var type = ServiceContainer.ModelService.ModelMapper[key];
+
+        var allow = type.GetAllowChildren();
+        if (allow == null || String.IsNullOrEmpty(allow.Name))
+        {
+          return key.SpacesFromCamel();
+        }
+        return allow.Name.SpacesFromCamel();
+      }
+
+      return key;
+    }
+    public static string GetModelTitleFullType(string fullName, string assemName)
+    {
+      var type = Type.GetType($"{fullName},{assemName}");
+      if (type != null)
+      {
+        var allow = type.GetAllowChildren();
+        if (allow == null || String.IsNullOrEmpty(allow.Name))
+        {
+          return type.Name.SpacesFromCamel();
+        }
+        return allow.Name.SpacesFromCamel();
+      }
+
+      return "";
+    }
+    public static string ImagePath(this string path)
+    {
+      if (string.IsNullOrEmpty(path))
+      {
+        return path;
+      }
+      return path.Replace('\\', '/');
+    }
   }
 }

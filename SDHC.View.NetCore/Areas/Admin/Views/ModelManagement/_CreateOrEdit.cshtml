@@ -1,0 +1,6 @@
+﻿@model SDHC.Common.Entity.Models.ModelPostModel
+@Html.Hidden("Id", Model.Id)
+@Html.Hidden("FullType", Model.FullType)
+@Html.Hidden("ThisAssembly", Model.ThisAssembly)
+@{ Html.RenderPartial("AdminInputs/_PropertiesEdit", Model);}
+<button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>

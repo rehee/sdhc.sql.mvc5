@@ -1,0 +1,18 @@
+﻿@{
+  Layout = "_Root.cshtml";
+}
+<section>
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <div class="page-header">
+        <h2>@ViewBag.Title</h2>
+        @RenderSection("breadcrumb", false)
+      </div>
+      @RenderBody()
+    </div>
+  </div>
+</section>
+
+@section script{
+  @RenderSection("script", false)
+}

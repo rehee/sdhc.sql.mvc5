@@ -3,6 +3,7 @@ using Microsoft.Owin;
 using SDHC.Common.Configs;
 using SDHC.Common.Entity.Extends;
 using SDHC.Common.Entity.Models;
+using SDHC.Common.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -70,7 +71,7 @@ namespace Start
           catch { }
         });
 
-
+      ServiceContainer.SecretService = new SecretService(ConfigContainer.Systems);
 
       LanguageManager.GetLang = () =>
       {

@@ -94,6 +94,8 @@ namespace System
       return result;
     }
 
+    public static Func<ContentProperty> NewContentProperty { get; set; } = () => new ContentProperty();
+    public static Func<List<ContentProperty>> NewContentPropertyList { get; set; } = () => new List<ContentProperty>();
 
     public static ContentProperty GetContentPropertyByPropertyInfo(this PropertyInfo p, object input)
     {
@@ -257,7 +259,14 @@ namespace System
             var files = propertyPost;
             if (files.File != null)
             {
-              var saveSuccess = GetSaveFile(files.File, out var filePath, $"{p.DeclaringType.FullName}_{p.Name}");
+              var assemy = "";
+              if (!String.IsNullOrEmpty(p.DeclaringType.Assembly.FullName))
+              {
+                assemy = C.Text(p.DeclaringType.Assembly.FullName.Split(',').FirstOrDefault());
+              }
+              var fileAdditionPatch = $"{p.DeclaringType.FullName},{assemy}_{p.Name}";
+
+              var saveSuccess = GetSaveFile(files.File, out var filePath, ServiceContainer.SecretService.Encrypt(fileAdditionPatch));
               if (saveSuccess)
               {
                 if (deleteExistFile && !string.IsNullOrEmpty(files.Value))

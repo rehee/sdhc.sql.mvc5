@@ -20,5 +20,16 @@ namespace SDHC.Common.Configs
     public  string ContentViewPath { get; set; } = "";
     public  string ContentPageUrl { get; set; } = "pages";
     public  int DefaultTablePageSize { get; set; } = (int)EnumTablePageSize.L10;
+    public int DeleteMinTime { get; set; } = 1000;
+    
+    public string EmailHost { get; set; }
+    public int EmailPort { get; set; }
+    public string EmailUser { get; set; }
+    public string EmailPassword { get; set; }
+    public bool EmailSSL { get; set; }
+
+    public string SecretdeKey { get; set; } = "zV7JkQs7";
+    public string SecretdeIV { get; set; } = "ovIeh78A";
+
   }
 }

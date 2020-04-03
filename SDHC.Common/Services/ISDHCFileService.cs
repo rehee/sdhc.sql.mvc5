@@ -14,6 +14,7 @@ namespace SDHC.Common.Services
   {
     bool SaveFile(object input, out string filePath, string extraPath = "");
     void DeleteFile(string filePath, out bool success);
+    string BasePath { get; }
   }
 
   public interface ISDHCFileConfig

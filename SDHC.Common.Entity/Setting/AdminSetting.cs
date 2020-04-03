@@ -29,40 +29,8 @@ namespace System
     public static string SuperUserRole { get; set; } = "Admin";
     [Config]
     public static string AdminRole { get; set; } = "Admin";
-
+    [Config]
     public static int DeleteMinTime { get; set; } = 1000;
-
-    public static string GetModelTitle(this string key)
-    {
-      if (ServiceContainer.ModelService.ModelMapper.ContainsKey(key))
-      {
-        var type = ServiceContainer.ModelService.ModelMapper[key];
-
-        var allow = type.GetAllowChildren();
-        if (allow == null || String.IsNullOrEmpty(allow.Name))
-        {
-          return key.SpacesFromCamel();
-        }
-        return allow.Name.SpacesFromCamel();
-      }
-
-      return key;
-    }
-    public static string GetModelTitleFullType(string fullName, string assemName)
-    {
-      var type = Type.GetType($"{fullName},{assemName}");
-      if (type != null)
-      {
-        var allow = type.GetAllowChildren();
-        if (allow == null || String.IsNullOrEmpty(allow.Name))
-        {
-          return type.Name.SpacesFromCamel();
-        }
-        return allow.Name.SpacesFromCamel();
-      }
-
-      return "";
-    }
 
     public static Func<IUserStore<SDHCUser>> MongoDbIuserStore { get; set; }
   }

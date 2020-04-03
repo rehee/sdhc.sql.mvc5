@@ -1,0 +1,14 @@
+﻿@model ModelPostModel
+@{
+  var postUrl = String.IsNullOrEmpty(Model.PostUrl) ?
+    Model.Id > 0 ? Url.Action("Edit", "ModelManagement", new { @area = ConfigContainer.Systems.AdminPath }) : Url.Action("Create", "ModelManagement", new { @area = ConfigContainer.Systems.AdminPath })
+    : Model.PostUrl;
+}
+<div class="card">
+  <div class="body">
+    <form action="@postUrl" class="" method="post" enctype="multipart/form-data">
+      @{ Html.RenderPartial("_ModelFormViewCore", Model);}
+      <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
+    </form>
+  </div>
+</div>

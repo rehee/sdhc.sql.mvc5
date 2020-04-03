@@ -1,0 +1,18 @@
+﻿@using SDHC.Common.Entity.Models
+@model ContentPropertyIndex
+@Html.Hidden("Properties[" + Model.Index.ToString() + "].Key", Model.Property.Key)
+@Html.Hidden("Properties[" + Model.Index.ToString() + "].ValueType", Model.Property.ValueType)
+@Html.Hidden("Properties[" + Model.Index.ToString() + "].EditorType", Model.Property.EditorType)
+@Html.Hidden("Properties[" + Model.Index.ToString() + "].MultiSelect", Model.Property.MultiSelect)
+@{
+  var valueName = "Value";
+  if (Model.Property.MultiSelect)
+  {
+
+    valueName = "MultiValue";
+
+  }
+  var inputName = "Properties[" + @Model.Index.ToString() + "]." + @valueName;
+  var FileName = "Properties[" + @Model.Index.ToString() + "].File";
+}
+<input type="hidden" class="form-control" name="@inputName" value="@Model.Property.Value" />

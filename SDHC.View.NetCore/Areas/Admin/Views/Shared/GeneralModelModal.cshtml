@@ -1,0 +1,59 @@
+﻿@model ModelPostModel
+@{
+  var outID = Model.PostFormId;
+  Model.PostFormId = "form_" + Model.PostFormId;
+}
+<script>
+  function formIdSubmit_@(Model.PostFormId)() {
+    @if (Model.IsPostAjax)
+    {
+      <Text>
+    @if (!String.IsNullOrEmpty(Model.PostBeforeMethod))
+    {
+      <Text>
+        @(Model.PostBeforeMethod)('@(Model.PostFormId)');
+      </Text>
+    }
+    event.preventDefault();
+    var formData = new FormData(document.getElementById('@Model.PostFormId'));
+    $.ajax({
+      url: '@Model.PostUrl',
+      type: 'post',
+      data: formData,
+      contentType: false,
+      processData: false,
+    })
+      .then(function (response) {
+        var responseMethod = @(string.IsNullOrEmpty(Model.PostResponseMethod) ?null: Model.PostResponseMethod);
+        if (responseMethod != null) {
+          responseMethod(response);
+        }
+      });
+
+    $('#hide_@Model.PostFormId').click();
+    return false;
+      </Text>
+    }
+  }
+</script>
+<div class="modal fade" id="@outID" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+  <div class="modal-dialog">
+    <form id="@Model.PostFormId" onsubmit="formIdSubmit_@(Model.PostFormId)()" enctype="multipart/form-data" action="@Model.PostUrl" method="post">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+          <h4 class="modal-title" id="myModal_@outID">@Model.PostFormTitle</h4>
+        </div>
+        <div class="modal-body">
+          @{ Html.RenderPartial("_ModelFormViewCore", Model);}
+          <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
+        </div>
+        <button type="button" style="display:none" id="hide_@Model.PostFormId" data-dismiss="modal">Close</button>
+        @*<div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>*@
+      </div>
+    </form>
+  </div>
+</div>
