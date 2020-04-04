@@ -68,6 +68,11 @@ namespace SDHC.Common.Services
       Type type = content != null ? content.GetType().GetRealType() : BaseIContentModelType;
       var allowChild = type.GetObjectCustomAttribute<AllowChildrenAttribute>();
       IEnumerable<string> additionalList = allowChild != null && allowChild.TableList != null ? allowChild.TableList : new string[] { "Title", "DisplayOrder" };
+      return GetContentTableHtmlView(content, type, allowChild, parentId, langKey);
+    }
+    private ContentTableHtmlView GetContentTableHtmlView(IContentModel content, Type type, AllowChildrenAttribute allowChild, long? parentId, int? langKey = null)
+    {
+      IEnumerable<string> additionalList = allowChild != null && allowChild.TableList != null ? allowChild.TableList : new string[] { "Title", "DisplayOrder" };
       var children = GetAllChildContent(parentId, langKey).OrderBy(b => b.DisplayOrder).ToList().ToList();
       var rowItems = children.Select(b =>
       {
@@ -235,33 +240,42 @@ namespace SDHC.Common.Services
       return null;
     }
 
-    public ContentIndexViewModel<T> GetContentIndexViewModelByIdOrLang<T>(long? id, int? langKey, Func<string, bool> isInRole)
+    public ContentIndexViewModel<T> GetContentIndexViewModelByIdOrLang<T>(long? id, int? langKey, IList<string> roles)
       where T : IContentModel
     {
       var result = new ContentIndexViewModel<T>();
       var content = GetContent(id.HasValue && id.Value > 0 ? id : null);
       result.Content = content != null ? (T)content : default(T);
       if (content == null)
+      {
         result.ChildrenAttribute = BaseIContentModelType.GetObjectCustomAttribute<AllowChildrenAttribute>();
+        result.ContentId = null;
+        result.LanguageKey = null;
+      }
       else
+      {
         result.ChildrenAttribute = content.GetObjectCustomAttribute<AllowChildrenAttribute>();
-      result.ContentId = content != null ? (long?)content.Id : null;
-      result.LanguageKey = content != null ? content.Lang : langKey;
+        result.ContentId = content.Id;
+        result.LanguageKey = content.Lang;
+      }
       Func<IEnumerable<string>, bool> checkInRole = b =>
       {
         if (b == null || !b.Any())
           return true;
         if (ConfigContainer.Systems.AdminFree)
           return true;
-        return b.Any(c => isInRole(c));
+        return b.Intersect(roles).Any();
       };
-      result.IsInCreateRoles = result.ChildrenAttribute != null ? checkInRole(result.ChildrenAttribute.CreateRoles) : true;
-      result.IsInReadRoles = result.ChildrenAttribute != null ? checkInRole(result.ChildrenAttribute.ReadRoles) : true;
-      result.IsInEditRoles = result.ChildrenAttribute != null ? checkInRole(result.ChildrenAttribute.EditRoles) : true;
-      result.IsInDeleteRoles = result.ChildrenAttribute != null ? checkInRole(result.ChildrenAttribute.DeleteRoles) : true;
-      result.IsInSortRoles = result.ChildrenAttribute != null ? checkInRole(result.ChildrenAttribute.SortRoles) : true;
-      result.Model = GetContentTableHtmlView(content != null ? (long?)content.Id : null, langKey);
-      result.TableSize = TypeExtends.GetTableSize(content);
+      if (result.ChildrenAttribute != null)
+      {
+        result.TableSize = (int)result.ChildrenAttribute.TableSize;
+        result.IsInCreateRoles = checkInRole(result.ChildrenAttribute.CreateRoles);
+        result.IsInReadRoles = checkInRole(result.ChildrenAttribute.ReadRoles);
+        result.IsInEditRoles = checkInRole(result.ChildrenAttribute.EditRoles);
+        result.IsInDeleteRoles = checkInRole(result.ChildrenAttribute.DeleteRoles);
+        result.IsInSortRoles = checkInRole(result.ChildrenAttribute.SortRoles);
+      }
+      result.Model = GetContentTableHtmlView(result.Content, typeof(T), result.ChildrenAttribute, result.ContentId, langKey);
       return result;
     }
   }

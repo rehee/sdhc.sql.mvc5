@@ -14,7 +14,7 @@ namespace Microsoft.Extensions.DependencyInjection
 {
   public static class ContainerInitFunction
   {
-    public static void ContainerInit<TRepo, TBaseContent, TBaseSelect>([NotNullAttribute] this IServiceCollection serviceCollection,
+    public static void ContainerInit<TRepo, TBaseContent, TBaseSelect, TUser>([NotNullAttribute] this IServiceCollection serviceCollection,
       Action<DbContextOptionsBuilder> optionsAction, SystemConfig config)
       where TRepo : DbContext, IContent
       where TBaseContent : BaseContent
@@ -30,6 +30,7 @@ namespace Microsoft.Extensions.DependencyInjection
       CrudContainer.Crud = new BaseCruds(crudInit);
       CrudContainer.CrudModel = new CrudModel(crudInit);
       CrudContainer.CrudContent = new CrudContent(crudInit);
+      CrudContainer.BaseUser = typeof(TUser);
       ServiceContainer.ModelService = new ModelService(crudInit);
       ServiceContainer.ContentService = new ContentService(crudInit);
       ServiceContainer.SelectService = new SelectService(crudInit);

@@ -24,6 +24,6 @@ namespace SDHC.Common.Services
     void GetContentListView(IContentModel model, ContentListView parent, int parentLevel = 0, int sortChildLevel = 4);
     long? UpdateContentOrder(IEnumerable<ContentSortPostModel> inputs);
 
-    ContentIndexViewModel<T> GetContentIndexViewModelByIdOrLang<T>(long? id, int? langKey, Func<string, bool> IsInRole) where T : IContentModel;
+    ContentIndexViewModel<T> GetContentIndexViewModelByIdOrLang<T>(long? id, int? langKey, IList<string> roles) where T : IContentModel;
   }
 }

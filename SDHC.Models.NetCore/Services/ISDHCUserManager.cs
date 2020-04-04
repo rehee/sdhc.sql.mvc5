@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace SDHC.Models.NetCore.Services
 {
-  public interface ISDHCUserManager<TUser> where TUser : SDHCUser, new()
+  public interface ISDHCUserManager<TUser> where TUser : IdentityUser, new()
   {
     Type BaseUser { get; }
     UserManager<TUser> UserManager { get; }

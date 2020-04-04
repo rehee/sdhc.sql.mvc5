@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using SDHC.Common.Configs;
@@ -10,6 +11,8 @@ using SDHC.Common.Entity.Models;
 using SDHC.Common.Entity.Models.ViewModels;
 using SDHC.Common.EntityCore.Models;
 using SDHC.Models.NetCore.Attributes;
+using SDHC.Models.NetCore.Models;
+using SDHC.Models.NetCore.Services;
 
 namespace View.Areas.Admin.Controllers
 {
@@ -25,7 +28,14 @@ namespace View.Areas.Admin.Controllers
     public IActionResult Index(long? id, int? lang)
     {
       var inputLang = langConfig.GetLangKey(lang);
-      return View(ServiceContainer.ContentService.GetContentIndexViewModelByIdOrLang<BaseContent>(id, inputLang, HttpContext.User.IsInRole));
+      var roles = new List<string>();
+      if (HttpContext.User.Identity.IsAuthenticated)
+      {
+        var user = CrudContainer.Crud.Read<IdentityUser>(CrudContainer.BaseUser, b => b.UserName == HttpContext.User.Identity.Name, out var db).FirstOrDefault();
+        var users = CrudContainer.Crud.Read<IdentityUserRole<string>>(b => b.UserId == user.Id, db).Select(b => b.RoleId).ToList();
+        roles = CrudContainer.Crud.Read<IdentityRole>(b => users.Contains(b.Id)).Select(b => b.Name).ToList();
+      }
+      return View(ServiceContainer.ContentService.GetContentIndexViewModelByIdOrLang<BaseContent>(id, inputLang, roles));
     }
     [HttpPost]
     [Admin(adminRole: "ContentCreate")]

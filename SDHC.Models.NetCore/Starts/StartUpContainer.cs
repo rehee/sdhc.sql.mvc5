@@ -43,7 +43,7 @@ namespace SDHC.Common.EntityCore.Services
         options.SignIn.RequireConfirmedAccount = false)
         .AddEntityFrameworkStores<TRepo>();
       services.AddScoped<RoleManager<IdentityRole>>();
-      services.InitSDHCContainer<TRepo, TBaseContent, TBaseSelect, FormFile>(configuration, dbAction,
+      services.InitSDHCContainer<TRepo, TBaseContent, TBaseSelect, FormFile, TUser>(configuration, dbAction,
                env.ContentRootPath, systemConfigKey);
       services.AddScoped<ISDHCUserManager<TUser>, SDHCUserManager<TUser>>();
 

@@ -36,7 +36,7 @@
 }
 
 @section breadcrumb{
-  @{ Html.RenderPartial("_BreadCrumbContent", Model.Content);}
+  @{ await Html.RenderPartialAsync("_BreadCrumbContent", Model.Content);}
 }
 <script>
   function subbform(id) {

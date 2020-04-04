@@ -15,7 +15,7 @@ namespace System
     public string[] SortRoles { get; set; } = new String[0];
     public string[] DeleteRoles { get; set; } = new String[0];
     public string[] TableList { get; set; } = new String[0];
-    public EnumTablePageSize TableSize { get; set; } = EnumTablePageSize.L0;
+    public EnumTablePageSize TableSize { get; set; } = EnumTablePageSize.L10;
     public bool SingleRecord { get; set; } = false;
     public int DisplayOrder { get; set; } = 0;
     public bool DisableDelete { get; set; }
