@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SDHC.Common.EntityCore.Models;
 using SDHC.Models.NetCore.Models;
@@ -22,7 +23,7 @@ namespace Models
     public DbSet<BaseSelectModel> BaseSelectModel { get; set; }
 
     public DbSet<SDHCUser> SDHCUsers { get; set; }
-
+    //public DbSet<IdentityRole> IdentityRoles { get; set; }
     public Task<int> SaveChangesAsync()
     {
       return this.SaveChangesAsync(default(System.Threading.CancellationToken));

@@ -16,7 +16,7 @@ namespace SDHC.Models.NetCore.Models.ViewModels
     public string FullType { get; set; }
     public string ThisAssembly { get; set; }
     public List<ContentProperty> Properties { get; set; } = new List<ContentProperty>();
-    public IEnumerable<string> SelectedRoles { get; set; } = Enumerable.Empty<string>();
+    public IEnumerable<string> SelectedRoles { get; set; } = new List<string>();
     public IEnumerable<RoleNameAndUser> Roles { get; set; }
   }
   public class RolesIndexView

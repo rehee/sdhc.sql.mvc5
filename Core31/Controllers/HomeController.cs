@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
+using SDHC.Models.NetCore.Models;
 
 namespace Controllers
 {

@@ -40,10 +40,10 @@ namespace SDHC.Common.EntityCore.Services
       services.AddScoped<ISDHCLanguageServiceInit, SDHCLanguageServiceInit>();
       services.AddDbContext<TRepo>(dbAction);
 
-      services.AddIdentity<TUser, IdentityRoleUser>(options => 
+      services.AddIdentity<TUser, IdentityRole>(options => 
         options.SignIn.RequireConfirmedAccount = false)
         .AddEntityFrameworkStores<TRepo>();
-      services.AddScoped<RoleManager<IdentityRoleUser>>();
+      services.AddScoped<RoleManager<IdentityRole>>();
       services.InitSDHCContainer<TRepo, TBaseContent, TBaseSelect, FormFile>(configuration, dbAction,
                env.ContentRootPath, systemConfigKey);
       services.AddScoped<ISDHCUserManager<TUser>, SDHCUserManager<TUser>>();
@@ -73,14 +73,14 @@ namespace SDHC.Common.EntityCore.Services
         name: "Files",
         pattern: $"{ConfigContainer.Systems.FileUploadPath}/{{*path}}", defaults: new { controller = "Files", action = "Index", });
         endpoints.MapControllerRoute(
-        name: "Admin",
-        pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}", defaults: new { area = "Admin" });
-        endpoints.MapControllerRoute(
         name: "area",
         pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
         endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
+        endpoints.MapControllerRoute(
+        name: "Admin",
+        pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}", defaults: new { area = "Admin" });
       });
     }
   }

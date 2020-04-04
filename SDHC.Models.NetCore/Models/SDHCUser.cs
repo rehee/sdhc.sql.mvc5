@@ -56,10 +56,10 @@ namespace SDHC.Models.NetCore.Models
     [IgnoreEdit]
     public string WeChatOpenId { get; set; }
 
-    public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
+    //public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
   }
-  public class IdentityRoleUser : IdentityRole
-  {
-    public virtual ICollection<IdentityUserRole<string>> Users { get; set; }
-  }
+  //public class IdentityRoleUser : IdentityRole
+  //{
+  //  public virtual ICollection<IdentityUserRole<string>> Users { get; set; }
+  //}
 }
