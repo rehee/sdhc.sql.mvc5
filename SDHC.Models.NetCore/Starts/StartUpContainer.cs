@@ -28,7 +28,6 @@ namespace SDHC.Common.EntityCore.Services
       where TBaseSelect : BaseSelect
     {
       var systemConfigKey = "SystemConfig";
-      services.Configure<SystemConfig>(configuration.GetSection(systemConfigKey));
       services.AddSession();
       services.AddHttpContextAccessor();
       Action<DbContextOptionsBuilder> dbAction = options =>
@@ -40,7 +39,7 @@ namespace SDHC.Common.EntityCore.Services
       services.AddScoped<ISDHCLanguageServiceInit, SDHCLanguageServiceInit>();
       services.AddDbContext<TRepo>(dbAction);
 
-      services.AddIdentity<TUser, IdentityRole>(options => 
+      services.AddIdentity<TUser, IdentityRole>(options =>
         options.SignIn.RequireConfirmedAccount = false)
         .AddEntityFrameworkStores<TRepo>();
       services.AddScoped<RoleManager<IdentityRole>>();
@@ -72,12 +71,19 @@ namespace SDHC.Common.EntityCore.Services
         endpoints.MapControllerRoute(
         name: "Files",
         pattern: $"{ConfigContainer.Systems.FileUploadPath}/{{*path}}", defaults: new { controller = "Files", action = "Index", });
+
+        endpoints.MapControllerRoute(
+        name: "Pages",
+        pattern: $"Page/{{*path}}", defaults: new { controller = "Page", action = "Index", });
+
         endpoints.MapControllerRoute(
         name: "area",
         pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
         endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
+
         endpoints.MapControllerRoute(
         name: "Admin",
         pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}", defaults: new { area = "Admin" });

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 
@@ -33,8 +34,12 @@ namespace SDHC.Common.Entity.Models
     }
 
     [BaseProperty]
+    [HideEdit]
+    public int? Lang { get; set; }
+    [BaseProperty]
     public virtual long Id { get; set; }
     [BaseProperty]
+    [Display(Name = "System Label")]
     public virtual string Title
     {
       get
@@ -103,7 +108,7 @@ namespace SDHC.Common.Entity.Models
     //public virtual IContentModel ThisParent { get; set; }
 
 
-    
+
 
     [IgnoreEdit]
     protected virtual IEnumerable<IContentModel> _parents { get; set; }

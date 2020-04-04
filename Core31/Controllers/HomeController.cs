@@ -3,6 +3,8 @@ using System.IO;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.Extensions.Options;
+using SDHC.Common.Configs;
 using SDHC.Models.NetCore.Models;
 
 namespace Controllers
@@ -11,7 +13,6 @@ namespace Controllers
   {
     public HomeController()
     {
-
     }
     public IActionResult Index()
     {

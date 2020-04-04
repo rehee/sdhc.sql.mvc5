@@ -3,7 +3,8 @@
 
 @Html.Hidden("Id", Model.Id)
 @Html.Hidden("ParentId", Model.ParentId)
-<input type="hidden" name="FullType" id="FullType" value="@Model.FullType" />
+@Html.Hidden("Lang", Model.Lang)
+@Html.Hidden("FullType", Model.FullType)
 @Html.Hidden("ThisAssembly", Model.ThisAssembly)
 @Html.Hidden("CreateTime", Model.CreateTime)
 @Html.Hidden("DisplayOrder", Model.DisplayOrder)

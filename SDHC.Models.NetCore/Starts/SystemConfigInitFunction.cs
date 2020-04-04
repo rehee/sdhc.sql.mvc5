@@ -10,9 +10,11 @@ namespace Microsoft.Extensions.DependencyInjection
 {
   public static class SystemConfigInitFunction
   {
-    public static void SystemConfigInit([NotNullAttribute] this IServiceCollection serviceCollection, IConfiguration configuration, 
+    public static void SystemConfigInit([NotNullAttribute] this IServiceCollection serviceCollection, IConfiguration configuration,
       string systemConfigKey)
     {
+      serviceCollection.Configure<SystemConfig>(configuration.GetSection(systemConfigKey));
+      serviceCollection.Configure<LanguageConfig>(configuration.GetSection(nameof(LanguageConfig)));
       ConfigContainer.GetSetting = (key) => configuration.GetValue<string>(key);
       IConfigurationSection sec = configuration.GetSection(systemConfigKey);
       var type = typeof(SystemConfig);

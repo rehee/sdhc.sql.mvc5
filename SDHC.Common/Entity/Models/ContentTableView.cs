@@ -34,6 +34,7 @@ namespace System
       }
     }
   }
+
   public class ContentTableHtmlView
   {
     public string FirstRowAction { get; set; }
@@ -54,6 +55,21 @@ namespace System
     public bool DisableDelete { get; set; }
     public string DeleteFunctionName { get; set; }
     public Type ThisTypeFrom { get; set; } = null;
+  }
+
+  public class ContentIndexViewModel<T> where T : IBasicModel
+  {
+    public int? LanguageKey { get; set; }
+    public long? ContentId { get; set; }
+    public int TableSize { get; set; } = 10;
+    public bool IsInCreateRoles { get; set; }
+    public bool IsInReadRoles { get; set; }
+    public bool IsInEditRoles { get; set; }
+    public bool IsInDeleteRoles { get; set; }
+    public bool IsInSortRoles { get; set; }
+    public AllowChildrenAttribute ChildrenAttribute { get; set; }
+    public ContentTableHtmlView Model { get; set; }
+    public T Content { get; set; }
   }
 
   public class ContentTableOption

@@ -25,6 +25,8 @@ namespace SDHC.Common.Entity.Models
     public DateTime? CreateTime { get; set; }
     [BaseProperty]
     public long DisplayOrder { get; set; }
+    [BaseProperty]
+    public int? Lang { get; set; }
 
     public List<ContentProperty> Properties { get; set; } = PassModeConvert.NewContentPropertyList();
   }

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using SDHC.Common.Configs;
 using SDHC.Common.Entity.Models;
 using SDHC.Common.Entity.Models.ViewModels;
 using SDHC.Common.EntityCore.Models;
@@ -14,43 +16,22 @@ namespace View.Areas.Admin.Controllers
   [Area("Admin")]
   public class ContentController : Controller
   {
-    [Admin(adminRole: "ContentIndex")]
-    public IActionResult Index(long? id)
+    LanguageConfig langConfig { get; }
+    public ContentController(IOptions<LanguageConfig> lang)
     {
-      var content = ServiceContainer.ContentService.GetContent(id.HasValue && id.Value > 0 ? id : null);
-      AllowChildrenAttribute childrenAttribute;
-      if (content == null)
-      {
-        childrenAttribute = ServiceContainer.ContentService.BaseIContentModelType.GetObjectCustomAttribute<AllowChildrenAttribute>();
-      }
-      else
-      {
-        childrenAttribute = content.GetObjectCustomAttribute<AllowChildrenAttribute>();
-      }
-      ViewBag.childrenAttribute = childrenAttribute;
-      var u = HttpContext.User;
-      Func<IEnumerable<string>, bool> isInRole = b =>
-      {
-        if (b == null || !b.Any())
-          return true;
-        if (ConfigContainer.Systems.AdminFree)
-          return true;
-        if (!u.Identity.IsAuthenticated)
-          return false;
-        return b.Any(c => u.IsInRole(c));
-      };
-      ViewBag.IsInCreateRoles = childrenAttribute != null ? isInRole(childrenAttribute.CreateRoles) : true;
-      ViewBag.IsInReadRoles = childrenAttribute != null ? isInRole(childrenAttribute.ReadRoles) : true;
-      ViewBag.IsInEditRoles = childrenAttribute != null ? isInRole(childrenAttribute.EditRoles) : true;
-      ViewBag.IsInDeleteRoles = childrenAttribute != null ? isInRole(childrenAttribute.DeleteRoles) : true;
-      ViewBag.IsInSortRoles = childrenAttribute != null ? isInRole(childrenAttribute.SortRoles) : true;
-      return View(content);
+      this.langConfig = lang.Value;
+    }
+    [Admin(adminRole: "ContentIndex")]
+    public IActionResult Index(long? id, int? lang)
+    {
+      var inputLang = langConfig.GetLangKey(lang);
+      return View(ServiceContainer.ContentService.GetContentIndexViewModelByIdOrLang<BaseContent>(id, inputLang, HttpContext.User.IsInRole));
     }
     [HttpPost]
     [Admin(adminRole: "ContentCreate")]
-    public ActionResult PreCreate(long? ContentId, string FullType)
+    public ActionResult PreCreate(long? ContentId, string FullTypeAndAssembly, int? LangKey)
     {
-      var content = ServiceContainer.ContentService.GetPreCreate(ContentId, FullType);
+      var content = ServiceContainer.ContentService.GetPreCreate(ContentId, FullTypeAndAssembly, langConfig.GetLangKey(LangKey));
       return View("Create", content);
     }
     [HttpPost]
@@ -59,7 +40,7 @@ namespace View.Areas.Admin.Controllers
     {
       var content = model.ConvertToBaseModel() as BaseContent;
       ServiceContainer.ContentService.CreateContent(content, content.ParentId);
-      return RedirectToAction("Index");
+      return RedirectToAction("Index", "Content", new { @id = content.Id, @lang = content.Lang, @area = "Admin" });
     }
     [HttpGet]
     [Admin(adminRole: "ContentEdit")]
@@ -84,9 +65,9 @@ namespace View.Areas.Admin.Controllers
       return RedirectToAction("Index");
     }
     [Admin(adminRole: "ContentSort")]
-    public ActionResult Sort(long? id)
+    public ActionResult Sort(long? id, int? lang)
     {
-      var model = ServiceContainer.ContentService.GetContentListView(id);
+      var model = ServiceContainer.ContentService.GetContentListView(id, 0, langConfig.GetLangKey(lang));
       return View(model);
     }
     [HttpPost]

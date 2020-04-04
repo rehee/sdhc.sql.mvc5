@@ -9,5 +9,6 @@ namespace System
   {
     public static SystemConfig Systems { get; set; }
     public static Func<string, string> GetSetting { get; set; }
+    
   }
 }

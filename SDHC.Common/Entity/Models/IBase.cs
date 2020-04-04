@@ -20,20 +20,21 @@ namespace SDHC.Common.Entity.Models
   {
 
   }
-  
+
   public interface IBasicModel : IBasicContent
   {
     string Title { get; set; }
   }
-  public interface IContentModel: IBasicModel
+  public interface IContentModel : IBasicModel
   {
+    int? Lang { get; set; }
     string Url { get; set; }
     long DisplayOrder { get; set; }
     DateTime? CreateTime { get; set; }
     long? ParentId { get; set; }
     IContentModel Parent { get; }
     IEnumerable<IContentModel> Parents { get; }
-    IEnumerable<IContentModel> Children { get;}
+    IEnumerable<IContentModel> Children { get; }
   }
   public interface IBasicSelect : IBasicContent
   {

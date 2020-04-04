@@ -1,23 +1,18 @@
-﻿@model BaseContent
+﻿@model ContentIndexViewModel<BaseContent>
 @{
   ViewBag.Title = "Content";
   Layout = "~/Areas/Admin/Views/Shared/_Layout_Content.cshtml";
-  var contentId = Model != null ? (long?)Model.Id : null;
 
-  var contents = ServiceContainer.ContentService.GetContentTableHtmlView(contentId);
-  if (contents != null)
+  Model.Model.FirstRow = new ContentTableOption()
   {
-    contents.FirstRow = new ContentTableOption()
-    {
-      RowAction = "Index",
-      RowController = "Content",
-      RowArea = ConfigContainer.Systems.AdminPath,
-      RowTitle = b => $"{(b as ContentTableRowItem).DisplayOrder} (children list)",
-      RowObject = b => new { id = (b as ContentTableRowItem).Id, area = ConfigContainer.Systems.AdminPath }
-    };
-    contents.Options = new List<ContentTableOption>();
-    contents.Options.Add(
-
+    RowAction = "Index",
+    RowController = "Content",
+    RowArea = ConfigContainer.Systems.AdminPath,
+    RowTitle = b => $"{(b as ContentTableRowItem).DisplayOrder} (children list)",
+    RowObject = b => new { id = (b as ContentTableRowItem).Id, area = ConfigContainer.Systems.AdminPath }
+  };
+  Model.Model.Options = new List<ContentTableOption>();
+  Model.Model.Options.Add(
     new ContentTableOption()
     {
       RowAction = "Edit",
@@ -27,8 +22,7 @@
       ButtonClass = "btn btn-primary",
       RowObject = b => new { @id = (b as ContentTableRowItem).Id, @area = ConfigContainer.Systems.AdminPath }
     });
-    contents.Options.Add(
-
+  Model.Model.Options.Add(
     new ContentTableOption()
     {
       RowAction = "Preview",
@@ -39,14 +33,10 @@
       RowObject = b => new { @id = (b as ContentTableRowItem).Id, @area = "" },
       UrlAttribute = c => $"target=\"_blank\"",
     });
-  }
-
-  var tableSize = TypeExtends.GetTableSize(Model);
-
 }
 
 @section breadcrumb{
-  @{ Html.RenderPartial("_BreadCrumbContent", Model);}
+  @{ Html.RenderPartial("_BreadCrumbContent", Model.Content);}
 }
 <script>
   function subbform(id) {
@@ -60,7 +50,7 @@
     <div class="card">
       <div class="card-header">
         <div class="button-box">
-          @if (ViewBag.IsInCreateRoles)
+          @if (Model.IsInCreateRoles)
           {
             <div class="btn-group">
               <button type="button" class="btn btn-info btn-group" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -68,7 +58,7 @@
               </button>
               <ul class="dropdown-menu">
                 @{
-                  var avaliableChild = TypeExtends.GetAllowChildrens(Model);
+                  var avaliableChild = TypeExtends.GetAllowChildrens(Model.Content);
                 }
                 @foreach (var child in avaliableChild)
                 {
@@ -76,31 +66,32 @@
                   <li>
                     <a href="#" onclick="subbform('@idguid')">@TypeExtends.GetClassDisplayName(child)</a>
                     <form id="@idguid" action="@Url.Action("PreCreate", "Content", new { @area = ConfigContainer.Systems.AdminPath })" method="post">
-                      @Html.Hidden("ContentId", contentId)
-                      @Html.Hidden("FullType", child.FullName + "," + child.Assembly.FullName)
+                      @Html.Hidden("ContentId", Model.ContentId)
+                      @Html.Hidden("LangKey", Model.LanguageKey)
+                      @Html.Hidden("FullTypeAndAssembly", child.FullName + "," + child.Assembly.FullName)
                     </form>
                   </li>
                 }
               </ul>
             </div>
           }
-          @if (ViewBag.IsInEditRoles)
+          @if (Model.IsInEditRoles)
           {
-            <a href="@Url.Action("Index", "Content", new { @area = ConfigContainer.Systems.AdminPath, @id = contentId })" class="btn btn-success">List</a>
+            <a href="@Url.Action("Index", "Content", new { @area = ConfigContainer.Systems.AdminPath, @id = Model.ContentId })" class="btn btn-success">List</a>
           }
-          @if (ViewBag.IsInEditRoles)
+          @if (Model.IsInEditRoles)
           {
-            <a href="@Url.Action("Edit", "Content", new { @area = ConfigContainer.Systems.AdminPath, @id = contentId })" class="btn btn-success">Edit</a>
+            <a href="@Url.Action("Edit", "Content", new { @area = ConfigContainer.Systems.AdminPath, @id = Model.ContentId })" class="btn btn-success">Edit</a>
           }
-          @if (ViewBag.IsInSortRoles)
+          @if (Model.IsInSortRoles)
           {
-            <a href="@Url.Action("Sort", "Content", new { @area = ConfigContainer.Systems.AdminPath, @id = contentId })" class="btn btn-warning">Sort</a>
+            <a href="@Url.Action("Sort", "Content", new { @area = ConfigContainer.Systems.AdminPath, @id = Model.ContentId.HasValue?Model.ContentId.Value:0, @lang = Model.LanguageKey })" class="btn btn-warning">Sort</a>
           }
-          @if (ViewBag.IsInDeleteRoles)
+          @if (Model.IsInDeleteRoles)
           {
             <a href="#" onclick="deleteCurrent()" class="btn btn-danger">Delete</a>
             <form id="ContentDeleteForm" action="@Url.Action("Delete", "Content", new { @area = ConfigContainer.Systems.AdminPath })" method="post">
-              @Html.Hidden("id", contentId)
+              @Html.Hidden("id", Model.ContentId)
             </form>
           }
 
@@ -111,9 +102,9 @@
       <div class="body">
 
         @{
-          if (contents != null)
+          if (Model.Model != null)
           {
-            Html.RenderPartial("Contents/_ContentTableHtml", contents);
+            Html.RenderPartial("Contents/_ContentTableHtml", Model.Model);
           }
 
         }
@@ -127,7 +118,7 @@
     $(function () {
       $('.basic-example').DataTable(
         {
-          "pageLength": @tableSize
+          "pageLength": @Model.TableSize
         } );
     });
 
