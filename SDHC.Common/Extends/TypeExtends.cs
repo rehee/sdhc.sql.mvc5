@@ -59,7 +59,7 @@ namespace System
       }
       return input.Name.SpacesFromCamel();
     }
-    
+
     public static IEnumerable<string> GetAdminAuthorizeRoles(EnumAdminAuthorize crud, Type input)
     {
       var adminList = ConfigContainer.Systems.AdminRole.Split(',')
@@ -158,7 +158,12 @@ namespace System
       {
         return path;
       }
-      return path.Replace('\\', '/');
+      var paths = path.Split('/', '\\').ToList();
+      if(paths[0]!= ConfigContainer.Systems.FileUploadPath)
+      {
+        paths.Insert(0, ConfigContainer.Systems.FileUploadPath);
+      }
+      return String.Join("/", paths);
     }
   }
 }

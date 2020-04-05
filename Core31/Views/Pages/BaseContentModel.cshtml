@@ -1,15 +1,31 @@
-﻿@model ContentPostModel
+﻿@model ContentViewModal
 @{
-    Layout = null;
+  Layout = null;
 }
 
 <!DOCTYPE html>
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>BaseContentModel</title>
+  <meta name="viewport" content="width=device-width" />
+  <title>BaseContentModel</title>
+  <style>
+    .review{
+      padding:5px;
+      border:1px solid black;
+    }
+  </style>
 </head>
 <body>
+  <div>
+    <img class="@Model.GetModalNameByName(nameof(Models.BaseContentModel.FF)) review" src="@Model.GetModelValueByName(nameof(Models.BaseContentModel.FF))" alt="Alternate Text" />
+
+    <div>
+      <p class="@Model.GetModalNameByName(nameof(Models.BaseContentModel.FF2)) review">
+        @Model.GetModelValueByName(nameof(Models.BaseContentModel.FF2))
+      </p>
+    </div>
+    
+  </div>
 </body>
 </html>

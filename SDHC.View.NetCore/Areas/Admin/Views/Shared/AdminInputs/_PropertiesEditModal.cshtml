@@ -1,0 +1,13 @@
+﻿@using SDHC.Common.Entity.Models
+@model ContentViewModal
+@foreach (var property in Model.ContentPropertyIndexs)
+{
+  if (property.Property.IgnoreProperty)
+  {
+    Html.RenderPartial("AdminInputs/_AdminInput_Ignore", property);
+  }
+  else
+  {
+    Html.RenderPartial("AdminInputs/_AdminInputModal", property);
+  }
+}

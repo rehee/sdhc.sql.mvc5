@@ -74,7 +74,7 @@ namespace SDHC.Common.EntityCore.Services
 
         endpoints.MapControllerRoute(
         name: "Pages",
-        pattern: $"Page/{{*path}}", defaults: new { controller = "Page", action = "Index", });
+        pattern: $"Pages/{{*path}}", defaults: new { controller = "Page", action = "Index", });
 
         endpoints.MapControllerRoute(
         name: "area",

@@ -1,0 +1,86 @@
+﻿@model ContentViewModal
+@{
+  Layout = "~/Areas/Admin/Views/Shared/_Layout_Content.cshtml";
+}
+<script>
+  function postForm() {
+    var form = document.getElementById('hide_modal');
+    form.submit();
+  }
+</script>
+<div class="card">
+  <div class="card-header">
+    <h2>Review Page</h2>
+    <div class="button-box">
+      <div class="btn-group">
+        <button type="button" onclick="postForm()" class="btn btn-info btn-group">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="body">
+    <iframe id="preview" style="width:100%;height:600px;" src="@Url.Action("Detail","Page",new { @id=Model.Model.Id,@area="" })#@Guid.NewGuid().ToString()">
+    </iframe>
+  </div>
+</div>
+
+
+
+<form action="@Url.Action("Edit","Content")" id="hide_modal" method="post" enctype="multipart/form-data">
+  @{ await Html.RenderPartialAsync("_ContentPostHide", Model.Model);}
+  @{ await Html.RenderPartialAsync("AdminInputs/_PropertiesEditModal", Model);}
+</form>
+
+@section script{
+  <script>
+    var preview = $('#preview')[0].contentWindow;
+    $('#preview').load(function () {
+      @foreach(var p in Model.ContentPropertyIndexs)
+      {
+        var modalId = Model.GetModalNameByName(p.Property.Key);
+        <Text>
+        $(preview.document.getElementsByClassName('@modalId')).click(function () {
+          $('#@modalId').modal('show');
+        })
+
+
+      $('#@modalId').on('hidden.bs.modal', function () {
+        var name = '@p.OuterName';
+        var input = $('#hide_modal' + ' [name="' + name+'"]');
+        var type = '@p.Property.EditorType';
+        var edits = $(preview.document.getElementsByClassName('@modalId'));
+        var setImage = (inp, imgElement) => {
+          if (!inp[0].files || !inp[0].files.length) {
+            return;
+          }
+          var uploadFile = inp[0].files[0];
+          var fileReader = new FileReader();
+          fileReader.onload = () => {
+            imgElement.attr("src", fileReader.result);
+          }
+          fileReader.readAsDataURL(uploadFile)
+        };
+        $.each(edits, e => {
+          var edit = $(edits[e]);
+          var editTag = edit.prop('tagName').toLowerCase();
+          switch (editTag) {
+            case "img":
+              setImage(input, edit);
+              break;
+            default:
+              edit.html(input.val());
+              break;
+          }
+        })
+      })
+        </Text>
+      }
+    });
+
+    function model_close_click(id) {
+      console.log(id);
+    }
+
+  </script>
+}

@@ -100,5 +100,18 @@ namespace View.Areas.Admin.Controllers
       return RedirectToAction("Index");
     }
 
+    public IActionResult Preview(int? id)
+    {
+      if (!id.HasValue)
+      {
+        return RedirectToAction("index");
+      }
+      var content = ServiceContainer.ContentService.GetContent(id);
+      if (content == null)
+      {
+        return RedirectToAction("index");
+      }
+      return View(new ContentViewModal(content.ConvertModelToPost()));
+    }
   }
 }

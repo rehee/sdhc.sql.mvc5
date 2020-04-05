@@ -1,23 +1,16 @@
 ﻿@using SDHC.Common.Entity.Models
 @model ContentPropertyIndex
 @{
-  var randomIndex = Guid.NewGuid().ToString().Replace('-', '_');
+  var randomIndex = Model.RandomIndex;
 }
 <input type="hidden" id="@(randomIndex)_Properties[@(Model.Index.ToString())].Key" name="Properties[@(Model.Index.ToString())].Key" value="@Model.Property.Key" />
 <input type="hidden" id="@(randomIndex)_Properties[@(Model.Index.ToString())].ValueType" name="Properties[@(Model.Index.ToString())].ValueType" value="@Model.Property.ValueType" />
 <input type="hidden" id="@(randomIndex)_Properties[@(Model.Index.ToString())].EditorType" name="Properties[@(Model.Index.ToString())].EditorType" value="@Model.Property.EditorType" />
 <input type="hidden" id="@(randomIndex)_Properties[@(Model.Index.ToString())].MultiSelect" name="Properties[@(Model.Index.ToString())].MultiSelect" value="@Model.Property.MultiSelect" />
 @{
-  var valueName = "Value";
-  if (Model.Property.MultiSelect)
-  {
 
-    valueName = "MultiValue";
-
-  }
-  var inputName = "Properties[" + @Model.Index.ToString() + "]." + @valueName;
-  var FileName = "Properties[" + @Model.Index.ToString() + "].FileCore";
-
+  var inputName = Model.InputName;
+  var FileName = Model.FileName;
 }
 
 @functions {

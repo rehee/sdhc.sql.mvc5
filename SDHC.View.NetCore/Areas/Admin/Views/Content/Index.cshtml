@@ -26,11 +26,11 @@
     new ContentTableOption()
     {
       RowAction = "Preview",
-      RowController = "SDHCPage",
+      RowController = "Content",
       RowArea = "",
       RowTitle = b => "Preview",
       ButtonClass = "btn btn-success",
-      RowObject = b => new { @id = (b as ContentTableRowItem).Id, @area = "" },
+      RowObject = b => new { @id = (b as ContentTableRowItem).Id, @area = "Admin" },
       UrlAttribute = c => $"target=\"_blank\"",
     });
 }

@@ -45,7 +45,7 @@ namespace Admin.Areas.Admin.Controllers
     [Admin(adminRole: "ContentCreate")]
     public ActionResult PreCreate(long? ContentId, string FullType)
     {
-      var content = ServiceContainer.ContentService.GetPreCreate(ContentId, FullType);
+      var content = ServiceContainer.ContentService.GetPreCreate(ContentId, FullType, 0);
       return View("Create", content);
     }
     [HttpPost]
