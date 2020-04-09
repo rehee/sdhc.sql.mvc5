@@ -63,7 +63,7 @@
       });
       connection.on("ReceiveMessage", function (user, message) {
         var msg = message.message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-        u = message.email + " : ";
+        u = message.userName + " : ";
         var encodedMsg = u + msg;
         var li = document.createElement("li");
         li.textContent = encodedMsg;

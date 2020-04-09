@@ -86,18 +86,11 @@ function checkChatBoxInputKey(event, chatboxtextarea, chatboxtitle, toid, img, s
       }
       message = $words.join(' ');
       message = emojione.shortnameToImage(message); // Set imotions
-      $("#chatbox_" + chatboxtitle).append(`
-            <div class= "col-xs-12 p-b-10 odd" >
-            <div class="chat-body">
-              <div class="chat-text">
-                <h4>${username}</h4>
-                <p>${message}</p>
-              </div>
-            </div>
-      </div>`);
+      connection.invoke("SendMessageToCustom", toid, message).catch(function (err) {
+      });
 
-      $(".target-emoji").css({ 'display': 'none' });
-      $('.wchat-filler').css({ 'height': 0 + 'px' });
+      //$(".target-emoji").css({ 'display': 'none' });
+      //$('.wchat-filler').css({ 'height': 0 + 'px' });
 
       scrollDown();
     }

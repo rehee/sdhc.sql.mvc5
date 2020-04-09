@@ -9,6 +9,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Areas\Admin\Views\Chats\Index - Copy.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Chats\Index - Copy.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="wwwroot\lj2.jpg" />
   </ItemGroup>
 

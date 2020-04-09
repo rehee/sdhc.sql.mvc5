@@ -70,8 +70,8 @@ namespace Core31.Hubs
     public async Task StaffConnect()
     {
       CurrentHubUser.IsStaff = true;
-
-      var userMessages = AllMissingMessage.Where(b => !String.IsNullOrEmpty(b.UserId)).GroupBy(b => b.UserId).ToList();
+      var allMissing = AllMissingMessage.Select(b => b).ToList();
+      var userMessages = allMissing.Where(b => !String.IsNullOrEmpty(b.UserId)).GroupBy(b => b.UserId).ToList();
       var allLiveConnection = userMaper.Values.Where(b => !b.IsStaff).GroupBy(b => b.UserId);
       var allLiveUser = allLiveConnection.Where(b => !String.IsNullOrEmpty(b.Key)).Select(b => b.FirstOrDefault()).ToList();
 
@@ -79,27 +79,40 @@ namespace Core31.Hubs
       {
         foreach (var message in userMessage)
         {
-          await Clients.Caller.SendAsync("ReceiveMessage", message.UserId, new ChatMessage(message.UserId, null, message.UserName, message.Message));
+          if (String.IsNullOrEmpty(message.Message))
+          {
+            continue;
+          }
+          await Clients.Caller.SendAsync("ReceiveMessage", message.UserId, new ChatMessage(message.UserId, null, message.UserName, message.Message, true));
         }
       }
-      foreach (var user in allLiveUser.Where(b => !userMessages.Select(b => b.Key).Contains(b.UserId)))
+      foreach (var user in allLiveUser)
       {
-        await Clients.Caller.SendAsync("ReceiveMessage", user.ClientId, new ChatMessage(user.UserId, null, user.Email, "new customer connected"));
+        await Clients.Caller.SendAsync("ReceiveMessage", user.ClientId, new ChatMessage(user.UserId, null, user.Email, "customer connected"));
       }
 
-      var messages = AllMissingMessage.Where(b => String.IsNullOrEmpty(b.UserId)).GroupBy(b => b.ConnectId).ToList();
+      var messages = allMissing.Where(b => String.IsNullOrEmpty(b.UserId)).GroupBy(b => b.ConnectId).ToList();
       foreach (var msgGroup in messages)
       {
         foreach (var message in msgGroup)
         {
-          await Clients.Caller.SendAsync("ReceiveMessage", message.ConnectId, new ChatMessage(message.ConnectId, null, message.UserName, message.Message));
+          if (String.IsNullOrEmpty(message.Message))
+          {
+            continue;
+          }
+          await Clients.Caller.SendAsync("ReceiveMessage", message.ConnectId, new ChatMessage(message.ConnectId, null, message.UserName, message.Message, true));
         }
       }
-      var allMessager = allLiveConnection.FirstOrDefault(b => String.IsNullOrEmpty(b.Key)).Select(b => b).ToList();
-      foreach (var user in allMessager.Where(b => !userMessages.Select(b => b.Key).Contains(b.ConnectId)))
+      var allMessager = allLiveConnection.Where(b => String.IsNullOrEmpty(b.Key)).SelectMany(b => b).ToList();
+      foreach (var user in allMessager)
       {
-        await Clients.Caller.SendAsync("ReceiveMessage", user.ConnectId, new ChatMessage(user.ConnectId, null, user.Email, "new customer connected"));
+        await Clients.Caller.SendAsync("ReceiveMessage", user.ConnectId, new ChatMessage(user.ConnectId, null, user.Email, " customer connected"));
       }
+      try
+      {
+        AllMissingMessage.Clear();
+      }
+      catch { }
     }
     public async Task SendMessageToCustom(string toId, string message)
     {
@@ -108,7 +121,7 @@ namespace Core31.Hubs
         return;
       }
       var senderName = String.IsNullOrEmpty(CurrentHubUser.Email) ? "System" : CurrentHubUser.Email;
-      var user = userMaper.GroupBy(b => b.Value.UserId).FirstOrDefault(b => b.Key == toId).Select(b => b.Value).FirstOrDefault();
+      var user = userMaper.Values.FirstOrDefault(b => b.UserId == toId);
       if (user != null)
       {
         await Clients.User(user.UserId).SendAsync("ReceiveMessage", toId, new ChatMessage(id, user.UserId, senderName, message));

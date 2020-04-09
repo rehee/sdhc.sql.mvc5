@@ -204,13 +204,14 @@ function setChatList(chatuser, toid, img, status, userName) {
     if (!chat.active) {
       chat.count = chat.count + 1;
     }
+    chat.userName = userName;
     if (chat.status != status) {
       chat.status = status
       statsChange++;
     }
   }
   if (statsChange) {
-
+    $('#display').html(null);
   }
   var online = _.filter(chatList, b => b.status == 'Online');
   var offline = _.filter(chatList, b => b.status != 'Online');
@@ -225,11 +226,13 @@ function setChatList(chatuser, toid, img, status, userName) {
 function createList(chatuser, toid, img, status, userName, active, count) {
   var testObj = $(`#chatbox1_${chatuser}`);
   if (testObj.length > 0) {
-    $(`#chatbox1_${chatuser} .personStatus span ${(active ? 'active' : '')}`).attr('class', status);
+    $(`#chatbox1_${chatuser} .personStatus span`).attr('class', status);
     $(`#chatbox1_${chatuser} .preview span`).attr('class', status).html(status);
     if (!$(`#chatbox1_${chatuser}`).hasClass('active') && count) {
       $(`#chatbox1_${chatuser} .count span`).attr('class', 'icon-meta unread-count').html(count);
     }
+    console.log(userName)
+    $(`#chatbox1_${chatuser} .bname.personName`).html(userName);
     return;
   }
   $('#display').append(`
