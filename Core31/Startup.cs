@@ -17,6 +17,8 @@ using SDHC.Common.Configs;
 using SDHC.Common.EntityCore.Services;
 using SDHC.Common.Services;
 using SDHC.Models.NetCore.Models;
+using Core31.Models;
+using Core31.Hubs;
 
 namespace Core31
 {
@@ -34,6 +36,7 @@ namespace Core31
     public void ConfigureServices(IServiceCollection services)
     {
       services.StartUpFunction<MyDBContext, SDHCUser, BaseContentModel, BaseSelectModel>(Configuration, WebHostEnvironment);
+      services.AddSignalR();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +47,11 @@ namespace Core31
       }
       app.UseDeveloperExceptionPage();
       StartUpContainer.Configure(app, env);
+      app.UseEndpoints(endpoints =>
+      {
+        endpoints.MapHub<ChatHub>("/chatHub");
+      });
+
     }
   }
 }

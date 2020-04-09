@@ -1,6 +1,95 @@
-﻿
-<img src="/Files/Index/lj2.jpg" />
-<form action="@Url.Action("Edit","Home")" method="post" enctype="multipart/form-data">
-  <input type="file" name="name1" value="" />
-  <input type="submit" name="name" value="11" />
-</form>
+﻿<div>
+  <p>1</p>
+  <p>1</p>
+  <p>1</p>
+  <p>1</p>
+  <p>1</p>
+</div>
+
+<div class="container">
+  <div class="row">&nbsp;</div>
+  <div class="row">
+    <div class="col-2">User</div>
+    <div class="col-4"><input type="text" id="userInput" value="@User.Identity.Name" /></div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <input type="button" id="link" value="Call customer service" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2">Message</div>
+    <div class="col-4"><input type="text" id="messageInput" /></div>
+  </div>
+  <div class="row">&nbsp;</div>
+  <div class="row">
+    <div class="col-6">
+      <input type="button" id="sendButton" value="Send Message" />
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <hr />
+  </div>
+</div>
+<div class="row">
+  <div class="col-6">
+    <ul id="messagesList"></ul>
+  </div>
+</div>
+
+<script src="/admin-lib/assets/js/signalr.js"></script>
+<script>
+  var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+  //Disable send button until connection is established
+
+  document.getElementById("link").addEventListener("click", function (event) {
+    connection.start().then(function () {
+      document.getElementById("sendButton").disabled = false;
+      var user = document.getElementById("userInput").value;
+      connection.invoke("CustomConnect", user).catch(function (err) {
+        return console.error(err.toString());
+      });
+
+
+      connection.on("ReceiveMessageFromMe", function (user, message) {
+        var msg = message.message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        var encodedMsg = message.userName + " : " + msg;
+        var li = document.createElement("li");
+        li.textContent = encodedMsg;
+        document.getElementById("messagesList").appendChild(li);
+      });
+      connection.on("ReceiveMessage", function (user, message) {
+        var msg = message.message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        u = message.email + " : ";
+        var encodedMsg = u + msg;
+        var li = document.createElement("li");
+        li.textContent = encodedMsg;
+        document.getElementById("messagesList").appendChild(li);
+      });
+
+
+      document.getElementById("sendButton").addEventListener("click", function (event) {
+
+        var message = document.getElementById("messageInput").value;
+        if (!message) {
+          return;
+        }
+        connection.invoke("SendMessageToStaff", message).catch(function (err) {
+          return console.error(err.toString());
+        });
+        event.preventDefault();
+      });
+
+
+
+
+    })
+  })
+
+  document.getElementById("sendButton").disabled = true;
+
+
+</script>
