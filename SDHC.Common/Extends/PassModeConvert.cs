@@ -45,6 +45,7 @@ namespace System
           var inputValue = p.GetValue(input);
           if (inputValue == null)
             continue;
+          
           baseP.SetValue(model, inputValue);
           continue;
         }

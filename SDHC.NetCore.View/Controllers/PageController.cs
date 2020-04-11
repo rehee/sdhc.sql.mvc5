@@ -23,7 +23,8 @@ namespace SDHC.NetCore.View.Controllers
     }
     public IActionResult Index(string path)
     {
-      return Content(path);
+      var model = ServiceContainer.ContentService.GetContent(path, currentLang);
+      return View($"Views/Pages/{model.GetType().Name}.cshtml", new ContentViewModal(model.ConvertModelToPost()));
     }
     public IActionResult Detail(long? id)
     {

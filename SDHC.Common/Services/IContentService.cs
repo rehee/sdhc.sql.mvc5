@@ -17,6 +17,7 @@ namespace SDHC.Common.Services
     IEnumerable<IContentModel> GetAllChildContent(long? parentId, int? langKey = null);
     ContentTableHtmlView GetContentTableHtmlView(long? parentId, int? langKey = null);
     IContentModel GetContent(long? id);
+    IContentModel GetContent(string urls, int lang);
     ContentPostModel GetPreCreate(long? id, string fullTypeAndAssembly, int? langKey);
     ContentPostViewModel GetContentPostViewModel(string url);
     string GetContentFullUrl(IContentModel model);

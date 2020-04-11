@@ -39,7 +39,6 @@ namespace SDHC.Common.Entity.Models
     [BaseProperty]
     public virtual long Id { get; set; }
     [BaseProperty]
-    [Display(Name = "System Label")]
     public virtual string Title
     {
       get

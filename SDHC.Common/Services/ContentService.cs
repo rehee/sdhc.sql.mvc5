@@ -96,6 +96,31 @@ namespace SDHC.Common.Services
       }
       return Find<IContentModel>(BaseIContentModelType, id.Value);
     }
+    public IContentModel GetContent(string urls, int lang)
+    {
+      IContentModel result = null;
+      if (String.IsNullOrWhiteSpace(urls))
+      {
+        goto HomePage;
+      }
+
+      var urlList = urls.Split('/').Select(b => b.Trim());
+      foreach (var u in urlList)
+      {
+        result = Read<IContentModel>(BaseIContentModelType, b => b.Title.Equals(u, StringComparison.OrdinalIgnoreCase) && b.Lang == lang).FirstOrDefault();
+        if (result == null)
+        {
+          goto HomePage;
+        }
+      }
+      return result;
+
+      HomePage:
+      result = Read<IContentModel>(BaseIContentModelType, b => !b.ParentId.HasValue && b.ParentId == 0 && b.Lang == lang).FirstOrDefault();
+      if (result != null)
+        return result;
+      return Read<IContentModel>(BaseIContentModelType, b => !b.ParentId.HasValue && b.ParentId == 0).FirstOrDefault();
+    }
     public ContentPostModel GetPreCreate(long? id, string fullTypeAndAssembly, int? langKey)
     {
       long? parentId = null;
@@ -278,5 +303,8 @@ namespace SDHC.Common.Services
       result.Model = GetContentTableHtmlView(result.Content, typeof(T), result.ChildrenAttribute, result.ContentId, langKey);
       return result;
     }
+
+
+
   }
 }
