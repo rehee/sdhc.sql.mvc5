@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -16,13 +17,13 @@ namespace Identity.Controllers
   [Authorize]
   public class AccountController : Controller
   {
-    private readonly ISDHCUserManager<SDHCUser> _userManager;
+    private readonly ISDHCUserManager _userManager;
     private readonly IEmailService _emailSender;
     private readonly ISmsService _smsSender;
     private readonly ILogger _logger;
 
     public AccountController(
-            ISDHCUserManager<SDHCUser> userManager,
+            ISDHCUserManager userManager,
             IEmailService emailSender,
             ISmsService smsSender,
             ILoggerFactory loggerFactory)
@@ -350,7 +351,7 @@ namespace Identity.Controllers
     [AllowAnonymous]
     public async Task<ActionResult> SendCode(string returnUrl = null, bool rememberMe = false)
     {
-      var user = await _userManager.SignInManager.GetTwoFactorAuthenticationUserAsync();
+      var user = await _userManager.SignInManager.GetTwoFactorAuthenticationUserAsync() as SDHCUser;
       if (user == null)
       {
         return View("Error");

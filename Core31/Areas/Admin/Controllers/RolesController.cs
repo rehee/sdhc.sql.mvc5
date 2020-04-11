@@ -17,8 +17,8 @@ namespace Admin.Areas.Admin.Controllers
   public class RolesController : Controller
   {
     // GET: Admin/Roles
-    private ISDHCUserManager<SDHCUser> userManager { get; }
-    public RolesController(ISDHCUserManager<SDHCUser> userManager)
+    private ISDHCUserManager userManager { get; }
+    public RolesController(ISDHCUserManager userManager)
     {
       this.userManager = userManager;
     }

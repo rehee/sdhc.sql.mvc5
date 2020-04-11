@@ -28,6 +28,7 @@ namespace Core31
     {
       Configuration = configuration;
       WebHostEnvironment = env;
+
     }
     public IConfiguration Configuration { get; }
     public IWebHostEnvironment WebHostEnvironment { get; }
@@ -37,6 +38,7 @@ namespace Core31
     {
       services.StartUpFunction<MyDBContext, SDHCUser, BaseContentModel, BaseSelectModel>(Configuration, WebHostEnvironment);
       services.AddSignalR();
+      
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,4 +56,6 @@ namespace Core31
 
     }
   }
+
+  
 }

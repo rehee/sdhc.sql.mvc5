@@ -7,6 +7,7 @@ using SDHC.Common.Configs;
 using SDHC.Common.Cruds;
 using SDHC.Common.Entity.Models;
 using SDHC.Common.EntityCore.Models;
+using SDHC.Common.EntityCore.Services;
 using SDHC.Common.Services;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ using System.Text;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-  public static class ConfigStartUp
+  public static class ConfigContainerStartUp
   {
     public static void InitSDHCContainer<TRepo, TBaseContent, TBaseSelect, TFileSngle, TUser>([NotNullAttribute] this IServiceCollection serviceCollection,
       IConfiguration configuration, Action<DbContextOptionsBuilder> optionsAction, string basicRoot, string systemConfigKey)
@@ -28,6 +29,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
       serviceCollection.SystemConfigInit(configuration, systemConfigKey);
       serviceCollection.ContainerInit<TRepo, TBaseContent, TBaseSelect, TUser>(optionsAction, ConfigContainer.Systems);
+      serviceCollection.AddScoped<ISDHCLanguageServiceInit, SDHCLanguageServiceInit>();
       serviceCollection.TryAddScoped<ISDHCLanguageService, SDHCLanguageService>();
       serviceCollection.FileServiceInit<TFileSngle>(basicRoot);
     }

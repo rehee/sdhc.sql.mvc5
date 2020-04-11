@@ -13,6 +13,7 @@ using SDHC.Common.EntityCore.Services;
 using SDHC.Common.Services;
 using SDHC.Models.NetCore.Models;
 using SDHC.Models.NetCore.Services;
+using SDHC.Models.NetCore.Services.UserAndRoles;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -30,22 +31,20 @@ namespace SDHC.Common.EntityCore.Services
       var systemConfigKey = "SystemConfig";
       services.AddSession();
       services.AddHttpContextAccessor();
+
       Action<DbContextOptionsBuilder> dbAction = options =>
       {
         options.UseSqlServer(
               configuration.GetConnectionString("DefaultConnection"));
       };
-
-      services.AddScoped<ISDHCLanguageServiceInit, SDHCLanguageServiceInit>();
       services.AddDbContext<TRepo>(dbAction);
 
-      services.AddIdentity<TUser, IdentityRole>(options =>
-        options.SignIn.RequireConfirmedAccount = false)
-        .AddEntityFrameworkStores<TRepo>();
-      services.AddScoped<RoleManager<IdentityRole>>();
       services.InitSDHCContainer<TRepo, TBaseContent, TBaseSelect, FormFile, TUser>(configuration, dbAction,
                env.ContentRootPath, systemConfigKey);
-      services.AddScoped<ISDHCUserManager<TUser>, SDHCUserManager<TUser>>();
+
+
+      services.UserAndAuthInit<TRepo, TUser, TBaseContent>();
+
 
       services.AddSingleton<IEmailService, EmailService>(b => new EmailService(ConfigContainer.Systems));
       services.AddSingleton<ISmsService, SmsService>();
@@ -53,7 +52,6 @@ namespace SDHC.Common.EntityCore.Services
       services.AddControllersWithViews();
       services.AddRazorPages();
       services.ConfigureOptions(typeof(V.EditorRCLConfigureOptions));
-      services.AutorizeStartUpFunction();
     }
     public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {

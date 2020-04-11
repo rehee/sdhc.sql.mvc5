@@ -17,13 +17,13 @@ namespace Identity.Controllers
   [Authorize]
   public class ManageController : Controller
   {
-    private readonly ISDHCUserManager<SDHCUser> _userManager;
+    private readonly ISDHCUserManager _userManager;
     private readonly IEmailService _emailSender;
     private readonly ISmsService _smsSender;
     private readonly ILogger _logger;
 
     public ManageController(
-    ISDHCUserManager<SDHCUser> userManager,
+    ISDHCUserManager userManager,
     IEmailService emailSender,
     ISmsService smsSender,
     ILoggerFactory loggerFactory)
