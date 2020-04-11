@@ -1,24 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 using Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
-using SDHC.Common.Configs;
-using SDHC.Common.EntityCore.Services;
-using SDHC.Common.Services;
-using SDHC.Models.NetCore.Models;
-using Core31.Models;
-using Core31.Hubs;
+using SDHC.NetCore.Models.Models;
 
 namespace Core31
 {
@@ -28,7 +14,6 @@ namespace Core31
     {
       Configuration = configuration;
       WebHostEnvironment = env;
-
     }
     public IConfiguration Configuration { get; }
     public IWebHostEnvironment WebHostEnvironment { get; }
@@ -38,7 +23,8 @@ namespace Core31
     {
       services.StartUpFunction<MyDBContext, SDHCUser, BaseContentModel, BaseSelectModel>(Configuration, WebHostEnvironment);
       services.AddSignalR();
-      
+      services.UseChat();
+
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,13 +35,10 @@ namespace Core31
       }
       app.UseDeveloperExceptionPage();
       StartUpContainer.Configure(app, env);
-      app.UseEndpoints(endpoints =>
-      {
-        endpoints.MapHub<ChatHub>("/chatHub");
-      });
+      app.UseChat();
 
     }
   }
 
-  
+
 }

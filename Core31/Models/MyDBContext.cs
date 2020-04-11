@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SDHC.Common.EntityCore.Models;
-using SDHC.Models.NetCore.Models;
+using SDHC.NetCore.Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

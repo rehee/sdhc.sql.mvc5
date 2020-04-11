@@ -284,7 +284,7 @@ namespace Core31.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("BaseSelect");
                 });
 
-            modelBuilder.Entity("SDHC.Models.NetCore.Models.SDHCUser", b =>
+            modelBuilder.Entity("SDHC.NetCore.Models.Models.SDHCUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
@@ -352,7 +352,7 @@ namespace Core31.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SDHC.Models.NetCore.Models.SDHCUser", null)
+                    b.HasOne("SDHC.NetCore.Models.Models.SDHCUser", null)
                         .WithMany("Roles")
                         .HasForeignKey("SDHCUserId");
 

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Options;
 using SDHC.Common.Configs;
-using SDHC.Models.NetCore.Models;
+using SDHC.NetCore.Models.Models;
 
 namespace Controllers
 {

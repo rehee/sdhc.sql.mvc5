@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using SDHC.Common.Entity.Models;
 using SDHC.Common.Responses;
-using SDHC.Models.NetCore.Attributes;
-using SDHC.Models.NetCore.Models;
-using SDHC.Models.NetCore.Models.ViewModels;
-using SDHC.Models.NetCore.Services;
+using SDHC.NetCore.Models.Attributes;
+using SDHC.NetCore.Models.Models;
+using SDHC.NetCore.Models.Models.ViewModels;
+using SDHC.NetCore.Models.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;

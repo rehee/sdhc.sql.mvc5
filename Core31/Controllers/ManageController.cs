@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SDHC.Common.Services;
-using SDHC.Models.NetCore.Models;
-using SDHC.Models.NetCore.Services;
+using SDHC.NetCore.Models.Models;
+using SDHC.NetCore.Models.Services;
 
 namespace Identity.Controllers
 {

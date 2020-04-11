@@ -282,7 +282,7 @@ namespace Core31.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("BaseSelect");
                 });
 
-            modelBuilder.Entity("SDHC.Models.NetCore.Models.SDHCUser", b =>
+            modelBuilder.Entity("SDHC.NetCore.Models.Models.SDHCUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
