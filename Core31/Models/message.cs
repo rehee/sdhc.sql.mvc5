@@ -38,8 +38,6 @@ namespace Core31.Models
         await _next.Invoke(context);
         return;
       }
-      System.Net.WebSockets.WebSocket dummy;
-
       CancellationToken ct = context.RequestAborted;
       var currentSocket = await context.WebSockets.AcceptWebSocketAsync();
       //string socketId = Guid.NewGuid().ToString();

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Options;
+using Models;
 using SDHC.Common.Configs;
 using SDHC.NetCore.Models.Models;
 
@@ -12,9 +13,9 @@ namespace Controllers
 {
   public class HomeController : Controller
   {
-    public HomeController()
+    public HomeController(MyDBContext db)
     {
-      
+      db.BaseContentModels.FirstOrDefault();
     }
     public IActionResult Index()
     {

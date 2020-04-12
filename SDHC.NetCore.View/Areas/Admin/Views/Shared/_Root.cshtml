@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   @{ Html.RenderPartial("_head"); }
@@ -61,9 +61,9 @@
     <!-- sidebar-->
     @{ Html.RenderPartial("_LeftSideBar");}
     @RenderBody()
-    <footer>
-      <span>@Html.Raw(ConfigContainer.Systems.AdminCopyright.Text("&copy; spxus admin"))</span>
-    </footer>
+  <footer>
+    <span>@Html.Raw(ConfigContainer.Systems.AdminCopyright.Text("&copy; spxus admin"))</span>
+  </footer>
   </div>
 
   @{ Html.RenderPartial("_js"); }
@@ -96,5 +96,6 @@
 
     });
   </script>
+  
 </body>
 </html>

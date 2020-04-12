@@ -20,8 +20,10 @@ namespace View.Areas.Admin.Controllers
   public class ContentController : Controller
   {
     LanguageConfig langConfig { get; }
+    DateTime start { get; }
     public ContentController(IOptions<LanguageConfig> lang)
     {
+      start = DateTime.UtcNow;
       this.langConfig = lang.Value;
     }
     [Admin(adminRole: "ContentIndex")]
@@ -35,6 +37,9 @@ namespace View.Areas.Admin.Controllers
         var users = CrudContainer.Crud.Read<IdentityUserRole<string>>(b => b.UserId == user.Id, db).Select(b => b.RoleId).ToList();
         roles = CrudContainer.Crud.Read<IdentityRole>(b => users.Contains(b.Id)).Select(b => b.Name).ToList();
       }
+      var end = DateTime.UtcNow;
+      ViewBag.start = start;
+      ViewBag.end = end;
       return View(ServiceContainer.ContentService.GetContentIndexViewModelByIdOrLang<BaseContent>(id, inputLang, roles));
     }
     [HttpPost]

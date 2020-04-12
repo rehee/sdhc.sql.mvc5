@@ -5,6 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SDHC.NetCore.Models.Models;
+using System.Reflection;
+using System;
+using View.Areas.Admin.Controllers;
 
 namespace Core31
 {
@@ -21,10 +24,13 @@ namespace Core31
     // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
     public void ConfigureServices(IServiceCollection services)
     {
+      // Source: https://dotnetstories.com/blog/Dynamically-pre-load-assemblies-in-a-ASPNET-Core-or-any-C-project-en-7155735300
+
+
       services.StartUpFunction<MyDBContext, SDHCUser, BaseContentModel, BaseSelectModel>(Configuration, WebHostEnvironment);
       services.AddSignalR();
       services.UseChat();
-
+      
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,6 +43,10 @@ namespace Core31
       StartUpContainer.Configure(app, env);
       app.UseChat();
 
+    }
+    public static void LoadAssemblyAndReference(Assembly assembly)
+    {
+      Assembly.Load(assembly.GetName());
     }
   }
 
