@@ -1,0 +1,8 @@
+﻿@model SDHC.Common.Entity.Models.ModelPostModel
+@{
+  ViewBag.Title = TypeExtends.GetModelTitleFullType(Model.FullType, Model.ThisAssembly) + " Edit";
+  Layout = "~/Areas/Admin/Views/Shared/_Layout_Content.cshtml";
+  ViewBag.HideLeft = true;
+  Model.PostUrl = Url.Action("EditAllType", "ModelManagement", new { @area = "Admin" });
+}
+@{ Html.RenderPartial("GeneralModelView", Model);}

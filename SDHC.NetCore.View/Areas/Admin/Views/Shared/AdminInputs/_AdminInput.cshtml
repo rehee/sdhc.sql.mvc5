@@ -3,14 +3,14 @@
 @{
   var randomIndex = Model.RandomIndex;
 }
-<input type="hidden" id="@(randomIndex)_Properties[@(Model.Index.ToString())].Key" name="Properties[@(Model.Index.ToString())].Key" value="@Model.Property.Key" />
-<input type="hidden" id="@(randomIndex)_Properties[@(Model.Index.ToString())].ValueType" name="Properties[@(Model.Index.ToString())].ValueType" value="@Model.Property.ValueType" />
-<input type="hidden" id="@(randomIndex)_Properties[@(Model.Index.ToString())].EditorType" name="Properties[@(Model.Index.ToString())].EditorType" value="@Model.Property.EditorType" />
-<input type="hidden" id="@(randomIndex)_Properties[@(Model.Index.ToString())].MultiSelect" name="Properties[@(Model.Index.ToString())].MultiSelect" value="@Model.Property.MultiSelect" />
+<input type="hidden" id="@(Model.OutMakr)@(randomIndex)_Properties[@(Model.Index.ToString())].Key" name="@(Model.OutMakr)Properties[@(Model.Index.ToString())].Key" value="@Model.Property.Key" />
+<input type="hidden" id="@(Model.OutMakr)@(randomIndex)_Properties[@(Model.Index.ToString())].ValueType" name="@(Model.OutMakr)Properties[@(Model.Index.ToString())].ValueType" value="@Model.Property.ValueType" />
+<input type="hidden" id="@(Model.OutMakr)@(randomIndex)_Properties[@(Model.Index.ToString())].EditorType" name="@(Model.OutMakr)Properties[@(Model.Index.ToString())].EditorType" value="@Model.Property.EditorType" />
+<input type="hidden" id="@(Model.OutMakr)@(randomIndex)_Properties[@(Model.Index.ToString())].MultiSelect" name="@(Model.OutMakr)Properties[@(Model.Index.ToString())].MultiSelect" value="@Model.Property.MultiSelect" />
 @{
 
-  var inputName = Model.InputName;
-  var FileName = Model.FileName;
+  var inputName = Model.OutMakr+Model.InputName;
+  var FileName = Model.OutMakr + Model.FileName;
 }
 
 @functions {

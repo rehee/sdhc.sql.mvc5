@@ -8,6 +8,7 @@ using System.Web;
 
 namespace Admin.Areas.Admin.Controllers
 {
+  [Area("Admin")]
   public class ModelManagementController : Controller
   {
     [Admin(adminRole: "ModelManagementIndex")]
@@ -105,6 +106,13 @@ namespace Admin.Areas.Admin.Controllers
         System.Threading.Thread.Sleep(1000 - ms);
       }
       return RedirectToAction("Index", "ModelManagement", new { @area = ConfigContainer.Systems.AdminPath, @id = type });
+    }
+
+    public ActionResult EditAllType(long? id, string typeName)
+    {
+      var type = Type.GetType(typeName);
+      var model = CrudContainer.CrudModel.Read<AbstractBaseModel>(type, b => b.Id == id).FirstOrDefault();
+      return View(model.ConvertModelToModelPostModel());
     }
   }
 }

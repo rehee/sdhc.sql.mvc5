@@ -20,7 +20,15 @@ namespace SDHC.Common.Entity.Models
   {
 
   }
-
+  public interface ISharedContent : IBasicModel
+  {
+    int Lang { get; set; }
+  }
+  public interface ISharedList : ISharedContent
+  {
+    int DisplayOrder { get; set; }
+    bool Displaied { get; set; }
+  }
   public interface IBasicModel : IBasicContent
   {
     string Title { get; set; }

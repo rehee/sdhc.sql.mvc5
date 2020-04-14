@@ -5,6 +5,7 @@ using SDHC.Common.Cruds;
 using SDHC.Common.EntityCore.Models;
 using SDHC.Common.Services;
 using SDHC.NetCore.Models.Authorizes;
+using SDHC.NetCore.Models.Services.Contents;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -37,6 +38,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
       serviceCollection.AddSingleton<ISecretService, SecretService>(s => new SecretService(config));
       ServiceContainer.SecretService = new SecretService(config);
+
+      serviceCollection.AddScoped<IContentViewService, ContentViewService>();
     }
   }
 }

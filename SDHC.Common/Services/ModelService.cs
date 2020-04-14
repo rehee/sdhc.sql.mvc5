@@ -13,6 +13,61 @@ namespace SDHC.Common.Services
     public ModelService(ICrudInit container) : base(container)
     { }
     public Dictionary<string, Type> ModelMapper { get; set; } = new Dictionary<string, Type>();
+    private Dictionary<string, Type> SharedContentMapper { get; } = new Dictionary<string, Type>();
+
+    public void AddSharedContent<T>(string key) where T : ISharedContent, new()
+    {
+      if (string.IsNullOrWhiteSpace(key))
+        return;
+      key = key.Trim();
+      if (SharedContentMapper.ContainsKey(key))
+      {
+        SharedContentMapper[key] = typeof(T);
+      }
+      else
+      {
+        SharedContentMapper.Add(key, typeof(T));
+      }
+    }
+    public ISharedContent GetSharedContent(string key, int lang, ISave repo = null)
+    {
+      if (repo == null)
+        repo = GetRepo();
+      if (!SharedContentMapper.TryGetValue(key, out var type))
+        return null;
+      var model = Read<ISharedContent>(type, b => b.Lang == lang, repo).FirstOrDefault();
+      if (model == null)
+      {
+        model = Activator.CreateInstance(type) as ISharedContent;
+        model.Lang = lang;
+        Create(model, repo);
+      }
+      return model;
+    }
+    public IDictionary<string, ISharedContent> getAllSharedContentByLang(int lang)
+    {
+      var repo = GetRepo();
+      var result = new Dictionary<string, ISharedContent>();
+      foreach (var m in SharedContentMapper)
+      {
+        result.Add(m.Key, GetSharedContent(m.Key, lang, repo));
+      }
+      return result;
+    }
+    public IDictionary<Tuple<string, int>, ISharedContent> getAllSharedContentByLangs(IEnumerable<int> lang)
+    {
+      var repo = GetRepo();
+      var result = new Dictionary<Tuple<string, int>, ISharedContent>();
+      foreach (var m in SharedContentMapper)
+      {
+        foreach (var l in lang)
+        {
+          result.Add(new Tuple<string, int>(m.Key, l), GetSharedContent(m.Key, l, repo));
+        }
+      }
+      return result;
+    }
+
     public IEnumerable<string> ModelManagerMapper
     {
       get
@@ -45,7 +100,7 @@ namespace SDHC.Common.Services
     {
       return type.GetModelPostModelByType();
     }
-    
+
     public IQueryable<T> Read<T>(string typeString, Expression<Func<T, bool>> where, out ISave repo)
     {
       var type = GetModelType(typeString);
@@ -61,7 +116,7 @@ namespace SDHC.Common.Services
       var type = GetModelType(typeString);
       return Read<T>(type, where, repo);
     }
-    
+
     public object Find(string typeString, long id, out ISave repo)
     {
       var type = GetModelType(typeString);

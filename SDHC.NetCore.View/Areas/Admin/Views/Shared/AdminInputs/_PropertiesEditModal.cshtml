@@ -1,6 +1,6 @@
 ﻿@using SDHC.Common.Entity.Models
-@model ContentViewModal
-@foreach (var property in Model.ContentPropertyIndexs)
+@model IEnumerable<ContentPropertyIndex>
+@foreach (var property in Model)
 {
   if (property.Property.IgnoreProperty)
   {

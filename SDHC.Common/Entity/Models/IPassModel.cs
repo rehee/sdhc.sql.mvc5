@@ -29,35 +29,40 @@ namespace SDHC.Common.Entity.Models
     public int? Lang { get; set; }
     public List<ContentProperty> Properties { get; set; } = PassModeConvert.NewContentPropertyList();
   }
-  public class ContentViewModal
+  public class ContentViewModal : IPostModeltViewModal<ContentPostModel>
   {
-    public ContentPostModel Model { get; }
-    public ContentViewModal(ContentPostModel model)
+    public ContentViewModal(ContentPostModel model, string outerKey = null) : base(model, outerKey)
+    {
+    }
+    public int Lang => Model.Lang ?? 0;
+  }
+  public class ModelViewModal : IPostModeltViewModal<ModelPostModel>
+  {
+    public ModelViewModal(ModelPostModel model, string outerKey = null) : base(model, outerKey)
+    {
+    }
+  }
+  public abstract class IPostModeltViewModal<T> where T : IPostModel
+  {
+    private Dictionary<string, ContentPropertyIndex> list { get; set; } = new Dictionary<string, ContentPropertyIndex>();
+    public T Model { get; }
+    public IPostModeltViewModal(T model, string outerKey = null)
     {
       Model = model;
-    }
-    private List<ContentPropertyIndex> list { get; set; }
-    public IEnumerable<ContentPropertyIndex> ContentPropertyIndexs
-    {
-      get
+      var index = 0;
+      OutIndex = outerKey;
+      foreach (var property in Model.Properties)
       {
-        if (list != null)
-          return list;
-        var index = 0;
-        list = new List<ContentPropertyIndex>();
-        foreach (var property in Model.Properties)
-        {
-          list.Add(new ContentPropertyIndex(property, index));
-          index++;
-        }
-        return list;
-
+        list.Add(property.Key, new ContentPropertyIndex(property, index, outerKey));
+        index++;
       }
     }
-
+    public IEnumerable<ContentPropertyIndex> ContentPropertyIndexs => list.Values;
     public ContentPropertyIndex GetContentPropertyByName(string key)
     {
-      return ContentPropertyIndexs.FirstOrDefault(b => b.Property.Key == key);
+      if (list.ContainsKey(key))
+        return list[key];
+      return null;
     }
     public string GetModelValueByName(string key)
     {
@@ -74,11 +79,25 @@ namespace SDHC.Common.Entity.Models
       }
       return p.Property.Value;
     }
-    public string GetModalNameByName(string key)
+    public string GetModelNameByName(string key)
     {
       var p = GetContentPropertyByName(key);
       return p != null ? $"modal_{p.OuterNameNoMark}" : null;
     }
+    public string OutIndex { get; }
+    public string OutMakr => String.IsNullOrEmpty(OutIndex) ? $"" : $"{OutIndex}.";
+  }
+
+  public class ContentViewModelSummary
+  {
+    public ContentViewModal ContentModel { get; set; }
+    public IEnumerable<ModelViewModal> Models { get; set; }
+  }
+
+  public class ContentViewModelSummaryPost
+  {
+    public ContentPostModel ContentModel { get; set; }
+    public IEnumerable<ModelPostModel> Models { get; set; }
   }
 
   public class ModelPostModel : IPostModel
@@ -114,12 +133,22 @@ namespace SDHC.Common.Entity.Models
     public string InputName { get; }
     public string FileName { get; }
     public bool IsFile => Property != null ? Property.EditorType == EnumInputType.FileUpload : false;
-    public string OuterName => IsFile ? FileName : InputName;
-    public string OuterNameNoMark => String.Join("", OuterName.Split('[', ']', '.'));
-    public ContentPropertyIndex(ContentProperty property, int index)
+    public string OuterName => $"{OutMakr}{(IsFile ? FileName : InputName)}";
+    public string OuterNameNoMark
+    {
+      get
+      {
+        var s = OuterName.Split('[', ']', '.');
+        return String.Join("_", s);
+      }
+    }
+    public string OutIndex { get; }
+    public string OutMakr => String.IsNullOrEmpty(OutIndex) ? $"" : $"{OutIndex}.";
+    public ContentPropertyIndex(ContentProperty property, int index, string outIndex = null)
     {
       Property = property;
       Index = index;
+      OutIndex = outIndex;
       RandomIndex = Guid.NewGuid().ToString().Replace('-', '_');
       var valueName = "Value";
       if (Property.MultiSelect)

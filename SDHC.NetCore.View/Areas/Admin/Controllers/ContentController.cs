@@ -116,7 +116,17 @@ namespace View.Areas.Admin.Controllers
       {
         return RedirectToAction("index");
       }
-      return View(new ContentViewModal(content.ConvertModelToPost()));
+      var model = new ContentViewModal(content.ConvertModelToPost(), "ContentModel");
+      return View(model);
+    }
+    public ActionResult EditPreview(ContentViewModelSummaryPost model)
+    {
+      ServiceContainer.ContentService.UpdateContent(model.ContentModel);
+      foreach (var m in model.Models)
+      {
+        ServiceContainer.ModelService.Update(m);
+      }
+      return RedirectToAction("Index");
     }
   }
 }

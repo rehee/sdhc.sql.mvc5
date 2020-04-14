@@ -1,8 +1,10 @@
-﻿using SDHC.Common.EntityCore.Models;
+﻿using SDHC.Common.Entity.Models;
+using SDHC.Common.EntityCore.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,5 +25,19 @@ namespace Models
   }
   public class BaseSelectModel : BaseSelect
   {
+  }
+
+  public class OurService : BaseModel
+  {
+    [InputType(EditorType = EnumInputType.FileUpload)]
+    public string Image { get; }
+  }
+
+  public class Home : AbstractBaseModel, ISharedContent
+  {
+    public int Lang { get; set; }
+
+    [InputType(EditorType = EnumInputType.FileUpload)]
+    public string HomeLogo { get; set; }
   }
 }

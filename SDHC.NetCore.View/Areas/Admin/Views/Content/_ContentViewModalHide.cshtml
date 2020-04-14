@@ -1,0 +1,10 @@
+﻿@using SDHC.Common.Entity.Models
+@model ContentViewModal
+
+@Html.Hidden(Model.OutMakr + "Id", Model.Model.Id)
+@Html.Hidden(Model.OutMakr + "ParentId", Model.Model.ParentId)
+@Html.Hidden(Model.OutMakr + "Lang", Model.Model.Lang)
+@Html.Hidden(Model.OutMakr + "FullType", Model.Model.FullType)
+@Html.Hidden(Model.OutMakr + "ThisAssembly", Model.Model.ThisAssembly)
+@Html.Hidden(Model.OutMakr + "CreateTime", Model.Model.CreateTime)
+@Html.Hidden(Model.OutMakr + "DisplayOrder", Model.Model.DisplayOrder)

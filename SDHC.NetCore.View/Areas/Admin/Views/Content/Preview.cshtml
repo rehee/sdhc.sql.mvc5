@@ -2,6 +2,10 @@
 @{
   Layout = "~/Areas/Admin/Views/Shared/_Layout_Content.cshtml";
 }
+@inject IContentViewService service
+@{
+  var allList = Model.ContentPropertyIndexs.Union(service.Models.SelectMany(b => b.ContentPropertyIndexs));
+}
 <script>
   function postForm() {
     var form = document.getElementById('hide_modal');
@@ -27,18 +31,27 @@
 
 
 
-<form action="@Url.Action("Edit","Content")" id="hide_modal" method="post" enctype="multipart/form-data">
-  @{ await Html.RenderPartialAsync("_ContentPostHide", Model.Model);}
-  @{ await Html.RenderPartialAsync("AdminInputs/_PropertiesEditModal", Model);}
+<form action="@Url.Action("EditPreview","Content")" id="hide_modal" method="post" enctype="multipart/form-data">
+
+  @{ await Html.RenderPartialAsync("_ContentViewModalHide", Model);}
+  @{ await Html.RenderPartialAsync("AdminInputs/_PropertiesEditModal", Model.ContentPropertyIndexs);}
+
+  @{
+    foreach (var m in service.Models)
+    {
+      await Html.RenderPartialAsync("_ModelPostHide", m);
+      await Html.RenderPartialAsync("AdminInputs/_PropertiesEditModal", m.ContentPropertyIndexs);
+    }
+  }
 </form>
 
 @section script{
   <script>
     var preview = $('#preview')[0].contentWindow;
     $('#preview').load(function () {
-      @foreach(var p in Model.ContentPropertyIndexs)
+      @foreach(var p in allList)
       {
-        var modalId = Model.GetModalNameByName(p.Property.Key);
+        var modalId = $"modal_{p.OuterNameNoMark}";
         <Text>
         $(preview.document.getElementsByClassName('@modalId')).click(function () {
           $('#@modalId').modal('show');
@@ -84,3 +97,138 @@
 
   </script>
 }
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<input type="button" class="btn btn-primary" data-toggle="modal" data-target="#list_modal" />
+<div class="modal fade" id="list_modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+  <div class="modal-dialog" id="TableTest">
+    <form id="form_list_modal" onsubmit="formIdSubmit_list_modal" enctype="multipart/form-data" action="" method="post">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+          <h4 class="modal-title" id="myModal_list_modal"></h4>
+        </div>
+        <div class="modal-body">
+          <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="card">
+                <div class="card-header">
+                  <div class="button-box">
+
+                  </div>
+
+                </div>
+
+                <div class="body" v-if="showTable">
+                  <table class="table table-bordered table-striped table-hover basic-example dataTable">
+                    <thead>
+                      <tr>
+                        <td>Title</td>
+                        <td>Option</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="todo in todos">
+                        <td v-on:click="showDetail(todo.Id)">{{todo.Title}}</td>
+                        <td>
+                          <input type="button" v-on:click="deleteRow(todo.Id)" class="btn btn btn-primary" value="delete" />
+                        </td>
+                      </tr>
+
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td>Title</td>
+                        <td>Option</td>
+                      </tr>
+                    </tfoot>
+
+                  </table>
+                </div>
+                <div class="modal-content" v-else>
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" v-on:click="showDetail()" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" v-on:click="showDetail()">Close</button>
+                    <button type="button" class="btn btn-primary" v-on:click="showDetail()">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <script>
+    @{
+      var services = CrudContainer.CrudModel.Read<AbstractBaseModel>(ServiceContainer.ModelService.ModelMapper.Values.FirstOrDefault(), b => true).ToList();
+      var postModels = Newtonsoft.Json.JsonConvert.SerializeObject(
+        services.Select(b => b.ConvertModelToModelPostModel()).ToList());
+      var json = Newtonsoft.Json.JsonConvert.SerializeObject(services);
+    }
+            var todoList = JSON.parse('@json'.replace(/&quot;/g, '"'));
+            var models = JSON.parse('@postModels'.replace(/&quot;/g, '"'));
+    var appS = new Vue({
+      el: '#TableTest',
+      data: {
+        todos: todoList,
+        models: models,
+        showTable: true,
+        selectModels:null,
+      },
+      methods: {
+        showDetail: function (id) {
+          var center = (window.screen.availWidth - 600) / 2;
+          console.log(center);
+          var windowObjectReference = window.open("/Admin/ModelManagement/Edit/3?type=OurService", "",
+            `width=600,height=700,left=${center},toolbar=no,location=no,resizable=no`);
+          console.log(this.selectModels);
+          if (windowObjectReference.window) {
+            windowObjectReference.window.onbeforeunload = () => {
+              alert();
+            }
+          }
+        },
+        deleteRow: function (id) {
+          swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel plx!",
+            closeOnConfirm: false,
+            closeOnCancel: false,
+          }, function (isConfirm) {
+            if (isConfirm) {
+              swal("Deleted!", "Your record has been deleted.", "success");
+
+              setTimeout(() => swal.close(), 1000);
+
+            } else {
+              swal("Cancelled", "Your record is safe :)", "error");
+
+              setTimeout(() => swal.close(), 1000);
+            }
+          });
+        }
+      }
+    })
+
+
+
+          </script>
+          <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
+        </div>
+        <button type="button" style="display:none" id="hide_list_modal" data-dismiss="modal">Close</button>
+        @*<div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>*@
+      </div>
+    </form>
+  </div>
+</div>

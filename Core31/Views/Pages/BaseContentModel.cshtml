@@ -1,4 +1,8 @@
 ﻿@model ContentViewModal
+@inject IContentViewService service
+@{
+
+}
 @{
   Layout = null;
 }
@@ -10,22 +14,55 @@
   <meta name="viewport" content="width=device-width" />
   <title>BaseContentModel</title>
   <style>
-    .review{
-      padding:5px;
-      border:1px solid black;
+    .review {
+      padding: 5px;
+      border: 1px solid black;
     }
   </style>
 </head>
 <body>
   <div>
-    <img class="@Model.GetModalNameByName(nameof(Models.BaseContentModel.FF)) review" src="@Model.GetModelValueByName(nameof(Models.BaseContentModel.FF))" alt="Alternate Text" />
+    <p>logo</p>
+    <p>
+      <img class="@service.GetModelNameByName(nameof(Models.Home),Model.Lang,nameof(Models.Home.HomeLogo)) review" src="@service.GetModelValueByName(nameof(Models.Home),Model.Lang,nameof(Models.Home.HomeLogo))" alt="Alternate Text" />
+    </p>
+  </div>
+  <div>
+    <img class="@Model.GetModelNameByName(nameof(Models.BaseContentModel.FF)) review" src="@Model.GetModelValueByName(nameof(Models.BaseContentModel.FF))" alt="Alternate Text" />
 
     <div>
-      <p class="@Model.GetModalNameByName(nameof(Models.BaseContentModel.FF2)) review">
+      <p class="@Model.GetModelNameByName(nameof(Models.BaseContentModel.FF2)) review">
         @Model.GetModelValueByName(nameof(Models.BaseContentModel.FF2))
       </p>
     </div>
-    
+
   </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+  <div id="app">
+    <ul>
+      <li v-for="todo in todos">
+        {{ todo.title }}
+        {{ todo.Title }}
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    @{
+      var services = CrudContainer.CrudModel.Read<Models.OurService>(b => true).ToList();
+      var json = Newtonsoft.Json.JsonConvert.SerializeObject(services);
+    }
+    var todoList = JSON.parse('@json'.replace(/&quot;/g, '"'));
+    console.log(todoList)
+    var app = new Vue({
+      el: '#app',
+      data: {
+        todos: todoList
+      }
+    })
+  </script>
 </body>
 </html>

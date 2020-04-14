@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.AspNetCore.Identity;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Options;
 using Models;
 using SDHC.Common.Configs;
+using SDHC.Common.Entity.Models;
 using SDHC.NetCore.Models.Models;
 
 namespace Controllers
@@ -19,7 +21,7 @@ namespace Controllers
     }
     public IActionResult Index()
     {
-      return View();
+      return View(null);
     }
     public IActionResult Files()
     {
@@ -37,8 +39,14 @@ namespace Controllers
     {
       return Content("");
     }
+    [HttpPost]
+    public IActionResult Test(ContentViewModelSummary model)
+    {
+      return Content("");
+    }
   }
   public class TestFile
   {
+    public IEnumerable<string> name { get; set; }
   }
 }

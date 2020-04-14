@@ -59,11 +59,17 @@
       <!-- END Top Navbar-->
     </header>
     <!-- sidebar-->
-    @{ Html.RenderPartial("_LeftSideBar");}
+
+    @{
+      if (ViewBag.HideLeft != true)
+      {
+        await Html.RenderPartialAsync("_LeftSideBar");
+      }
+    }
     @RenderBody()
-  <footer>
-    <span>@Html.Raw(ConfigContainer.Systems.AdminCopyright.Text("&copy; spxus admin"))</span>
-  </footer>
+    <footer>
+      <span>@Html.Raw(ConfigContainer.Systems.AdminCopyright.Text("&copy; spxus admin"))</span>
+    </footer>
   </div>
 
   @{ Html.RenderPartial("_js"); }
@@ -96,6 +102,6 @@
 
     });
   </script>
-  
+
 </body>
 </html>
