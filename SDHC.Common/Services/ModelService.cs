@@ -15,8 +15,9 @@ namespace SDHC.Common.Services
     public Dictionary<string, Type> ModelMapper { get; set; } = new Dictionary<string, Type>();
     private Dictionary<string, Type> SharedContentMapper { get; } = new Dictionary<string, Type>();
 
-    public void AddSharedContent<T>(string key) where T : ISharedContent, new()
+    public void AddSharedContent<T>() where T : ISharedContent, new()
     {
+      var key = typeof(T).FullName;
       if (string.IsNullOrWhiteSpace(key))
         return;
       key = key.Trim();

@@ -30,7 +30,7 @@ namespace Core31
       services.StartUpFunction<MyDBContext, SDHCUser, BaseContentModel, BaseSelectModel>(Configuration, WebHostEnvironment);
       services.AddSignalR();
       services.UseChat();
-      ServiceContainer.ModelService.AddSharedContent<Home>(nameof(Home));
+      ServiceContainer.ModelService.AddSharedContent<Home>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

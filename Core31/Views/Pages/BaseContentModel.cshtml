@@ -24,7 +24,7 @@
   <div>
     <p>logo</p>
     <p>
-      <img class="@service.GetModelNameByName(nameof(Models.Home),Model.Lang,nameof(Models.Home.HomeLogo)) review" src="@service.GetModelValueByName(nameof(Models.Home),Model.Lang,nameof(Models.Home.HomeLogo))" alt="Alternate Text" />
+      <img class="@(service.GetModelNameByName<Models.Home>(Model.Lang,nameof(Models.Home.HomeLogo))) review" src="@(service.GetModelValueByName<Models.Home>(Model.Lang,nameof(Models.Home.HomeLogo)))" alt="Alternate Text" />
     </p>
   </div>
   <div>
