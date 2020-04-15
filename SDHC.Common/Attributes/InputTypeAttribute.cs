@@ -32,6 +32,7 @@ namespace System
   public interface IInputCommon
   {
     EnumInputType EditorType { get; set; }
+    Type RelatedType { get; set; }
     bool MultiSelect { get; set; }
     bool HasRangeMin { get; set; }
     bool HasRangeMax { get; set; }

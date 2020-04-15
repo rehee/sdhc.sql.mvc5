@@ -7,15 +7,15 @@ namespace System
 {
   public static class MyReflectExtends
   {
-    public static string GetPropertyByKey(this object input, string key)
+    public static string GetPropertyByKey(this object input, string key, bool isImage = false)
     {
-      return String.Join(",", GetPropertyEnumerableByKey<string>(input, key));
+      return String.Join(",", GetPropertyEnumerableByKey<string>(input, key, isImage));
     }
-    public static T GetPropertyByKey<T>(this object input, string key)
+    public static T GetPropertyByKey<T>(this object input, string key, bool isImage = false)
     {
-      return GetPropertyEnumerableByKey<T>(input, key).FirstOrDefault();
+      return GetPropertyEnumerableByKey<T>(input, key, isImage).FirstOrDefault();
     }
-    public static IEnumerable<T> GetPropertyEnumerableByKey<T>(this object input, string key)
+    public static IEnumerable<T> GetPropertyEnumerableByKey<T>(this object input, string key, bool isImage = false)
     {
       var listResult = new List<T>();
       if (input == null)
@@ -93,6 +93,10 @@ namespace System
       if (value == null)
       {
         return listResult;
+      }
+      if (isImage)
+      {
+        value = $"<img style=\"display: block; max-width: 75px; max-height: 75px;\" src=\"{ContentExtends.GetUrlPath((value as string).ImagePath())}\" />";
       }
       listResult.Add(value.MyTryConvert<T>());
       return listResult;

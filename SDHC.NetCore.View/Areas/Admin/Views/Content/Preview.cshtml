@@ -63,6 +63,21 @@
         var input = $('#hide_modal' + ' [name="' + name+'"]');
         var type = '@p.Property.EditorType';
         var edits = $(preview.document.getElementsByClassName('@modalId'));
+        if (type == 'SharedLink') {
+          var refreshUrl = `@Html.Raw(@Url.Action("GetSharedView", "SharedLinks", new { @id = p.ModelId, @key = p.Property.Key, @fullType = p.FullType, @asm = p.AssemblyName, @area = "Admin" }))`;
+          setTimeout(function () {
+            $.get(refreshUrl, function (r) {
+              if (!r) {
+                return;
+              }
+              $.each(edits, e => {
+                var edit = $(edits[e]);
+                edit.html(r);
+              })
+            });
+            }, 1000);
+           return;
+        }
         var setImage = (inp, imgElement) => {
           if (!inp[0].files || !inp[0].files.length) {
             return;
@@ -168,8 +183,8 @@
         services.Select(b => b.ConvertModelToModelPostModel()).ToList());
       var json = Newtonsoft.Json.JsonConvert.SerializeObject(services);
     }
-            var todoList = JSON.parse('@json'.replace(/&quot;/g, '"'));
-            var models = JSON.parse('@postModels'.replace(/&quot;/g, '"'));
+            var todoList = JSON.parse('@json'.replace(/&quot;/g, '"').replace(/\\/g,'/'));
+            var models = JSON.parse('@postModels'.replace(/&quot;/g, '"').replace(/\\/g, '/'));
     var appS = new Vue({
       el: '#TableTest',
       data: {

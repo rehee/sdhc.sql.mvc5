@@ -17,26 +17,28 @@ namespace Models
     public string FF { get; set; }
     [InputType(EditorType = EnumInputType.Text)]
     public string FF2 { get; set; }
+
+    [NotMapped]
+    [InputType(EditorType = EnumInputType.SharedLink, RelatedType = typeof(OurService))]
+    public string OurServices { get; set; }
   }
 
   public class HomePage : BaseContentModel
   {
-
+    public string Home2 { get; set; }
   }
   public class BaseSelectModel : BaseSelect
   {
   }
-
-  public class OurService : BaseModel
+  [AllowChildren(TableList = new string[] { "Image" }, TableImageList = new string[] { "Image" })]
+  public class OurService : BaseSharedLink
   {
     [InputType(EditorType = EnumInputType.FileUpload)]
-    public string Image { get; }
+    public string Image { get; set; }
   }
 
-  public class Home : AbstractBaseModel, ISharedContent
+  public class Home : BaseSharedContent
   {
-    public int Lang { get; set; }
-
     [InputType(EditorType = EnumInputType.FileUpload)]
     public string HomeLogo { get; set; }
   }

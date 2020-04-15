@@ -48,4 +48,19 @@ namespace SDHC.Common.EntityCore.Models
     [BaseProperty]
     public override long Id { get; set; }
   }
+  public abstract class BaseSharedContent : BaseModel, ISharedContent
+  {
+    [HideEdit]
+    public int Lang { get; set; }
+  }
+  public abstract class BaseSharedLink : BaseSharedContent, ISharedLink
+  {
+    [InputType(EditorType = EnumInputType.Number)]
+    public int DisplayOrder { get; set; }
+
+    [InputType(EditorType = EnumInputType.Bool)]
+    public bool Displayed { get; set; }
+
+
+  }
 }

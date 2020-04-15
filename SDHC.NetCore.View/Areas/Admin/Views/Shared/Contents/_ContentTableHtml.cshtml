@@ -57,7 +57,7 @@
         </td>
         @foreach (var item in row.Values)
         {
-          <td>@item</td>
+          <td>@Html.Raw(item.Text())</td>
         }
         <td>
           @if (Model.Options != null)

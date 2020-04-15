@@ -1,0 +1,23 @@
+﻿@model ContentViewModal
+@{
+  var sharedModel = Model.GetSharedLinkPost(nameof(Models.BaseContentModel.OurServices));
+}
+<div id="@sharedModel.View.AppName">
+  <table>
+    @foreach (Models.OurService item in sharedModel.Models)
+    {
+      <tr>
+        <td>
+          @item.Title
+        </td>
+        <td>
+          @item.Image
+        </td>
+      </tr>
+    }
+
+  </table>
+
+  
+
+</div>

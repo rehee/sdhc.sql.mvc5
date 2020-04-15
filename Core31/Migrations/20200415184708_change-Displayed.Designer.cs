@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Models;
 
 namespace Core31.Migrations
 {
     [DbContext(typeof(MyDBContext))]
-    partial class MyDBContextModelSnapshot : ModelSnapshot
+    [Migration("20200415184708_change-Displayed")]
+    partial class changeDisplayed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -359,16 +361,6 @@ namespace Core31.Migrations
                     b.HasBaseType("SDHC.Common.EntityCore.Models.BaseSelect");
 
                     b.HasDiscriminator().HasValue("BaseSelectModel");
-                });
-
-            modelBuilder.Entity("Models.HomePage", b =>
-                {
-                    b.HasBaseType("Models.BaseContentModel");
-
-                    b.Property<string>("Home2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasDiscriminator().HasValue("HomePage");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

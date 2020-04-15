@@ -44,6 +44,7 @@ namespace System
     public string TableClass { get; set; }
 
     public IEnumerable<string> TableHeaders { get; set; }
+    public IEnumerable<string> TableImageColumns { get; set; }
     public IEnumerable<ContentTableRowItem> Rows { get; set; }
 
 

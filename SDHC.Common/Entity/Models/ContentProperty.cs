@@ -23,7 +23,7 @@ namespace SDHC.Common.Entity.Models
       }
       set
       {
-        
+
       }
     }
     public object FileMvc { get; set; }
@@ -43,6 +43,8 @@ namespace SDHC.Common.Entity.Models
     public bool NewLineAfter { get; set; }
     public bool HasRangeMin { get; set; }
     public bool HasRangeMax { get; set; }
+    public Type RelatedType { get; set; }
+    public IEnumerable<ISharedLink> SharedLinks { get; set; }
   }
   public class DropDownViewModel
   {

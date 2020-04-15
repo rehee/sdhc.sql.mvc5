@@ -52,6 +52,7 @@ namespace Microsoft.Extensions.DependencyInjection
       services.AddControllersWithViews();
       services.AddRazorPages();
       services.ConfigureOptions(typeof(V.EditorRCLConfigureOptions));
+      services.AddScoped<IViewRenderService, ViewRenderService>();
     }
     public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {

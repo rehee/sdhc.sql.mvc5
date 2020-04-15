@@ -1,7 +1,7 @@
 ﻿@model ContentPropertyIndex
 
 <div class="modal fade" id="modal_@Model.OuterNameNoMark" tabindex="-1" role="dialog" aria-labelledby="label_modal_@Model.OuterNameNoMark" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog" style="width:75%" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="label_modal_@Model.OuterNameNoMark">Modal title</h5>
@@ -10,7 +10,14 @@
         </button>
       </div>
       <div class="modal-body">
-        @{ await Html.RenderPartialAsync("AdminInputs/_AdminInput", Model);}
+        @{
+          await Html.RenderPartialAsync("AdminInputs/_AdminInput", Model);
+          if (Model.Property.EditorType == EnumInputType.SharedLink)
+          {
+            await Html.RenderPartialAsync("AdminInputs/_SharedLinsModal", Model);
+
+          }
+        }
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" onclick="model_close_click('@Model.OuterName')" data-dismiss="modal">Close</button>

@@ -108,11 +108,34 @@ namespace Admin.Areas.Admin.Controllers
       return RedirectToAction("Index", "ModelManagement", new { @area = ConfigContainer.Systems.AdminPath, @id = type });
     }
 
-    public ActionResult EditAllType(long? id, string typeName)
+    public ActionResult EditSharedLink(long? id, int? lang, string typeName)
     {
       var type = Type.GetType(typeName);
-      var model = CrudContainer.CrudModel.Read<AbstractBaseModel>(type, b => b.Id == id).FirstOrDefault();
+      ISharedLink model = CrudContainer.CrudModel.Read<ISharedLink>(type, b => b.Id == id).FirstOrDefault();
+      if (model == null)
+      {
+        model = Activator.CreateInstance(type) as ISharedLink;
+        model.Lang = lang ?? 0;
+        model.DisplayOrder = CrudContainer.CrudModel.Read<ISharedLink>(type, b => b.Lang == lang).OrderByDescending(b => b.DisplayOrder).FirstOrDefault()?.DisplayOrder ?? 0;
+      }
       return View(model.ConvertModelToModelPostModel());
+    }
+    [HttpPost]
+    public ActionResult EditSharedLink(ModelPostModel model)
+    {
+      try
+      {
+        if (model.Id <= 0)
+        {
+          ServiceContainer.ModelService.Create(model);
+        }
+        else
+        {
+          ServiceContainer.ModelService.Update(model);
+        }
+      }
+      catch { }
+      return RedirectToAction("CloseWindow", "CommonFunction", new { @area = "" });
     }
   }
 }

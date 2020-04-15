@@ -45,7 +45,7 @@ namespace System
           var inputValue = p.GetValue(input);
           if (inputValue == null)
             continue;
-          
+
           baseP.SetValue(model, inputValue);
           continue;
         }
@@ -131,6 +131,7 @@ namespace System
           result.RangeMax = max;
         }
       }
+      result.RelatedType = relatedType;
       var propertyType = p.GetType().GetRealType();
       var displayAttribute = p.GetCustomAttributes().Where(b => b.GetType().GetRealType().Name == "DisplayAttribute").FirstOrDefault();
       var property = displayAttribute != null ? displayAttribute.GetType().GetRealType().GetProperties().Where(b => b.Name == "Name").FirstOrDefault() : null;
@@ -145,30 +146,33 @@ namespace System
 
       var type = p.PropertyType;
       var datetimeType = typeof(DateTime);
-      if (result.EditorType == EnumInputType.DropDwon)
+      switch (result.EditorType)
       {
-        var stringValue = input != null ? p.GetValue(input).MyTryConvert<string>() : "";
-        var stringValueList = stringValue.StringValueToList();
-        if (result.MultiSelect || stringValueList.Count() > 1)
-        {
-          result.MultiValue = stringValueList;
-          result.Value = "";
-        }
-        p.SetDropDownSelect(
-          (List<DropDownViewModel>)result.SelectItems, relatedType, result.Value, result.MultiValue);
+        case EnumInputType.DropDwon:
+          var stringValue = input != null ? p.GetValue(input).MyTryConvert<string>() : "";
+          var stringValueList = stringValue.StringValueToList();
+          if (result.MultiSelect || stringValueList.Count() > 1)
+          {
+            result.MultiValue = stringValueList;
+            result.Value = "";
+          }
+          p.SetDropDownSelect(
+            (List<DropDownViewModel>)result.SelectItems, relatedType, result.Value, result.MultiValue);
+          break;
+        case EnumInputType.SharedLink:
+          result.SharedLinks = p.GetContentLinks(inputAttribute);
+          break;
+        default:
+          break;
+
       }
+
       return result;
-      //return new ContentProperty()
-      //{
-      //  Key = p.Name,
-      //  Value = postValue,
-      //  EditorType = editorType,
-      //  ValueType = propertyType.FullName,
-      //  Title = displayTitle,
-      //  MultiSelect = multiSelect,
-      //  SelectItems = editorType == EnumInputType.DropDwon ? selector : Enumerable.Empty<DropDownViewModel>(),
-      //  MultiValue = multiSelect ? postMultiValue : Enumerable.Empty<string>(),
-      //};
+
+    }
+    public static IEnumerable<ISharedLink> GetContentLinks(this PropertyInfo p, InputTypeAttribute inputAttribute)
+    {
+      return ServiceContainer.ModelService.Read<ISharedLink>(inputAttribute.RelatedType, b => true).OrderBy(b => b.DisplayOrder).ToList();
     }
     public static void SetDropDownSelect(
       this PropertyInfo p, List<DropDownViewModel> selector, Type relatedType, string postValue, IEnumerable<string> postValues = null)

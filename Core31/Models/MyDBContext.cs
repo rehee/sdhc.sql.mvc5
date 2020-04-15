@@ -21,6 +21,7 @@ namespace Models
     public DbSet<BaseSelect> Selects { get; set; }
     public DbSet<BaseContentModel> BaseContentModels { get; set; }
     public DbSet<BaseSelectModel> BaseSelectModel { get; set; }
+    public DbSet<HomePage> HomePages { get; set; }
 
     public DbSet<OurService> OurServices { get; set; }
 

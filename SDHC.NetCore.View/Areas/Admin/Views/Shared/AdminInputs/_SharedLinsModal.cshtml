@@ -1,0 +1,174 @@
+﻿@model ContentPropertyIndex
+@{
+  var sharedLink = Model.GetSharedLinkPost();
+}
+
+<div class="body" id="@sharedLink.View.AppName">
+  <p>
+    <input type="button" class="btn btn-primary" v-on:click="ShowDetail(0)" value="Add" />
+  </p>
+  <table class="table table-bordered table-striped table-hover basic-example dataTable">
+    <thead>
+      <tr>
+        <td>Display Order</td>
+        @foreach (var header in sharedLink.Headers)
+        {
+          <td>@header</td>
+        }
+        <td>Options</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="item in list">
+        <td v-on:click="ShowDetail(item.Id)">{{item.DisplayOrder}}</td>
+        @foreach (var header in sharedLink.Headers)
+        {
+          if (sharedLink.Images.Contains(header))
+          {
+            <td>
+              <img v-on:click="ShowDetail(item.Id)" style="max-width:75px;max-height:75px;" :src="ImageUrl(item.@header)" />
+            </td>
+          }
+          else
+          {
+            <td>
+              <p v-on:click="ShowDetail(item.Id)">{{item.@header}}</p>
+            </td>
+          }
+
+        }
+        <td>
+          <input type="button" class="btn" v-on:click="toggle(item.Id)" v-bind:class="{ 'btn-success': item.Displayed, 'btn-secondary': !item.Displayed }" :value="item.Displayed?'Display':'Hide'" />
+          <input type="button" v-on:click="deleteRow(item.Id)" class="btn btn-danger" value="delete" />
+        </td>
+      </tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>Id</td>
+        @foreach (var header in sharedLink.Headers)
+        {
+          <td>@header</td>
+        }
+        <td>Display Order</td>
+      </tr>
+    </tfoot>
+
+  </table>
+</div>
+<script>
+  var @sharedLink.View.ListName =[];
+  function set_list_@(sharedLink.View.ListName)(str){
+    var list = JSON.parse(str.replace(/&quot;/g, '"').replace(/\\/g, '/'));
+    @(sharedLink.View.ListName).length = 0;
+        for (var i = 0; i < list.length; i++) {
+          @(sharedLink.View.ListName).push(list[i]);
+        }
+  }
+  set_list_@(sharedLink.View.ListName)('@sharedLink.View.Value');
+  var content_@sharedLink.View.AppName = '';
+
+  function refresh_@(sharedLink.View.AppName)() {
+    swal("Success!", "Your record has been deleted.", "success");
+    var thisUrl = `@Html.Raw(Url.Action("GetSharedLinks", "SharedLinks", new {@id=Model.ModelId,@key=Model.Property.Key,@fullType=Model.FullType,@asm=Model.AssemblyName ,@area="Admin" }))`;
+    $.get(thisUrl, function (data) {
+      setTimeout(() => swal.close(), 500);
+      if (data && data.value) {
+        set_list_@(sharedLink.View.ListName)(data.value);
+      }
+    });
+  }
+  var app_@sharedLink.View.AppName = new Vue({
+    el: '#@sharedLink.View.AppName',
+    data: {
+      list: @sharedLink.View.ListName,
+    },
+    methods: {
+      ImageUrl: function (input) {
+        return `/${input}`;
+      },
+      ShowDetail: function (id) {
+        var center = (window.screen.availWidth - 600) / 2;
+        var windowObjectReference = window.open(
+          `/Admin/ModelManagement/EditSharedLink/${id}?lang=@(Model.Lang??0)&typeName=@($"{sharedLink.TypeName},{sharedLink.AssemblyName}")`, "",
+          `width=600,height=700,left=${center},toolbar=no,location=no,resizable=no`);
+        if (windowObjectReference.window) {
+
+          function windowBeforeExit(windowObjectReference,refresh) {
+
+            return function () {
+              setTimeout(function () {
+                if (windowObjectReference.window != null && windowObjectReference.window.document.location) {
+                  windowObjectReference.window.onbeforeunload = windowBeforeExit(
+                    windowObjectReference, windowObjectReference.window.document.location.pathname== "/CommonFunction/CloseWindow");
+                  return;
+                }
+                if (refresh) {
+                  refresh_@(sharedLink.View.AppName)();
+                }
+              },500);
+            }
+          }
+
+          windowObjectReference.window.onbeforeunload = windowBeforeExit(windowObjectReference);
+        }
+      }, deleteRow: function (id) {
+        swal({
+          title: "Are you sure?",
+          text: "You will not be able to recover!",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Yes, delete it!",
+          cancelButtonText: "No, cancel plx!",
+          closeOnConfirm: false,
+          closeOnCancel: false,
+        }, function (isConfirm) {
+          if (isConfirm) {
+            swal("Deleted!", "Your record has been deleted.", "success");
+            $.post(
+              '@Html.Raw(Url.Action("Delete", "SharedLinks",new { @area="Admin" }))',
+              {
+                id: @Model.ModelId,
+                key: '@Model.Property.Key',
+                fullType:'@Model.FullType',
+                asm: '@Model.AssemblyName',
+                sharedLinksId:id,
+              },
+              function (r) {
+                setTimeout(() => swal.close(), 500);
+                if (!r||!r.value) {
+                  return;
+                }
+                set_list_@(sharedLink.View.ListName)(r.value);
+              });
+            } else {
+            swal("Cancelled", "Your record is safe :)", "error");
+
+            setTimeout(() => swal.close(), 1000);
+          }
+        });
+      }, toggle: function (id) {
+
+        swal("Success!", "Your record has been deleted.", "success");
+        $.post(
+          '@Html.Raw(Url.Action("Toggle", "SharedLinks",new { @area="Admin" }))',
+          {
+            id: @Model.ModelId,
+            key: '@Model.Property.Key',
+            fullType:'@Model.FullType',
+            asm: '@Model.AssemblyName',
+            sharedLinksId:id,
+          },
+          function (r) {
+            setTimeout(() => swal.close(), 1000);
+            if (!r||!r.value) {
+              return;
+            }
+            set_list_@(sharedLink.View.ListName)(r.value);
+          });
+      }
+    },
+    })
+</script>

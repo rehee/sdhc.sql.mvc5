@@ -74,9 +74,10 @@ namespace SDHC.Common.Services
     {
       IEnumerable<string> additionalList = allowChild != null && allowChild.TableList != null ? allowChild.TableList : new string[] { "Title", "DisplayOrder" };
       var children = GetAllChildContent(parentId, langKey).OrderBy(b => b.DisplayOrder).ToList().ToList();
+      var tableImageColumns = allowChild != null && allowChild.TableImageList != null ? allowChild.TableImageList : new string[] { };
       var rowItems = children.Select(b =>
       {
-        var values = additionalList.Select(a => b.GetPropertyByKey(a)).ToList();
+        var values = additionalList.Select(a => b.GetPropertyByKey(a, tableImageColumns.Contains(a))).ToList();
         return new ContentTableRowItem(b.Id, values, b.GetType().GetRealType(), b.DisplayOrder);
       }).ToList();
       var result = new ContentTableHtmlView();
@@ -116,10 +117,10 @@ namespace SDHC.Common.Services
       return result;
 
       HomePage:
-      result = Read<IContentModel>(BaseIContentModelType, b => !b.ParentId.HasValue && b.ParentId == 0 && b.Lang == lang).FirstOrDefault();
+      result = Read<IContentModel>(BaseIContentModelType, b => (!b.ParentId.HasValue || b.ParentId == 0) && b.Lang == lang).FirstOrDefault();
       if (result != null)
         return result;
-      return Read<IContentModel>(BaseIContentModelType, b => !b.ParentId.HasValue && b.ParentId == 0).FirstOrDefault();
+      return Read<IContentModel>(BaseIContentModelType, b => !b.ParentId.HasValue || b.ParentId == 0).FirstOrDefault();
     }
     public ContentPostModel GetPreCreate(long? id, string fullTypeAndAssembly, int? langKey)
     {

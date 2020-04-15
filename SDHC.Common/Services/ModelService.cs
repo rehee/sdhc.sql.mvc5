@@ -154,9 +154,10 @@ namespace SDHC.Common.Services
       var allowChild = type.GetObjectCustomAttribute<AllowChildrenAttribute>();
 
       IEnumerable<string> additionalList = allowChild != null && allowChild.TableList != null ? allowChild.TableList : new string[] { };
+      IEnumerable<string> imageList = allowChild != null && allowChild.TableList != null ? allowChild.TableImageList : new string[] { };
       var rowItems = children.Select(b =>
       {
-        var values = additionalList.Select(a => b.GetPropertyByKey(a)).ToList();
+        var values = additionalList.Select(a => b.GetPropertyByKey(a, imageList.Contains(a))).ToList();
         return new ContentTableRowItem(b.Id, values, b.GetType().GetRealType());
       }).ToList();
       var result = new ContentTableHtmlView();

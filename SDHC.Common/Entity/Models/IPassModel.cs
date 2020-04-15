@@ -31,10 +31,10 @@ namespace SDHC.Common.Entity.Models
   }
   public class ContentViewModal : IPostModeltViewModal<ContentPostModel>
   {
-    public ContentViewModal(ContentPostModel model, string outerKey = null) : base(model, outerKey)
+
+    public ContentViewModal(ContentPostModel model, string outerKey = null) : base(model, outerKey, model.Lang)
     {
     }
-    public int Lang => Model.Lang ?? 0;
   }
   public class ModelViewModal : IPostModeltViewModal<ModelPostModel>
   {
@@ -44,16 +44,22 @@ namespace SDHC.Common.Entity.Models
   }
   public abstract class IPostModeltViewModal<T> where T : IPostModel
   {
+    public int Lang { get; }
     private Dictionary<string, ContentPropertyIndex> list { get; set; } = new Dictionary<string, ContentPropertyIndex>();
     public T Model { get; }
-    public IPostModeltViewModal(T model, string outerKey = null)
+    public IPostModeltViewModal(T model, string outerKey = null, int? lang = null)
     {
       Model = model;
       var index = 0;
       OutIndex = outerKey;
+      if (lang == null && model is ISharedContent)
+      {
+        lang = (model as ISharedContent).Lang;
+      }
+      Lang = lang ?? 0;
       foreach (var property in Model.Properties)
       {
-        list.Add(property.Key, new ContentPropertyIndex(property, index, outerKey));
+        list.Add(property.Key, new ContentPropertyIndex(property, index, outerKey, lang, Model.Id, model.FullType, model.ThisAssembly));
         index++;
       }
     }
@@ -144,7 +150,14 @@ namespace SDHC.Common.Entity.Models
     }
     public string OutIndex { get; }
     public string OutMakr => String.IsNullOrEmpty(OutIndex) ? $"" : $"{OutIndex}.";
-    public ContentPropertyIndex(ContentProperty property, int index, string outIndex = null)
+    public int? Lang { get; }
+    public long? ModelId { get; }
+    public string FullType { get; }
+    public string AssemblyName { get; }
+    public ContentPropertyIndex(ContentProperty property, int index, string outIndex = null, int? lang = null, long? modelId = null,
+      string fullType = null, string assemblyName = null
+
+      )
     {
       Property = property;
       Index = index;
@@ -157,6 +170,10 @@ namespace SDHC.Common.Entity.Models
       }
       InputName = "Properties[" + Index.ToString() + "]." + valueName;
       FileName = "Properties[" + Index.ToString() + "].FileCore";
+      Lang = lang;
+      ModelId = modelId;
+      FullType = fullType;
+      AssemblyName = assemblyName;
     }
   }
 

@@ -20,6 +20,7 @@ namespace System
     Bool,
     Range,
     Html,
-    Currency
+    Currency,
+    SharedLink,
   }
 }

@@ -24,10 +24,10 @@ namespace SDHC.Common.Entity.Models
   {
     int Lang { get; set; }
   }
-  public interface ISharedList : ISharedContent
+  public interface ISharedLink : ISharedContent
   {
     int DisplayOrder { get; set; }
-    bool Displaied { get; set; }
+    bool Displayed { get; set; }
   }
   public interface IBasicModel : IBasicContent
   {
