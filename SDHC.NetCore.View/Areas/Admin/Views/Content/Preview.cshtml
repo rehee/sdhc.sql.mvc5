@@ -86,28 +86,43 @@
           })
           return;
         }
-        var setImage = (inp, imgElement) => {
-          if (!inp[0].files || !inp[0].files.length) {
-            return;
-          }
-          var uploadFile = inp[0].files[0];
-          var fileReader = new FileReader();
-          fileReader.onload = () => {
-            imgElement.attr("src", fileReader.result);
-          }
-          fileReader.readAsDataURL(uploadFile)
-        };
+        if (type == 'FileUpload') {
+          var setImage = (inp, imgElement, noImg) => {
+            if (!inp[0].files || !inp[0].files.length) {
+              return;
+            }
+            var uploadFile = inp[0].files[0];
+            var fileReader = new FileReader();
+            fileReader.onload = () => {
+              if (noImg) {
+                imgElement.css('background-image', 'url(' + fileReader.result + ')');
+              } else {
+                imgElement.attr("src", fileReader.result);
+              }
+            }
+            fileReader.readAsDataURL(uploadFile)
+          };
+
+          $.each(edits, e => {
+            var edit = $(edits[e]);
+            var editTag = edit.prop('tagName').toLowerCase();
+            switch (editTag) {
+              case "img":
+                setImage(input, edit, false);
+                break;
+              default:
+                setImage(input, edit, true);
+                break;
+            }
+          })
+
+          return;
+        }
+
+        
         $.each(edits, e => {
           var edit = $(edits[e]);
-          var editTag = edit.prop('tagName').toLowerCase();
-          switch (editTag) {
-            case "img":
-              setImage(input, edit);
-              break;
-            default:
-              edit.html(input.val());
-              break;
-          }
+          edit.html(input.val());
         })
       })
         </Text>

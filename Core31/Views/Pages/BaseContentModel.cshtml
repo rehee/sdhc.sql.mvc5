@@ -195,7 +195,6 @@
           </div>
         </div>
       </header>
-
       <div class=attorna-page-wrapper id=attorna-page-wrapper>
         <div class=gdlr-core-page-builder-body>
           <!--bannder-->
@@ -353,9 +352,7 @@
                 <h3 class="attorna-widget-title">Links</h3><span class=clear></span>
                 <div class=menu-practice-areas-container>
                   <ul id=menu-practice-areas class="gdlr-core-custom-menu-widget gdlr-core-menu-style-half @(service.GetModelNameByName<Models.Home>(Model.Lang,nameof(Models.Home.FootLinks))) review">
-                    @(Html.Raw(
-                                service.GetModelValueByName<Models.Home>(Model.Lang, nameof(Models.Home.FootLinks)).Text()
-                                ))
+                    @(Html.Raw(service.GetModelValueByName<Models.Home>(Model.Lang, nameof(Models.Home.FootLinks)).Text()))
                   </ul>
                 </div>
               </div>
