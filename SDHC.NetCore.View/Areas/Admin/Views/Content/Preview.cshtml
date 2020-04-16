@@ -58,79 +58,91 @@
         })
 
 
-      $('#@modalId').on('hidden.bs.modal', function () {
+      $('#@modalId').on('hidden.bs.modal', function (e) {
         var name = '@p.OuterName';
         var input = $('#hide_modal' + ' [name="' + name+'"]');
         var type = '@p.Property.EditorType';
         var edits = $(preview.document.getElementsByClassName('@modalId'));
-        if (type == 'SharedLink') {
-          var refreshUrl = `@Html.Raw(@Url.Action("GetSharedView", "SharedLinks", new { @id = p.ModelId, @key = p.Property.Key, @fullType = p.FullType, @asm = p.AssemblyName, @area = "Admin" }))`;
-          setTimeout(function () {
-            $.get(refreshUrl, function (r) {
-              if (!r) {
+        function refresh_modal() {
+          if (preview[`@(modalId)_refresh`]) {
+            preview[`@(modalId)_refresh`]();
+          }
+        }
+        switch (type) {
+          case 'SharedLink':
+            var refreshUrl = `@Html.Raw(@Url.Action("GetSharedView", "SharedLinks", new { @id = p.ModelId, @key = p.Property.Key, @fullType = p.FullType, @asm = p.AssemblyName, @area = "Admin" }))`;
+            setTimeout(function () {
+              $.get(refreshUrl, function (r) {
+                if (!r) {
+                  return;
+                }
+                $.each(edits, e => {
+                  var edit = $(edits[e]);
+                  edit.html(r);
+                })
+                refresh_modal();
+              });
+            }, 1000);
+            return;
+          case 'Html':
+            var htmlEditor = CKEDITOR.instances[`${input.prop('id')}`].document.getBody().getHtml();
+            $.each(edits, e => {
+              var edit = $(edits[e]);
+              edit.html(htmlEditor);
+            })
+            break;
+          case 'FileUpload':
+            var setImage = (inp, imgElement, noImg) => {
+              if (!inp[0].files || !inp[0].files.length) {
                 return;
               }
-              $.each(edits, e => {
-                var edit = $(edits[e]);
-                edit.html(r);
-              })
-            });
-            }, 1000);
-           return;
-        }
-        if (type == 'Html') {
-          var htmlEditor = CKEDITOR.instances[`${input.prop('id')}`].document.getBody().getHtml();
-          $.each(edits, e => {
-            var edit = $(edits[e]);
-            edit.html(htmlEditor);
-          })
-          return;
-        }
-        if (type == 'FileUpload') {
-          var setImage = (inp, imgElement, noImg) => {
-            if (!inp[0].files || !inp[0].files.length) {
-              return;
-            }
-            var uploadFile = inp[0].files[0];
-            var fileReader = new FileReader();
-            fileReader.onload = () => {
-              if (noImg) {
-                imgElement.css('background-image', 'url(' + fileReader.result + ')');
-              } else {
-                imgElement.attr("src", fileReader.result);
+              var uploadFile = inp[0].files[0];
+              var fileReader = new FileReader();
+              fileReader.onload = () => {
+                if (noImg) {
+                  imgElement.css('background-image', 'url(' + fileReader.result + ')');
+                } else {
+                  imgElement.attr("src", fileReader.result);
+                }
               }
-            }
-            fileReader.readAsDataURL(uploadFile)
-          };
+              fileReader.readAsDataURL(uploadFile)
+            };
 
-          $.each(edits, e => {
-            var edit = $(edits[e]);
-            var editTag = edit.prop('tagName').toLowerCase();
-            switch (editTag) {
-              case "img":
-                setImage(input, edit, false);
-                break;
-              default:
-                setImage(input, edit, true);
-                break;
-            }
-          })
-
-          return;
+            $.each(edits, e => {
+              var edit = $(edits[e]);
+              var editTag = edit.prop('tagName').toLowerCase();
+              switch (editTag) {
+                case "img":
+                  setImage(input, edit, false);
+                  break;
+                default:
+                  setImage(input, edit, true);
+                  break;
+              }
+            })
+            break;
+          default:
+            $.each(edits, e => {
+              var edit = $(edits[e]);
+              edit.html(input.val());
+            })
+            break;
         }
 
-        
-        $.each(edits, e => {
-          var edit = $(edits[e]);
-          edit.html(input.val());
-        })
+        refresh_modal();
+
+
+
+
+
+
       })
         </Text>
       }
     });
 
     function model_close_click(id) {
-      
+
     }
 
   </script>

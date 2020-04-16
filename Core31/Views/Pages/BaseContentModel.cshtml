@@ -36,6 +36,41 @@
       }
     </style>
   }
+
+  <script src='/www-content/js/jquery/jquery.js'></script>
+  <script src='/www-content/js/jquery/jquery-migrate.min.js'></script>
+  <script src='/www-content/plugins/revslider/public/assets/js/jquery.themepunch.tools.min.js'></script>
+  <script src='/www-content/plugins/revslider/public/assets/js/jquery.themepunch.revolution.min.js'></script>
+  <script src="/www-content/plugins/revslider/public/assets/js/extensions/revolution.extension.slideanims.min.js"></script>
+  <script src="/www-content/plugins/revslider/public/assets/js/extensions/revolution.extension.layeranimation.min.js"></script>
+  <script src="/www-content/plugins/revslider/public/assets/js/extensions/revolution.extension.kenburn.min.js"></script>
+  <script src="/www-content/plugins/revslider/public/assets/js/extensions/revolution.extension.navigation.min.js"></script>
+  <script src="/www-content/plugins/revslider/public/assets/js/extensions/revolution.extension.parallax.min.js"></script>
+  <script src="/www-content/plugins/revslider/public/assets/js/extensions/revolution.extension.actions.min.js"></script>
+  <script src="/www-content/plugins/revslider/public/assets/js/extensions/revolution.extension.video.min.js"></script>
+
+  <!--Modals-->
+  <script src="/www-content/plugins/bootstrap/js/bootstrap.js"></script>
+  <script src="/www-content/plugins/dashboard/modernizr.custom.js"></script>
+  <!--Modals-->
+
+  <script src='/www-content/plugins/goodlayers-core/plugins/combine/script.js'></script>
+  <script>
+    var gdlr_core_pbf = {
+      "admin": "",
+      "video": {
+        "width": "640",
+        "height": "360"
+      },
+      "ajax_url": "https:\/\/demo.goodlayers.com\/attorna\/wp-admin\/admin-ajax.php"
+    };
+  </script>
+  <script src='/www-content/plugins/goodlayers-core/include/js/page-builder.js'></script>
+
+  <script src='/www-content/js/jquery/ui/effect.min.js'></script>
+  <script src='/www-content/js/jquery.mmenu.js'></script>
+  <script src='/www-content/js/jquery.superfish.js'></script>
+  <script src='/www-content/js/script-core.js'></script>
 </head>
 <body class="home page-template-default page page-id-2039 gdlr-core-body woocommerce-no-js attorna-body attorna-body-front attorna-full  attorna-with-sticky-navigation  attorna-blockquote-style-1 gdlr-core-link-to-lightbox" data-home-url=index.html>
 
@@ -158,7 +193,7 @@
           <div class="attorna-header-container-inner clearfix">
             <div class="attorna-logo  attorna-item-pdlr">
               <div class=attorna-logo-inner>
-                <a  href="index.html">
+                <a href="index.html">
                   <img class="@(service.GetModelNameByName<Models.Home>(Model.Lang, nameof(Models.Home.HomeLogo))) review" src="@(service.GetModelValueByName<Models.Home>(Model.Lang, nameof(Models.Home.HomeLogo)))" alt="Logo" width="400" height="71" title="logo">
                 </a>
               </div>
@@ -195,27 +230,14 @@
           </div>
         </div>
       </header>
-      <div class=attorna-page-wrapper id=attorna-page-wrapper>
-        <div class=gdlr-core-page-builder-body>
+      <div class="attorna-page-wrapper" id=attorna-page-wrapper>
+
+        <div class="gdlr-core-page-builder-body ">
           <!--bannder-->
-          <div class="gdlr-core-pbf-wrapper " style="padding: 0px 0px 0px 0px;">
-            <div class=gdlr-core-pbf-background-wrap></div>
-            <div class="gdlr-core-pbf-wrapper-content gdlr-core-js ">
-              <div class="gdlr-core-pbf-wrapper-container clearfix gdlr-core-pbf-wrapper-full-no-space">
-                <div class=gdlr-core-pbf-element>
-                  <div class="gdlr-core-revolution-slider-item gdlr-core-item-pdlr gdlr-core-item-pdb " style="padding-bottom: 0px ;">
-                    <div id=rev_slider_1_1_wrapper class="rev_slider_wrapper fullwidthbanner-container" data-source=gallery style="margin:0px auto;background:#202020;padding:0px;margin-top:0px;margin-bottom:0px;">
-                      <div id=rev_slider_1_1 class="rev_slider fullwidthabanner" style=display:none; data-version=5.4.8.2>
-                        <ul class="@(Model.GetModelNameByName(nameof(Models.BaseContentModel.Banners))) review">
-                          @{ await Html.RenderPartialAsync("Banners", Model); }
-                        </ul>
-                        <div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="gdlr-core-pbf-wrapper @(Model.GetModelNameByName(nameof(Models.BaseContentModel.Banners))) review">
+            @{ await Html.RenderPartialAsync("Banners", Model); }
+            
+
           </div>
           <!--about -->
           <div class="gdlr-core-pbf-wrapper @(Model.GetModelNameByName(nameof(Models.BaseContentModel.HomeAbout))) review" style="margin: -70px 0px 0px 0px;padding: 0px 0px 0px 0px;" id=gdlr-core-wrapper-1>
@@ -385,42 +407,6 @@
     </div>
   </div>
 
-
-  <script src='/www-content/js/jquery/jquery.js'></script>
-  <script src='/www-content/js/jquery/jquery-migrate.min.js'></script>
-  <script src='/www-content/plugins/revslider/public/assets/js/jquery.themepunch.tools.min.js'></script>
-  <script src='/www-content/plugins/revslider/public/assets/js/jquery.themepunch.revolution.min.js'></script>
-  <script src="/www-content/plugins/revslider/public/assets/js/extensions/revolution.extension.slideanims.min.js"></script>
-  <script src="/www-content/plugins/revslider/public/assets/js/extensions/revolution.extension.layeranimation.min.js"></script>
-  <script src="/www-content/plugins/revslider/public/assets/js/extensions/revolution.extension.kenburn.min.js"></script>
-  <script src="/www-content/plugins/revslider/public/assets/js/extensions/revolution.extension.navigation.min.js"></script>
-  <script src="/www-content/plugins/revslider/public/assets/js/extensions/revolution.extension.parallax.min.js"></script>
-  <script src="/www-content/plugins/revslider/public/assets/js/extensions/revolution.extension.actions.min.js"></script>
-  <script src="/www-content/plugins/revslider/public/assets/js/extensions/revolution.extension.video.min.js"></script>
-
-  <!--Modals-->
-  <script src="/www-content/plugins/bootstrap/js/bootstrap.js"></script>
-  <script src="/www-content/plugins/dashboard/modernizr.custom.js"></script>
-  <!--Modals-->
-
-  <script src='/www-content/plugins/goodlayers-core/plugins/combine/script.js'></script>
-  <script>
-    var gdlr_core_pbf = {
-      "admin": "",
-      "video": {
-        "width": "640",
-        "height": "360"
-      },
-      "ajax_url": "https:\/\/demo.goodlayers.com\/attorna\/wp-admin\/admin-ajax.php"
-    };
-  </script>
-  <script src='/www-content/plugins/goodlayers-core/include/js/page-builder.js'></script>
-
-  <script src='/www-content/js/jquery/ui/effect.min.js'></script>
-  <script src='/www-content/js/jquery.mmenu.js'></script>
-  <script src='/www-content/js/jquery.superfish.js'></script>
-  <script src='/www-content/js/script-core.js'></script>
-
   <script>
     function setREVStartSize(e) {
       try {
@@ -454,120 +440,126 @@
     };
   </script>
   <script>
-    function revslider_showDoubleJqueryError(sliderID) {
-      var errorMessage = "Revolution Slider Error: You have some jquery.js library include that comes after the revolution files js include.";
-      errorMessage += "<br> This includes make eliminates the revolution slider libraries, and make it not work.";
-      errorMessage += "<br><br> To fix it you can:<br>&nbsp;&nbsp;&nbsp; 1. In the Slider Settings -> Troubleshooting set option:  <strong><b>Put JS Includes To Body</b></strong> option to true.";
-      errorMessage += "<br>&nbsp;&nbsp;&nbsp; 2. Find the double jquery.js include and remove it.";
-      errorMessage = "<span style=font-size:16px;color:#BC0C06;>" + errorMessage + "</span>";
-      jQuery(sliderID).show().html(errorMessage);
-    }
-  </script>
-  <script>
-    var htmlDiv = document.getElementById("rs-plugin-settings-inline-css");
-    var htmlDivCss = "";
-    if (htmlDiv) {
-      htmlDiv.innerHTML = htmlDiv.innerHTML + htmlDivCss;
-    } else {
-      var htmlDiv = document.createElement("div");
-      htmlDiv.innerHTML = "<style>" + htmlDivCss + "</style>";
-      document.getElementsByTagName("head")[0].appendChild(htmlDiv.childNodes[0]);
-    }
-  </script>
-  <script>
-    if (setREVStartSize !== undefined) setREVStartSize({
-      c: '#rev_slider_1_1',
-      gridwidth: [1280],
-      gridheight: [750],
-      sliderLayout: 'auto'
-    });
-    var revapi1, tpj;
-    (function () {
-      if (!/loaded|interactive|complete/.test(document.readyState)) document.addEventListener("DOMContentLoaded", onLoad);
-      else onLoad();
+    function allBannerFunction() {
+      function revslider_showDoubleJqueryError(sliderID) {
+        var errorMessage = "Revolution Slider Error: You have some jquery.js library include that comes after the revolution files js include.";
+        errorMessage += "<br> This includes make eliminates the revolution slider libraries, and make it not work.";
+        errorMessage += "<br><br> To fix it you can:<br>&nbsp;&nbsp;&nbsp; 1. In the Slider Settings -> Troubleshooting set option:  <strong><b>Put JS Includes To Body</b></strong> option to true.";
+        errorMessage += "<br>&nbsp;&nbsp;&nbsp; 2. Find the double jquery.js include and remove it.";
+        errorMessage = "<span style=font-size:16px;color:#BC0C06;>" + errorMessage + "</span>";
+        jQuery(sliderID).show().html(errorMessage);
+      }
 
-      function onLoad() {
-        if (tpj === undefined) {
-          tpj = jQuery;
-          if ("off" == "on") tpj.noConflict();
-        }
-        if (tpj("#rev_slider_1_1").revolution == undefined) {
-          revslider_showDoubleJqueryError("#rev_slider_1_1");
-        } else {
-          revapi1 = tpj("#rev_slider_1_1").show().revolution({
-            sliderType: "standard",
-            jsFileLocation: "//demo.goodlayers.com/attorna/wp-content/plugins/revslider/public/assets/js/",
-            sliderLayout: "auto",
-            dottedOverlay: "none",
-            delay: 9000,
-            navigation: {
-              keyboardNavigation: "off",
-              keyboard_direction: "horizontal",
-              mouseScrollNavigation: "off",
-              mouseScrollReverse: "default",
-              onHoverStop: "off",
-              arrows: {
-                style: "uranus",
-                enable: true,
-                hide_onmobile: false,
-                hide_onleave: true,
-                hide_delay: 200,
-                hide_delay_mobile: 1200,
-                tmp: '',
-                left: {
-                  h_align: "left",
-                  v_align: "center",
-                  h_offset: 20,
-                  v_offset: 0
-                },
-                right: {
-                  h_align: "right",
-                  v_align: "center",
-                  h_offset: 20,
-                  v_offset: 0
+      var htmlDiv = document.getElementById("rs-plugin-settings-inline-css");
+      var htmlDivCss = "";
+      if (htmlDiv) {
+        htmlDiv.innerHTML = htmlDiv.innerHTML + htmlDivCss;
+      } else {
+        var htmlDiv = document.createElement("div");
+        htmlDiv.innerHTML = "<style>" + htmlDivCss + "</style>";
+        document.getElementsByTagName("head")[0].appendChild(htmlDiv.childNodes[0]);
+      }
+
+      if (setREVStartSize !== undefined) setREVStartSize({
+        c: '#rev_slider_1_1',
+        gridwidth: [1280],
+        gridheight: [750],
+        sliderLayout: 'auto'
+      });
+      var revapi1, tpj;
+      (function () {
+        if (!/loaded|interactive|complete/.test(document.readyState)) document.addEventListener("DOMContentLoaded", onLoad);
+        else onLoad();
+
+        function onLoad() {
+          if (tpj === undefined) {
+            tpj = jQuery;
+            if ("off" == "on") tpj.noConflict();
+          }
+          if (tpj("#rev_slider_1_1").revolution == undefined) {
+            revslider_showDoubleJqueryError("#rev_slider_1_1");
+          } else {
+            revapi1 = tpj("#rev_slider_1_1").show().revolution({
+              sliderType: "standard",
+              jsFileLocation: "//demo.goodlayers.com/attorna/wp-content/plugins/revslider/public/assets/js/",
+              sliderLayout: "auto",
+              dottedOverlay: "none",
+              delay: 9000,
+              navigation: {
+                keyboardNavigation: "off",
+                keyboard_direction: "horizontal",
+                mouseScrollNavigation: "off",
+                mouseScrollReverse: "default",
+                onHoverStop: "off",
+                arrows: {
+                  style: "uranus",
+                  enable: true,
+                  hide_onmobile: false,
+                  hide_onleave: true,
+                  hide_delay: 200,
+                  hide_delay_mobile: 1200,
+                  tmp: '',
+                  left: {
+                    h_align: "left",
+                    v_align: "center",
+                    h_offset: 20,
+                    v_offset: 0
+                  },
+                  right: {
+                    h_align: "right",
+                    v_align: "center",
+                    h_offset: 20,
+                    v_offset: 0
+                  }
                 }
+              },
+              visibilityLevels: [1240, 1024, 778, 480],
+              gridwidth: 1280,
+              gridheight: 750,
+              lazyType: "none",
+              shadow: 0,
+              spinner: "off",
+              stopLoop: "off",
+              stopAfterLoops: -1,
+              stopAtSlide: -1,
+              shuffle: "off",
+              autoHeight: "off",
+              disableProgressBar: "on",
+              hideThumbsOnMobile: "off",
+              hideSliderAtLimit: 0,
+              hideCaptionAtLimit: 0,
+              hideAllCaptionAtLilmit: 0,
+              debugMode: false,
+              fallbacks: {
+                simplifyAll: "off",
+                nextSlideOnWindowFocus: "off",
+                disableFocusListener: false,
               }
-            },
-            visibilityLevels: [1240, 1024, 778, 480],
-            gridwidth: 1280,
-            gridheight: 750,
-            lazyType: "none",
-            shadow: 0,
-            spinner: "off",
-            stopLoop: "off",
-            stopAfterLoops: -1,
-            stopAtSlide: -1,
-            shuffle: "off",
-            autoHeight: "off",
-            disableProgressBar: "on",
-            hideThumbsOnMobile: "off",
-            hideSliderAtLimit: 0,
-            hideCaptionAtLimit: 0,
-            hideAllCaptionAtLilmit: 0,
-            debugMode: false,
-            fallbacks: {
-              simplifyAll: "off",
-              nextSlideOnWindowFocus: "off",
-              disableFocusListener: false,
-            }
-          });
+            });
+          };
         };
-      };
-    }());
-  </script>
-  <script>
-    var htmlDivCss = unescape("%23rev_slider_1_1%20.uranus.tparrows%20%7B%0A%20%20width%3A50px%3B%0A%20%20height%3A50px%3B%0A%20%20background%3Argba%28255%2C255%2C255%2C0%29%3B%0A%20%7D%0A%20%23rev_slider_1_1%20.uranus.tparrows%3Abefore%20%7B%0A%20width%3A50px%3B%0A%20height%3A50px%3B%0A%20line-height%3A50px%3B%0A%20font-size%3A40px%3B%0A%20transition%3Aall%200.3s%3B%0A-webkit-transition%3Aall%200.3s%3B%0A%20%7D%0A%20%0A%20%20%23rev_slider_1_1%20.uranus.tparrows%3Ahover%3Abefore%20%7B%0A%20%20%20%20opacity%3A0.75%3B%0A%20%20%7D%0A");
-    var htmlDiv = document.getElementById('rs-plugin-settings-inline-css');
-    if (htmlDiv) {
-      htmlDiv.innerHTML = htmlDiv.innerHTML + htmlDivCss;
-    } else {
-      var htmlDiv = document.createElement('div');
-      htmlDiv.innerHTML = '<style>' + htmlDivCss + '</style>';
-      document.getElementsByTagName('head')[0].appendChild(htmlDiv.childNodes[0]);
+      }());
+
+      var htmlDivCss = unescape("%23rev_slider_1_1%20.uranus.tparrows%20%7B%0A%20%20width%3A50px%3B%0A%20%20height%3A50px%3B%0A%20%20background%3Argba%28255%2C255%2C255%2C0%29%3B%0A%20%7D%0A%20%23rev_slider_1_1%20.uranus.tparrows%3Abefore%20%7B%0A%20width%3A50px%3B%0A%20height%3A50px%3B%0A%20line-height%3A50px%3B%0A%20font-size%3A40px%3B%0A%20transition%3Aall%200.3s%3B%0A-webkit-transition%3Aall%200.3s%3B%0A%20%7D%0A%20%0A%20%20%23rev_slider_1_1%20.uranus.tparrows%3Ahover%3Abefore%20%7B%0A%20%20%20%20opacity%3A0.75%3B%0A%20%20%7D%0A");
+      var htmlDiv = document.getElementById('rs-plugin-settings-inline-css');
+      if (htmlDiv) {
+        htmlDiv.innerHTML = htmlDiv.innerHTML + htmlDivCss;
+      } else {
+        var htmlDiv = document.createElement('div');
+        htmlDiv.innerHTML = '<style>' + htmlDivCss + '</style>';
+        document.getElementsByTagName('head')[0].appendChild(htmlDiv.childNodes[0]);
+      }
     }
+    function @(Model.GetModelNameByName(nameof(Models.BaseContentModel.Banners)))_refresh(){
+      allBannerFunction();
+    }
+    allBannerFunction();
+
 
 
   </script>
+
+
   @if (ViewBag.IsReview == true)
   {
     <script>
