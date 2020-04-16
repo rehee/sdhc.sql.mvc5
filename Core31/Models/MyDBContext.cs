@@ -22,12 +22,14 @@ namespace Models
     public DbSet<BaseContentModel> BaseContentModels { get; set; }
     public DbSet<BaseSelectModel> BaseSelectModel { get; set; }
     public DbSet<HomePage> HomePages { get; set; }
-
     public DbSet<OurService> OurServices { get; set; }
-
     public DbSet<Home> Homes { get; set; }
-
     public DbSet<SDHCUser> SDHCUsers { get; set; }
+    public DbSet<Partner> Partners { get; set; }
+    public DbSet<CaseStudy> CaseStudies { get; set; }
+    public DbSet<About> About { get; set; }
+    public DbSet<Banner> Banners { get; set; }
+
     //public DbSet<IdentityRole> IdentityRoles { get; set; }
     public Task<int> SaveChangesAsync()
     {

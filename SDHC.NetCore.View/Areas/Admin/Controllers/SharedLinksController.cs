@@ -57,7 +57,9 @@ namespace SDHC.NetCore.View.Areas.Admin.Controllers
       ServiceContainer.ModelService.Delete<ISharedLink>(db, toggle);
       var model = ServiceContainer.ContentService.Find<BaseContent>(type, id);
       var m = new ContentViewModal(model.ConvertModelToPost(), "ContentModel");
-      return Json(new { value = m.GetSharedLinkPost(key).View.Value });
+      var value = m.GetSharedLinkPost(key).View.Value;
+
+      return Json(new { value = value });
     }
   }
 }

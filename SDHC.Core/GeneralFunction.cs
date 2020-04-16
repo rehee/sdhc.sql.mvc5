@@ -77,7 +77,7 @@ namespace System
     public static string Text(this string input, string defaultValue = "", int captalString = -1, bool trim = true)
     {
       var result = input;
-      if (String.IsNullOrEmpty(input) || String.IsNullOrWhiteSpace(input))
+      if (String.IsNullOrWhiteSpace(input))
       {
         result = defaultValue;
       }

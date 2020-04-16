@@ -1,42 +1,584 @@
 ﻿@model ContentViewModal
 @inject IContentViewService service
 @{
-
-}
-@{
   Layout = null;
 }
 
 <!DOCTYPE html>
+<html lang=en-US class=no-js>
 
-<html>
 <head>
-  <meta name="viewport" content="width=device-width" />
-  <title>BaseContentModel</title>
-  <style>
-    .review {
-      padding: 5px;
-      border: 1px solid black;
-    }
-  </style>
+  <meta charset=UTF-8>
+  <meta name=viewport content="width=device-width, initial-scale=1">
+  <title>Ted Immigration</title>
+
+  <link rel="stylesheet" href="/www-content/plugins/bootstrap/css/bootstrap.css" media="all" />
+
+  <link rel=stylesheet href='/www-content/plugins/goodlayers-core/plugins/combine/style.css' type=text/css media=all>
+  <link rel=stylesheet href='/www-content/plugins/goodlayers-core/include/css/page-builder.css' type=text/css media=all>
+  <link rel=stylesheet href='/www-content/plugins/revslider/public/assets/css/settings.css' type=text/css media=all>
+  <link rel=stylesheet href='/www-content/css/style-core.css' type=text/css media=all>
+  <link rel=stylesheet href='/www-content/css/attorna-style-custom.css' type=text/css media=all>
+  <link rel=stylesheet href='/www-content/plugins/revslider/public/assets/fonts/font-awesome/css/font-awesome.css' type=text/css media=all>
+
+  <!--dashboard-->
+  <link rel="stylesheet" href="/www-content/plugins/dashboard/dashboard.css" type="text/css" media="all" />
+
+  <!--Chat Css-->
+  <link href="/www-content/plugins/wchat/assets/css/style-light.css" rel="stylesheet">
+  <link href="/www-content/plugins/wchat/assets/css/mobile.css" rel="stylesheet" id="style">
+  @if (ViewBag.IsReview == true)
+  {
+    <style>
+      .review {
+        border: 1px solid red;
+        padding: 5px;
+      }
+    </style>
+  }
 </head>
-<body>
-  <div>
-    <p>logo</p>
-    <p>
-      <img class="@(service.GetModelNameByName<Models.Home>(Model.Lang, nameof(Models.Home.HomeLogo))) review" src="@(service.GetModelValueByName<Models.Home>(Model.Lang, nameof(Models.Home.HomeLogo)))" alt="Alternate Text" />
-    </p>
-  </div>
-  <div>
-    <img class="@Model.GetModelNameByName(nameof(Models.BaseContentModel.FF)) review" src="@Model.GetModelValueByName(nameof(Models.BaseContentModel.FF))" alt="Alternate Text" />
-    <div>
-      <p class="@Model.GetModelNameByName(nameof(Models.BaseContentModel.FF2)) review">
-        @Model.GetModelValueByName(nameof(Models.BaseContentModel.FF2))
-      </p>
+<body class="home page-template-default page page-id-2039 gdlr-core-body woocommerce-no-js attorna-body attorna-body-front attorna-full  attorna-with-sticky-navigation  attorna-blockquote-style-1 gdlr-core-link-to-lightbox" data-home-url=index.html>
+
+  <!-- Default Modal -->
+  <div class="modal fade" id="defaultmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+          <h4 class="modal-title" id="myModalLabel">Default Modal</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Text</label>
+            <input type="text" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label>Upload Image</label>
+            <input type="file" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label>Upload Image</label>
+            <textarea rows="5" class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-info">Save changes</button>
+        </div>
+      </div>
     </div>
-   </div>
-  <div id="OurServices_View" class="@Model.GetModelNameByName(nameof(Models.BaseContentModel.OurServices))">
-    @{await Html.RenderPartialAsync("OurServices", Model);}
   </div>
+  <!-- Default Modal -->
+
+  <div class=attorna-mobile-header-wrap>
+    <div class="attorna-mobile-header attorna-header-background attorna-style-slide attorna-sticky-mobile-navigation " id=attorna-mobile-header>
+      <div class="attorna-mobile-header-container attorna-container clearfix">
+        <div class="attorna-logo  attorna-item-pdlr">
+          <div class=attorna-logo-inner>
+            <a href="index.html"><img src="/www-content/upload/logo.png" alt="logo" width="400" height="71" title="logo"></a>
+          </div>
+        </div>
+        <div class=attorna-mobile-menu-right>
+          <div class=attorna-mobile-menu>
+            <a class="attorna-mm-menu-button attorna-mobile-menu-button attorna-mobile-button-hamburger-with-border" href=#attorna-mobile-menu><i class="fa fa-bars"></i></a>
+            <div class="attorna-mm-menu-wrap attorna-navigation-font" id=attorna-mobile-menu data-slide=right>
+              <ul id=menu-main-navigation class=m-menu>
+                <li class="menu-item menu-item-home current-menu-item">
+                  <a href="index.html" aria-current="page">Home</a>
+                </li>
+                <li class="menu-item">
+                  <a href="personalimmigration.html" aria-current="page">Peronal Immigration</a>
+                </li>
+                <li class="menu-item">
+                  <a href="businessimmigration.html" aria-current="page">Business Immigration</a>
+                </li>
+                <li class="menu-item">
+                  <a href="casestudy.html">Case Study</a>
+                </li>
+                <li class="menu-item">
+                  <a href="news.html">News</a>
+                </li>
+                <li class="menu-item">
+                  <a href="about.html">About</a>
+                </li>
+                <li class="menu-item">
+                  <a href="contact.html">Contact</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="attorna-body-outer-wrapper ">
+    <div class="attorna-body-wrapper clearfix  attorna-with-frame">
+
+      <div class=attorna-top-bar>
+        <div class=attorna-top-bar-background></div>
+        <div class="attorna-top-bar-container attorna-container ">
+          <div class="attorna-top-bar-container-inner clearfix">
+            <div class="attorna-top-bar-left attorna-item-pdlr">
+              <i class="fa fa-phone" style="font-size: 15px ;color: #b1976b ;margin-right: 10px ;"></i>
+              <span class="@(service.GetModelNameByName<Models.Home>(Model.Lang, nameof(Models.Home.Phone))) review">
+                @(service.GetModelValueByName<Models.Home>(Model.Lang, nameof(Models.Home.Phone)))
+              </span>
+              <div style="margin-left: 12px; margin-right: 14px; display: inline;">&#183;</div>
+              <i class="fa fa-envelope-open-o" style="font-size: 14px ;color: #b1976b ;margin-right: 10px ;"></i>
+              <a href="@(service.GetModelValueByName<Models.Home>(Model.Lang, nameof(Models.Home.Email)))" class="@(service.GetModelNameByName<Models.Home>(Model.Lang, nameof(Models.Home.Email))) review">
+                @(service.GetModelValueByName<Models.Home>(Model.Lang, nameof(Models.Home.Email)))
+              </a>
+              <div style="margin-left: 10px; margin-right: 13px; display: inline;">&#183;</div>
+              <i class=icon_clock_alt style="font-size: 15px ;color: #b1976b ;margin-right: 10px ;"></i>
+              <span class="@(service.GetModelNameByName<Models.Home>(Model.Lang, nameof(Models.Home.WorkingHours))) review">
+                @(service.GetModelValueByName<Models.Home>(Model.Lang, nameof(Models.Home.WorkingHours)))
+              </span>
+            </div>
+
+            <!--<a class=attorna-top-bar-right-button href=contact.html target=_self><i class="fa fa-comment-o"></i>Free consultant</a>-->
+            <div class="attorna-top-bar-right attorna-item-pdlr">
+              <div class=attorna-top-bar-right-social>
+                <!--<a href=# target=_blank class=attorna-top-bar-social-icon title=facebook><i class="fa fa-facebook"></i></a>
+                <a href=# target=_blank class=attorna-top-bar-social-icon title=linkedin><i class="fa fa-linkedin"></i></a>
+                <a href=# target=_blank class=attorna-top-bar-social-icon title=pinterest><i class="fa fa-pinterest-p"></i></a>
+                <a href=# target=_blank class=attorna-top-bar-social-icon title=twitter><i class="fa fa-twitter"></i></a>
+                <a href=# target=_blank class=attorna-top-bar-social-icon title=instagram><i class="fa fa-instagram"></i></a>-->
+                <a href="#">EN</a>
+                <a href="#">中文</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--header-->
+      <header class="attorna-header-wrap attorna-header-style-plain  attorna-style-menu-right attorna-sticky-navigation attorna-style-fixed" data-navigation-offset=75px>
+        <div class=attorna-header-background></div>
+        <div class="attorna-header-container  attorna-container">
+          <div class="attorna-header-container-inner clearfix">
+            <div class="attorna-logo  attorna-item-pdlr">
+              <div class=attorna-logo-inner>
+                <a  href="index.html">
+                  <img class="@(service.GetModelNameByName<Models.Home>(Model.Lang, nameof(Models.Home.HomeLogo))) review" src="@(service.GetModelValueByName<Models.Home>(Model.Lang, nameof(Models.Home.HomeLogo)))" alt="Logo" width="400" height="71" title="logo">
+                </a>
+              </div>
+            </div>
+            <div class="attorna-navigation attorna-item-pdlr clearfix ">
+              <div class=attorna-main-menu id=attorna-main-menu>
+                <ul id=menu-main-navigation-1 class=sf-menu>
+                  <li class="menu-item menu-item-home current-menu-item attorna-normal-menu">
+                    <a href="index.html" class="sf-with-ul-pre">Home</a>
+                  </li>
+                  <li class="menu-item attorna-normal-menu">
+                    <a href="personalimmigration.html" class="sf-with-ul-pre">Personal Immigration</a>
+                  </li>
+                  <li class="menu-item attorna-normal-menu">
+                    <a href="businessimmigration.html" class="sf-with-ul-pre">Business Immigration</a>
+                  </li>
+                  <li class="menu-item attorna-normal-menu">
+                    <a href="casestudy.html" class="sf-with-ul-pre">Case Study</a>
+                  </li>
+                  <li class="menu-item attorna-normal-menu">
+                    <a href="news.html" class="sf-with-ul-pre">News</a>
+                  </li>
+                  <li class="menu-item attorna-normal-menu">
+                    <a href="about.html" class="sf-with-ul-pre">About</a>
+                  </li>
+                  <li class="menu-item attorna-normal-menu">
+                    <a href="contact.html" class="sf-with-ul-pre">Contact</a>
+                  </li>
+                </ul>
+                <div class=attorna-navigation-slide-bar id=attorna-navigation-slide-bar></div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class=attorna-page-wrapper id=attorna-page-wrapper>
+        <div class=gdlr-core-page-builder-body>
+          <!--bannder-->
+          <div class="gdlr-core-pbf-wrapper " style="padding: 0px 0px 0px 0px;">
+            <div class=gdlr-core-pbf-background-wrap></div>
+            <div class="gdlr-core-pbf-wrapper-content gdlr-core-js ">
+              <div class="gdlr-core-pbf-wrapper-container clearfix gdlr-core-pbf-wrapper-full-no-space">
+                <div class=gdlr-core-pbf-element>
+                  <div class="gdlr-core-revolution-slider-item gdlr-core-item-pdlr gdlr-core-item-pdb " style="padding-bottom: 0px ;">
+                    <div id=rev_slider_1_1_wrapper class="rev_slider_wrapper fullwidthbanner-container" data-source=gallery style="margin:0px auto;background:#202020;padding:0px;margin-top:0px;margin-bottom:0px;">
+                      <div id=rev_slider_1_1 class="rev_slider fullwidthabanner" style=display:none; data-version=5.4.8.2>
+                        <ul class="@(Model.GetModelNameByName(nameof(Models.BaseContentModel.Banners))) review">
+                          @{ await Html.RenderPartialAsync("Banners", Model); }
+                        </ul>
+                        <div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--about -->
+          <div class="gdlr-core-pbf-wrapper @(Model.GetModelNameByName(nameof(Models.BaseContentModel.HomeAbout))) review" style="margin: -70px 0px 0px 0px;padding: 0px 0px 0px 0px;" id=gdlr-core-wrapper-1>
+            @{ await Html.RenderPartialAsync("HomeAbout", Model); }
+          </div>
+          <!--Leagle service-->
+          <div class="gdlr-core-pbf-wrapper " style="padding: 95px 0px 30px 0px;">
+            <div class=gdlr-core-pbf-background-wrap></div>
+            <div class="gdlr-core-pbf-wrapper-content gdlr-core-js ">
+              <div class="gdlr-core-pbf-wrapper-container clearfix gdlr-core-container">
+                <div class=gdlr-core-pbf-element>
+                  <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix  gdlr-core-center-align gdlr-core-title-item-caption-top gdlr-core-item-pdlr" style="padding-bottom: 20px ;">
+                    <span class="gdlr-core-title-item-caption gdlr-core-info-font gdlr-core-skin-caption" style="font-size: 13px ;font-weight: 600 ;font-style: normal ;letter-spacing: 3px ;text-transform: uppercase ;color: #a8a8a8 ;">what we are expert at</span>
+                    <div class="gdlr-core-title-item-title-wrap ">
+                      <h3 class="gdlr-core-title-item-title gdlr-core-skin-title " style="font-size: 30px ;font-weight: 700 ;text-transform: none ;">
+                        <span>Our service</span>
+                        <span class="gdlr-core-title-item-title-divider gdlr-core-skin-divider"></span>
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+                <div class=gdlr-core-pbf-element>
+                  <div class="gdlr-core-divider-item gdlr-core-divider-item-normal gdlr-core-item-pdlr gdlr-core-center-align gdlr-core-style-vertical" style="margin-bottom: 70px ;">
+                    <div class="gdlr-core-divider-line gdlr-core-skin-divider" style="border-color: #b1976b ;height: 27px ;"></div>
+                  </div>
+                </div>
+                <div class="@Model.GetModelNameByName(nameof(Models.BaseContentModel.OurServices)) review">
+                  @{ await Html.RenderPartialAsync(nameof(Models.BaseContentModel.OurServices), Model);}
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!--Case study-->
+          <div class="gdlr-core-pbf-wrapper " style="padding: 100px 0px 65px 0px;" id=gdlr-core-wrapper-6>
+            <div class=gdlr-core-pbf-background-wrap>
+              <div class="gdlr-core-pbf-background gdlr-core-parallax gdlr-core-js" style="background-image: url(www-content/upload/work-bg.jpg) ;background-size: cover ;background-position: center ;" data-parallax-speed=0.1></div>
+            </div>
+            <div class="gdlr-core-pbf-wrapper-content gdlr-core-js ">
+              <div class="gdlr-core-pbf-wrapper-container clearfix gdlr-core-container">
+                <div class=gdlr-core-pbf-element>
+                  <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix  gdlr-core-center-align gdlr-core-title-item-caption-top gdlr-core-item-pdlr" style="padding-bottom: 20px ;">
+                    <span class="gdlr-core-title-item-caption gdlr-core-info-font gdlr-core-skin-caption" style="font-size: 15px ;font-weight: 600 ;font-style: normal ;letter-spacing: 3px ;text-transform: uppercase ;color: #a69279 ;margin-bottom: 7px ;">
+                      our case
+                    </span>
+                    <div class="gdlr-core-title-item-title-wrap ">
+                      <h3 class="gdlr-core-title-item-title gdlr-core-skin-title " style="font-size: 30px ;font-weight: 700 ;text-transform: none ;color: #2b2b2b ;">Case Study<span class="gdlr-core-title-item-title-divider gdlr-core-skin-divider"></span></h3>
+                    </div>
+                  </div>
+                </div>
+                <div class=gdlr-core-pbf-element>
+                  <div class="gdlr-core-divider-item gdlr-core-divider-item-normal gdlr-core-item-pdlr gdlr-core-center-align gdlr-core-style-vertical" style="margin-bottom: 43px ;">
+                    <div class="gdlr-core-divider-line gdlr-core-skin-divider" style="border-color: #b1976b ;height: 27px ;"></div>
+                  </div>
+                </div>
+                <div class=gdlr-core-pbf-element>
+                  <div class="gdlr-core-blog-item gdlr-core-item-pdb clearfix  gdlr-core-style-blog-column-with-frame" style="padding-bottom: 15px ;">
+                    <div class="gdlr-core-blog-item-holder gdlr-core-js-2 clearfix" data-layout=fitrows>
+                      <div class="@Model.GetModelNameByName(nameof(Models.BaseContentModel.CaseStudies)) review">
+                        @{ await Html.RenderPartialAsync(nameof(Models.BaseContentModel.CaseStudies), Model);}
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class=gdlr-core-pbf-element>
+                  <div class="gdlr-core-button-item gdlr-core-item-pdlr gdlr-core-item-pdb gdlr-core-center-align">
+                    <a class="gdlr-core-button  gdlr-core-button-gradient gdlr-core-button-no-border" href="casestudy.html" style="font-size: 13px ;font-weight: 700 ;letter-spacing: 2px ;color: #ffffff ;padding: 12px 24px 14px 28px;border-radius: 3px;-moz-border-radius: 3px;-webkit-border-radius: 3px;background: #b1976b ;"><span class=gdlr-core-content>View all</span><i class="gdlr-core-pos-right fa fa-long-arrow-right"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--Partner-->
+          <div class="gdlr-core-pbf-wrapper " style="padding: 60px 0px 10px 0px;">
+            <div class=gdlr-core-pbf-background-wrap style="background-color: #1d1d1d ;"></div>
+            <div class="gdlr-core-pbf-wrapper-content gdlr-core-js ">
+              <div class="gdlr-core-pbf-wrapper-container clearfix gdlr-core-container">
+                <div class=gdlr-core-pbf-element>
+                  <div class="gdlr-core-gallery-item gdlr-core-item-pdb clearfix  gdlr-core-gallery-item-style-grid" style="padding-bottom: 10px ;">
+                    <div class="gdlr-core-gallery-item-holder gdlr-core-js-2 clearfix" data-layout=fitrows>
+                      <div class="@Model.GetModelNameByName(nameof(Models.BaseContentModel.Partners)) review">
+                        @{ await Html.RenderPartialAsync(nameof(Models.BaseContentModel.Partners), Model);}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class=gdlr-core-pbf-element>
+                  <div class="gdlr-core-divider-item gdlr-core-divider-item-normal gdlr-core-item-pdlr gdlr-core-center-align" style="margin-bottom: 0px ;">
+                    <div class="gdlr-core-divider-line gdlr-core-skin-divider" style="border-color: #3a3a3a ;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--footer-->
+      <footer>
+        <div class="attorna-footer-wrapper ">
+          <div class="attorna-footer-container attorna-container clearfix">
+            <div class="attorna-footer-column attorna-item-pdlr attorna-column-15">
+              <div id=text-1 class="widget widget_text attorna-widget">
+                <div class=textwidget>
+                  <p>
+                    <img class="alignnone size-full wp-image-6129 @(service.GetModelNameByName<Models.Home>(Model.Lang,nameof(Models.Home.FootLogo))) review" src="@(service.GetModelValueByName<Models.Home>(Model.Lang,nameof(Models.Home.FootLogo)))" alt="Logo" width="210">
+                    <br> <span class=gdlr-core-space-shortcode style="margin-top: -27px ;"></span>
+                    <br>
+                    <span class="@(service.GetModelNameByName<Models.Home>(Model.Lang,nameof(Models.Home.FootAbout))) review">
+                      @(service.GetModelValueByName<Models.Home>(Model.Lang,nameof(Models.Home.FootAbout)))
+                    </span>
+                  </p>
+                  <div class="gdlr-core-social-network-item gdlr-core-item-pdb  gdlr-core-none-align @(service.GetModelNameByName<Models.Home>(Model.Lang,nameof(Models.Home.SocialMedia))) review" style="padding-bottom: 0px ;">
+                    @(Html.Raw(
+                                service.GetModelValueByName<Models.Home>(Model.Lang, nameof(Models.Home.SocialMedia)).Text()
+                                ))
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="attorna-footer-column attorna-item-pdlr attorna-column-15">
+              <div id=text-7 class="widget widget_text attorna-widget ">
+                <h3 class="attorna-widget-title">Contact Info</h3><span class=clear></span>
+                <div class="textwidget @(service.GetModelNameByName<Models.Home>(Model.Lang,nameof(Models.Home.FootContactInfo))) review ">
+                  @(Html.Raw(service.GetModelValueByName<Models.Home>(Model.Lang, nameof(Models.Home.FootContactInfo)).Text()))
+                </div>
+              </div>
+            </div>
+            <div class="attorna-footer-column attorna-item-pdlr attorna-column-15">
+              <div id=gdlr-core-custom-menu-widget-4 class="widget widget_gdlr-core-custom-menu-widget attorna-widget">
+                <h3 class="attorna-widget-title">Links</h3><span class=clear></span>
+                <div class=menu-practice-areas-container>
+                  <ul id=menu-practice-areas class="gdlr-core-custom-menu-widget gdlr-core-menu-style-half @(service.GetModelNameByName<Models.Home>(Model.Lang,nameof(Models.Home.FootLinks))) review">
+                    @(Html.Raw(
+                                service.GetModelValueByName<Models.Home>(Model.Lang, nameof(Models.Home.FootLinks)).Text()
+                                ))
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="attorna-footer-column attorna-item-pdlr attorna-column-15">
+              <div id=text-7 class="widget widget_text attorna-widget">
+                <h3 class="attorna-widget-title">Wechat</h3><span class=clear></span>
+                <div class="textwidget @(service.GetModelNameByName<Models.Home>(Model.Lang,nameof(Models.Home.FootWechat))) review">
+                  @(Html.Raw(
+                                service.GetModelValueByName<Models.Home>(Model.Lang, nameof(Models.Home.FootWechat)).Text()
+                                ))
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class=attorna-copyright-wrapper>
+          <div class="attorna-copyright-container attorna-container clearfix">
+            <div class="attorna-copyright-left attorna-item-pdlr">&copy; 2020 Ted Immigration, All Right Reserved</div>
+            <div class="attorna-copyright-right attorna-item-pdlr">
+              <a href="terms.html" style="margin-left:21px;">Terms & Conditions</a>
+              <a href="privacy.html" style="margin-left:21px;">Privacy & Policy</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      <!-- end footer -->
+
+    </div>
+  </div>
+
+
+  <script src='/www-content/js/jquery/jquery.js'></script>
+  <script src='/www-content/js/jquery/jquery-migrate.min.js'></script>
+  <script src='/www-content/plugins/revslider/public/assets/js/jquery.themepunch.tools.min.js'></script>
+  <script src='/www-content/plugins/revslider/public/assets/js/jquery.themepunch.revolution.min.js'></script>
+  <script src="/www-content/plugins/revslider/public/assets/js/extensions/revolution.extension.slideanims.min.js"></script>
+  <script src="/www-content/plugins/revslider/public/assets/js/extensions/revolution.extension.layeranimation.min.js"></script>
+  <script src="/www-content/plugins/revslider/public/assets/js/extensions/revolution.extension.kenburn.min.js"></script>
+  <script src="/www-content/plugins/revslider/public/assets/js/extensions/revolution.extension.navigation.min.js"></script>
+  <script src="/www-content/plugins/revslider/public/assets/js/extensions/revolution.extension.parallax.min.js"></script>
+  <script src="/www-content/plugins/revslider/public/assets/js/extensions/revolution.extension.actions.min.js"></script>
+  <script src="/www-content/plugins/revslider/public/assets/js/extensions/revolution.extension.video.min.js"></script>
+
+  <!--Modals-->
+  <script src="/www-content/plugins/bootstrap/js/bootstrap.js"></script>
+  <script src="/www-content/plugins/dashboard/modernizr.custom.js"></script>
+  <!--Modals-->
+
+  <script src='/www-content/plugins/goodlayers-core/plugins/combine/script.js'></script>
+  <script>
+    var gdlr_core_pbf = {
+      "admin": "",
+      "video": {
+        "width": "640",
+        "height": "360"
+      },
+      "ajax_url": "https:\/\/demo.goodlayers.com\/attorna\/wp-admin\/admin-ajax.php"
+    };
+  </script>
+  <script src='/www-content/plugins/goodlayers-core/include/js/page-builder.js'></script>
+
+  <script src='/www-content/js/jquery/ui/effect.min.js'></script>
+  <script src='/www-content/js/jquery.mmenu.js'></script>
+  <script src='/www-content/js/jquery.superfish.js'></script>
+  <script src='/www-content/js/script-core.js'></script>
+
+  <script>
+    function setREVStartSize(e) {
+      try {
+        e.c = jQuery(e.c);
+        var i = jQuery(window).width(),
+          t = 9999,
+          r = 0,
+          n = 0,
+          l = 0,
+          f = 0,
+          s = 0,
+          h = 0;
+        if (e.responsiveLevels && (jQuery.each(e.responsiveLevels, function (e, f) {
+          f > i && (t = r = f, l = e), i > f && f > r && (r = f, n = e)
+        }), t > r && (l = n)), f = e.gridheight[l] || e.gridheight[0] || e.gridheight, s = e.gridwidth[l] || e.gridwidth[0] || e.gridwidth, h = i / s, h = h > 1 ? 1 : h, f = Math.round(h * f), "fullscreen" == e.sliderLayout) {
+          var u = (e.c.width(), jQuery(window).height());
+          if (void 0 != e.fullScreenOffsetContainer) {
+            var c = e.fullScreenOffsetContainer.split(",");
+            if (c) jQuery.each(c, function (e, i) {
+              u = jQuery(i).length > 0 ? u - jQuery(i).outerHeight(!0) : u
+            }), e.fullScreenOffset.split("%").length > 1 && void 0 != e.fullScreenOffset && e.fullScreenOffset.length > 0 ? u -= jQuery(window).height() * parseInt(e.fullScreenOffset, 0) / 100 : void 0 != e.fullScreenOffset && e.fullScreenOffset.length > 0 && (u -= parseInt(e.fullScreenOffset, 0))
+          }
+          f = u
+        } else void 0 != e.minHeight && f < e.minHeight && (f = e.minHeight);
+        e.c.closest(".rev_slider_wrapper").css({
+          height: f
+        })
+      } catch (d) {
+        console.log("Failure at Presize of Slider:" + d)
+      }
+    };
+  </script>
+  <script>
+    function revslider_showDoubleJqueryError(sliderID) {
+      var errorMessage = "Revolution Slider Error: You have some jquery.js library include that comes after the revolution files js include.";
+      errorMessage += "<br> This includes make eliminates the revolution slider libraries, and make it not work.";
+      errorMessage += "<br><br> To fix it you can:<br>&nbsp;&nbsp;&nbsp; 1. In the Slider Settings -> Troubleshooting set option:  <strong><b>Put JS Includes To Body</b></strong> option to true.";
+      errorMessage += "<br>&nbsp;&nbsp;&nbsp; 2. Find the double jquery.js include and remove it.";
+      errorMessage = "<span style=font-size:16px;color:#BC0C06;>" + errorMessage + "</span>";
+      jQuery(sliderID).show().html(errorMessage);
+    }
+  </script>
+  <script>
+    var htmlDiv = document.getElementById("rs-plugin-settings-inline-css");
+    var htmlDivCss = "";
+    if (htmlDiv) {
+      htmlDiv.innerHTML = htmlDiv.innerHTML + htmlDivCss;
+    } else {
+      var htmlDiv = document.createElement("div");
+      htmlDiv.innerHTML = "<style>" + htmlDivCss + "</style>";
+      document.getElementsByTagName("head")[0].appendChild(htmlDiv.childNodes[0]);
+    }
+  </script>
+  <script>
+    if (setREVStartSize !== undefined) setREVStartSize({
+      c: '#rev_slider_1_1',
+      gridwidth: [1280],
+      gridheight: [750],
+      sliderLayout: 'auto'
+    });
+    var revapi1, tpj;
+    (function () {
+      if (!/loaded|interactive|complete/.test(document.readyState)) document.addEventListener("DOMContentLoaded", onLoad);
+      else onLoad();
+
+      function onLoad() {
+        if (tpj === undefined) {
+          tpj = jQuery;
+          if ("off" == "on") tpj.noConflict();
+        }
+        if (tpj("#rev_slider_1_1").revolution == undefined) {
+          revslider_showDoubleJqueryError("#rev_slider_1_1");
+        } else {
+          revapi1 = tpj("#rev_slider_1_1").show().revolution({
+            sliderType: "standard",
+            jsFileLocation: "//demo.goodlayers.com/attorna/wp-content/plugins/revslider/public/assets/js/",
+            sliderLayout: "auto",
+            dottedOverlay: "none",
+            delay: 9000,
+            navigation: {
+              keyboardNavigation: "off",
+              keyboard_direction: "horizontal",
+              mouseScrollNavigation: "off",
+              mouseScrollReverse: "default",
+              onHoverStop: "off",
+              arrows: {
+                style: "uranus",
+                enable: true,
+                hide_onmobile: false,
+                hide_onleave: true,
+                hide_delay: 200,
+                hide_delay_mobile: 1200,
+                tmp: '',
+                left: {
+                  h_align: "left",
+                  v_align: "center",
+                  h_offset: 20,
+                  v_offset: 0
+                },
+                right: {
+                  h_align: "right",
+                  v_align: "center",
+                  h_offset: 20,
+                  v_offset: 0
+                }
+              }
+            },
+            visibilityLevels: [1240, 1024, 778, 480],
+            gridwidth: 1280,
+            gridheight: 750,
+            lazyType: "none",
+            shadow: 0,
+            spinner: "off",
+            stopLoop: "off",
+            stopAfterLoops: -1,
+            stopAtSlide: -1,
+            shuffle: "off",
+            autoHeight: "off",
+            disableProgressBar: "on",
+            hideThumbsOnMobile: "off",
+            hideSliderAtLimit: 0,
+            hideCaptionAtLimit: 0,
+            hideAllCaptionAtLilmit: 0,
+            debugMode: false,
+            fallbacks: {
+              simplifyAll: "off",
+              nextSlideOnWindowFocus: "off",
+              disableFocusListener: false,
+            }
+          });
+        };
+      };
+    }());
+  </script>
+  <script>
+    var htmlDivCss = unescape("%23rev_slider_1_1%20.uranus.tparrows%20%7B%0A%20%20width%3A50px%3B%0A%20%20height%3A50px%3B%0A%20%20background%3Argba%28255%2C255%2C255%2C0%29%3B%0A%20%7D%0A%20%23rev_slider_1_1%20.uranus.tparrows%3Abefore%20%7B%0A%20width%3A50px%3B%0A%20height%3A50px%3B%0A%20line-height%3A50px%3B%0A%20font-size%3A40px%3B%0A%20transition%3Aall%200.3s%3B%0A-webkit-transition%3Aall%200.3s%3B%0A%20%7D%0A%20%0A%20%20%23rev_slider_1_1%20.uranus.tparrows%3Ahover%3Abefore%20%7B%0A%20%20%20%20opacity%3A0.75%3B%0A%20%20%7D%0A");
+    var htmlDiv = document.getElementById('rs-plugin-settings-inline-css');
+    if (htmlDiv) {
+      htmlDiv.innerHTML = htmlDiv.innerHTML + htmlDivCss;
+    } else {
+      var htmlDiv = document.createElement('div');
+      htmlDiv.innerHTML = '<style>' + htmlDivCss + '</style>';
+      document.getElementsByTagName('head')[0].appendChild(htmlDiv.childNodes[0]);
+    }
+
+
+  </script>
+  @if (ViewBag.IsReview == true)
+  {
+    <script>
+      jQuery('body').on('click', 'a', function (e) {
+        e.preventDefault();
+        return false;
+      });
+    </script>
+  }
 </body>
 </html>

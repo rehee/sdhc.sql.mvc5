@@ -1,0 +1,39 @@
+﻿@model ContentViewModal
+@inject IContentViewService service
+@{
+  Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>BaseContentModel</title>
+  <style>
+    .review {
+      padding: 5px;
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <p>logo</p>
+    <p>
+      <img class="@(service.GetModelNameByName<Models.Home>(Model.Lang, nameof(Models.Home.HomeLogo))) review" src="@(service.GetModelValueByName<Models.Home>(Model.Lang, nameof(Models.Home.HomeLogo)))" alt="Alternate Text" />
+    </p>
+  </div>
+  <div>
+    <img class="@Model.GetModelNameByName(nameof(Models.BaseContentModel.FF)) review" src="@Model.GetModelValueByName(nameof(Models.BaseContentModel.FF))" alt="Alternate Text" />
+    <div>
+      <p class="@Model.GetModelNameByName(nameof(Models.BaseContentModel.FF2)) review">
+        @Model.GetModelValueByName(nameof(Models.BaseContentModel.FF2))
+      </p>
+    </div>
+   </div>
+  <div id="@(nameof(Models.BaseContentModel.OurServices))_View" class="@Model.GetModelNameByName(nameof(Models.BaseContentModel.OurServices))">
+    @{await Html.RenderPartialAsync("OurServices", Model);}
+  </div>
+</body>
+</html>

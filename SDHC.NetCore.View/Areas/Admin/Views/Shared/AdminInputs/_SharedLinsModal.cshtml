@@ -59,14 +59,29 @@
 </div>
 <script>
   var @sharedLink.View.ListName =[];
-  function set_list_@(sharedLink.View.ListName)(str){
-    var list = JSON.parse(str.replace(/&quot;/g, '"').replace(/\\/g, '/'));
-    @(sharedLink.View.ListName).length = 0;
+  function htmldecode_@(sharedLink.View.ListName)(str) {
+    str = str.replace(/&amp;/gi, '&');
+    str = str.replace(/&nbsp;/gi, ' ');
+    str = str.replace(/&quot;/gi, '"');
+    str = str.replace(/&#39;/g, "'");
+    str = str.replace(/&lt;/gi, '<');
+    str = str.replace(/&gt;/gi, '>');
+    //str = str.replace(/<br[^>]*>(?:(rn)|r|n)?/gi, 'n');
+    return str;
+  }
+  function set_list_@(sharedLink.View.ListName)(str) {
+    var newStr = htmldecode_@(sharedLink.View.ListName)(str
+      .replace(/&quot;/g, '"')
+      .replace(/\\/g, '/')
+      .replace(/\n/g, '')
+      .replace(/\r/g, ''));
+    var list = JSON.parse(newStr);
+    @(sharedLink.View.ListName).splice(0, @(sharedLink.View.ListName).length);
         for (var i = 0; i < list.length; i++) {
           @(sharedLink.View.ListName).push(list[i]);
         }
   }
-  set_list_@(sharedLink.View.ListName)('@sharedLink.View.Value');
+  set_list_@(sharedLink.View.ListName)('@Html.Raw(sharedLink.View.Value.Text())');
   var content_@sharedLink.View.AppName = '';
 
   function refresh_@(sharedLink.View.AppName)() {
@@ -98,20 +113,26 @@
           function windowBeforeExit(windowObjectReference,refresh) {
 
             return function () {
+              console.log(windowObjectReference)
+              console.log(refresh)
+              console.log(windowObjectReference.window.document.URL);
+
               setTimeout(function () {
-                if (windowObjectReference.window != null && windowObjectReference.window.document.location) {
-                  windowObjectReference.window.onbeforeunload = windowBeforeExit(
-                    windowObjectReference, windowObjectReference.window.document.location.pathname== "/CommonFunction/CloseWindow");
-                  return;
-                }
                 if (refresh) {
                   refresh_@(sharedLink.View.AppName)();
+                  return;
                 }
-              },500);
+                if (windowObjectReference.window != null && windowObjectReference.window.document.URL) {
+                   windowObjectReference.window.onunload  = windowBeforeExit(
+                     windowObjectReference, windowObjectReference.window.document.URL.indexOf("/CommonFunction/CloseWindow")>=0);
+                }
+              }, 100);
+
+
             }
           }
 
-          windowObjectReference.window.onbeforeunload = windowBeforeExit(windowObjectReference);
+          windowObjectReference.window.onunload = windowBeforeExit(windowObjectReference);
         }
       }, deleteRow: function (id) {
         swal({
@@ -138,7 +159,7 @@
               },
               function (r) {
                 setTimeout(() => swal.close(), 500);
-                if (!r||!r.value) {
+                if (!r||r.value==null||r.value==undefined) {
                   return;
                 }
                 set_list_@(sharedLink.View.ListName)(r.value);

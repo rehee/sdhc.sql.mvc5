@@ -103,8 +103,8 @@
                     var n = t.hasClass("open");
                     t.find("input")[n ? "focus" : "blur"]()
                 },
-                dismiss: function() {
-                    o(e).removeClass("open").find('input[type="text"]').blur()
+              dismiss: function () {
+                  o(e).removeClass("open").find('input[type="text"]').blur()
                 }
             }
         }

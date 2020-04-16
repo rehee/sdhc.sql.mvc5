@@ -28,8 +28,15 @@ namespace SDHC.NetCore.View.Controllers
     }
     public IActionResult Detail(long? id)
     {
-      var model = ServiceContainer.ContentService.GetContent(id);
-      return View($"Views/Pages/{model.GetType().Name}.cshtml", new ContentViewModal(model.ConvertModelToPost(), "ContentModel"));
+      try
+      {
+        ViewBag.IsReview = true;
+        var model = ServiceContainer.ContentService.GetContent(id);
+        return View($"Views/Pages/{model.GetType().Name}.cshtml", new ContentViewModal(model.ConvertModelToPost(), "ContentModel"));
+
+      }
+      catch { }
+      return Content("");
     }
   }
 }

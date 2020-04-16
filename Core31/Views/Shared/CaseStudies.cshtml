@@ -1,0 +1,35 @@
+﻿@model ContentViewModal
+@{
+  var sharedModel = Model.GetSharedLinkPost(nameof(Models.BaseContentModel.CaseStudies));
+  var index = 0;
+}
+
+@foreach (Models.CaseStudy item in sharedModel.Models.Where(b => b.Displayed))
+{
+  <div class="gdlr-core-item-list  gdlr-core-item-pdlr gdlr-core-column-20 @(index==0?"gdlr-core-column-first":"")">
+    <div class="gdlr-core-blog-grid gdlr-core-style-3 gdlr-core-js  gdlr-core-blog-grid-with-frame gdlr-core-item-mgb gdlr-core-skin-e-background  gdlr-core-outer-frame-element gdlr-core-with-thumbnail" style="box-shadow: 0 0 35px rgba(10, 10, 10,0.08); -moz-box-shadow: 0 0 35px rgba(10, 10, 10,0.08); -webkit-box-shadow: 0 0 35px rgba(10, 10, 10,0.08); border-radius: 4px;-moz-border-radius: 4px;-webkit-border-radius: 4px;" data-sync-height=blog-item-1>
+      <div class="gdlr-core-blog-thumbnail gdlr-core-media-image  gdlr-core-opacity-on-hover gdlr-core-zoom-on-hover">
+        <a href="casestudydetails.html"><img src="@item.Image.ImagePath().GetUrlPath()" alt width=700 height=450 title=drew-beamer-679505-unsplash></a>
+      </div>
+      <div class="gdlr-core-blog-grid-frame gdlr-core-sync-height-space-position" style="padding-top: 40px;padding-bottom: 35px;">
+        <h3 class="gdlr-core-blog-title gdlr-core-skin-title" style="font-size: 18px ;font-weight: 700 ;letter-spacing: 0px ;"><a href=#>@item.Title</a></h3>
+        <div class="gdlr-core-blog-info-wrapper gdlr-core-skin-divider">
+          <span class="gdlr-core-blog-info gdlr-core-blog-info-font gdlr-core-skin-caption gdlr-core-blog-info-date">
+            <span class=gdlr-core-blog-info-sep>•</span><span class=gdlr-core-head><i class=icon_clock_alt></i></span><a href=#>
+              @item.EditDate.ToString("MMM dd,yyyy")
+            </a>
+          </span><span class="gdlr-core-blog-info gdlr-core-blog-info-font gdlr-core-skin-caption gdlr-core-blog-info-author">
+            <span class=gdlr-core-blog-info-sep>•</span><span class=gdlr-core-head><i class=icon_documents_alt></i></span>
+            <a href=# title="@item.AuthName" rel=author>
+              @item.AuthName
+            </a>
+          </span><span class="gdlr-core-blog-info gdlr-core-blog-info-font gdlr-core-skin-caption gdlr-core-blog-info-comment">
+            <span class=gdlr-core-blog-info-sep>•</span><span class=gdlr-core-head><i class=icon_comment_alt></i></span>
+            <a href=#>@item.Comment comment</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  index++;
+}

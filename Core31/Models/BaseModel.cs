@@ -21,8 +21,48 @@ namespace Models
     [NotMapped]
     [InputType(EditorType = EnumInputType.SharedLink, RelatedType = typeof(OurService))]
     public string OurServices { get; set; }
+    [NotMapped]
+    [InputType(EditorType = EnumInputType.SharedLink, RelatedType = typeof(Banner))]
+    public string Banners { get; set; }
+    [NotMapped]
+    [InputType(EditorType = EnumInputType.SharedLink, RelatedType = typeof(About))]
+    public string HomeAbout { get; set; }
+    [NotMapped]
+    [InputType(EditorType = EnumInputType.SharedLink, RelatedType = typeof(CaseStudy))]
+    public string CaseStudies { get; set; }
+    [NotMapped]
+    [InputType(EditorType = EnumInputType.SharedLink, RelatedType = typeof(Partner))]
+    public string Partners { get; set; }
   }
+  public class Partner : BaseSharedLink
+  {
+    [InputType(EditorType = EnumInputType.FileUpload)]
+    public string Image { get; set; }
+  }
+  public class CaseStudy : BaseSharedLink
+  {
+    [InputType(EditorType = EnumInputType.FileUpload)]
+    public string Image { get; set; }
+    [InputType(EditorType = EnumInputType.DateTime)]
+    public DateTime EditDate { get; set; }
+    public string AuthName { get; set; }
+    [InputType(EditorType = EnumInputType.Number)]
+    public int Comment { get; set; }
+  }
+  public class About : BaseSharedLink
+  {
+    [InputType(EditorType = EnumInputType.FileUpload)]
+    public string Image { get; set; }
+    [InputType(EditorType = EnumInputType.Html)]
+    public string Content { get; set; }
 
+  }
+  public class Banner : BaseSharedLink
+  {
+    [InputType(EditorType = EnumInputType.FileUpload)]
+    public string Image { get; set; }
+
+  }
   public class HomePage : BaseContentModel
   {
     public string Home2 { get; set; }
@@ -41,5 +81,20 @@ namespace Models
   {
     [InputType(EditorType = EnumInputType.FileUpload)]
     public string HomeLogo { get; set; }
+    [InputType(EditorType = EnumInputType.FileUpload)]
+    public string FootLogo { get; set; }
+    public string FootAbout { get; set; }
+    [InputType(EditorType = EnumInputType.TextArea)]
+    public string SocialMedia { get; set; }
+    [InputType(EditorType = EnumInputType.Html)]
+    public string FootContactInfo { get; set; }
+    [InputType(EditorType = EnumInputType.TextArea)]
+    public string FootLinks { get; set; }
+    [InputType(EditorType = EnumInputType.Html)]
+    public string FootWechat { get; set; }
+
+    public string Phone { get; set; }
+    public string Email { get; set; }
+    public string WorkingHours { get; set; }
   }
 }
