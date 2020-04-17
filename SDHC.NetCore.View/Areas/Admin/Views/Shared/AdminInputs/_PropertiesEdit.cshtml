@@ -5,7 +5,7 @@
 }
 @foreach (var property in Model.Properties)
 {
-  if (property.IgnoreProperty)
+  if (property.IgnoreProperty || property.EditorType == EnumInputType.SharedLink)
   {
     Html.RenderPartial("AdminInputs/_AdminInput_Ignore", new ContentPropertyIndex(property, index));
   }
@@ -13,7 +13,7 @@
   {
 
     Html.RenderPartial("AdminInputs/_AdminInput", new ContentPropertyIndex(property, index));
-  
+
   }
   index++;
 }
