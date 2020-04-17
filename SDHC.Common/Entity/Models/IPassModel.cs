@@ -82,7 +82,7 @@ namespace SDHC.Common.Entity.Models
         return list[key];
       return null;
     }
-    public string GetModelValueByName(string key)
+    public string GetValueByName(string key)
     {
       var p = GetContentPropertyByName(key);
       if (p == null)
@@ -97,20 +97,20 @@ namespace SDHC.Common.Entity.Models
       }
       return p.Property.Value;
     }
-    public string GetModelNameByName(string key)
+    public string GetModalNameByName(string key)
     {
       var p = GetContentPropertyByName(key);
-      return p != null ? $"modal_{p.OuterNameNoMark}" : null;
+      return p?.ModalName ?? "";
     }
-    public string GetModelRefreshByName(string key)
+    public string GetModalRefreshByName(string key)
     {
       var p = GetContentPropertyByName(key);
-      return p != null ? $"modal_{p.OuterNameNoMark}_refresh" : null;
+      return p?.ModalRefresh ?? "";
     }
-    public string GetModelReviewByName(string key)
+    public string GetModalReviewByName(string key)
     {
       var p = GetContentPropertyByName(key);
-      return p != null ? $"modal_{p.OuterNameNoMark} review" : null;
+      return p?.ModalReview ?? "";
     }
 
     public string OutIndex { get; }
@@ -160,6 +160,11 @@ namespace SDHC.Common.Entity.Models
         return String.Join("_", s);
       }
     }
+    public string ModalName => $"modal_{OuterNameNoMark}";
+    public string ModalRefresh => $"{ModalName}_refresh";
+    public string ModalReview => $"{ModalName} review";
+
+
     public string OutIndex { get; }
     public string OutMakr => String.IsNullOrEmpty(OutIndex) ? $"" : $"{OutIndex}.";
     public int? Lang { get; }

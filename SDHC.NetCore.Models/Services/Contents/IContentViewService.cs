@@ -12,10 +12,10 @@ namespace SDHC.NetCore.Models.Services.Contents
   public interface IContentViewService
   {
     IEnumerable<ModelViewModal> Models { get; }
-    string GetModelValueByName<T>(int lang, string name);
-    string GetModelNameByName<T>(int lang, string name);
-    string GetModelRefreshByName<T>(int lang, string name);
-    string GetModelReviewByName<T>(int lang, string name);
+    string GetValueByName<T>(int lang, string name);
+    string GetModalNameByName<T>(int lang, string name);
+    string GetModalRefreshByName<T>(int lang, string name);
+    string GetModalReviewByName<T>(int lang, string name);
   }
 
   public class ContentViewService : IContentViewService
@@ -42,28 +42,28 @@ namespace SDHC.NetCore.Models.Services.Contents
       }
     }
 
-    public string GetModelNameByName<T>(int lang, string name)
+    public string GetModalNameByName<T>(int lang, string name)
     {
       var key = typeof(T).FullName;
-      return modelMapper[new Tuple<string, int>(key, lang)]?.GetModelNameByName(name);
+      return modelMapper[new Tuple<string, int>(key, lang)]?.GetModalNameByName(name);
     }
 
-    public string GetModelValueByName<T>(int lang, string name)
+    public string GetValueByName<T>(int lang, string name)
     {
       var key = typeof(T).FullName;
-      return modelMapper[new Tuple<string, int>(key, lang)]?.GetModelValueByName(name);
+      return modelMapper[new Tuple<string, int>(key, lang)]?.GetValueByName(name);
     }
 
-    public string GetModelRefreshByName<T>(int lang, string name)
+    public string GetModalRefreshByName<T>(int lang, string name)
     {
       var key = typeof(T).FullName;
-      return modelMapper[new Tuple<string, int>(key, lang)]?.GetModelRefreshByName(name);
+      return modelMapper[new Tuple<string, int>(key, lang)]?.GetModalRefreshByName(name);
     }
 
-    public string GetModelReviewByName<T>(int lang, string name)
+    public string GetModalReviewByName<T>(int lang, string name)
     {
       var key = typeof(T).FullName;
-      return modelMapper[new Tuple<string, int>(key, lang)]?.GetModelReviewByName(name);
+      return modelMapper[new Tuple<string, int>(key, lang)]?.GetModalReviewByName(name);
     }
   }
 }

@@ -124,18 +124,18 @@
           <div class="attorna-top-bar-container-inner clearfix">
             <div class="attorna-top-bar-left attorna-item-pdlr">
               <i class="fa fa-phone" style="font-size: 15px ;color: #b1976b ;margin-right: 10px ;"></i>
-              <span class="@(service.GetModelNameByName<Models.Home>(Model.Lang, nameof(Models.Home.Phone))) review">
-                @(service.GetModelValueByName<Models.Home>(Model.Lang, nameof(Models.Home.Phone)))
+              <span class="@(service.GetModalReviewByName<Models.Home>(Model.Lang, nameof(Models.Home.Phone)))">
+                @(service.GetValueByName<Models.Home>(Model.Lang, nameof(Models.Home.Phone)))
               </span>
               <div style="margin-left: 12px; margin-right: 14px; display: inline;">&#183;</div>
               <i class="fa fa-envelope-open-o" style="font-size: 14px ;color: #b1976b ;margin-right: 10px ;"></i>
-              <a href="@(service.GetModelValueByName<Models.Home>(Model.Lang, nameof(Models.Home.Email)))" class="@(service.GetModelNameByName<Models.Home>(Model.Lang, nameof(Models.Home.Email))) review">
-                @(service.GetModelValueByName<Models.Home>(Model.Lang, nameof(Models.Home.Email)))
+              <a href="@(service.GetValueByName<Models.Home>(Model.Lang, nameof(Models.Home.Email)))" class="@(service.GetModalReviewByName<Models.Home>(Model.Lang, nameof(Models.Home.Email)))">
+                @(service.GetValueByName<Models.Home>(Model.Lang, nameof(Models.Home.Email)))
               </a>
               <div style="margin-left: 10px; margin-right: 13px; display: inline;">&#183;</div>
               <i class=icon_clock_alt style="font-size: 15px ;color: #b1976b ;margin-right: 10px ;"></i>
-              <span class="@(service.GetModelNameByName<Models.Home>(Model.Lang, nameof(Models.Home.WorkingHours))) review">
-                @(service.GetModelValueByName<Models.Home>(Model.Lang, nameof(Models.Home.WorkingHours)))
+              <span class="@(service.GetModalReviewByName<Models.Home>(Model.Lang, nameof(Models.Home.WorkingHours))) review">
+                @(service.GetValueByName<Models.Home>(Model.Lang, nameof(Models.Home.WorkingHours)))
               </span>
             </div>
 
@@ -163,7 +163,7 @@
             <div class="attorna-logo  attorna-item-pdlr">
               <div class=attorna-logo-inner>
                 <a href="index.html">
-                  <img class="@(service.GetModelNameByName<Models.Home>(Model.Lang, nameof(Models.Home.HomeLogo))) review" src="@(service.GetModelValueByName<Models.Home>(Model.Lang, nameof(Models.Home.HomeLogo)))" alt="Logo" width="400" height="71" title="logo">
+                  <img class="@(service.GetModalReviewByName<Models.Home>(Model.Lang, nameof(Models.Home.HomeLogo)))" src="@(service.GetValueByName<Models.Home>(Model.Lang, nameof(Models.Home.HomeLogo)))" alt="Logo" width="400" height="71" title="logo">
                 </a>
               </div>
             </div>
@@ -203,13 +203,13 @@
 
         <div class="gdlr-core-page-builder-body ">
           <!--bannder-->
-          <div class="gdlr-core-pbf-wrapper @(Model.GetModelNameByName(nameof(Models.BaseContentModel.Banners))) review">
+          <div class="gdlr-core-pbf-wrapper @(Model.GetModalReviewByName(nameof(Models.BaseContentModel.Banners)))">
             @{ await Html.RenderPartialAsync("Banners", Model); }
             
 
           </div>
           <!--about -->
-          <div class="gdlr-core-pbf-wrapper @(Model.GetModelNameByName(nameof(Models.BaseContentModel.HomeAbout))) review" style="margin: -70px 0px 0px 0px;padding: 0px 0px 0px 0px;" id=gdlr-core-wrapper-1>
+          <div class="gdlr-core-pbf-wrapper @(Model.GetModalReviewByName(nameof(Models.BaseContentModel.HomeAbout)))" style="margin: -70px 0px 0px 0px;padding: 0px 0px 0px 0px;" id=gdlr-core-wrapper-1>
             @{ await Html.RenderPartialAsync("HomeAbout", Model); }
           </div>
           <!--Leagle service-->
@@ -233,7 +233,7 @@
                     <div class="gdlr-core-divider-line gdlr-core-skin-divider" style="border-color: #b1976b ;height: 27px ;"></div>
                   </div>
                 </div>
-                <div class="@Model.GetModelNameByName(nameof(Models.BaseContentModel.OurServices)) review">
+                <div class="@Model.GetModalReviewByName(nameof(Models.BaseContentModel.OurServices))">
                   @{ await Html.RenderPartialAsync(nameof(Models.BaseContentModel.OurServices), Model);}
                 </div>
               </div>
@@ -266,7 +266,7 @@
                 <div class=gdlr-core-pbf-element>
                   <div class="gdlr-core-blog-item gdlr-core-item-pdb clearfix  gdlr-core-style-blog-column-with-frame" style="padding-bottom: 15px ;">
                     <div class="gdlr-core-blog-item-holder gdlr-core-js-2 clearfix" data-layout=fitrows>
-                      <div class="@Model.GetModelNameByName(nameof(Models.BaseContentModel.CaseStudies)) review">
+                      <div class="@Model.GetModalReviewByName(nameof(Models.BaseContentModel.CaseStudies))">
                         @{ await Html.RenderPartialAsync(nameof(Models.BaseContentModel.CaseStudies), Model);}
                       </div>
 
@@ -290,7 +290,7 @@
                 <div class=gdlr-core-pbf-element>
                   <div class="gdlr-core-gallery-item gdlr-core-item-pdb clearfix  gdlr-core-gallery-item-style-grid" style="padding-bottom: 10px ;">
                     <div class="gdlr-core-gallery-item-holder gdlr-core-js-2 clearfix" data-layout=fitrows>
-                      <div class="@Model.GetModelNameByName(nameof(Models.BaseContentModel.Partners)) review">
+                      <div class="@Model.GetModalReviewByName(nameof(Models.BaseContentModel.Partners))">
                         @{ await Html.RenderPartialAsync(nameof(Models.BaseContentModel.Partners), Model);}
                       </div>
                     </div>
@@ -315,16 +315,16 @@
               <div id=text-1 class="widget widget_text attorna-widget">
                 <div class=textwidget>
                   <p>
-                    <img class="alignnone size-full wp-image-6129 @(service.GetModelNameByName<Models.Home>(Model.Lang,nameof(Models.Home.FootLogo))) review" src="@(service.GetModelValueByName<Models.Home>(Model.Lang,nameof(Models.Home.FootLogo)))" alt="Logo" width="210">
+                    <img class="alignnone size-full wp-image-6129 @(service.GetModalReviewByName<Models.Home>(Model.Lang,nameof(Models.Home.FootLogo)))" src="@(service.GetValueByName<Models.Home>(Model.Lang,nameof(Models.Home.FootLogo)))" alt="Logo" width="210">
                     <br> <span class=gdlr-core-space-shortcode style="margin-top: -27px ;"></span>
                     <br>
-                    <span class="@(service.GetModelNameByName<Models.Home>(Model.Lang,nameof(Models.Home.FootAbout))) review">
-                      @(service.GetModelValueByName<Models.Home>(Model.Lang,nameof(Models.Home.FootAbout)))
+                    <span class="@(service.GetModalReviewByName<Models.Home>(Model.Lang,nameof(Models.Home.FootAbout)))">
+                      @(service.GetValueByName<Models.Home>(Model.Lang,nameof(Models.Home.FootAbout)))
                     </span>
                   </p>
-                  <div class="gdlr-core-social-network-item gdlr-core-item-pdb  gdlr-core-none-align @(service.GetModelNameByName<Models.Home>(Model.Lang,nameof(Models.Home.SocialMedia))) review" style="padding-bottom: 0px ;">
+                  <div class="gdlr-core-social-network-item gdlr-core-item-pdb  gdlr-core-none-align @(service.GetModalReviewByName<Models.Home>(Model.Lang,nameof(Models.Home.SocialMedia)))" style="padding-bottom: 0px ;">
                     @(Html.Raw(
-                                service.GetModelValueByName<Models.Home>(Model.Lang, nameof(Models.Home.SocialMedia)).Text()
+                                service.GetValueByName<Models.Home>(Model.Lang, nameof(Models.Home.SocialMedia)).Text()
                                 ))
                   </div>
                 </div>
@@ -333,8 +333,8 @@
             <div class="attorna-footer-column attorna-item-pdlr attorna-column-15">
               <div id=text-7 class="widget widget_text attorna-widget ">
                 <h3 class="attorna-widget-title">Contact Info</h3><span class=clear></span>
-                <div class="textwidget @(service.GetModelNameByName<Models.Home>(Model.Lang,nameof(Models.Home.FootContactInfo))) review ">
-                  @(Html.Raw(service.GetModelValueByName<Models.Home>(Model.Lang, nameof(Models.Home.FootContactInfo)).Text()))
+                <div class="textwidget @(service.GetModalReviewByName<Models.Home>(Model.Lang,nameof(Models.Home.FootContactInfo)))">
+                  @(Html.Raw(service.GetValueByName<Models.Home>(Model.Lang, nameof(Models.Home.FootContactInfo)).Text()))
                 </div>
               </div>
             </div>
@@ -342,8 +342,8 @@
               <div id=gdlr-core-custom-menu-widget-4 class="widget widget_gdlr-core-custom-menu-widget attorna-widget">
                 <h3 class="attorna-widget-title">Links</h3><span class=clear></span>
                 <div class=menu-practice-areas-container>
-                  <ul id=menu-practice-areas class="gdlr-core-custom-menu-widget gdlr-core-menu-style-half @(service.GetModelNameByName<Models.Home>(Model.Lang,nameof(Models.Home.FootLinks))) review">
-                    @(Html.Raw(service.GetModelValueByName<Models.Home>(Model.Lang, nameof(Models.Home.FootLinks)).Text()))
+                  <ul id=menu-practice-areas class="gdlr-core-custom-menu-widget gdlr-core-menu-style-half @(service.GetModalReviewByName<Models.Home>(Model.Lang,nameof(Models.Home.FootLinks)))">
+                    @(Html.Raw(service.GetValueByName<Models.Home>(Model.Lang, nameof(Models.Home.FootLinks)).Text()))
                   </ul>
                 </div>
               </div>
@@ -351,9 +351,9 @@
             <div class="attorna-footer-column attorna-item-pdlr attorna-column-15">
               <div id=text-7 class="widget widget_text attorna-widget">
                 <h3 class="attorna-widget-title">Wechat</h3><span class=clear></span>
-                <div class="textwidget @(service.GetModelNameByName<Models.Home>(Model.Lang,nameof(Models.Home.FootWechat))) review">
+                <div class="textwidget @(service.GetModalReviewByName<Models.Home>(Model.Lang,nameof(Models.Home.FootWechat)))">
                   @(Html.Raw(
-                                service.GetModelValueByName<Models.Home>(Model.Lang, nameof(Models.Home.FootWechat)).Text()
+                                service.GetValueByName<Models.Home>(Model.Lang, nameof(Models.Home.FootWechat)).Text()
                                 ))
                 </div>
               </div>
@@ -519,7 +519,7 @@
         document.getElementsByTagName('head')[0].appendChild(htmlDiv.childNodes[0]);
       }
     }
-    function @(Model.GetModelNameByName(nameof(Models.BaseContentModel.Banners)))_refresh(){
+    function @(Model.GetModalRefreshByName(nameof(Models.BaseContentModel.Banners)))(){
       allBannerFunction();
     }
     
