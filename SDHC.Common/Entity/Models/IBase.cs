@@ -16,9 +16,9 @@ namespace SDHC.Common.Entity.Models
   {
     string DisplayName();
   }
-  public interface IBasicContent : IInt64Key, IDisplayName
+  public interface IBasicModel : IInt64Key, IDisplayName
   {
-
+    string Title { get; set; }
   }
   public interface ISharedContent : IBasicModel
   {
@@ -29,11 +29,11 @@ namespace SDHC.Common.Entity.Models
     int DisplayOrder { get; set; }
     bool Displayed { get; set; }
   }
-  public interface IBasicModel : IBasicContent
+  public interface IBasicContent : IBasicModel
   {
-    string Title { get; set; }
+    
   }
-  public interface IContentModel : IBasicModel
+  public interface IContentModel : IBasicContent
   {
     int? Lang { get; set; }
     string Url { get; set; }
@@ -44,7 +44,7 @@ namespace SDHC.Common.Entity.Models
     IEnumerable<IContentModel> Parents { get; }
     IEnumerable<IContentModel> Children { get; }
   }
-  public interface IBasicSelect : IBasicContent
+  public interface IBasicSelect : IBasicModel
   {
 
   }

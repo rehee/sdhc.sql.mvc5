@@ -12,7 +12,6 @@ namespace System
   {
     public static SaveFile GetSaveFile => ServiceContainer.SDHCFileService.SaveFile;
     public static DeleteFile GetDeleteFile => ServiceContainer.SDHCFileService.DeleteFile;
-
     public static ContentPostModel ConvertModelToPost(this object input)
     {
       var model = new ContentPostModel();
@@ -25,7 +24,6 @@ namespace System
       ConvertToIPost(input, model);
       return model;
     }
-
     public static void ConvertToIPost(object input, IPostModel model)
     {
       var type = input.GetType().GetRealType();
@@ -56,7 +54,6 @@ namespace System
       }
       model.Properties = model.Properties.OrderByDescending(b => b.SortOrder).ToList();
     }
-
     public static object ConvertToBaseModel(this IPostModel input, bool deleteExistFile = true, List<string> oldFiles = null, List<string> newFiles = null)
     {
       var result = input.ConvertBaseTypeToEnity(out var typeName, out var assemblyName);
@@ -94,10 +91,8 @@ namespace System
       }
       return result;
     }
-
     public static Func<ContentProperty> NewContentProperty { get; set; } = () => new ContentProperty();
     public static Func<List<ContentProperty>> NewContentPropertyList { get; set; } = () => new List<ContentProperty>();
-
     public static ContentProperty GetContentPropertyByPropertyInfo(this PropertyInfo p, object input)
     {
       var result = new ContentProperty();
@@ -235,7 +230,6 @@ namespace System
       }
 
     }
-
     public static void SetPropertyValue(this PropertyInfo p, IPassModel input, object result, bool deleteExistFile = true, List<string> oldFiles = null, List<string> newFiles = null)
     {
       var propertyPost = input.Properties.Find(b => b.Key == p.Name);
@@ -309,7 +303,6 @@ namespace System
       catch { }
 
     }
-
     public static object ConvertBaseTypeToEnity(this IPostModel input, out string typeName, out string assemblyName)
     {
       var type = Type.GetType($"{input.FullType},{input.ThisAssembly}");
@@ -344,8 +337,6 @@ namespace System
       }
 
     }
-
-
     public static void SetObjectByObject(this object thisObject, object targetObject)
     {
       if (thisObject == null || targetObject == null)
@@ -366,7 +357,6 @@ namespace System
         catch { }
       }
     }
-
     public static ModelPostModel GetModelPostModelByType(this Type type)
     {
       var baseModel = Activator.CreateInstance(type);

@@ -8,7 +8,29 @@ namespace SDHC.Common.Entity.Models
   {
     List<ContentProperty> Properties { get; set; }
   }
+  public interface IPostModel : IPassModel, IInt64Key
+  {
+    string FullType { get; set; }
+    string ThisAssembly { get; set; }
+  }
 
+  public class ModelPostModel : IPostModel
+  {
+    [BaseProperty]
+    public long Id { get; set; }
+    [BaseProperty]
+    public string FullType { get; set; }
+    [BaseProperty]
+    public string ThisAssembly { get; set; }
+    public string PostUrl { get; set; }
+    public string PostReturnUrl { get; set; }
+    public bool IsPostAjax { get; set; }
+    public string PostBeforeMethod { get; set; }
+    public string PostResponseMethod { get; set; }
+    public string PostFormId { get; set; } = Guid.NewGuid().ToString().Replace('-', '_');
+    public string PostFormTitle { get; set; }
+    public List<ContentProperty> Properties { get; set; } = new List<ContentProperty>();
+  }
   public class ContentPostModel : IPostModel
   {
     [BaseProperty]
@@ -29,19 +51,7 @@ namespace SDHC.Common.Entity.Models
     public int? Lang { get; set; }
     public List<ContentProperty> Properties { get; set; } = PassModeConvert.NewContentPropertyList();
   }
-  public class ContentViewModal : IPostModeltViewModal<ContentPostModel>
-  {
 
-    public ContentViewModal(ContentPostModel model, string outerKey = null) : base(model, outerKey, model.Lang)
-    {
-    }
-  }
-  public class ModelViewModal : IPostModeltViewModal<ModelPostModel>
-  {
-    public ModelViewModal(ModelPostModel model, string outerKey = null) : base(model, outerKey)
-    {
-    }
-  }
   public abstract class IPostModeltViewModal<T> where T : IPostModel
   {
     public int Lang { get; }
@@ -90,10 +100,34 @@ namespace SDHC.Common.Entity.Models
       var p = GetContentPropertyByName(key);
       return p != null ? $"modal_{p.OuterNameNoMark}" : null;
     }
+    public string GetModelRefreshByName(string key)
+    {
+      var p = GetContentPropertyByName(key);
+      return p != null ? $"modal_{p.OuterNameNoMark}_refresh" : null;
+    }
+    public string GetModelReviewByName(string key)
+    {
+      var p = GetContentPropertyByName(key);
+      return p != null ? $"modal_{p.OuterNameNoMark} review" : null;
+    }
+
     public string OutIndex { get; }
     public string OutMakr => String.IsNullOrEmpty(OutIndex) ? $"" : $"{OutIndex}.";
   }
 
+  public class ContentViewModal : IPostModeltViewModal<ContentPostModel>
+  {
+    public ContentViewModal(ContentPostModel model, string outerKey = null) : base(model, outerKey, model.Lang)
+    {
+    }
+  }
+  public class ModelViewModal : IPostModeltViewModal<ModelPostModel>
+  {
+    public ModelViewModal(ModelPostModel model, string outerKey = null) : base(model, outerKey)
+    {
+    }
+  }
+  
   public class ContentViewModelSummary
   {
     public ContentViewModal ContentModel { get; set; }
@@ -106,31 +140,6 @@ namespace SDHC.Common.Entity.Models
     public IEnumerable<ModelPostModel> Models { get; set; }
   }
 
-  public class ModelPostModel : IPostModel
-  {
-    [BaseProperty]
-    public long Id { get; set; }
-    [BaseProperty]
-    public string FullType { get; set; }
-    [BaseProperty]
-    public string ThisAssembly { get; set; }
-
-    public string PostUrl { get; set; }
-    public string PostReturnUrl { get; set; }
-    public bool IsPostAjax { get; set; }
-    public string PostBeforeMethod { get; set; }
-    public string PostResponseMethod { get; set; }
-    public string PostFormId { get; set; } = Guid.NewGuid().ToString().Replace('-', '_');
-    public string PostFormTitle { get; set; }
-
-    public List<ContentProperty> Properties { get; set; } = new List<ContentProperty>();
-  }
-
-  public interface IPostModel : IPassModel, IInt64Key
-  {
-    string FullType { get; set; }
-    string ThisAssembly { get; set; }
-  }
   public class ContentPropertyIndex
   {
     public ContentProperty Property { get; set; }

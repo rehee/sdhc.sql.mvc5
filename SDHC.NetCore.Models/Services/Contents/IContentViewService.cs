@@ -14,6 +14,8 @@ namespace SDHC.NetCore.Models.Services.Contents
     IEnumerable<ModelViewModal> Models { get; }
     string GetModelValueByName<T>(int lang, string name);
     string GetModelNameByName<T>(int lang, string name);
+    string GetModelRefreshByName<T>(int lang, string name);
+    string GetModelReviewByName<T>(int lang, string name);
   }
 
   public class ContentViewService : IContentViewService
@@ -43,13 +45,25 @@ namespace SDHC.NetCore.Models.Services.Contents
     public string GetModelNameByName<T>(int lang, string name)
     {
       var key = typeof(T).FullName;
-      return modelMapper[new Tuple<string, int>(key, lang)].GetModelNameByName(name);
+      return modelMapper[new Tuple<string, int>(key, lang)]?.GetModelNameByName(name);
     }
 
     public string GetModelValueByName<T>(int lang, string name)
     {
       var key = typeof(T).FullName;
-      return modelMapper[new Tuple<string, int>(key, lang)].GetModelValueByName(name);
+      return modelMapper[new Tuple<string, int>(key, lang)]?.GetModelValueByName(name);
+    }
+
+    public string GetModelRefreshByName<T>(int lang, string name)
+    {
+      var key = typeof(T).FullName;
+      return modelMapper[new Tuple<string, int>(key, lang)]?.GetModelRefreshByName(name);
+    }
+
+    public string GetModelReviewByName<T>(int lang, string name)
+    {
+      var key = typeof(T).FullName;
+      return modelMapper[new Tuple<string, int>(key, lang)]?.GetModelReviewByName(name);
     }
   }
 }

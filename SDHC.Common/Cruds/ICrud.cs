@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SDHC.Common.Cruds
 {
@@ -34,6 +35,31 @@ namespace SDHC.Common.Cruds
     void Delete<T>(ISave repo, T model) where T : class, IInt64Key;
     void Delete<T>(T model, ISave repo = null) where T : class, IInt64Key;
     void Delete(object model, ISave repo = null);
+    
+    Task CreateAsync(IInt64Key model, ISave repo);
+    Task CreateAsync<T>(T input) where T : class;
+    Task CreateAsync(object input, out ISave repo);
+    Task CreateAsync(object input);
+    Task CreateAsync(object input, ISave repo);
+    Task<IQueryable<T>> ReadAsync<T>(Expression<Func<T, bool>> where, out ISave db) where T : class;
+    Task<IQueryable<T>> ReadAsync<T>(Expression<Func<T, bool>> where) where T : class;
+    Task<IQueryable<T>> ReadAsync<T>(Expression<Func<T, bool>> where, ISave db) where T : class;
+    Task<IQueryable<T>> ReadAsync<T>(Type type, Expression<Func<T, bool>> where, out ISave db);
+    Task<IQueryable<T>> ReadAsync<T>(Type type, Expression<Func<T, bool>> where);
+    Task<IQueryable<T>> ReadAsync<T>(Type type, Expression<Func<T, bool>> where, ISave db);
+
+    Task UpdateAsync<T>(T input) where T : class, IInt64Key;
+    Task UpdateAsync(Type type, IInt64Key input);
+
+    Task<T> FindAsync<T>(long id, out ISave repo) where T : class, IInt64Key;
+    Task<T> FindAsync<T>(long id) where T : class, IInt64Key;
+    Task<T> FindAsync<T>(Type type, long id, out ISave repo) where T : class, IInt64Key;
+    Task<T> FindAsync<T>(Type type, long id) where T : class, IInt64Key;
+    Task<object> FindAsync(Type type, long id, out ISave repo);
+    Task<object> FindAsync(Type type, long id);
+    Task DeleteAsync<T>(ISave repo, T model) where T : class, IInt64Key;
+    Task DeleteAsync<T>(T model, ISave repo = null) where T : class, IInt64Key;
+    Task DeleteAsync(object model, ISave repo = null);
   }
 }
 

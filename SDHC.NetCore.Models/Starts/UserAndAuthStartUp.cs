@@ -31,7 +31,6 @@ namespace Microsoft.Extensions.DependencyInjection
       services.AddScoped<ISDHCMemberService, SDHCMemberService<TUser>>();
       services.AddScoped<ISDHCSignInService, SDHCSignInService<TUser>>();
       services.AddScoped<ISDHCUserManager, SDHCUserManager<TUser>>();
-      //services.AddScoped<IUserTwoFactorTokenProvider<TUser>, SDHCUserTwoFactorTokenProvider<TUser>>();
       services.AutorizeStartUpFunction();
     }
   }

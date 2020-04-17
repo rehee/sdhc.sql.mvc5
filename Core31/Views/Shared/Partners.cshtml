@@ -4,7 +4,7 @@
   var index = 0;
 }
 
-@foreach (Models.Partner item in sharedModel.Models.Where(b => b.Displayed))
+@foreach (var item in sharedModel.GetModels<Models.Partner>())
 {
   <div class="gdlr-core-item-list gdlr-core-gallery-column  gdlr-core-column-12 gdlr-core-item-pdlr gdlr-core-item-mgb @(index==0?"gdlr-core-column-first":"")">
     <div class="gdlr-core-gallery-list gdlr-core-media-image"><img src="@item.Image.ImagePath().GetUrlPath()" alt="" width=220 height=120 title=banner-1-d></div>

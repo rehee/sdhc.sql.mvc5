@@ -50,11 +50,24 @@ namespace System
         AssemblyName = type?.Assembly.FullName,
         View = new SharedLinkView(Newtonsoft.Json.JsonConvert.SerializeObject(models), model.Key)
       };
-
       return result;
     }
-
-
-
+    public static IEnumerable<T> GetModels<T>(this SharedLinkPost model, Func<T, bool> where = null, Func<T, int> orderBy = null, bool asc = true) where T : ISharedLink
+    {
+      if (where == null)
+      {
+        where = b => b.Displayed;
+      }
+      if (orderBy == null)
+      {
+        orderBy = b => b.DisplayOrder;
+      }
+      var query = model.Models.Where(b => where((T)b)).Select(b => (T)b);
+      if (asc)
+      {
+        return query.OrderBy(orderBy);
+      }
+      return query.OrderByDescending(orderBy);
+    }
   }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
@@ -19,8 +20,9 @@ namespace Controllers
     {
       db.BaseContentModels.FirstOrDefault();
     }
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
+      var model = (await ServiceContainer.ModelService.ReadAsync<About>(b => true)).ToList();
       return View(null);
     }
     public IActionResult Files()

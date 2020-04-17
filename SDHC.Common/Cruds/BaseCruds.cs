@@ -3,6 +3,7 @@ using SDHC.Common.Entity.Models;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace System
 {
@@ -16,6 +17,8 @@ namespace System
 
     public virtual void Create(IInt64Key model, ISave repo)
     {
+      if (model == null || repo == null)
+        return;
       var type = model.GetType().GetRealType();
       var repoType = repo.GetType();
       var addMethod = repo.GetMethod(type, "Add", out object p);
@@ -34,6 +37,8 @@ namespace System
     }
     public void Create<T>(T input) where T : class
     {
+      if (input == null)
+        return;
       var type = typeof(T);
       var repo = this.GetRepo();
       var set = repo.GetDbSet<T>();
@@ -41,14 +46,12 @@ namespace System
       addFunc.Invoke(set, new object[1] { input });
       repo.SaveChanges();
     }
-
     public virtual IQueryable<object> GetDbSet(Type type, out ISave repo)
     {
       repo = GetRepo();
       var set = repo.GetDbSet(type);
       return (IQueryable<object>)set;
     }
-
     public virtual void Create(object input, out ISave repo)
     {
       repo = GetRepo();
@@ -77,7 +80,6 @@ namespace System
         }
       }
     }
-
     public virtual IQueryable<T> Read<T>(Expression<Func<T, bool>> where, out ISave db) where T : class
     {
       db = GetRepo();
@@ -110,7 +112,6 @@ namespace System
         return null;
       return Queryable.Where<T>(dbset, where);
     }
-
     public void Update<T>(T input) where T : class, IInt64Key
     {
       var model = Find<T>(input.Id, out ISave db);
@@ -213,6 +214,191 @@ namespace System
 
         }
       }
+    }
+
+    public Task CreateAsync(IInt64Key model, ISave repo)
+    {
+      return Task.Run(() =>
+      {
+        Create(model, repo);
+      });
+    }
+
+    public Task CreateAsync<T>(T input) where T : class
+    {
+      return Task.Run(() =>
+      {
+        Create(input);
+      });
+    }
+
+    public Task CreateAsync(object input, out ISave repo)
+    {
+      var thisRepo = GetRepo();
+      repo = thisRepo;
+      return CreateAsync(input, thisRepo);
+    }
+
+    public Task CreateAsync(object input)
+    {
+      return Task.Run(() =>
+      {
+        Create(input);
+      });
+    }
+
+    public Task CreateAsync(object input, ISave repo)
+    {
+      return Task.Run(() =>
+      {
+        Create(input, repo);
+      });
+    }
+
+    public Task<IQueryable<T>> ReadAsync<T>(Expression<Func<T, bool>> where, out ISave db) where T : class
+    {
+      var thisDb = GetRepo();
+      db = GetRepo();
+      var task = new Task<IQueryable<T>>(() =>
+      {
+        return Read<T>(where, thisDb);
+      });
+      task.Start();
+      return task;
+    }
+
+    public Task<IQueryable<T>> ReadAsync<T>(Expression<Func<T, bool>> where) where T : class
+    {
+      var task = new Task<IQueryable<T>>(() =>
+      {
+        return Read<T>(where);
+      });
+      task.Start();
+      return task;
+    }
+
+    public Task<IQueryable<T>> ReadAsync<T>(Expression<Func<T, bool>> where, ISave db) where T : class
+    {
+      var task = new Task<IQueryable<T>>(() =>
+      {
+        return Read<T>(where, db);
+      });
+      task.Start();
+      return task;
+    }
+
+    public Task<IQueryable<T>> ReadAsync<T>(Type type, Expression<Func<T, bool>> where, out ISave db)
+    {
+      var thisDb = GetRepo();
+      db = thisDb;
+      var task = new Task<IQueryable<T>>(() =>
+      {
+        return Read<T>(type, where, thisDb);
+      });
+      task.Start();
+      return task;
+    }
+
+    public Task<IQueryable<T>> ReadAsync<T>(Type type, Expression<Func<T, bool>> where)
+    {
+      var task = new Task<IQueryable<T>>(() =>
+      {
+        return Read<T>(type, where);
+      });
+      task.Start();
+      return task;
+    }
+
+    public Task<IQueryable<T>> ReadAsync<T>(Type type, Expression<Func<T, bool>> where, ISave db)
+    {
+      var task = new Task<IQueryable<T>>(() =>
+      {
+        return Read<T>(type, where, db);
+      });
+      task.Start();
+      return task;
+    }
+
+    public Task UpdateAsync<T>(T input) where T : class, IInt64Key
+    {
+      return Task.Run(() =>
+      {
+        Update<T>(input);
+      });
+    }
+
+    public Task UpdateAsync(Type type, IInt64Key input)
+    {
+      return Task.Run(() =>
+      {
+        UpdateAsync(type, input);
+      });
+    }
+
+    public Task<T> FindAsync<T>(long id, out ISave repo) where T : class, IInt64Key
+    {
+      var result = Find<T>(id, out repo);
+      return Task.FromResult(result);
+    }
+
+    public Task<T> FindAsync<T>(long id) where T : class, IInt64Key
+    {
+      return Task<T>.Run(() =>
+      {
+        return Find<T>(id);
+      });
+    }
+
+    public Task<T> FindAsync<T>(Type type, long id, out ISave repo) where T : class, IInt64Key
+    {
+      var result = Find<T>(type, id, out repo);
+      return Task.FromResult(result);
+    }
+
+    public Task<T> FindAsync<T>(Type type, long id) where T : class, IInt64Key
+    {
+      return Task<T>.Run(() =>
+      {
+        return Find<T>(type, id);
+      });
+    }
+
+    public Task<object> FindAsync(Type type, long id, out ISave repo)
+    {
+      var result = Find(type, id, out repo);
+      return Task.FromResult(result);
+    }
+
+    public Task<object> FindAsync(Type type, long id)
+    {
+      return Task<object>.Run(() =>
+      {
+        return Find(type, id);
+      });
+    }
+
+    Task ICrud.DeleteAsync<T>(ISave repo, T model)
+    {
+      return Task.Run(() =>
+      {
+        Delete<T>(repo, model);
+      });
+    }
+
+    Task ICrud.DeleteAsync<T>(T model, ISave repo)
+    {
+      return Task.Run(() =>
+      {
+        Delete<T>(model, repo);
+      });
+    }
+
+    public Task DeleteAsync(object model, ISave repo = null)
+    {
+      return Task.Run(() =>
+      {
+        Delete(model, repo);
+      });
     }
   }
 }

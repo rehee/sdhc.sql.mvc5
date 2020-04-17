@@ -3,7 +3,7 @@
   var sharedModel = Model.GetSharedLinkPost(nameof(Models.BaseContentModel.HomeAbout));
   var index = 1;
 
-  var homeAbout = sharedModel.Models.Where(b => b.Displayed).FirstOrDefault() as Models.About;
+  var homeAbout = sharedModel.GetModels<Models.About>().FirstOrDefault();
 }
 <div class=gdlr-core-pbf-background-wrap></div>
 <div class="gdlr-core-pbf-wrapper-content gdlr-core-js ">
