@@ -4,6 +4,7 @@ using SDHC.NetCore.Models.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace Admin.Areas.Admin.Controllers
@@ -110,31 +111,15 @@ namespace Admin.Areas.Admin.Controllers
 
     public ActionResult EditSharedLink(long? id, int? lang, string typeName)
     {
-      var type = Type.GetType(typeName);
-      ISharedLink model = CrudContainer.CrudModel.Read<ISharedLink>(type, b => b.Id == id).FirstOrDefault();
-      if (model == null)
-      {
-        model = Activator.CreateInstance(type) as ISharedLink;
-        model.Lang = lang ?? 0;
-        model.DisplayOrder = CrudContainer.CrudModel.Read<ISharedLink>(type, b => b.Lang == lang).OrderByDescending(b => b.DisplayOrder).FirstOrDefault()?.DisplayOrder ?? 0;
-      }
-      return View(model.ConvertModelToModelPostModel());
+      var model = ServiceContainer.ModelService.GetSharedLink(id, lang, typeName);
+      if(model==null)
+        return RedirectToAction("CloseWindow", "CommonFunction", new { @area = "" });
+      return View(model);
     }
     [HttpPost]
-    public ActionResult EditSharedLink(ModelPostModel model)
+    public async Task<ActionResult> EditSharedLink(ModelPostModel model)
     {
-      try
-      {
-        if (model.Id <= 0)
-        {
-          ServiceContainer.ModelService.Create(model);
-        }
-        else
-        {
-          ServiceContainer.ModelService.Update(model);
-        }
-      }
-      catch { }
+      await ServiceContainer.ModelService.CreateOrUpdate(model);
       return RedirectToAction("CloseWindow", "CommonFunction", new { @area = "" });
     }
   }

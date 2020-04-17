@@ -191,5 +191,21 @@ namespace SDHC.Common.Services
       return result;
     }
 
+    public ModelPostModel GetSharedLink(long? id, int? lang, string typeName)
+    {
+      if (String.IsNullOrWhiteSpace(typeName))
+        return null;
+      var type = Type.GetType(typeName);
+      if (type == null)
+        return null;
+      var model = Read<ISharedLink>(type, b => b.Id == id).FirstOrDefault();
+      if (model == null)
+      {
+        model = Activator.CreateInstance(type) as ISharedLink;
+        model.Lang = lang ?? 0;
+        model.DisplayOrder = CrudContainer.CrudModel.Read<ISharedLink>(type, b => b.Lang == lang).OrderByDescending(b => b.DisplayOrder).FirstOrDefault()?.DisplayOrder ?? 0;
+      }
+      return model.ConvertModelToModelPostModel();
+    }
   }
 }

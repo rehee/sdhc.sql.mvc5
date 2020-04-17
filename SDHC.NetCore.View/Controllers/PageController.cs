@@ -26,14 +26,17 @@ namespace SDHC.NetCore.View.Controllers
       var model = ServiceContainer.ContentService.GetContent(path, currentLang);
       return View($"Views/Pages/{model.GetType().Name}.cshtml", new ContentViewModal(model.ConvertModelToPost(), "ContentModel"));
     }
-    public IActionResult Detail(long? id)
+    public async Task<IActionResult> Detail(long? id)
     {
       try
       {
+        if (!id.HasValue)
+          return Content("");
+        var model = await ServiceContainer.ContentService.GetContentViewModel(id.Value, "ContentModel");
+        if (model == null)
+          return Content("");
         ViewBag.IsReview = true;
-        var model = ServiceContainer.ContentService.GetContent(id);
-        return View($"Views/Pages/{model.GetType().Name}.cshtml", new ContentViewModal(model.ConvertModelToPost(), "ContentModel"));
-
+        return View($"Views/Pages/{model.ViewPath}.cshtml", model);
       }
       catch { }
       return Content("");

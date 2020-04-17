@@ -29,6 +29,10 @@ namespace System
       var type = input.GetType().GetRealType();
       model.FullType = type.FullName;
       model.ThisAssembly = type.Assembly.FullName;
+      if(model is ContentPostModel)
+      {
+        (model as ContentPostModel).ViewPath = type.Name;
+      }
       var resultProperty = model.GetType().GetRealType().GetProperties().Where(b => b.BaseProperty()).ToList();
       var properties = input.GetType().GetRealType().GetProperties();
       foreach (var p in properties)

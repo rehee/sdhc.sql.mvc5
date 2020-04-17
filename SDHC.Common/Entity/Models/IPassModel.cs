@@ -49,6 +49,8 @@ namespace SDHC.Common.Entity.Models
     public long DisplayOrder { get; set; }
     [BaseProperty]
     public int? Lang { get; set; }
+    [BaseProperty]
+    public string ViewPath { get; set; }
     public List<ContentProperty> Properties { get; set; } = PassModeConvert.NewContentPropertyList();
   }
 
@@ -120,6 +122,7 @@ namespace SDHC.Common.Entity.Models
     public ContentViewModal(ContentPostModel model, string outerKey = null) : base(model, outerKey, model.Lang)
     {
     }
+    public string ViewPath => Model.ViewPath;
   }
   public class ModelViewModal : IPostModeltViewModal<ModelPostModel>
   {
@@ -127,7 +130,7 @@ namespace SDHC.Common.Entity.Models
     {
     }
   }
-  
+
   public class ContentViewModelSummary
   {
     public ContentViewModal ContentModel { get; set; }

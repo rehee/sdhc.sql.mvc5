@@ -3,7 +3,7 @@
   var sharedModel = Model.GetSharedLinkPost(nameof(Models.BaseContentModel.OurServices));
   var index = 0;
 }
-@foreach (Models.OurService item in sharedModel.Models)
+@foreach (var item in sharedModel.GetModels<Models.OurService>())
 {
   <div class="gdlr-core-pbf-column gdlr-core-column-20 @(index==0?"gdlr-core-column-first":"")">
     <div class="gdlr-core-pbf-column-content-margin gdlr-core-js " style="padding: 0px 0px 40px 0px;">

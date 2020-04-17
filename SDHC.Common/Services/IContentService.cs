@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SDHC.Common.Services
 {
@@ -26,5 +27,9 @@ namespace SDHC.Common.Services
     long? UpdateContentOrder(IEnumerable<ContentSortPostModel> inputs);
 
     ContentIndexViewModel<T> GetContentIndexViewModelByIdOrLang<T>(long? id, int? langKey, IList<string> roles) where T : IContentModel;
+
+    Task<ContentViewModal> GetContentViewModel(long id, string outKey = "");
+
+    Task Update(ContentViewModelSummaryPost model);
   }
 }

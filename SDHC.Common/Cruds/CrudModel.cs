@@ -51,5 +51,24 @@ namespace System
       }
       catch { }
     }
+
+    public Task CreateOrUpdate(ModelPostModel model)
+    {
+      return Task.Run(() =>
+      {
+        try
+        {
+          if (model.Id <= 0)
+          {
+            Create(model);
+          }
+          else
+          {
+            Update(model);
+          }
+        }
+        catch { }
+      });
+    }
   }
 }

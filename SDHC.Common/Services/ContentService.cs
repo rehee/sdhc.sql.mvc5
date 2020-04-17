@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SDHC.Common.Services
 {
@@ -306,6 +307,34 @@ namespace SDHC.Common.Services
     }
 
 
-
+    public Task<ContentViewModal> GetContentViewModel(long id, string outKey = "")
+    {
+      return Task<ContentViewModal>.Run(() =>
+      {
+        var content = GetContent(id);
+        if (content == null)
+          return null;
+        return new ContentViewModal(content.ConvertModelToPost(), outKey);
+      });
+    }
+    public Task Update(ContentViewModelSummaryPost model)
+    {
+      return Task.Run(() =>
+      {
+        try
+        {
+          ServiceContainer.ContentService.UpdateContent(model.ContentModel);
+        }
+        catch { }
+        foreach (var m in model.Models)
+        {
+          try
+          {
+            ServiceContainer.ModelService.Update(m);
+          }
+          catch { }
+        }
+      });
+    }
   }
 }

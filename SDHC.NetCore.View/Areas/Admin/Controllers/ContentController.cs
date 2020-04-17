@@ -105,27 +105,22 @@ namespace View.Areas.Admin.Controllers
       return RedirectToAction("Index");
     }
 
-    public IActionResult Preview(int? id)
+    public async Task<IActionResult> Preview(int? id)
     {
       if (!id.HasValue)
       {
         return RedirectToAction("index");
       }
-      var content = ServiceContainer.ContentService.GetContent(id);
+      var content = await ServiceContainer.ContentService.GetContentViewModel(id.Value, "ContentModel");
       if (content == null)
       {
         return RedirectToAction("index");
       }
-      var model = new ContentViewModal(content.ConvertModelToPost(), "ContentModel");
-      return View(model);
+      return View(content);
     }
-    public ActionResult EditPreview(ContentViewModelSummaryPost model)
+    public async Task<ActionResult> EditPreview(ContentViewModelSummaryPost model)
     {
-      ServiceContainer.ContentService.UpdateContent(model.ContentModel);
-      foreach (var m in model.Models)
-      {
-        ServiceContainer.ModelService.Update(m);
-      }
+      await ServiceContainer.ContentService.Update(model);
       return RedirectToAction("Index");
     }
   }

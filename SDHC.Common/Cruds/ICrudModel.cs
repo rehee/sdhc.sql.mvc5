@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SDHC.Common.Cruds
 {
@@ -12,6 +13,8 @@ namespace SDHC.Common.Cruds
     void Create(ModelPostModel model);
     void Update(ModelPostModel model);
     void Update(BaseViewModel model);
+
+    Task CreateOrUpdate(ModelPostModel model);
   }
 }
 

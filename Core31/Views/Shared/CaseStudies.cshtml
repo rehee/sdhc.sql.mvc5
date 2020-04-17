@@ -4,7 +4,7 @@
   var index = 0;
 }
 
-@foreach (Models.CaseStudy item in sharedModel.Models.Where(b => b.Displayed))
+@foreach (var item in sharedModel.GetModels<Models.CaseStudy>())
 {
   <div class="gdlr-core-item-list  gdlr-core-item-pdlr gdlr-core-column-20 @(index==0?"gdlr-core-column-first":"")">
     <div class="gdlr-core-blog-grid gdlr-core-style-3 gdlr-core-js  gdlr-core-blog-grid-with-frame gdlr-core-item-mgb gdlr-core-skin-e-background  gdlr-core-outer-frame-element gdlr-core-with-thumbnail" style="box-shadow: 0 0 35px rgba(10, 10, 10,0.08); -moz-box-shadow: 0 0 35px rgba(10, 10, 10,0.08); -webkit-box-shadow: 0 0 35px rgba(10, 10, 10,0.08); border-radius: 4px;-moz-border-radius: 4px;-webkit-border-radius: 4px;" data-sync-height=blog-item-1>
