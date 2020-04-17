@@ -61,6 +61,8 @@ namespace Models
   {
     [InputType(EditorType = EnumInputType.FileUpload)]
     public string Image { get; set; }
+    public string SubTitle { get; set; }
+    public string Content { get; set; }
 
   }
   public class HomePage : BaseContentModel

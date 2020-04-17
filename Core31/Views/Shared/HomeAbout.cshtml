@@ -33,7 +33,6 @@
               <div class="gdlr-core-text-box-item gdlr-core-item-pdlr gdlr-core-item-pdb gdlr-core-left-align" style="padding-bottom: 15px ;">
                 <div class=gdlr-core-text-box-item-content style="text-transform: none ;">
                   @Html.Raw(homeAbout?.Content?.Text() ?? "")
-                  <div class="btn btn-info" data-toggle="modal" data-target="#defaultmodal">Preview</div>
                 </div>
               </div>
             </div>
@@ -43,7 +42,7 @@
       </div>
       <div class="gdlr-core-pbf-column gdlr-core-column-30 gdlr-core-hide-in-mobile">
         <div class="gdlr-core-pbf-column-content-margin gdlr-core-js " data-sync-height=height-about>
-          <div class=gdlr-core-pbf-background-wrap style="border-radius: 0px 4px 4px 0px;-moz-border-radius: 0px 4px 4px 0px;-webkit-border-radius: 0px 4px 4px 0px;">
+          <div id="bg-wrap-id" class=gdlr-core-pbf-background-wrap style="border-radius: 0px 4px 4px 0px;-moz-border-radius: 0px 4px 4px 0px;-webkit-border-radius: 0px 4px 4px 0px;">
             <div class="gdlr-core-pbf-background gdlr-core-parallax gdlr-core-js" style="background-image: url(@homeAbout?.Image.ImagePath().GetUrlPath()) ;background-size: cover ;background-position: center ;" data-parallax-speed=0></div>
           </div>
           <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js  gdlr-core-sync-height-content"></div>
@@ -52,3 +51,10 @@
     </div>
   </div>
 </div>
+
+<script>
+  function @(Model.GetModelNameByName(nameof(Models.BaseContentModel.HomeAbout)))_refresh(){
+    var outer = jQuery('#gdlr-core-wrapper-1').height();
+    jQuery('#bg-wrap-id').css('height', outer);
+  }
+</script>

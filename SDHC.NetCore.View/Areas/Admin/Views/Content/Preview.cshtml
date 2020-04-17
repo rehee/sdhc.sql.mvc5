@@ -73,6 +73,7 @@
             var refreshUrl = `@Html.Raw(@Url.Action("GetSharedView", "SharedLinks", new { @id = p.ModelId, @key = p.Property.Key, @fullType = p.FullType, @asm = p.AssemblyName, @area = "Admin" }))`;
             setTimeout(function () {
               $.get(refreshUrl, function (r) {
+                console.log(r);
                 if (!r) {
                   return;
                 }
