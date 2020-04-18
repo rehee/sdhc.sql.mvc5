@@ -5370,18 +5370,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Admin\Admin.csproj">
-      <Project>{429cb85d-6359-4365-b5d4-8e97722a730d}</Project>
-      <Name>Admin</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Entity\Entities.csproj">
-      <Project>{f2c8f800-1b09-4f8c-8099-edbf5088098d}</Project>
-      <Name>Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SDHC.Common.Entity\SDHC.Common.Entity.csproj">
-      <Project>{27b1ce81-9446-4e82-a23d-10d6f4269c16}</Project>
-      <Name>SDHC.Common.Entity</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SDHC.Common\SDHC.Common.csproj">
       <Project>{38ac9be4-4fd0-4db7-827a-e0bb80e3dde3}</Project>
       <Name>SDHC.Common</Name>
