@@ -14,7 +14,7 @@ namespace SDHC.NetCore.Models.Attributes
     {
       if (!ConfigContainer.Systems.AdminFree)
       {
-        var adminRoleForSetting = ConfigContainer.GetSetting(adminRole);
+        var adminRoleForSetting = ConfigContainer.GetSetting($"Roles:{adminRole}");
         var DefaultadminRole = ConfigContainer.Systems.AdminRole;
         var supperUser = ConfigContainer.Systems.SuperUserRole;
         var roleLists = new List<string>();

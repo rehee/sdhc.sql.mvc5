@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
+using SDHC.Common.Configs;
 using SDHC.Common.Services;
 using SDHC.NetCore.Models.Models;
 using SDHC.NetCore.Models.Services;

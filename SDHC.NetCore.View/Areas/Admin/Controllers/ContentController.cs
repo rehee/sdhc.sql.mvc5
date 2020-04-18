@@ -20,14 +20,18 @@ namespace View.Areas.Admin.Controllers
   [Area("Admin")]
   public class ContentController : Controller
   {
+    private readonly IAdminControlService ac;
+
     LanguageConfig langConfig { get; }
-    public ContentController(IOptions<LanguageConfig> lang)
+    public ContentController(IOptions<LanguageConfig> lang, IAdminControlService ac)
     {
       this.langConfig = lang.Value;
+      this.ac = ac;
     }
     [Admin(adminRole: "ContentIndex")]
     public IActionResult Index(long? id, int? lang)
     {
+      ac.Check(this);
       var that = this;
       var inputLang = langConfig.GetLangKey(lang);
       var roles = new List<string>();
@@ -44,6 +48,7 @@ namespace View.Areas.Admin.Controllers
     [Admin(adminRole: "ContentCreate")]
     public ActionResult PreCreate(long? ContentId, string FullTypeAndAssembly, int? LangKey)
     {
+      ac.Check(this);
       var content = ServiceContainer.ContentService.GetPreCreate(ContentId, FullTypeAndAssembly, langConfig.GetLangKey(LangKey));
       return View("Create", content);
     }
@@ -51,6 +56,7 @@ namespace View.Areas.Admin.Controllers
     [Admin(adminRole: "ContentCreate")]
     public ActionResult Create(ContentPostModel model)
     {
+      ac.Check(this);
       var content = model.ConvertToBaseModel() as BaseContent;
       ServiceContainer.ContentService.CreateContent(content, content.ParentId);
       return RedirectToAction("Index", "Content", new { @id = content.Id, @lang = content.Lang, @area = "Admin" });
@@ -59,6 +65,7 @@ namespace View.Areas.Admin.Controllers
     [Admin(adminRole: "ContentEdit")]
     public ActionResult Edit(long? id)
     {
+      ac.Check(this);
       if (!id.HasValue)
       {
         return RedirectToAction("index");
@@ -74,12 +81,14 @@ namespace View.Areas.Admin.Controllers
     [Admin(adminRole: "ContentEdit")]
     public ActionResult Edit(ContentPostModel model)
     {
+      ac.Check(this);
       ServiceContainer.ContentService.UpdateContent(model);
       return RedirectToAction("Index");
     }
     [Admin(adminRole: "ContentSort")]
     public ActionResult Sort(long? id, int? lang)
     {
+      ac.Check(this);
       var model = ServiceContainer.ContentService.GetContentListView(id, 0, langConfig.GetLangKey(lang));
       return View(model);
     }
@@ -87,6 +96,7 @@ namespace View.Areas.Admin.Controllers
     [Admin(adminRole: "ContentSort")]
     public ActionResult Sort(IEnumerable<ContentSortPostModel> input)
     {
+      ac.Check(this);
       ServiceContainer.ContentService.UpdateContentOrder(input);
       return RedirectToAction("Sort");
     }
@@ -94,6 +104,7 @@ namespace View.Areas.Admin.Controllers
     [Admin(adminRole: "ContentDelete")]
     public ActionResult Delete(long? id)
     {
+      ac.Check(this);
       if (!id.HasValue)
         return RedirectToAction("Index", "Content", new { @area = ConfigContainer.Systems.AdminPath });
       var content = ServiceContainer.ContentService.GetContent(id);
@@ -105,6 +116,7 @@ namespace View.Areas.Admin.Controllers
     [Admin("ContentEdit")]
     public async Task<IActionResult> Preview(int? id)
     {
+      ac.Check(this);
       if (!id.HasValue)
       {
         return RedirectToAction("index");
@@ -119,6 +131,7 @@ namespace View.Areas.Admin.Controllers
     [Admin("ContentEdit")]
     public async Task<ActionResult> EditPreview(ContentViewModelSummaryPost model)
     {
+      ac.Check(this);
       await ServiceContainer.ContentService.Update(model);
       return RedirectToAction("Index");
     }

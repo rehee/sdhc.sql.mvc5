@@ -30,6 +30,7 @@ namespace SDHC.NetCore.View.Controllers
     [Admin("ContentEdit")]
     public async Task<IActionResult> Detail(long? id)
     {
+      
       try
       {
         if (!id.HasValue)

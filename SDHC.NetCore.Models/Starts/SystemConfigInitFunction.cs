@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using SDHC.Common.Configs;
+using SDHC.NetCore.Models.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -15,6 +16,8 @@ namespace Microsoft.Extensions.DependencyInjection
     {
       serviceCollection.Configure<SystemConfig>(configuration.GetSection(systemConfigKey));
       serviceCollection.Configure<LanguageConfig>(configuration.GetSection(nameof(LanguageConfig)));
+      serviceCollection.Configure<AdminControl>(configuration.GetSection(nameof(AdminControl)));
+      serviceCollection.AddSingleton<IAdminControlService, AdminControlService>();
       ConfigContainer.GetSetting = (key) => configuration.GetValue<string>(key);
       IConfigurationSection sec = configuration.GetSection(systemConfigKey);
       var type = typeof(SystemConfig);
