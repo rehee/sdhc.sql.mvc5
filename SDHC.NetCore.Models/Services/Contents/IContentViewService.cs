@@ -27,7 +27,6 @@ namespace SDHC.NetCore.Models.Services.Contents
     {
       get => modelMapper.Values;
     }
-
     public ContentViewService(ISDHCLanguageService lang, IOptions<LanguageConfig> langSetting)
     {
       this.lang = lang;
@@ -41,25 +40,21 @@ namespace SDHC.NetCore.Models.Services.Contents
         index++;
       }
     }
-
     public string GetModalNameByName<T>(int lang, string name)
     {
       var key = typeof(T).FullName;
       return modelMapper[new Tuple<string, int>(key, lang)]?.GetModalNameByName(name);
     }
-
     public string GetValueByName<T>(int lang, string name)
     {
       var key = typeof(T).FullName;
       return modelMapper[new Tuple<string, int>(key, lang)]?.GetValueByName(name);
     }
-
     public string GetModalRefreshByName<T>(int lang, string name)
     {
       var key = typeof(T).FullName;
       return modelMapper[new Tuple<string, int>(key, lang)]?.GetModalRefreshByName(name);
     }
-
     public string GetModalReviewByName<T>(int lang, string name)
     {
       var key = typeof(T).FullName;

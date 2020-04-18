@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -20,15 +21,14 @@ namespace View.Areas.Admin.Controllers
   public class ContentController : Controller
   {
     LanguageConfig langConfig { get; }
-    DateTime start { get; }
     public ContentController(IOptions<LanguageConfig> lang)
     {
-      start = DateTime.UtcNow;
       this.langConfig = lang.Value;
     }
     [Admin(adminRole: "ContentIndex")]
     public IActionResult Index(long? id, int? lang)
     {
+      var that = this;
       var inputLang = langConfig.GetLangKey(lang);
       var roles = new List<string>();
       if (HttpContext.User.Identity.IsAuthenticated)
@@ -38,8 +38,6 @@ namespace View.Areas.Admin.Controllers
         roles = CrudContainer.Crud.Read<IdentityRole>(b => users.Contains(b.Id)).Select(b => b.Name).ToList();
       }
       var end = DateTime.UtcNow;
-      ViewBag.start = start;
-      ViewBag.end = end;
       return View(ServiceContainer.ContentService.GetContentIndexViewModelByIdOrLang<BaseContent>(id, inputLang, roles));
     }
     [HttpPost]
@@ -104,7 +102,7 @@ namespace View.Areas.Admin.Controllers
       CrudContainer.CrudContent.Delete(id.Value);
       return RedirectToAction("Index");
     }
-
+    [Admin("ContentEdit")]
     public async Task<IActionResult> Preview(int? id)
     {
       if (!id.HasValue)
@@ -118,6 +116,7 @@ namespace View.Areas.Admin.Controllers
       }
       return View(content);
     }
+    [Admin("ContentEdit")]
     public async Task<ActionResult> EditPreview(ContentViewModelSummaryPost model)
     {
       await ServiceContainer.ContentService.Update(model);

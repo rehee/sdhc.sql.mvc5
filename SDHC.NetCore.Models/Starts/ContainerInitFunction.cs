@@ -15,19 +15,17 @@ namespace Microsoft.Extensions.DependencyInjection
 {
   public static class ContainerInitFunction
   {
-    public static void ContainerInit<TRepo, TBaseContent, TBaseSelect, TUser>([NotNullAttribute] this IServiceCollection serviceCollection,
+    public static void ContainerInit<TRepo, TBaseContent, TUser>([NotNullAttribute] this IServiceCollection serviceCollection,
       Action<DbContextOptionsBuilder> optionsAction, SystemConfig config)
       where TRepo : DbContext, IContent
       where TBaseContent : BaseContent
-      where TBaseSelect : BaseSelect
     {
       var builder = new DbContextOptionsBuilder<TRepo>();
       optionsAction(builder);
       var options = builder.Options;
-      var crudInit = new CrudSelectInit(
+      var crudInit = new CrudInit(
         () => Activator.CreateInstance(typeof(TRepo), options) as TRepo,
-        typeof(TBaseContent), typeof(TBaseSelect)
-      );
+        typeof(TBaseContent));
       CrudContainer.Crud = new BaseCruds(crudInit);
       CrudContainer.CrudModel = new CrudModel(crudInit);
       CrudContainer.CrudContent = new CrudContent(crudInit);

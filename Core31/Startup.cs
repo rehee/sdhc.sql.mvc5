@@ -27,7 +27,7 @@ namespace Core31
       // Source: https://dotnetstories.com/blog/Dynamically-pre-load-assemblies-in-a-ASPNET-Core-or-any-C-project-en-7155735300
 
 
-      services.StartUpFunction<MyDBContext, SDHCUser, BaseContentModel, BaseSelectModel>(Configuration, WebHostEnvironment);
+      services.StartUpFunction<MyDBContext, SDHCUser, BaseContentModel>(Configuration, WebHostEnvironment);
       services.AddSignalR();
       services.UseChat();
       ServiceContainer.ModelService.AddSharedContent<Home>();
@@ -39,8 +39,10 @@ namespace Core31
       if (env.IsDevelopment())
       {
       }
-      app.UseDeveloperExceptionPage();
-      StartUpContainer.Configure(app, env);
+      //app.UseDeveloperExceptionPage();
+      app.UseStatusCodePagesWithReExecute("/error/{0}");
+      app.UseExceptionHandler("/error/500");
+      app.UseSDHC(env);
       app.UseChat();
 
       ServiceContainer.ModelService.ModelMapper.Add("OurService", typeof(OurService));

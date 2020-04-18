@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Host;
 using SDHC.Common.Entity.Models;
 using SDHC.Common.Services;
+using SDHC.NetCore.Models.Attributes;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -26,6 +27,7 @@ namespace SDHC.NetCore.View.Controllers
       var model = ServiceContainer.ContentService.GetContent(path, currentLang);
       return View($"Views/Pages/{model.GetType().Name}.cshtml", new ContentViewModal(model.ConvertModelToPost(), "ContentModel"));
     }
+    [Admin("ContentEdit")]
     public async Task<IActionResult> Detail(long? id)
     {
       try

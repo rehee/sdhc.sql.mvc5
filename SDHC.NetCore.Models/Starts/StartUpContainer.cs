@@ -22,11 +22,10 @@ namespace Microsoft.Extensions.DependencyInjection
 {
   public static class StartUpContainer
   {
-    public static void StartUpFunction<TRepo, TUser, TBaseContent, TBaseSelect>(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment env)
+    public static void StartUpFunction<TRepo, TUser, TBaseContent>(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment env)
       where TRepo : DbContext, IContent
       where TUser : SDHCUser, new()
       where TBaseContent : BaseContent
-      where TBaseSelect : BaseSelect
     {
       var systemConfigKey = "SystemConfig";
       services.AddSession();
@@ -39,7 +38,7 @@ namespace Microsoft.Extensions.DependencyInjection
       };
       services.AddDbContext<TRepo>(dbAction);
 
-      services.InitSDHCContainer<TRepo, TBaseContent, TBaseSelect, FormFile, TUser>(configuration, dbAction,
+      services.InitSDHCContainer<TRepo, TBaseContent, FormFile, TUser>(configuration, dbAction,
                env.ContentRootPath, systemConfigKey);
 
 
@@ -54,7 +53,7 @@ namespace Microsoft.Extensions.DependencyInjection
       services.ConfigureOptions(typeof(V.EditorRCLConfigureOptions));
       services.AddScoped<IViewRenderService, ViewRenderService>();
     }
-    public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    public static void UseSDHC(this IApplicationBuilder app, IWebHostEnvironment env)
     {
       app.UseStaticFiles();
       app.UseHttpsRedirection();

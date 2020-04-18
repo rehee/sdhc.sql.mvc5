@@ -20,15 +20,14 @@ namespace Microsoft.Extensions.DependencyInjection
 {
   public static class ConfigContainerStartUp
   {
-    public static void InitSDHCContainer<TRepo, TBaseContent, TBaseSelect, TFileSngle, TUser>([NotNullAttribute] this IServiceCollection serviceCollection,
+    public static void InitSDHCContainer<TRepo, TBaseContent, TFileSngle, TUser>([NotNullAttribute] this IServiceCollection serviceCollection,
       IConfiguration configuration, Action<DbContextOptionsBuilder> optionsAction, string basicRoot, string systemConfigKey)
       where TRepo : DbContext, IContent
       where TBaseContent : BaseContent
-      where TBaseSelect : BaseSelect
       where TFileSngle : IFormFile
     {
       serviceCollection.SystemConfigInit(configuration, systemConfigKey);
-      serviceCollection.ContainerInit<TRepo, TBaseContent, TBaseSelect, TUser>(optionsAction, ConfigContainer.Systems);
+      serviceCollection.ContainerInit<TRepo, TBaseContent, TUser>(optionsAction, ConfigContainer.Systems);
       serviceCollection.AddScoped<ISDHCLanguageServiceInit, SDHCLanguageServiceInit>();
       serviceCollection.TryAddScoped<ISDHCLanguageService, SDHCLanguageService>();
       serviceCollection.FileServiceInit<TFileSngle>(basicRoot);

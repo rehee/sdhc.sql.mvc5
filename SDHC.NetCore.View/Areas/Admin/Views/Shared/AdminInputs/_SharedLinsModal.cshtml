@@ -86,7 +86,7 @@
 
   function refresh_@(sharedLink.View.AppName)() {
     swal("Success!", "Your record has been deleted.", "success");
-    var thisUrl = `@Html.Raw(Url.Action("GetSharedLinks", "SharedLinks", new {@id=Model.ModelId,@key=Model.Property.Key,@fullType=Model.FullType,@asm=Model.AssemblyName ,@area="Admin" }))`;
+    var thisUrl = `@Html.Raw(Url.Action("GetSharedLinks", "SharedLinks", new {@id=Model.ModelId,@key=Model.Property.Key,@area="Admin" }))`;
     $.get(thisUrl, function (data) {
       setTimeout(() => swal.close(), 500);
       if (data && data.value) {

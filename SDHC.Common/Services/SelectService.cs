@@ -9,10 +9,17 @@ namespace SDHC.Common.Services
 {
   public class SelectService : ModelService, ISelectService
   {
-    public Type BasicSelectType { get; }
-    public SelectService(ICrudSelect init) : base(init)
+
+    public SelectService(CrudInit init) : base(init)
     {
-      this.BasicSelectType = init.BasicSelectType;
+
+    }
+    private List<Type> allowSelect { get; } = new List<Type>();
+    public void AddSelectType<T>() where T : IBasicSelect
+    {
+      var type = typeof(T);
+      if (!allowSelect.Any(b => b == type))
+        allowSelect.Add(type);
     }
     public IEnumerable<IBasicSelect> GetAllSelect(Type selectType)
     {
@@ -30,22 +37,16 @@ namespace SDHC.Common.Services
     }
     public IEnumerable<IBasicSelect> GetAllSelect(string type)
     {
-      var children = BasicSelectType.GetAllowChildren();
-      if (children == null)
+      if (!allowSelect.Any())
         return Enumerable.Empty<IBasicSelect>();
-      var selectType = children.ChildrenType.Where(b => String.Equals(b.FullName, type, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
-      if (children == null)
+      var selectType = allowSelect.FirstOrDefault(b => b.Name == type);
+      if (selectType == null)
         return Enumerable.Empty<IBasicSelect>();
       return GetAllSelect(selectType);
     }
     public IEnumerable<Type> GetAllAvaliableSelect()
     {
-      var avaliable = BasicSelectType.GetObjectCustomAttribute<AllowChildrenAttribute>(true);
-      if (avaliable == null || avaliable.ChildrenType == null)
-      {
-        return Enumerable.Empty<Type>();
-      }
-      return avaliable.ChildrenType;
+      return allowSelect;
     }
     public IEnumerable<DropDownSummary> GetAllAvaliableSelectList()
     {

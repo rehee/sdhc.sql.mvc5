@@ -20,16 +20,4 @@ namespace SDHC.Common.Cruds
       BaseIContentModelType = baseIContentModelType;
     }
   }
-  public interface ICrudSelect : ICrudInit
-  {
-    Type BasicSelectType { get; }
-  }
-  public class CrudSelectInit : CrudInit, ICrudSelect
-  {
-    public CrudSelectInit(Func<ISave> getRepo, Type baseIContentModelType, Type basicSelectType) : base(getRepo, baseIContentModelType)
-    {
-      BasicSelectType = basicSelectType;
-    }
-    public Type BasicSelectType { get; }
-  }
 }

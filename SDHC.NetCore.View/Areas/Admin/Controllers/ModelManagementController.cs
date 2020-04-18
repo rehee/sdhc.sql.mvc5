@@ -108,7 +108,7 @@ namespace Admin.Areas.Admin.Controllers
       }
       return RedirectToAction("Index", "ModelManagement", new { @area = ConfigContainer.Systems.AdminPath, @id = type });
     }
-
+    [Admin("ContentEdit")]
     public ActionResult EditSharedLink(long? id, int? lang, string typeName)
     {
       var model = ServiceContainer.ModelService.GetSharedLink(id, lang, typeName);
@@ -117,6 +117,7 @@ namespace Admin.Areas.Admin.Controllers
       return View(model);
     }
     [HttpPost]
+    [Admin("ContentEdit")]
     public async Task<ActionResult> EditSharedLink(ModelPostModel model)
     {
       await ServiceContainer.ModelService.CreateOrUpdate(model);
