@@ -9,6 +9,7 @@ using SDHC.Common.Entity.Models;
 using SDHC.Common.EntityCore.Models;
 using SDHC.Common.EntityCore.Services;
 using SDHC.Common.Services;
+using SDHC.NetCore.Models.Services.Razors;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -31,6 +32,8 @@ namespace Microsoft.Extensions.DependencyInjection
       serviceCollection.AddScoped<ISDHCLanguageServiceInit, SDHCLanguageServiceInit>();
       serviceCollection.TryAddScoped<ISDHCLanguageService, SDHCLanguageService>();
       serviceCollection.FileServiceInit<TFileSngle>(basicRoot);
+      serviceCollection.TryAddScoped<IViewNameService, ViewNameService>();
+
     }
   }
 }

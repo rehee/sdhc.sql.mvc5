@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Routing;
 
@@ -14,7 +16,7 @@ namespace System
 {
   public interface IViewRenderService
   {
-    Task<string> RenderToStringAsync(string viewName, object model);
+    Task<string> RenderToStringAsync(string viewName, object model, RouteData routeData = null, ActionDescriptor action = null, ActionContext context = null);
   }
 
   public class ViewRenderService : IViewRenderService
@@ -32,16 +34,16 @@ namespace System
       _serviceProvider = serviceProvider;
     }
 
-    public async Task<string> RenderToStringAsync(string viewName, object model)
+    public async Task<string> RenderToStringAsync(string viewName, object model, RouteData routeData = null, ActionDescriptor action = null, ActionContext context = null)
     {
       var httpContext = new DefaultHttpContext { RequestServices = _serviceProvider };
-      var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+      var actionContext = context ?? new ActionContext(httpContext, routeData ?? new RouteData(), action ?? new ActionDescriptor());
 
       using (var sw = new StringWriter())
       {
-        var viewResult = _razorViewEngine.FindView(actionContext, viewName, false);
+        var viewResult = FindView(actionContext, viewName);
 
-        if (viewResult.View == null)
+        if (viewResult == null)
         {
           throw new ArgumentNullException($"{viewName} does not match any available view");
         }
@@ -53,16 +55,45 @@ namespace System
 
         var viewContext = new ViewContext(
             actionContext,
-            viewResult.View,
+            viewResult,
             viewDictionary,
             new TempDataDictionary(actionContext.HttpContext, _tempDataProvider),
             sw,
             new HtmlHelperOptions()
         );
+        try
+        {
+          await viewResult.RenderAsync(viewContext);
 
-        await viewResult.View.RenderAsync(viewContext);
+        }
+        catch (Exception ex)
+        {
+          Console.WriteLine(ex.Message);
+        }
         return sw.ToString();
       }
+    }
+
+    private IView FindView(ActionContext actionContext, string viewName)
+    {
+      var getViewResult = _razorViewEngine.GetView(executingFilePath: null, viewPath: viewName, isMainPage: true);
+      if (getViewResult.Success)
+      {
+        return getViewResult.View;
+      }
+
+      var findViewResult = _razorViewEngine.FindView(actionContext, viewName, isMainPage: true);
+      if (findViewResult.Success)
+      {
+        return findViewResult.View;
+      }
+
+      var searchedLocations = getViewResult.SearchedLocations.Concat(findViewResult.SearchedLocations);
+      var errorMessage = string.Join(
+          Environment.NewLine,
+          new[] { $"Unable to find view '{viewName}'. The following locations were searched:" }.Concat(searchedLocations));
+
+      throw new InvalidOperationException(errorMessage);
     }
   }
 }

@@ -126,7 +126,7 @@ namespace SDHC.Common.Services
     public ContentPostModel GetPreCreate(long? id, string fullTypeAndAssembly, int? langKey)
     {
       long? parentId = null;
-      int? lang = null;
+      int lang = 0;
       if (id.HasValue)
       {
         var parent = Find<IContentModel>(BaseIContentModelType, id.Value);
@@ -138,7 +138,7 @@ namespace SDHC.Common.Services
       }
       else
       {
-        lang = langKey;
+        lang = langKey ?? 0;
       }
       var type = Type.GetType(fullTypeAndAssembly);
       if (type == null)
@@ -277,7 +277,7 @@ namespace SDHC.Common.Services
       {
         result.ChildrenAttribute = BaseIContentModelType.GetObjectCustomAttribute<AllowChildrenAttribute>();
         result.ContentId = null;
-        result.LanguageKey = null;
+        result.LanguageKey = langKey;
       }
       else
       {

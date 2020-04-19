@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Components.RenderTree;
+using Microsoft.AspNetCore.Mvc;
 using SDHC.Common.Entity.Models;
 using SDHC.NetCore.Models.Attributes;
 using System;
@@ -12,6 +13,12 @@ namespace Admin.Areas.Admin.Controllers
   [Area("Admin")]
   public class ModelManagementController : Controller
   {
+    private readonly IViewRenderService viewRender;
+
+    public ModelManagementController(IViewRenderService viewRender)
+    {
+      this.viewRender = viewRender;
+    }
     [Admin(adminRole: "ModelManagementIndex")]
     public ActionResult Index(string id)
     {
@@ -109,19 +116,18 @@ namespace Admin.Areas.Admin.Controllers
       return RedirectToAction("Index", "ModelManagement", new { @area = ConfigContainer.Systems.AdminPath, @id = type });
     }
     [Admin("ContentEdit")]
-    public ActionResult EditSharedLink(long? id, int? lang, string typeName)
+    public IActionResult EditSharedLink(long? id, int? lang, string typeName)
     {
       var model = ServiceContainer.ModelService.GetSharedLink(id, lang, typeName);
-      if(model==null)
-        return RedirectToAction("CloseWindow", "CommonFunction", new { @area = "" });
       return View(model);
     }
     [HttpPost]
     [Admin("ContentEdit")]
-    public async Task<ActionResult> EditSharedLink(ModelPostModel model)
+    public async Task<IActionResult> EditSharedLink(ModelPostModel model)
     {
       await ServiceContainer.ModelService.CreateOrUpdate(model);
       return RedirectToAction("CloseWindow", "CommonFunction", new { @area = "" });
+
     }
   }
 }

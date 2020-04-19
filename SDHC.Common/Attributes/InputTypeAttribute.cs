@@ -24,6 +24,7 @@ namespace System
     public bool NewLineAfter { get; set; }
     public bool HasRangeMin { get; set; }
     public bool HasRangeMax { get; set; }
+    public bool IsSingleRecord { get; set; } = false;
     public InputTypeAttribute()
     {
 
@@ -45,6 +46,7 @@ namespace System
     int InputWidth { get; set; }
     bool NewLine { get; set; }
     bool NewLineAfter { get; set; }
+    bool IsSingleRecord { get; set; }
   }
 
 }

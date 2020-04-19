@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SDHC.Common.Entity.Models;
 using SDHC.Common.EntityCore.Models;
+using SDHC.Common.Services;
 using SDHC.NetCore.Models.Attributes;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -17,10 +18,12 @@ namespace SDHC.NetCore.View.Areas.Admin.Controllers
   public class SharedLinksController : Controller
   {
     private readonly IViewRenderService viewRender;
+    private readonly IViewNameService viewNameService;
 
-    public SharedLinksController(IViewRenderService viewRender)
+    public SharedLinksController(IViewRenderService viewRender, IViewNameService viewNameService)
     {
       this.viewRender = viewRender;
+      this.viewNameService = viewNameService;
     }
     public async Task<IActionResult> GetSharedLinks(long id, string key)
     {
@@ -31,7 +34,7 @@ namespace SDHC.NetCore.View.Areas.Admin.Controllers
     public async Task<IActionResult> GetSharedView(long id, string key)
     {
       var m = await ServiceContainer.ContentService.GetContentViewModel(id, "ContentModel");
-      var content = await viewRender.RenderToStringAsync(key, m);
+      var content = await viewRender.RenderToStringAsync(viewNameService.ViewName(m.GetContentPropertyByName(key)), m, context: this.ControllerContext);
       return Content(content);
     }
     [HttpPost]
@@ -46,7 +49,7 @@ namespace SDHC.NetCore.View.Areas.Admin.Controllers
         db.SaveChanges();
       }
       catch { }
-      
+
       return await GetSharedLinks(id, key);
     }
     [HttpPost]

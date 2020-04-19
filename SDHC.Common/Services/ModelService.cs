@@ -198,7 +198,16 @@ namespace SDHC.Common.Services
       var type = Type.GetType(typeName);
       if (type == null)
         return null;
-      var model = Read<ISharedLink>(type, b => b.Id == id).FirstOrDefault();
+      ISharedLink model = null;
+      if (id == -1)
+      {
+        model = Read<ISharedLink>(type, b => b.Lang == lang).FirstOrDefault();
+      }
+      else
+      {
+        model = Read<ISharedLink>(type, b => b.Id == id).FirstOrDefault();
+      }
+      
       if (model == null)
       {
         model = Activator.CreateInstance(type) as ISharedLink;

@@ -15,12 +15,14 @@
           if (Model.Property.EditorType == EnumInputType.SharedLink)
           {
             await Html.RenderPartialAsync("AdminInputs/_SharedLinsModal", Model);
-
           }
         }
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" onclick="model_close_click('@Model.OuterName')" data-dismiss="modal">Close</button>
+        @if (Model.Property.EditorType != EnumInputType.SharedLink)
+        {
+          <button type="button" class="btn btn-primary" onclick="model_close_click('@Model.OuterName')" data-dismiss="modal">Close</button>
+        }
       </div>
     </div>
   </div>

@@ -82,7 +82,10 @@
                 })
                 refresh_modal();
               });
-            }, 1000);
+            app_App_@(p.Property.Key).ShowTable();
+            app_App_@(p.Property.Key).ResetDefault();
+            }, 500);
+
             return;
           case 'Html':
             var htmlEditor = CKEDITOR.instances[`${input.prop('id')}`].document.getBody().getHtml();

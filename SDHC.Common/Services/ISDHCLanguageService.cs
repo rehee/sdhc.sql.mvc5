@@ -10,6 +10,7 @@ namespace SDHC.Common.Services
     string LanguageKey { get; }
     Func<int> GetLang { get; }
     Action<int> SetLang { get; }
+    IEnumerable<LanguageSetting> LangConfigs { get; }
   }
   public interface ISDHCLanguageServiceInit 
   {

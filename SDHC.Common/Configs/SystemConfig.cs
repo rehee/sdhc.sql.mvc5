@@ -18,7 +18,8 @@ namespace SDHC.Common.Configs
     public string AdminPolicy { get; set; } = "AdminPolicy";
     public bool UserNameIsNotEmail { get; set; } = true;
     public int DefaultLanguage { get; set; } = 0;
-    public string ContentViewPath { get; set; } = "";
+    public string ContentViewPath { get; set; } = "Pages";
+    public string SharedLinkViewPath { get; set; } = "SharedLinks";
     public string ContentPageUrl { get; set; } = "pages";
     public int DefaultTablePageSize { get; set; } = (int)EnumTablePageSize.L10;
     public int DeleteMinTime { get; set; } = 1000;
@@ -33,5 +34,7 @@ namespace SDHC.Common.Configs
     public string SecretdeIV { get; set; } = "ovIeh78A";
 
     public bool AutoConfirmEmail { get; set; } = true;
+
+    public bool ViewForEveryLang { get; set; } = false;
   }
 }

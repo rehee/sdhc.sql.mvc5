@@ -3,6 +3,6 @@
   ViewBag.Title = TypeExtends.GetModelTitleFullType(Model.FullType, Model.ThisAssembly) + " Edit";
   Layout = "~/Areas/Admin/Views/Shared/_Layout_Content.cshtml";
   ViewBag.HideLeft = true;
-  Model.PostUrl = Url.Action("EditSharedLink", "ModelManagement", new { @area = "Admin" });
+  Model.PostUrl = Url.Action("EditSharedLink", "ModelManagement", new { @id = Model.Id, @area = "Admin" });
 }
 @{ Html.RenderPartial("GeneralModelView", Model);}

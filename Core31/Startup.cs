@@ -40,8 +40,8 @@ namespace Core31
       {
       }
       //app.UseDeveloperExceptionPage();
-      app.UseStatusCodePagesWithReExecute("/error/{0}");
-      app.UseExceptionHandler("/error/500");
+      //app.UseStatusCodePagesWithReExecute("/error/{0}");
+      //app.UseExceptionHandler("/error/500");
       app.UseSDHC(env);
       app.UseChat();
 

@@ -45,6 +45,7 @@ namespace SDHC.Common.Entity.Models
     public bool HasRangeMax { get; set; }
     public Type RelatedType { get; set; }
     public IEnumerable<ISharedLink> SharedLinks { get; set; }
+    public bool IsSingleRecord { get; set; } = false;
   }
   public class DropDownViewModel
   {

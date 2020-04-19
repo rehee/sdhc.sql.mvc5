@@ -2,7 +2,8 @@
 @{
   var randomKey = Guid.NewGuid().ToString().Replace('-', '_');
 }
-@Html.Hidden("Id", Model.Id, new { @id = "Id" + randomKey })
+@*@Html.Hidden("Id", Model.Id, new { @id = "Id" + randomKey })*@
+<input type="hidden" name="Id" value="@Model.Id" id="Id@randomKey" />
 @Html.Hidden("FullType", Model.FullType, new { @id = "FullType" + randomKey })
 @Html.Hidden("ThisAssembly", Model.ThisAssembly, new { @id = "ThisAssembly" + randomKey })
 @Html.Hidden("PostUrl", Model.PostUrl, new { @id = "PostUrl" + randomKey })

@@ -20,9 +20,13 @@ namespace SDHC.Common.Entity.Models
   {
     string Title { get; set; }
   }
-  public interface ISharedContent : IBasicModel
+  public interface ILanguage
   {
     int Lang { get; set; }
+  }
+  public interface ISharedContent : IBasicModel, ILanguage
+  {
+    
   }
   public interface ISharedLink : ISharedContent
   {
@@ -33,9 +37,8 @@ namespace SDHC.Common.Entity.Models
   {
     
   }
-  public interface IContentModel : IBasicContent
+  public interface IContentModel : IBasicContent, ILanguage
   {
-    int? Lang { get; set; }
     string Url { get; set; }
     long DisplayOrder { get; set; }
     DateTime? CreateTime { get; set; }

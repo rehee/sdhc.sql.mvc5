@@ -41,8 +41,9 @@ namespace View.Areas.Admin.Controllers
         var users = CrudContainer.Crud.Read<IdentityUserRole<string>>(b => b.UserId == user.Id, db).Select(b => b.RoleId).ToList();
         roles = CrudContainer.Crud.Read<IdentityRole>(b => users.Contains(b.Id)).Select(b => b.Name).ToList();
       }
-      var end = DateTime.UtcNow;
-      return View(ServiceContainer.ContentService.GetContentIndexViewModelByIdOrLang<BaseContent>(id, inputLang, roles));
+      var model = ServiceContainer.ContentService.GetContentIndexViewModelByIdOrLang<BaseContent>(id, inputLang, roles);
+      
+      return View(model);
     }
     [HttpPost]
     [Admin(adminRole: "ContentCreate")]
@@ -129,7 +130,7 @@ namespace View.Areas.Admin.Controllers
       return View(content);
     }
     [Admin("ContentEdit")]
-    public async Task<ActionResult> EditPreview(ContentViewModelSummaryPost model)
+    public async Task<IActionResult> EditPreview(ContentViewModelSummaryPost model)
     {
       ac.Check(this);
       await ServiceContainer.ContentService.Update(model);

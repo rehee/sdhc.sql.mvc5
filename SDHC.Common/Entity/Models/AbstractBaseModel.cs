@@ -35,7 +35,7 @@ namespace SDHC.Common.Entity.Models
 
     [BaseProperty]
     [HideEdit]
-    public int? Lang { get; set; }
+    public int Lang { get; set; }
     [BaseProperty]
     public virtual long Id { get; set; }
     [BaseProperty]
