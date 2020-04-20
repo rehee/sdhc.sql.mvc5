@@ -25,6 +25,7 @@ namespace System
     public bool HasRangeMin { get; set; }
     public bool HasRangeMax { get; set; }
     public bool IsSingleRecord { get; set; } = false;
+    public bool IsLinkedRecord { get; set; } = false;
     public InputTypeAttribute()
     {
 
@@ -47,6 +48,7 @@ namespace System
     bool NewLine { get; set; }
     bool NewLineAfter { get; set; }
     bool IsSingleRecord { get; set; }
+    bool IsLinkedRecord { get; set; }
   }
 
 }

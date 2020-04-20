@@ -12,6 +12,9 @@ namespace SDHC.Common.Entity.Models
     public string ValueType { get; set; } = "";
     public string Title { get; set; } = "";
 
+    public long ModelId { get; set; }
+    public int Lang { get; set; }
+
     public EnumInputType EditorType { get; set; } = EnumInputType.Text;
     public bool MultiSelect { get; set; } = false;
     public IEnumerable<DropDownViewModel> SelectItems { get; set; } = new List<DropDownViewModel>();
@@ -46,6 +49,7 @@ namespace SDHC.Common.Entity.Models
     public Type RelatedType { get; set; }
     public IEnumerable<ISharedLink> SharedLinks { get; set; }
     public bool IsSingleRecord { get; set; } = false;
+    public bool IsLinkedRecord { get; set; } = false;
   }
   public class DropDownViewModel
   {

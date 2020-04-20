@@ -191,7 +191,7 @@ namespace SDHC.Common.Services
       return result;
     }
 
-    public ModelPostModel GetSharedLink(long? id, int? lang, string typeName)
+    public ModelPostModel GetSharedLink(long? id, int? lang, string typeName, bool isRelated = false, long? relatedId = null)
     {
       if (String.IsNullOrWhiteSpace(typeName))
         return null;
@@ -201,18 +201,19 @@ namespace SDHC.Common.Services
       ISharedLink model = null;
       if (id == -1)
       {
-        model = Read<ISharedLink>(type, b => b.Lang == lang).FirstOrDefault();
+        model = Read<ISharedLink>(type, b => b.Lang == lang && b.RelatedId == relatedId).FirstOrDefault();
       }
       else
       {
         model = Read<ISharedLink>(type, b => b.Id == id).FirstOrDefault();
       }
-      
+
       if (model == null)
       {
         model = Activator.CreateInstance(type) as ISharedLink;
         model.Lang = lang ?? 0;
         model.DisplayOrder = CrudContainer.CrudModel.Read<ISharedLink>(type, b => b.Lang == lang).OrderByDescending(b => b.DisplayOrder).FirstOrDefault()?.DisplayOrder ?? 0;
+        model.RelatedId = relatedId;
       }
       return model.ConvertModelToModelPostModel();
     }

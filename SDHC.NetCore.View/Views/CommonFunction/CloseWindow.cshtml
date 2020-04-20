@@ -11,12 +11,14 @@
     <img src="/admin-lib/assets/images/Loading_icon.gif" alt="Loading" />
   </div>
   <script>
-    setTimeout(function () {
-      window.close();
+    window.close();
       if (window) {
-        window.location.href = "/closethatframe";
+        var closeFunction = `@ViewBag.CloseFunction`;
+        console.log(closeFunction);
+        if (closeFunction) {
+          window.parent[`${closeFunction}`]();
+        }
       }
-    }, 500);
 
   </script>
 </body>

@@ -25,7 +25,7 @@ namespace Models
     [InputType(EditorType = EnumInputType.SharedLink, RelatedType = typeof(Banner))]
     public string Banners { get; set; }
     [NotMapped]
-    [InputType(EditorType = EnumInputType.SharedLink, RelatedType = typeof(About), IsSingleRecord = true)]
+    [InputType(EditorType = EnumInputType.SharedLink, RelatedType = typeof(About), IsSingleRecord = true, IsLinkedRecord = true)]
     public string HomeAbout { get; set; }
     [NotMapped]
     [InputType(EditorType = EnumInputType.SharedLink, RelatedType = typeof(CaseStudy))]

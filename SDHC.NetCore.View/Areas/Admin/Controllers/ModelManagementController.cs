@@ -116,17 +116,19 @@ namespace Admin.Areas.Admin.Controllers
       return RedirectToAction("Index", "ModelManagement", new { @area = ConfigContainer.Systems.AdminPath, @id = type });
     }
     [Admin("ContentEdit")]
-    public IActionResult EditSharedLink(long? id, int? lang, string typeName)
+    public IActionResult EditSharedLink(long? id, int? lang, string typeName, bool isRelated = false, long? relatedId = null, string closed = "")
     {
-      var model = ServiceContainer.ModelService.GetSharedLink(id, lang, typeName);
+      var model = ServiceContainer.ModelService.GetSharedLink(id, lang, typeName, isRelated, relatedId);
+      model.CloseFunction = closed;
       return View(model);
     }
     [HttpPost]
     [Admin("ContentEdit")]
     public async Task<IActionResult> EditSharedLink(ModelPostModel model)
     {
+      ViewBag.CloseFunction = model.CloseFunction;
       await ServiceContainer.ModelService.CreateOrUpdate(model);
-      return RedirectToAction("CloseWindow", "CommonFunction", new { @area = "" });
+      return RedirectToAction("CloseWindow", "CommonFunction", new { @id = model.CloseFunction, @area = "" });
 
     }
   }

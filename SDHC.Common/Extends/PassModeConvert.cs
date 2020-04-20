@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
@@ -29,10 +30,14 @@ namespace System
       var type = input.GetType().GetRealType();
       model.FullType = type.FullName;
       model.ThisAssembly = type.Assembly.FullName;
-      if(model is ContentPostModel)
+      int lang = 0;
+      long modelId = 0;
+      if (model is ContentPostModel)
       {
         (model as ContentPostModel).ViewPath = type.Name;
+        lang = (input as IContentModel).Lang;
       }
+      modelId = (input as IInt64Key).Id;
       var resultProperty = model.GetType().GetRealType().GetProperties().Where(b => b.BaseProperty()).ToList();
       var properties = input.GetType().GetRealType().GetProperties();
       foreach (var p in properties)
@@ -51,7 +56,7 @@ namespace System
           baseP.SetValue(model, inputValue);
           continue;
         }
-        var prop = p.GetContentPropertyByPropertyInfo(input);
+        var prop = p.GetContentPropertyByPropertyInfo(input, lang, modelId);
         if (prop == null)
           continue;
         model.Properties.Add(prop);
@@ -97,9 +102,11 @@ namespace System
     }
     public static Func<ContentProperty> NewContentProperty { get; set; } = () => new ContentProperty();
     public static Func<List<ContentProperty>> NewContentPropertyList { get; set; } = () => new List<ContentProperty>();
-    public static ContentProperty GetContentPropertyByPropertyInfo(this PropertyInfo p, object input)
+    public static ContentProperty GetContentPropertyByPropertyInfo(this PropertyInfo p, object input, int lang = 0, long modelId = 0)
     {
       var result = new ContentProperty();
+      result.Lang = lang;
+      result.ModelId = modelId;
       if (p.GetCustomAttribute<BasePropertyAttribute>() != null)
       {
         result.BaseProperty = true;
@@ -159,7 +166,8 @@ namespace System
             (List<DropDownViewModel>)result.SelectItems, relatedType, result.Value, result.MultiValue);
           break;
         case EnumInputType.SharedLink:
-          result.SharedLinks = p.GetContentLinks(inputAttribute);
+          //result.SharedLinks = GetSharedLinks(inputType.RelatedType, result.Lang, inputType.IsSingleRecord, inputType.IsLinkedRecord, result.ModelId);
+          result.SharedLinks = Enumerable.Empty<ISharedLink>();
           break;
         default:
           break;
@@ -169,9 +177,13 @@ namespace System
       return result;
 
     }
-    public static IEnumerable<ISharedLink> GetContentLinks(this PropertyInfo p, InputTypeAttribute inputAttribute)
+    public static IEnumerable<ISharedLink> GetSharedLinks(Type type, int? lang = null, bool isSingle = false, bool isLinked = false, long? modelId = null)
     {
-      return ServiceContainer.ModelService.Read<ISharedLink>(inputAttribute.RelatedType, b => true).OrderBy(b => b.DisplayOrder).ToList();
+      Expression<Func<ISharedLink, bool>> where = b => !b.RelatedId.HasValue;
+      Expression<Func<ISharedLink, bool>> whereLink = b => b.RelatedId == modelId;
+      Expression<Func<ISharedLink, bool>> whereUsed = isLinked ? whereLink : where;
+      var result = ServiceContainer.ModelService.Read<ISharedLink>(type, whereUsed).OrderBy(b => b.DisplayOrder);
+      return isSingle ? result.Take(1).ToList() : result.ToList();
     }
     public static void SetDropDownSelect(
       this PropertyInfo p, List<DropDownViewModel> selector, Type relatedType, string postValue, IEnumerable<string> postValues = null)

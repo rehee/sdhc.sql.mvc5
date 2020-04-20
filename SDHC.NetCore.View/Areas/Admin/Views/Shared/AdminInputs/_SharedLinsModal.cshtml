@@ -60,7 +60,7 @@
   </div>
   <div v-else>
     <div>
-      <iframe id="frame_@sharedLink.View.AppName" style="width:100%;height:600px;" :src="detailUrl"></iframe>
+      <iframe id="frame_@sharedLink.View.AppName" style="width:100%;height:600px; border:none;" :src="detailUrl"></iframe>
     </div>
   </div>
 
@@ -93,7 +93,6 @@
   var content_@sharedLink.View.AppName = '';
 
   function refresh_@(sharedLink.View.AppName)() {
-    swal("Success!", "Your record has been updated.", "success");
     var thisUrl = `@Html.Raw(Url.Action("GetSharedLinks", "SharedLinks", new {@id=Model.ModelId,@key=Model.Property.Key,@area="Admin" }))`;
     $.get(thisUrl, function (data) {
       setTimeout(() => swal.close(), 500);
@@ -102,6 +101,15 @@
       }
     });
   }
+  function hide_refresh_app_@(sharedLink.View.AppName)() {
+    var isSingle = @(Model.Property.IsSingleRecord?"true":"false");
+    if (isSingle) {
+      $('#@Model.ModalName').modal('hide');
+    } else {
+      refresh_@(sharedLink.View.AppName)();
+      app_@(sharedLink.View.AppName).ShowTable();
+    }
+  }
   var app_@sharedLink.View.AppName = new Vue({
     el: '#@sharedLink.View.AppName',
     data: {
@@ -109,7 +117,7 @@
       showTable: @(Model.Property.IsSingleRecord?"false":"true"),
       detailUrl:'',
       isSingle:@(Model.Property.IsSingleRecord?"true":"false"),
-      baseUrl: `/Admin/ModelManagement/EditSharedLink/-1?lang=@(Model.Lang??0)&typeName=@($"{sharedLink.TypeName},{sharedLink.AssemblyName}")`,
+      baseUrl: `/Admin/ModelManagement/EditSharedLink/-1?lang=@(Model.Lang??0)&typeName=@($"{sharedLink.TypeName},{sharedLink.AssemblyName}")&isRelated=@(sharedLink.IsRelated)&relatedId=@(sharedLink.RelatedId)&closed=hide_refresh_app_@(sharedLink.View.AppName)`,
     },
     methods: {
       IsShowTable: function () {
@@ -127,7 +135,6 @@
         if (this.isSingle == false) {
           this.showTable = true;
         } else {
-          $('#@Model.ModalName').modal('hide');
           this.ShowDetail(-1);
         }
 
@@ -146,33 +153,33 @@
           })
       },
       ShowDetail: function (id) {
-        this.detailUrl = `/Admin/ModelManagement/EditSharedLink/${id}?lang=@(Model.Lang??0)&typeName=@($"{sharedLink.TypeName},{sharedLink.AssemblyName}")`;
-        this.showTable = false;
-        var url = this.detailUrl;
-        var shows = this.ShowTable;
-        function windowBeforeExit(win,refresh) {
-          return function () {
-            setTimeout(function () {
-                if (refresh) {
-                  shows();
-                  refresh_@(sharedLink.View.AppName)();
-                  return;
-                }
-                if (win != null && win.document.URL) {
-                  win.onunload  = windowBeforeExit(
-                    win, win.document.URL.indexOf("/CommonFunction/CloseWindow")>=0);
-                }
-              }, 100);
-            }
+        var url = `/Admin/ModelManagement/EditSharedLink/${id}?lang=@(Model.Lang??0)&typeName=@($"{sharedLink.TypeName},{sharedLink.AssemblyName}")&isRelated=@(sharedLink.IsRelated)&relatedId=@(sharedLink.RelatedId)&closed=hide_refresh_app_@(sharedLink.View.AppName)`;
+        if (this.isSingle) {
+
+        } else {
+          this.detailUrl = url;
         }
-        setTimeout(function () {
+
+        this.showTable = false;
+        var shows = this.ShowTable;
+        var isSingle = this.isSingle;
+        function resetUrl() {
+          var win = document.getElementById("frame_@sharedLink.View.AppName");
+          if (!win) {
+            setTimeout(resetUrl, 50);
+          }
           var testiframe_@sharedLink.View.AppName = document.getElementById("frame_@sharedLink.View.AppName").contentWindow;
+          if (!testiframe_@sharedLink.View.AppName) {
+            setTimeout(resetUrl, 50);
+          }
           if (id == -1) {
+            if (testiframe_@(sharedLink.View.AppName).window.location.href.replace(/%20/g,' ') == `${testiframe_@(sharedLink.View.AppName).window.location.protocol}//${testiframe_@(sharedLink.View.AppName).window.location.host}${url}`) {
+              return;
+            }
             testiframe_@(sharedLink.View.AppName).window.location.href = url;
           }
-          testiframe_@(sharedLink.View.AppName).onunload = windowBeforeExit(testiframe_@(sharedLink.View.AppName), false);
-        }, 500);
-
+        }
+        resetUrl();
       }, deleteRow: function (id) {
         swal({
           title: "Are you sure?",

@@ -13,4 +13,5 @@
 @Html.Hidden("PostResponseMethod", Model.PostResponseMethod, new { @id = "PostResponseMethod" + randomKey })
 @Html.Hidden("PostFormId", Model.PostFormId, new { @id = "PostFormId" + randomKey })
 
+<input type="hidden" name="CloseFunction" value="@Model.CloseFunction" id="CloseFunction@randomKey" />
 @{ Html.RenderPartial("AdminInputs/_PropertiesEdit", Model);}

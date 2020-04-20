@@ -535,6 +535,8 @@
     <script>
       jQuery('body').on('click', 'a', function (e) {
         e.preventDefault();
+
+        window.parent.link_clicked(e);
         return false;
       });
     </script>

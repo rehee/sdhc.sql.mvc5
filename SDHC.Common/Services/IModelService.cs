@@ -29,7 +29,7 @@ namespace SDHC.Common.Services
     ContentTableHtmlView GetContentTableHtmlView(Type type);
     ContentTableHtmlView GetContentTableHtmlView<T>(Type type, Expression<Func<T, bool>> where) where T : IInt64Key;
 
-    ModelPostModel GetSharedLink(long? id, int? lang, string typeName);
+    ModelPostModel GetSharedLink(long? id, int? lang, string typeName, bool isRelated = false, long? relatedId = null);
   }
 }
 

@@ -11,8 +11,9 @@ namespace SDHC.NetCore.View.Areas.Admin.Controllers
   public class CommonFunction : Controller
   {
     // GET: /<controller>/
-    public IActionResult CloseWindow()
+    public IActionResult CloseWindow(string id="")
     {
+      ViewBag.CloseFunction = id;
       return View();
     }
   }

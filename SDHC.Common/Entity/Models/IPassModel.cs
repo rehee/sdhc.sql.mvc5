@@ -30,6 +30,7 @@ namespace SDHC.Common.Entity.Models
     public string PostFormId { get; set; } = Guid.NewGuid().ToString().Replace('-', '_');
     public string PostFormTitle { get; set; }
     public List<ContentProperty> Properties { get; set; } = new List<ContentProperty>();
+    public string CloseFunction { get; set; }
   }
   public class ContentPostModel : IPostModel
   {

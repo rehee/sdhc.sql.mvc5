@@ -24,7 +24,7 @@
     </div>
   </div>
   <div class="body">
-    <iframe id="preview" style="width:100%;height:600px;" src="@Url.Action("Detail","Page",new { @id=Model.Model.Id,@area="" })#@Guid.NewGuid().ToString()">
+    <iframe id="preview" style="width:100%;height:600px; border:none;" scrolling="no" src="@Url.Action("Detail","Page",new { @id=Model.Model.Id,@area="" })#@Guid.NewGuid().ToString()">
     </iframe>
   </div>
 </div>
@@ -49,6 +49,7 @@
   <script>
     var preview = $('#preview')[0].contentWindow;
     $('#preview').load(function () {
+      $('#preview').css('height', preview.document.body.scrollHeight+10);
       @foreach(var p in allList)
       {
         var modalId = p.ModalName;
@@ -139,6 +140,9 @@
 
     function model_close_click(id) {
 
+    }
+    function link_clicked(e) {
+      console.log(e);
     }
 
   </script>

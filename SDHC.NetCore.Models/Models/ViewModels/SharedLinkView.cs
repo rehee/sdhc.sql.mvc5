@@ -16,12 +16,6 @@ namespace SDHC.NetCore.Models.Models.ViewModels
       Value = value;
       ReferenceName = listName;
     }
-    public SharedLinkView(ContentProperty model, int? lang = null)
-    {
-      var links = lang.HasValue ? model.SharedLinks.Where(b => b.Lang == lang) : model.SharedLinks;
-      Value = Newtonsoft.Json.JsonConvert.SerializeObject(links);
-      ReferenceName = model.Key;
-    }
     public SharedLinkView(IEnumerable<ISharedLink> models, string listName)
     {
       Models = models;
@@ -40,6 +34,8 @@ namespace SDHC.NetCore.Models.Models.ViewModels
     public IEnumerable<ISharedLink> Models { get; set; }
     public String TypeName { get; set; }
     public String AssemblyName { get; set; }
+    public bool IsRelated { get; set; }
+    public long RelatedId { get; set; }
     public int? Lang { get; set; }
   }
 }

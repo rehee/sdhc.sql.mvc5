@@ -9,7 +9,7 @@
 <input type="hidden" id="@(Model.OutMakr)@(randomIndex)_Properties[@(Model.Index.ToString())].MultiSelect" name="@(Model.OutMakr)Properties[@(Model.Index.ToString())].MultiSelect" value="@Model.Property.MultiSelect" />
 @{
 
-  var inputName = Model.OutMakr+Model.InputName;
+  var inputName = Model.OutMakr + Model.InputName;
   var FileName = Model.OutMakr + Model.FileName;
 }
 
@@ -43,7 +43,7 @@
 
 <div class="form-group" style="@(Model.Property.InputWidth > 0 ? "width:" + Model.Property.InputWidth + "%;display:inline-block;" : "")">
   <label>
-    @Model.Property.Title
+    @(Model.Property.EditorType !=  EnumInputType.SharedLink? Model.Property.Title : "")
     @if (Model.Property.EditorType == EnumInputType.Range)
     {
       <script>

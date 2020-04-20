@@ -3,6 +3,7 @@ using SDHC.NetCore.Models.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
@@ -12,16 +13,15 @@ namespace System
   {
     public static SharedLinkView GetSharedLinkView<T>(this IPostModeltViewModal<T> model, string key) where T : IPostModel
     {
-      var lang = model.Lang;
-      return new SharedLinkView(model.GetContentPropertyByName(key).Property, lang);
+      return model.GetSharedLinkPost<T>(key).View;
     }
     public static SharedLinkView GetSharedLinkView(this ContentPropertyIndex model)
     {
-      return new SharedLinkView(model.Property, model.Lang);
+      return model.GetSharedLinkPost(model.Lang).View;
     }
     public static SharedLinkView GetSharedLinkView(this ContentProperty model)
     {
-      return new SharedLinkView(model);
+      return model.GetSharedLinkPost().View;
     }
 
     public static SharedLinkPost GetSharedLinkPost<T>(this IPostModeltViewModal<T> model, string key) where T : IPostModel
@@ -39,7 +39,7 @@ namespace System
       var allowChild = type.GetCustomAttribute<AllowChildrenAttribute>();
       var header = allowChild?.TableList ?? Enumerable.Empty<string>();
       var image = allowChild?.TableList ?? Enumerable.Empty<string>();
-      var models = ServiceContainer.ModelService.Read<ISharedLink>(type, b => lang.HasValue ? b.Lang == lang : true).OrderBy(b => b.DisplayOrder);
+      var models = PassModeConvert.GetSharedLinks(type, lang, model.IsSingleRecord, model.IsLinkedRecord, model.ModelId);
       var result = new SharedLinkPost
       {
         Headers = header,
@@ -48,10 +48,13 @@ namespace System
         Lang = lang,
         TypeName = type?.FullName,
         AssemblyName = type?.Assembly.FullName,
+        IsRelated = model.IsLinkedRecord,
+        RelatedId = model.ModelId,
         View = new SharedLinkView(Newtonsoft.Json.JsonConvert.SerializeObject(models), model.Key)
       };
       return result;
     }
+
     public static IEnumerable<T> GetModels<T>(this SharedLinkPost model, Func<T, bool> where = null, Func<T, int> orderBy = null, bool asc = true) where T : ISharedLink
     {
       if (where == null)
