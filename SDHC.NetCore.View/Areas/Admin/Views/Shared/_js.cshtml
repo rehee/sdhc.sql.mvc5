@@ -44,7 +44,7 @@
 <script src="~/admin-lib/plugins/bootstrap-datetime-picker/js/bootstrap-datetimepicker.js"></script>
 <script src="~/admin-lib/plugins/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
 <script src="~/admin-lib/plugins/bootstrap-daterange/daterangepicker.js"></script>
-<script src="~/admin-lib/plugins/ckeditor/ckeditor.js"></script>
+@*<script src="~/admin-lib/plugins/ckeditor/ckeditor.js"></script>*@
 <script src="~/admin-lib/plugins/jquery-spinner/js/jquery.spinner.js"></script>
 <script src="~/admin-lib/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
 <script src="~/admin-lib/plugins/bootstrap-selectsplitter/bootstrap-selectsplitter.js"></script>
@@ -65,3 +65,21 @@
   </script>*@
 
 
+<link href="~/admin-lib/plugins/summernote/dist/summernote.css" rel="stylesheet">
+<script src="~/admin-lib/plugins/summernote/dist/summernote.min.js"></script>
+
+<style>
+  .note-editable {
+    height: 400px !important;
+    max-height: 400px !important;
+  }
+</style>
+<script>
+  function resetEditor(id) {
+    $(`#${id}`).summernote(
+      {
+        dialogsInBody: true
+      }
+    );
+  }
+</script>

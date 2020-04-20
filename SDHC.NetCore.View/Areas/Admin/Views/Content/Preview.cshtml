@@ -89,7 +89,7 @@
 
             return;
           case 'Html':
-            var htmlEditor = CKEDITOR.instances[`${input.prop('id')}`].document.getBody().getHtml();
+            var htmlEditor = $(`#${input.prop('id')}`).summernote('code');
             $.each(edits, e => {
               var edit = $(edits[e]);
               edit.html(htmlEditor);

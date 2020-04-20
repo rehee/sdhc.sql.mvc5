@@ -1,0 +1,17 @@
+﻿@if (ViewBag.IsReview == true)
+{
+  <style>
+    .review {
+      border: 1px solid red;
+      padding: 5px;
+    }
+  </style>
+  <script>
+    jQuery('body').on('click', 'a', function (e) {
+      e.preventDefault();
+
+      window.parent.link_clicked(e);
+      return false;
+    });
+  </script>
+}

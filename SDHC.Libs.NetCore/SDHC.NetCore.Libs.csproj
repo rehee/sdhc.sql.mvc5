@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\admin-lib\assets\images\Loading_icon.gif" />
+    <Content Remove="wwwroot\admin-lib\assets\js\vue.js" />
   </ItemGroup>
 
   <ItemGroup>

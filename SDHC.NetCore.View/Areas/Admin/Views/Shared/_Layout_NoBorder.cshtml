@@ -44,11 +44,6 @@
     });
   </script>
   <script>
-    function resetEditor(id) {
-      CKEDITOR.replace(id, {
-        height: 300
-      });
-    }
     $(function () {
       var htmlEditor = $("textarea[id^=html_editor_]");
       for (var i = 0; i < htmlEditor.length; i++) {
