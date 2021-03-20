@@ -95,10 +95,10 @@ namespace View.Areas.Admin.Controllers
     }
     [HttpPost]
     [Admin(adminRole: "ContentSort")]
-    public ActionResult Sort(IEnumerable<ContentSortPostModel> input)
+    public ActionResult Sort(ContentSortPostModel[] itemList)
     {
       ac.Check(this);
-      ServiceContainer.ContentService.UpdateContentOrder(input);
+      ServiceContainer.ContentService.UpdateContentOrder(itemList);
       return RedirectToAction("Sort");
     }
     [HttpPost]

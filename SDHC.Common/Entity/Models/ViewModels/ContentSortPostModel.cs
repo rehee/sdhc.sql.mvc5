@@ -12,4 +12,8 @@ namespace SDHC.Common.Entity.Models.ViewModels
     public long? parentId { get; set; }
     public long? displayOrder { get; set; }
   }
+  public class PostContentSortPostModel
+  {
+    public ContentSortPostModel[] itemList { get; set; }
+  }
 }

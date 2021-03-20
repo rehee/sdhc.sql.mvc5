@@ -55,11 +55,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.7/jstree.min.js"></script>
   <script>
 
-        function pushSortItem(item,lists,parentId,displayOrder){
+    function pushSortItem(item, lists, parentId, displayOrder) {
             lists.push({
-                id:item.id,
-                parentId:parentId,
-                displayOrder:displayOrder,
+              id: item.id?Number(item.id):0,
+              parentId: parentId?Number(parentId):0,
+              displayOrder: displayOrder?Number(displayOrder):0,
             });
             if(item.children && item.children.length>0){
                 for(var index = 0;index<item.children.length;index++){
@@ -93,8 +93,11 @@
             $.ajax({
                 method: "POST",
                 url: "@Url.Action("Sort","Content",new {@area= ConfigContainer.Systems.AdminPath} )",
-                data: JSON.stringify(itemList),
-                contentType: "application/json; charset=utf-8",
+              data: { 'itemList': itemList },
+              //data: JSON.stringify({ 'itemList': itemList }),
+              //dataType: "json",
+              //traditional: true,
+              //contentType: "application/json; charset=utf-8",
             }).done(function () {
               window.location.replace('@Url.Action("Index", "Content", new { @id=Model.Id, area = ConfigContainer.Systems.AdminPath })');
             });

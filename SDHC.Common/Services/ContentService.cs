@@ -59,7 +59,7 @@ namespace SDHC.Common.Services
         .AsQueryable();
       }
       return Read<IContentModel>(BaseIContentModelType,
-        b => b.Lang == langKey)
+        b => (b.ParentId.HasValue == false || b.ParentId == 0) && b.Lang == langKey)
         .AsQueryable();
     }
     public ContentTableHtmlView GetContentTableHtmlView(long? parentId, int? langKey = null)

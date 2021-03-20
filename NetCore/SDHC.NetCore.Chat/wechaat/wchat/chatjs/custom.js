@@ -177,53 +177,65 @@ $('#display').on('mousedown', '.person', function () {
   }
 });
 
+$('#display').on('click', '.remove_user', function () {
+  setChatList($(this).attr('data-chat_id'), null, null, null, null, null, true);
+})
 var chatList = [];
 
-function setChatList(chatuser, toid, img, status, userName) {
-  var chat = null;
-  var statsChange = 0;
-  for (var i = 0; i < chatList.length; i++) {
-    var thisChat = chatList[i];
-    if (thisChat.chatuser == chatuser) {
-      chat = thisChat;
-      break;
-    }
-  }
-  if (chat == null) {
-    chatList.push({
-      chatuser: chatuser,
-      toid: toid,
-      img: img,
-      status: status,
-      userName: userName,
-      count: 0,
-      active: false,
-    });
-    statsChange++;
+function setChatList(chatuser, toid, img, status, userName, timeStamp, removeUser) {
+  if (removeUser) {
+    chatList = _.filter(chatList, b => b.chatuser != chatuser)
+    $('#resultchat').html(null);
+    $('#hide_chat_title .chat-body').html(null);
   } else {
-    if (!chat.active) {
-      chat.count = chat.count + 1;
+    var chat = null;
+    var statsChange = 0;
+    for (var i = 0; i < chatList.length; i++) {
+      var thisChat = chatList[i];
+      if (thisChat.chatuser == chatuser) {
+        chat = thisChat;
+        break;
+      }
     }
-    chat.userName = userName;
-    if (chat.status != status) {
-      chat.status = status
+    if (chat == null) {
+      chatList.push({
+        chatuser: chatuser,
+        toid: toid,
+        img: img,
+        status: status,
+        userName: userName,
+        count: 0,
+        active: false,
+        timeStamp: timeStamp,
+      });
       statsChange++;
+    } else {
+      if (!chat.active) {
+        chat.count = chat.count + 1;
+      }
+      chat.userName = userName;
+      chat: timeStamp
+      if (chat.status != status) {
+        chat.status = status
+        statsChange++;
+      }
     }
   }
-  if (statsChange) {
+
+  if (statsChange || removeUser) {
     $('#display').html(null);
   }
   var online = _.filter(chatList, b => b.status == 'Online');
   var offline = _.filter(chatList, b => b.status != 'Online');
   _.forEach(online, c => {
-    createList(c.chatuser, c.toid, c.img, c.status, c.userName, c.active, c.count);
+    createList(c.chatuser, c.toid, c.img, c.status, c.userName, c.active, c.count, c.timeStamp);
   });
   _.forEach(offline, c => {
-    createList(c.chatuser, c.toid, c.img, c.status, c.userName, c.active, c.count);
+    createList(c.chatuser, c.toid, c.img, c.status, c.userName, c.active, c.count, c.timeStamp);
   });
 }
 
-function createList(chatuser, toid, img, status, userName, active, count) {
+function createList(chatuser, toid, img, status, userName, active, count, timeStamp) {
   var testObj = $(`#chatbox1_${chatuser}`);
   if (testObj.length > 0) {
     $(`#chatbox1_${chatuser} .personStatus span`).attr('class', status);
@@ -231,8 +243,8 @@ function createList(chatuser, toid, img, status, userName, active, count) {
     if (!$(`#chatbox1_${chatuser}`).hasClass('active') && count) {
       $(`#chatbox1_${chatuser} .count span`).attr('class', 'icon-meta unread-count').html(count);
     }
-    console.log(userName)
-    $(`#chatbox1_${chatuser} .bname.personName`).html(userName);
+    $(`#chatbox1_${chatuser} .bname.personName`).html(timeStamp);
+    $(`#chatbox1_${chatuser} .timeStamp`).html(userName);
     return;
   }
   $('#display').append(`
@@ -242,7 +254,12 @@ function createList(chatuser, toid, img, status, userName, active, count) {
             <span class="bname personName">${userName}</span>
             <span class="personStatus"><span class="${status}"></span></span>
             <span class="count"><span class=""></span></span><br>
-            <small class="preview"><span class="${status}">${status}</span></small>
+            <small class="preview">
+              <span class="${status}">${status}</span>
+              &nbsp;&nbsp;
+              <span class="timeStamp">${timeStamp}</span>
+              <span data-chat_id="${chatuser}" class="badge remove_user f_right badge-radius badge-danger"><i class="fa fa-trash-o"></i></span>
+            </small>
         </span>
     </a>
 </li>
@@ -256,7 +273,7 @@ $(document).ready(function () {
     });
   });
   connection.on("ReceiveMessage", function (user, message) {
-    setChatList(user, user, '', message.offline ? 'Offline' : 'Online', message.userName);
+    setChatList(user, user, '', message.offline ? 'Offline' : 'Online', message.userName, message.timeStamp);
     createChatBox(user, user, '', message.offline ? 'Offline' : 'Online');
 
     var msg = message.message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -266,6 +283,7 @@ $(document).ready(function () {
           <div class="chat-text">
             <h4>${message.userName}</h4>
             <p>${msg}</p>
+            <p>${message.timeStamp}</p>
           </div>
         </div>
       </div>`);

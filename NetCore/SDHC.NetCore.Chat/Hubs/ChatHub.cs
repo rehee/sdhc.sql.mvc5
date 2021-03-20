@@ -32,7 +32,7 @@ namespace SDHC.NetCore.Chat
     {
       var user = Context.User;
       var isAuthenticated = user.Identity.IsAuthenticated;
-      var userName = isAuthenticated ? user.Identity.Name : null;
+      var userName = isAuthenticated ? user.Identity.Name : $"GUEST : {id}";
       return new HubUserMap(userName, false, isAuthenticated, userID, id);
     }
     public ChatHub()
@@ -43,10 +43,6 @@ namespace SDHC.NetCore.Chat
     public async Task CustomConnect(string email)
     {
       await NoStaffOnline();
-      if (String.IsNullOrEmpty(CurrentHubUser.Email))
-      {
-        CurrentHubUser.Email = email;
-      }
       await ToAllStaff(CurrentHubUser.ClientId, new ChatMessage(CurrentHubUser.ClientId, null, CurrentHubUser.Email, "customer online"));
     }
     public async Task MessageToMe(string message, string messageFrom = "Me")
@@ -150,8 +146,8 @@ namespace SDHC.NetCore.Chat
     public override async Task OnDisconnectedAsync(Exception exception)
     {
       var id = Context.ConnectionId;
-
-      await Clients.Clients(StaffIds).SendAsync("ReceiveMessage", CurrentHubUser.ClientId, new ChatMessage(CurrentHubUser.ClientId, id, "", "Off Line", true));
+      var userName = userMaper.GetValueOrDefault(id)?.Email ?? $"Guest:{id}";
+      await Clients.Clients(StaffIds).SendAsync("ReceiveMessage", CurrentHubUser.ClientId, new ChatMessage(CurrentHubUser.ClientId, id, userName, "OFF Line", true));
       try
       {
         if (userMaper.ContainsKey(id))
@@ -188,7 +184,7 @@ namespace SDHC.NetCore.Chat
 
   public class ChatMessage
   {
-    public ChatMessage(string fromId, string toId, string userName, string message, bool offline = false, bool odd = false)
+    public ChatMessage(string fromId, string toId, string userName, string message, bool offline = false, bool odd = false, DateTime? messageTime = null)
     {
       FromId = fromId;
       ToId = toId;
@@ -196,6 +192,7 @@ namespace SDHC.NetCore.Chat
       Message = message;
       Offline = offline;
       Odd = odd;
+      TimeStamp = (messageTime ?? DateTime.UtcNow).ToString("yyyy-mm-dd HH:MM:ss");
     }
     public string FromId { get; set; }
     public string ToId { get; set; }
@@ -203,6 +200,7 @@ namespace SDHC.NetCore.Chat
     public string Message { get; set; }
     public bool Offline { get; set; }
     public bool Odd { get; set; }
+    public string TimeStamp { get; set; }
   }
 
   public class HubUserMap

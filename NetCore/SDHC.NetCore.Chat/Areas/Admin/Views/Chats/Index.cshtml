@@ -5,7 +5,11 @@
 <link href="~/wchat/assets/css/style-light.css" rel="stylesheet">
 <link href="~/wchat/assets/css/mobile.css" rel="stylesheet" id="style">
 
-
+<style>
+  .f_right{
+    float:right;
+  }
+</style>
 <div style="position: relative;height: 500px;" class="m-b-20">
   <!-- #start# Wchat -->
   <div id="wchat">
@@ -22,9 +26,9 @@
               <div class="intro-body">
                 <div class="intro-image" style="opacity: 1; transform: scale(1);"></div>
                 <div class="intro-text-container" style="opacity: 1; transform: translateY(0px);">
-                  <h1 class="intro-title">Welcome to wchat Bylancer1</h1>
+                  <h1 class="intro-title">Welcome to online chat</h1>
                   <div class="intro-text">
-                    No Conversation sync. Please search users and start chat.
+                    
                   </div>
                 </div>
               </div>
@@ -63,34 +67,21 @@
             <div id="contact-list">
               <style>
                 .wchat-header.wchat-chat-header.top {
-                  visibility: hidden;
+                  /*visibility: hidden;*/
                 }
               </style>
               <header class="wchat-header wchat-chat-header top">
-                <div class="chat-avatar">
-                  <div class="avatar icon-user-default" style="height: 40px; width: 40px;">
-                    <div class="avatar-body userimage"><img src="../../plugins/wchat/storage/user_image/Bylancer.jpg" class="avatar-image is-loaded" width="100%"></div>
-                  </div>
 
-                </div>
                 <div class="chat-body">
-                  <div class="chat-main"><h2 class="chat-title" dir="auto"><span class="wchatellips personName">Bylancer</span></h2></div>
-                </div>
-                <div class="wchat-chat-controls">
-                  <div class="menu menu-horizontal">
-                    <div class="menu-item active dropdown pull-right">
-                      <button class="icon dropdown-toggle" data-toggle="dropdown" href="#"><span class="font-19"><i class="icon icon-options-vertical"></i></span></button>
-                      <ul class="dropdown-menu dropdown-user animated flipInY">
-                        <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
-                        <li><a href="#"><i class="ti-wallet"></i> Edit Profile</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
-                      </ul>
-                      <!-- /.dropdown-user -->
-                    </div>
-                    <div class="menu-item right-side-toggle"><button class="icon ti-settings font-20" title="Attach"></button><span></span></div>
+                  <div class="chat-main">
+                    <h2 class="chat-title" dir="auto">
+                      <span class="wchatellips personName">
+                        GUEST LIST
+                      </span>
+                    </h2>
                   </div>
                 </div>
+
               </header>
               <div class="form-material">
                 <input class="form-control p-lr-20 live-search-box search_bg" style="visibility:hidden" id="searchbox" type="text" placeholder="Search By Username or Email">
@@ -116,51 +107,11 @@
           </style>
           <header id="hide_chat_title" class="wchat-header wchat-chat-header top" data-user="">
             <button class="icon m-r-5 hidden-sm hidden-md hidden-lg open-panel" href="#"><span class="font-19"><i class="icon ti-arrow-left"></i></span></button>
-            <div class="chat-avatar" id="launchProfile">
-              <div class="avatar icon-user-default" style="height: 40px; width: 40px;">
-                <div class="avatar-body userimage profile-picture">&nbsp;</div>
-              </div>
-            </div>
+            
             <div class="chat-body">
               <div class="chat-main"><h2 class="chat-title" dir="auto"><span class="wchatellips personName">&nbsp;</span></h2></div>
               <div class="chat-status wchatellips" id="typing_on">
-                <!--last seen today at 8:52 PM-->
-              </div>
-            </div>
-            <div class="wchat-chat-controls">
-              <div class="menu menu-horizontal">
-                <div class="menu-item active dropdown pull-right">
-                  <button id="MobileChromeplaysound" class="hidden"></button>
-                  <button class="icon dropdown-toggle font-19" data-toggle="dropdown" href="#" id="mute-sound"><i class="icon icon-volume-2"></i></button>
-                </div>
-                <div class="mega-dropdown  pull-right">
-                  <button class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" aria-expanded="false"><span class="font-19"><i class="icon fa fa-paperclip"></i></span></button>
-                  <ul class="dropdown-menu mega-dropdown-menu animated bounceInDown" style="width: 100px;right: -90px;box-shadow:0 0 0 rgba(0, 0, 0, 0.05) !important;background: none;">
-                    <li class="col-sm-12 demo-box">
-                      <div class="row">
-                        <div class="col-sm-12">
-                          <div class="white-box text-center bg-purple uploadFile" id="uploadFile"><a href="#" class="text-white" data-toggle="tooltip" title="" data-original-title="Photos"><i class="icon ti-gallery font-19"></i></a></div>
-                        </div>
-                        <div class="col-sm-12">
-                          <div class="white-box text-center bg-success uploadFile"><a href="#" class="text-white" data-toggle="tooltip" title="" data-original-title="Videos"><i class="icon icon-camrecorder font-19"></i></a></div>
-                        </div>
-                        <div class="col-sm-12">
-                          <div class="white-box text-center bg-info uploadFile"><a href="#" class="text-white" data-toggle="tooltip" title="" data-original-title="Document"><i class="icon icon-doc font-19"></i></a></div>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                <div class="menu-item active dropdown pull-right">
-                  <button class="icon dropdown-toggle" data-toggle="dropdown" href="#"><span class="font-19"><i class="icon icon-options-vertical"></i></span></button>
-                  <ul class="dropdown-menu dropdown-user animated flipInY">
-                    <li><a href="javascript:void(0)" onclick="javascript:ShowProfile();"><i class="ti-user"></i> User Profile</a></li>
-                    <li><a href="javascript:void(0)"><i class="ti-wallet"></i> Email This Chat</a></li>
-                    <li><a href="javascript:void(0)"><i class="icon-doc"></i> Save Chat</a></li>
-                  </ul>
-                  <!-- /.dropdown-user -->
-                </div>
-                <div class="menu-item right-side-toggle hidden-xs hidden"><button class="icon ti-settings font-20" title="Attach"></button><span></span></div>
+              
               </div>
             </div>
           </header>
